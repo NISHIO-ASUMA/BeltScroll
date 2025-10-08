@@ -3,8 +3,6 @@
 // テクスチャ処理 [ texture.h ]
 // Author: Asuma Nishio
 // 
-// TODO : ここ変更
-// 
 //=====================================
 
 #ifndef _TEXTURE_H_ // このマクロ定義がされてなかったら
@@ -35,7 +33,7 @@ private:
 
 	static constexpr int NUM_TEXTURE = 128;	// 最大テクスチャ数
 
-	std::string TEXTURE[NUM_TEXTURE];			// 配列
+	std::string TEXTURE[NUM_TEXTURE];				// 配列
 	LPDIRECT3DTEXTURE9 m_apTexture[NUM_TEXTURE];	// テクスチャポインタ
 	static int m_nNumAll;							// テクスチャカウント変数
 };

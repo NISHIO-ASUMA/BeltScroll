@@ -148,24 +148,30 @@ void CModelList::UnLoad(void)
 	// 情報の破棄
 	for (auto iter = m_ModelInfo.begin(); iter != m_ModelInfo.end(); iter++)
 	{
+		// メッシュ情報
 		if ((*iter).pMesh != nullptr)
 		{
 			(*iter).pMesh->Release();
 			(*iter).pMesh = nullptr;
 		}
+
+		// マテリアルポインタ情報
 		if ((*iter).pBuffMat != nullptr)
 		{
 			(*iter).pBuffMat->Release();
 			(*iter).pBuffMat = nullptr;
 		}
 
+		// テクスチャ情報
 		(*iter).pTexture.clear();
 
+		// ファイルパス情報
 		if ((*iter).FileName != NULL)
 		{
 			ZeroMemory(&((*iter).FileName), sizeof((*iter).FileName));
 		}
 
+		// マテリアル情報
 		if ((*iter).dwNumMat != NULL)
 		{
 			(*iter).dwNumMat = 0;

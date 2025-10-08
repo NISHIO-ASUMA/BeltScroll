@@ -504,7 +504,7 @@ void CRenderer::ChangeTarget(D3DXVECTOR3 posV, D3DXVECTOR3 posR, D3DXVECTOR3 vec
 		D3DXToRadian(45.0f),
 		fAsepct,
 		10.0f,
-		3000.0f);
+		5000.0f);
 
 	// プロジェクションマトリックスの設定
 	m_pD3DDevice->SetTransform(D3DTS_PROJECTION, &mtxprojection);

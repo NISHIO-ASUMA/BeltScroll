@@ -241,7 +241,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "data\\TEXTURE\\Item_life.png";
+    "data/TEXTURE/Item_life.png";
    }
   }
   Material {

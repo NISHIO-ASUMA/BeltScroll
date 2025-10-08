@@ -25,11 +25,11 @@ public:
 	//************************* 
 	struct MODELINFO
 	{
-		LPD3DXMESH pMesh;		// メッシュのポインタ
-		LPD3DXBUFFER pBuffMat;	// マテリアルのポインタ
-		DWORD dwNumMat;			// マテリアル数
-		std::vector<int>pTexture; // テクスチャの動的ポインタ
-		char FileName[MAX_WORD];		// 文字列
+		LPD3DXMESH pMesh;			// メッシュのポインタ
+		LPD3DXBUFFER pBuffMat;		// マテリアルのポインタ
+		DWORD dwNumMat;				// マテリアル数
+		std::vector<int>pTexture;	// テクスチャの動的ポインタ
+		char FileName[MAX_WORD];	// 文字列
 	};
 
 	// コンストラクタ・デストラクタ

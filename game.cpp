@@ -186,7 +186,7 @@ void CGame::Update(void)
 		//}
 
 			// èÛë‘ïœçX
-		m_nGametype = GAMESTATE_END;
+		// m_nGametype = GAMESTATE_END;
 	}
 }
 //==================================
