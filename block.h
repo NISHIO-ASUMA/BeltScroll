@@ -33,7 +33,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool Collision(void);
+	bool Collision(D3DXVECTOR3 *pPos,D3DXVECTOR3* pPosOld,D3DXVECTOR3 * pMove,float fDestSize,bool &isLanding);
 
 	// ê√ìIÉÅÉìÉoä÷êî
 	static CBlock* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale,const char* FileName);
