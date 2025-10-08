@@ -12,6 +12,7 @@
 // 前方宣言
 //**********************
 class CInputMouse;
+class CInputKeyboard;
 
 //**********************
 // カメラクラスを定義
@@ -34,18 +35,7 @@ public:
 		MODE_MAIN,
 		MODE_SUB,
 		MODE_MAX
-	
-	};
 
-	//**********************
-	// ロックオン時列挙型
-	//**********************
-	enum LOCKONMODE
-	{
-		LOCK_NONE,
-		LOCK_PLAYER,
-		LOCK_SUBPLAYER,
-		LOCK_MAX
 	};
 
 	// コンストラクタ・デストラクタ
@@ -57,33 +47,11 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void SetCamera(void);
-
-	void MouseView(CInputMouse* pMouse);
-	void LockOn(void);
-	void LockOnMain(void);
-	void PlayerFollow(void);
-	void Rotation(void);
-	void TitleCamera(void);
-	void TutorialCamera(void);
-	void AnimCamera(void);
-	void UpdateAnimCamera(void);
-	void UpdateShake(void);
-	void ChangeLockOn(D3DXVECTOR3 NowPos ,D3DXVECTOR3 DestPos);
-
-	void Load(int nIdx);
-	void Save(void);
+	void MouseView(CInputMouse* pMouse, CInputKeyboard* pInput);
+	void WheelMouse(int nDelta);
 
 	// セッター
-	void StartEventCamera(const D3DXVECTOR3& targetV, const D3DXVECTOR3& targetR, int endFrame);
-	void ShakeCamera(int WaveTime);
-	void SetIsRotation(bool isFlags) { m_isRotation = isFlags; }
-	void SetFinishRotation(bool isFlags) { m_isStopRotation = isFlags; }
 	void SetCameraMode(int nMode) { m_pCamera.nMode = nMode; }
-	void SetKey(bool isFlags) { m_isKey = isFlags; }
-	void SetLoadPass(int nIdxPass) { m_nFileIdx = nIdxPass; }
-	void SetAnim(bool isFlags) { m_isAnimTime = isFlags; }
-	void SetLockOnObject(LOCKONMODE lockObj) { m_LockMode = lockObj; }
-	void SetRot(D3DXVECTOR3 rot) { m_pCamera.rot = rot; }
 
 	// ゲッター
 	D3DXVECTOR3 GetRot(void) { return m_pCamera.rot; }
@@ -91,63 +59,9 @@ public:
 	D3DXVECTOR3 GetPosR(void) { return m_pCamera.posR; }
 	D3DXMATRIX GetMtxProjection(void) { return m_pCamera.mtxprojection; }
 	int GetMode(void) { return m_pCamera.nMode; }
-	bool GetShake(void) { return m_isShake; }
-	bool GetAnim(void) { return m_isAnimTime; }
-
-	// フラグメント
-	bool GetIsRotation(void) { return m_isRotation; }
-	bool GetFinishRotation(void) { return m_isStopRotation; }
-	bool GetKeyFlag(void) { return m_isKey; }
+	float GetDistance(void) { return m_pCamera.fDistance; }
 
 private:
-	// 定数宣言
-	static constexpr int NUMKEY = 10;
-	static constexpr int ANIMFILENUM = 2;
-
-	//*************************
-	// イベントフレーム構造体
-	//*************************
-	struct EventData
-	{
-		bool isActive;		// イベント実行中か
-		int	 frame;			// 経過フレーム
-		int	 endFrame;		// 終了フレーム
-		D3DXVECTOR3 startPosV;		// 開始視点
-		D3DXVECTOR3 startPosR;		// 開始注視点
-		D3DXVECTOR3 targetPosV;		// 目標視点
-		D3DXVECTOR3 targetPosR;		// 目標注視点
-	};
-
-
-	//********************************
-	// カメラアニメーションキー構造体
-	//********************************
-	struct AnimDataKey
-	{
-		float fPosVX;	// 視点X
-		float fPosVY;	// 視点Y
-		float fPosVZ;	// 視点Z
-
-		float fPosRX;	// 注視点X
-		float fPosRY;	// 注視点Y
-		float fPosRZ;	// 注視点Z
-
-		float fRotX;	// 向きX
-		float fRotY;	// 向きY
-		float fRotZ;	// 向きZ
-		int nAnimFrame; // アニメーションのフレーム
-		float fDistance;// カメラの距離
-	};
-
-	//**********************************
-	// カメラアニメーションデータ構造体
-	//**********************************
-	struct AnimData
-	{
-		AnimDataKey KeyInfo[NUMKEY];	// 構造体
-		int nNumKey; // キーの最大数
-		bool isLoop;	// ループするかどうか
-	};
 
 	//*************************
 	// カメラ構造体を定義
@@ -164,34 +78,10 @@ private:
 		int nMode;					// カメラのモード
 		int nUseKey;				// アニメーション使用時に読み取るキー数
 		int nCntAnim;				// カウント
-		AnimData m_AnimData;	// アニメーションデータ
 	};
 
-	EventData m_event;		// イベント用データ
 	Camera m_pCamera;		// カメラ構造体変数
-	LOCKONMODE m_LockMode;
-
-	int m_nShakeTime;				// 振動時間
-	int m_nAnimNowKey;				// 現在キーNo
-	int m_nFileIdx;					// ファイルインデックス
-	int m_nAnimShakeFlame;			// アニメーション振動フレーム
-
-	bool m_isRotation;		// 回転したかどうか
-	bool m_isStopRotation;	// 回転終了
-	bool m_isSetPos;		// ボスが死んだかどうかのフラグ
-	bool m_isShake;			// 振動するかどうか
-	bool m_isKey;			// キー入力判定
-	bool m_isAnimTime;		// アニメーション中かどうか
-	bool m_isLoad;			// 読み込んだかどうか
-	bool m_isStopCurrentAnim;
-	bool m_isSoundPlay;
-	bool m_isCreate;
-
-	const char* ANIMFILE[ANIMFILENUM] =
-	{
-		"data\\Loader\\CameraInfo.txt",
-		"data\\Loader\\CameraGameEnd.txt",
-	};
+	D3DXVECTOR3 m_Zoom;		// ズーム
 };
 
 #endif

@@ -15,4 +15,5 @@ FILENAME = "data/TEXTURE/PauseBack.png"			# [3]ポーズテクスチャ
 FILENAME = "data/TEXTURE/pausemenu_continue.png"# [4]ポーズテクスチャ
 FILENAME = "data/TEXTURE/pausemenu_quit.png"	# [5]ポーズテクスチャ
 FILENAME = "data/TEXTURE/pausemenu_retry.png"	# [6]ポーズテクスチャ
-FILENAME = "data/TEXTURE/data/TEXTURE/Item_life.png #[7]モデルテクスチャ
+FILENAME = "data/TEXTURE/pausemenu_retry.png"	# [6]ポーズテクスチャ
+FILENAME = "data/TEXTURE/wall001.jpg			# [7]メッシュフィールドテクスチャ

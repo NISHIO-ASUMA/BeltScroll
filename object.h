@@ -22,12 +22,10 @@ public:
 		TYPE_NONE,
 		TYPE_PLAYER,
 		TYPE_MESH,
-		TYPE_BULLET,
 		TYPE_BOSS,
 		TYPE_ENEMY,
 		TYPE_BLOCK,
 		TYPE_PAUSE,
-		TYPE_BARRIER,
 		TYPE_ITEM,
 		TYPE_MAX
 	};
@@ -40,11 +38,11 @@ public:
 		NONE,		// 初期状態
 		MESH,		// メッシュ
 		BASENUMBER, // 基準番号
-		MODELOBJECT,// モデル
+		MODELOBJECT,// Xファイルのモデル
 		BULLET,		// 弾
 		SHADOW,		// 影
 		IMPACT,		// 衝撃波
-		CHARACTOR,	// プレイヤー
+		CHARACTOR,	// キャラクター
 		BILLBOARD,	// ビルボード
 		EFFECT,		// エフェクト
 		UI,			// 2DUI

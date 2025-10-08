@@ -13,6 +13,7 @@
 #include "game.h"
 #include "ui.h"
 #include "objectX.h"
+#include "meshfield.h"
 
 //=====================================
 // コンストラクタ
@@ -34,10 +35,9 @@ CTitle::~CTitle()
 HRESULT CTitle::Init(void)
 {
 	// ui生成
-	CUi::Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0, 120.0f, 30.0f, "titlemenu_001.png", false);
+	// CUi::Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0, 120.0f, 30.0f, "titlemenu_001.png", false);
 
-	// CObjectX::Create("data/MODEL/STAGEOBJ/Item_life.x",VECTOR3_NULL);
-
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 	// 初期化結果を返す
 	return S_OK;
 }

@@ -27,7 +27,7 @@ CObjectX::CObjectX(int nPriority) : CObject(nPriority)
 	m_fsize = VECTOR3_NULL;
 	m_Vtxmin = VECTOR3_NULL;
 	m_Vtxmax = VECTOR3_NULL;
-
+	m_Scale = { 1.0f,1.0f ,1.0f };
 	m_pTexture = nullptr;
 	m_pFileName = {};
 
@@ -202,7 +202,7 @@ void CObjectX::Draw(void)
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
 	// 計算用のマトリックスを宣言
-	D3DXMATRIX mtxRot, mtxTrans;
+	D3DXMATRIX mtxRot,mtxTrans,mtxScale;
 
 	// 現在のマテリアルを保存
 	D3DMATERIAL9 matDef;
@@ -213,12 +213,13 @@ void CObjectX::Draw(void)
 	// ワールドマトリックスの初期化
 	D3DXMatrixIdentity(&m_mtxWorld);
 
-	if (!m_isUseQaut)
-	{
-		// 向きを反映
-		D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
-		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
-	}
+	// 拡大率を反映
+	D3DXMatrixScaling(&mtxScale, m_Scale.x, m_Scale.y, m_Scale.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxScale);
+
+	// 向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
 
 	// 位置を反映
 	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);

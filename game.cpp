@@ -13,6 +13,8 @@
 #include "debugproc.h"
 #include "title.h"
 #include "result.h"
+#include "meshfield.h"
+#include "gamemanager.h"
 
 //**************************
 // 静的メンバ変数宣言
@@ -52,17 +54,11 @@ HRESULT CGame::Init(void)
 	// ポーズマネージャー初期化処理
 	m_pPausemanager->Init();
 
-	//// ゲームマネージャー生成
-	//m_pGameManager = new CGameManager;
+	// TODO : 検証用生成
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
-	//// nullだったら
-	//if (m_pGameManager == nullptr)
-	//{
-	//	return E_FAIL;
-	//}
-
-	//// ゲームマネージャー初期化処理
-	//m_pGameManager->Init();
+	// マネージャー生成
+	CGameManager::GetInstance()->Init();
 
 	// 通常進行状態
 	m_nGametype = GAMESTATE_NORMAL;
@@ -89,18 +85,8 @@ void CGame::Uninit(void)
 		m_pPausemanager = nullptr;
 	}
 
-	//// nullチェック
-	//if (m_pGameManager != nullptr)
-	//{
-	//	// 終了処理
-	//	m_pGameManager->Uninit();
-
-	//	// ポインタの破棄
-	//	delete m_pGameManager;
-
-	//	// nullptrにする
-	//	m_pGameManager = nullptr;
-	//}
+	// 破棄
+	CGameManager::GetInstance()->Uninit();
 }
 //==================================
 // 更新処理
