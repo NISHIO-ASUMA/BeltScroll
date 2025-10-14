@@ -14,11 +14,13 @@
 #include "fade.h"
 #include "title.h"
 #include "ui.h"
+#include "rankingscore.h"
+#include "number.h"
 
 //******************************
 // 静的メンバ変数
 //******************************
-CObject2D* CRanking::m_pRankObj[MAX_RANK] = {};
+CRankingScore* CRanking::m_Score[MAX_RANK] = {};
 
 //===================================
 // オーバーロードコンストラクタ
@@ -43,7 +45,7 @@ CRanking::~CRanking()
 //===================================
 // 生成処理
 //===================================
-CRanking* CRanking::Create()
+CRanking* CRanking::Create(void)
 {
 	// インスタンス生成
 	CRanking* pRanking = new CRanking;
@@ -61,26 +63,15 @@ CRanking* CRanking::Create()
 //===================================
 // 初期化処理
 //===================================
-HRESULT CRanking::Init()
+HRESULT CRanking::Init(void)
 {
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
-	for (int nRank = 0; nRank < 2; nRank++)
-	{
-		if (nRank == 0)	// ランキング背景
-		{
-			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f, 360.0f, 0.0f), 1280.0f, 720.0f);
-			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
-		}
-		if (nRank == 1)	// 文字
-		{
-			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f * nRank, 70.0f, 0.0f), 600.0f, 100.0f);
-			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
-		}
-	}
+	// ランキングの背景と文字
 
-	TxtLoad("data\\txt\\Rank.txt");	// 読込
+
+	TxtLoad("data\\Text\\Rank.txt");	// 読込
 
 	SetSort();	// 並び替え
 
@@ -90,8 +81,15 @@ HRESULT CRanking::Init()
 		//m_Score[nCnt]->Add(m_nNumData[nCnt]);
 	//}
 
+	// 順位の数
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	{
+		m_Score[nCnt] = CRankingScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
+	}
+
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
+
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
 
@@ -103,17 +101,11 @@ HRESULT CRanking::Init()
 //===================================
 void CRanking::Uninit(void)
 {
-	// オブジェクト2Dの終了処理
-	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	for (int nCnt = 0; nCnt < 8; nCnt++)
 	{
-		if (m_pRankObj[nCnt] != NULL)
-		{
-			m_pRankObj[nCnt]->Uninit();
-		}
+		m_apNumbers[nCnt]->CNumber::Uninit();
 	}
 
-	//// オブジェクトの破棄
-	//CObject::Release();
 }
 //===================================
 // 更新処理
@@ -179,7 +171,7 @@ void CRanking::SetSort(void)
 	}
 
 	// ランキングの保存
-	TxtSave("data\\txt\\Rank.txt");
+	TxtSave("data\\Text\\Rank.txt");
 }
 
 //===================================
