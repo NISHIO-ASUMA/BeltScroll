@@ -158,6 +158,8 @@ void CGame::Update(void)
 	// falseの時に更新
 	if (m_pPausemanager->GetPause() == false)
 	{
+		CGameManager::GetInstance()->Update();
+
 		// ゲームマネージャー更新
 		// m_pGameManager->Update();
 

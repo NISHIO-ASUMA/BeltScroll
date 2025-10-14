@@ -11,11 +11,14 @@
 #include "gamemanager.h"
 #include "meshfield.h"
 #include "ui.h"
+#include "manager.h"
+#include "result.h"
+#include "player.h"
 
 //******************************
 // 静的メンバ変数
 //******************************
-CGameManager* CGameManager::m_pInstance = nullptr;
+CGameManager* CGameManager::m_pInstance = nullptr; // インスタンス
 
 //===============================
 // デストラクタ
@@ -29,10 +32,12 @@ CGameManager::~CGameManager()
 //===============================
 HRESULT CGameManager::Init(void)
 {
-	// TODO : 検証用生成
+	//メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
-	// CUi::Create(CENTERPOS,0,60.0f,60.0f,"PointUi.png",false);
+	// プレイヤー生成 ( のちにモデル変更 )
+	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
+
 
 	// 初期化結果を返す
 	return S_OK;
@@ -54,14 +59,22 @@ void CGameManager::Uninit(void)
 //===============================
 void CGameManager::Update(void)
 {
+	// キー入力
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	{
+		// 遷移
+		CManager::GetFade()->SetFade(new CResult());
 
+		return;
+	}
 }
 //===============================
 // 描画処理
 //===============================
 void CGameManager::Draw(void)
 {
-
+	// 描画するものがあればここに追加
+	// Object継承の物は書くな
 }
 //===============================
 // インスタンス取得

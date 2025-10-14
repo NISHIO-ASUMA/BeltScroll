@@ -12,7 +12,6 @@
 #include "manager.h"
 #include "game.h"
 #include "ui.h"
-#include "objectX.h"
 #include "meshfield.h"
 
 //=====================================
@@ -34,10 +33,9 @@ CTitle::~CTitle()
 //=====================================
 HRESULT CTitle::Init(void)
 {
-	// ui生成
-	// CUi::Create(D3DXVECTOR3(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 0.0f), 0, 120.0f, 30.0f, "titlemenu_001.png", false);
 
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+
 	// 初期化結果を返す
 	return S_OK;
 }
@@ -53,6 +51,15 @@ void CTitle::Uninit(void)
 //=====================================
 void CTitle::Update(void)
 {
+	// キー入力で遷移
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	{
+		// ランキング
+		CManager::GetFade()->SetFade(new CGame());
+
+		return;
+	}
+
 	// コントローラー取得
 	if (CManager::GetJoyPad()->GetTrigger(CManager::GetJoyPad()->JOYKEY_BACK))
 	{

@@ -13,6 +13,7 @@
 #include "input.h"
 #include "fade.h"
 #include "title.h"
+#include "ui.h"
 
 //===================================
 // オーバーロードコンストラクタ
@@ -51,6 +52,8 @@ CRanking* CRanking::Create(void)
 //===================================
 HRESULT CRanking::Init(void)
 {
+	// ui生成
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
 
 	// 初期化結果を返す
 	return S_OK;
