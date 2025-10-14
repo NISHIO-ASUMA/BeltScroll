@@ -36,7 +36,7 @@ public:
 	virtual ~CScene();
 
 	// èÉêàâºëzä÷êî
-	virtual HRESULT Init(void) = 0;
+	virtual HRESULT Init(D3DXVECTOR3 pos, float fWidth, float fHeight) = 0;
 	virtual void Uninit(void) = 0;
 	virtual void Update(void) = 0;
 	virtual void Draw(void) = 0;

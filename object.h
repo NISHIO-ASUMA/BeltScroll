@@ -27,6 +27,7 @@ public:
 		TYPE_BLOCK,
 		TYPE_PAUSE,
 		TYPE_ITEM,
+		TYPE_SCENE,
 		TYPE_MAX
 	};
 

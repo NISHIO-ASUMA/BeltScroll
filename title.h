@@ -29,7 +29,7 @@ public:
 	~CTitle();
 
 	// ƒƒ“ƒoŠÖ”
-	HRESULT Init(void);
+	HRESULT Init(D3DXVECTOR3 pos, float fWidth, float fHeight);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);

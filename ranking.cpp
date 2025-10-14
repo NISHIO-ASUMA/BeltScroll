@@ -14,12 +14,23 @@
 #include "fade.h"
 #include "title.h"
 
+//******************************
+// 静的メンバ変数
+//******************************
+CObject2D* CRanking::m_pRankObj[MAX_RANK] = {};
+
 //===================================
 // オーバーロードコンストラクタ
 //===================================
 CRanking::CRanking() : CScene(CScene::MODE_RANKING)
 {
+	//CObject::SetObjType(CObject::TYPE_SCENE);
 
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	{
+		//m_Score[nCnt] = NULL;
+		m_nNumData[nCnt] = 0;
+	}
 }
 //===================================
 // デストラクタ
@@ -31,14 +42,14 @@ CRanking::~CRanking()
 //===================================
 // 生成処理
 //===================================
-CRanking* CRanking::Create(void)
+CRanking* CRanking::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 {
 	// インスタンス生成
 	CRanking* pRanking = new CRanking;
 	if (pRanking == nullptr) return nullptr;
 
 	// 初期化失敗時
-	if (FAILED(pRanking->Init()))
+	if (FAILED(pRanking->Init(pos,fWidth,fHeight)))
 	{
 		return nullptr;
 	}
@@ -49,8 +60,37 @@ CRanking* CRanking::Create(void)
 //===================================
 // 初期化処理
 //===================================
-HRESULT CRanking::Init(void)
+HRESULT CRanking::Init(D3DXVECTOR3 pos, float fWidth, float fHeight)
 {
+	//// サウンドへのポインタ(サウンドの取得)
+	//CSound* pSound = CManager::GetSound();
+
+	for (int nRank = 0; nRank < 2; nRank++)
+	{
+		if (nRank == 0)	// ランキング背景
+		{
+			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f, 360.0f, 0.0f), 1280.0f, 720.0f);
+			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
+		}
+		if (nRank == 1)	// 文字
+		{
+			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f * nRank, 70.0f, 0.0f), 600.0f, 100.0f);
+			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
+		}
+	}
+
+	TxtLoad("data\\txt\\Rank.txt");	// 読込
+
+	SetSort();	// 並び替え
+
+	//for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	//{
+		//m_Score[nCnt] = CScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
+		//m_Score[nCnt]->Add(m_nNumData[nCnt]);
+	//}
+
+	//// BGMを流す
+	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
 
 	// 初期化結果を返す
 	return S_OK;
@@ -60,7 +100,17 @@ HRESULT CRanking::Init(void)
 //===================================
 void CRanking::Uninit(void)
 {
+	// オブジェクト2Dの終了処理
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	{
+		if (m_pRankObj[nCnt] != NULL)
+		{
+			m_pRankObj[nCnt]->Uninit();
+		}
+	}
 
+	//// オブジェクトの破棄
+	//CObject::Release();
 }
 //===================================
 // 更新処理
@@ -86,4 +136,115 @@ void CRanking::Update(void)
 void CRanking::Draw(void)
 {
 	// 無し
+}
+
+//===================================
+// ランキングの入替処理(降順)
+//===================================
+void CRanking::SetSort(void)
+{
+	//int nScore = CScore::Load("data\\txt\\Score.txt");
+
+	int nNumData[MAX_RANK + 1] = { 0 };	// ランキングスコア格納用
+
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	{
+		nNumData[nCnt] = m_nNumData[nCnt];
+	}
+
+	//nNumData[MAX_RANK] = nScore;
+
+	for (int nCntRank = 0; nCntRank < MAX_RANK; nCntRank++)
+	{
+		for (int nSelect = nCntRank + 1; nSelect < MAX_RANK + 1; nSelect++)
+		{
+			if (nNumData[nCntRank] < nNumData[nSelect])
+			{
+				int nRankSave = nNumData[nCntRank];	// 一時保存
+
+				// 数値の入れ替え
+				nNumData[nCntRank] = nNumData[nSelect];
+				nNumData[nSelect] = nRankSave;
+			}
+		}
+	}
+
+	// ランキングの代入
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	{
+		m_nNumData[nCnt] = nNumData[nCnt];
+	}
+
+	// ランキングの保存
+	TxtSave("data\\txt\\Rank.txt");
+}
+
+//===================================
+// ランキングの読込処理
+//===================================
+void CRanking::TxtLoad(const char* pFileName)
+{
+	// ファイルを開く
+	FILE* pFile = fopen(pFileName, "r");
+
+	if (pFile != NULL)
+	{
+		// 文字列格納用変数
+		char aString[32] = {};
+		char cData = {};
+		int nRank[MAX_RANK] = { 0 };
+
+		while (1)
+		{
+			cData = fscanf(pFile, "%s", &aString[0]);
+
+			// 何も無かったら
+			if ((int)aString[0] == EOF || (char)aString[0] == NULL)
+			{
+				// ループを抜ける
+				break;
+			}
+			else if (strcmp(&aString[0], "RANKING") == 0)
+			{
+				// 数字の読み取り
+				for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+				{
+					cData = fscanf(pFile, "%d", &nRank[nCnt]);
+				}
+			}
+			else if (strcmp(&aString[0], "END_RANKING") == 0)
+			{
+				// スコアの保存
+				for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+				{
+					m_nNumData[nCnt] = nRank[nCnt];
+				}
+
+				// ファイルを閉じる
+				fclose(pFile);
+
+				// ループを抜ける
+				break;
+			}
+		}
+	}
+}
+
+//===================================
+// ランキングの保存処理
+//===================================
+void CRanking::TxtSave(const char* pFileName)
+{
+	// ファイルを開く
+	FILE* pFile = fopen(pFileName, "w");
+
+	if (pFile != nullptr)
+	{
+		fprintf(pFile, "RANKING");
+
+		for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+		{
+			fprintf(pFile, "\n%d", m_nNumData[nCnt]);
+		}
+	}
 }
