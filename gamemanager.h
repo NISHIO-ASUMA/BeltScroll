@@ -12,6 +12,7 @@
 // 前方宣言
 //**************************
 class CBlockManager;
+class CPlayer;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -28,6 +29,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	CPlayer* GetPlayer(void) { return m_pPlayer; }
+
 	// 静的メンバ関数
 	static CGameManager* GetInstance(void);
 
@@ -35,6 +38,7 @@ private:
 	CGameManager() {}
 	static CGameManager* m_pInstance; 	// シングルトン変数
 	CBlockManager* m_pBlockManager;
+	CPlayer* m_pPlayer;
 
 };
 

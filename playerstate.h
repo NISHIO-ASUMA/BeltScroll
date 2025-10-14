@@ -30,10 +30,7 @@ public:
 		ID_MOVE, // 移動
 		ID_ACTION, // 攻撃
 		ID_JUMP, // ジャンプ
-		ID_GUARD, // 防御
 		ID_DAMAGE,// ダメージ
-		ID_AVOIDRIGHT, // 回避
-		ID_AVOIDLEFT, // 回避
 		ID_MAX
 	};
 

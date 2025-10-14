@@ -49,6 +49,7 @@ public:
 	void SetCamera(void);
 	void MouseView(CInputMouse* pMouse, CInputKeyboard* pInput);
 	void WheelMouse(int nDelta);
+	void PlayerFllow(void);
 
 	// セッター
 	void SetCameraMode(int nMode) { m_pCamera.nMode = nMode; }

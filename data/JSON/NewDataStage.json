@@ -2,7 +2,7 @@
    "AllObject": 8,
    "SetObjects": [
       {
-         "filepath": "data/MODEL/block000.x",
+         "filepath": "data/MODEL/STAGEOBJ/block000.x",
          "idx": 0,
          "pos": [
             0.0,
@@ -20,138 +20,138 @@
             1.0
          ]
       },
-      {
-         "filepath": "data/MODEL/block000.x",
-         "idx": 1,
-         "pos": [
-            -105.0,
-            24.0,
-            -130.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/flog_001.x",
-         "idx": 2,
-         "pos": [
-            -374.0,
-            24.0,
-            139.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/block000.x",
-         "idx": 3,
-         "pos": [
-            115.0,
-            24.0,
-            -230.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/block000.x",
-         "idx": 4,
-         "pos": [
-            197.0,
-            24.0,
-            -387.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/block002.x",
-         "idx": 5,
-         "pos": [
-            -4.0,
-            24.0,
-            -457.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/block001.x",
-         "idx": 6,
-         "pos": [
-            -355.0,
-            78.0,
-            -275.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      },
-      {
-         "filepath": "data/MODEL/Item_life.x",
-         "idx": 7,
-         "pos": [
-            433.3299865722656,
-            196.0,
-            -369.7300109863281
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ]
-      }
+    {
+      "filepath": "data/MODEL/STAGEOBJ/block000.x",
+      "idx": 1,
+      "pos": [
+        -105.0,
+        24.0,
+        -130.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/flog_001.x",
+      "idx": 2,
+      "pos": [
+        -374.0,
+        24.0,
+        139.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/block000.x",
+      "idx": 3,
+      "pos": [
+        115.0,
+        24.0,
+        -230.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/block000.x",
+      "idx": 4,
+      "pos": [
+        197.0,
+        24.0,
+        -387.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/block002.x",
+      "idx": 5,
+      "pos": [
+        -4.0,
+        24.0,
+        -457.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/block001.x",
+      "idx": 6,
+      "pos": [
+        -355.0,
+        78.0,
+        -275.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/Item_life.x",
+      "idx": 7,
+      "pos": [
+        433.3299865722656,
+        196.0,
+        -369.7300109863281
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
    ]
 }

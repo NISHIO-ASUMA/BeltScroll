@@ -72,13 +72,6 @@ void CPlayerStateNeutral::OnUpdate()
 	CInputKeyboard* pInput = CManager::GetInputKeyboard();
 	CJoyPad* pPad = CManager::GetJoyPad();
 
-	// カメラ取得
-	CCamera* pCamera = CManager::GetCamera();
-
-	// イベントモード または アニメーション中 なら
-	if (pCamera->GetMode() == CCamera::MODE_EVENT) return;
-	if (pCamera->GetMode() == CCamera::MODE_ANIM) return;
-
 	// Damage中は一切入力を受け付けない
 	if (m_pPlayer->GetStateMachine()->GetNowStateID() == ID_DAMAGE) return;
 
@@ -233,7 +226,7 @@ void CPlayerStateMove::OnStart()
 //==================================
 void CPlayerStateMove::OnUpdate()
 {
-#if 0
+#if 1
 	// キー入力を取得	
 	CInputKeyboard* pInput = CManager::GetInputKeyboard();
 	CJoyPad* pPad = CManager::GetJoyPad();
@@ -241,11 +234,8 @@ void CPlayerStateMove::OnUpdate()
 	// カメラ取得
 	CCamera* pCamera = CManager::GetCamera();
 
-	// イベントモードなら
-	if (pCamera->GetMode() == CCamera::MODE_EVENT) return;
-
 	// 移動処理実行
-	m_pPlayer->UpdateMove(MeshPos, pInput, pPad);
+	m_pPlayer->UpdateMove(pInput, pPad);
 
 	// キー入力が無い
 	if (!m_pPlayer->isMoveInputKey(pInput) && !m_pPlayer->isMovePadButton(pPad)
@@ -253,18 +243,6 @@ void CPlayerStateMove::OnUpdate()
 	{
 		// ニュートラルに遷移
 		m_pPlayer->ChangeState(new CPlayerStateNeutral, ID_NEUTRAL);
-
-		// ここで処理を返す
-		return;
-	}
-
-	// ジャンプキー入力時にステート変更
-	if ((pInput->GetPress(DIK_SPACE) || pPad->GetPress(CJoyPad::JOYKEY_A)) &&
-		m_pPlayer->GetNowMotion() != CPlayer::PLAYERMOTION_DAMAGE		   &&
-		!m_pPlayer->IsJumping())
-	{
-		// ジャンプに遷移
-		m_pPlayer->ChangeState(new CPlayerStateJump, ID_JUMP);
 
 		// ここで処理を返す
 		return;

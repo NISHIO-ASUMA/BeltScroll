@@ -14,6 +14,8 @@
 #include "debugproc.h"
 #include "object.h"
 #include "template.h"
+#include "player.h"
+#include "gamemanager.h"
 
 //**********************
 // 定数宣言
@@ -96,8 +98,17 @@ void CCamera::Update(void)
 	CInputMouse* pMouse = CManager::GetMouse();
 	CInputKeyboard* pInput = CManager::GetInputKeyboard();
 
+#ifdef _DEBUG
+
 	// マウス更新
 	MouseView(pMouse, pInput);
+
+#else
+
+	// 追従カメラ
+	PlayerFllow();
+
+#endif // _DEBUG
 
 	// 角度の正規化
 	if (m_pCamera.rot.y > D3DX_PI)
@@ -258,4 +269,36 @@ void CCamera::WheelMouse(int nDelta)
 		m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 		m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	}
+}
+//==============================
+// 追従カメラ処理
+//==============================
+void CCamera::PlayerFllow(void)
+{
+#if 1
+	// プレイヤー取得 ここを考える
+	CPlayer* pPlayer = CGameManager::GetInstance()->GetPlayer();
+
+	// nullptrチェック
+	if (pPlayer == nullptr)
+	{
+		// ここで処理を返す
+		return;
+	}
+
+	// 追従カメラ用に設定
+	m_pCamera.posRDest.x = pPlayer->GetPos().x + sinf(pPlayer->GetRotDest().y) * 1.0f;
+	m_pCamera.posRDest.y = pPlayer->GetPos().y + cosf(pPlayer->GetRotDest().y) * 1.0f;
+	m_pCamera.posRDest.z = pPlayer->GetPos().z + cosf(pPlayer->GetRotDest().y) * 1.0f;
+
+	m_pCamera.posR.x += ((m_pCamera.posRDest.x - m_pCamera.posR.x) * 0.3f);
+	m_pCamera.posR.y += ((m_pCamera.posRDest.y - m_pCamera.posR.y) * 0.3f);
+	m_pCamera.posR.z += ((m_pCamera.posRDest.z - m_pCamera.posR.z) * 0.3f);
+
+	// カメラの視点の情報
+	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+
+#endif
 }

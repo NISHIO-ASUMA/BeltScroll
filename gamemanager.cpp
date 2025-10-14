@@ -37,7 +37,7 @@ HRESULT CGameManager::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
-	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
+	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
 	// 生成
 	m_pBlockManager = new CBlockManager;
@@ -105,6 +105,8 @@ CGameManager* CGameManager::GetInstance(void)
 		m_pInstance = new CGameManager();
 
 		m_pInstance->m_pBlockManager = nullptr;
+		m_pInstance->m_pPlayer = nullptr;
+
 	}
 
 	// 生成ポインタを返す
