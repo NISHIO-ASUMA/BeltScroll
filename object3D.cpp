@@ -11,6 +11,7 @@
 #include "object3D.h"
 #include "texture.h"
 #include "manager.h"
+#include <string>
 
 //===============================
 // コンストラクタ
@@ -23,7 +24,7 @@ CObject3D::CObject3D(int nPriority) : CObject(nPriority)
 	m_rot = VECTOR3_NULL;
 	m_pos = VECTOR3_NULL;
 	m_col = COLOR_WHITE;
-	m_nIdxTexture = NULL;
+	m_nIdxTexture = -1;
 	m_fWidth = NULL;
 	m_fHeight = NULL;
 }
@@ -37,7 +38,7 @@ CObject3D::~CObject3D()
 //===============================
 // 生成処理
 //===============================
-CObject3D* CObject3D::Create(D3DXVECTOR3 pos)
+CObject3D* CObject3D::Create(D3DXVECTOR3 pos,const char * pFileName)
 {
 	// インスタンス生成
 	CObject3D* pObj3D = new CObject3D;
@@ -47,7 +48,7 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos)
 
 	// オブジェクト設定
 	pObj3D->SetPos(pos);
-	pObj3D->SetTexture();
+	pObj3D->SetTexture(pFileName);
 
 	// 初期化処理失敗時
 	if (FAILED(pObj3D->Init()))
@@ -170,6 +171,9 @@ void CObject3D::Draw(void)
 	// デバイスポインタを宣言
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
+	// テクスチャポインタ取得
+	CTexture* pTexture = CManager::GetTexture();
+
 	// 計算用のマトリックスを宣言
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -193,6 +197,9 @@ void CObject3D::Draw(void)
 	// 頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
+	// テクスチャ割り当て
+	pDevice->SetTexture(0, pTexture->GetAddress(m_nIdxTexture));
+
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
@@ -202,13 +209,18 @@ void CObject3D::Draw(void)
 //===============================
 // テクスチャ割り当て
 //===============================
-void CObject3D::SetTexture(void)
+void CObject3D::SetTexture(const char * pTexName)
 {
 	// テクスチャポインタ取得
 	CTexture* pTexture = CManager::GetTexture();
+	if (pTexture == nullptr) return;
+
+	// パス連結
+	std::string TexPath = "data/TEXTURE/";
+	TexPath += pTexName;
 
 	// 割り当て
-	m_nIdxTexture = pTexture->Register("data\\TEXTURE\\field100.jpg");
+	m_nIdxTexture = pTexture->Register(TexPath.c_str());
 }
 //===============================
 // オブジェクトの高さ取得

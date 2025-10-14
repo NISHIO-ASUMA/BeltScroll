@@ -34,7 +34,7 @@ public:
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetCol(D3DXCOLOR col) { m_col = col;}
 	void SetSize(float fWidth, float fHeight) { m_fWidth = fWidth, m_fHeight = fHeight; }
-	void SetTexture(void);
+	void SetTexture(const char* pTexName);
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
@@ -46,7 +46,7 @@ public:
 	float GetHeight(D3DXVECTOR3 pos);
 
 	// 静的メンバ関数
-	static CObject3D* Create(D3DXVECTOR3 pos);
+	static CObject3D* Create(D3DXVECTOR3 pos, const char* pFileName);
 
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファ
