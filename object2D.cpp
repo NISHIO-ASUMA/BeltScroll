@@ -444,7 +444,7 @@ void CObject2D::SetTexture(const char* pRegisterName)
 	if (pTexture == nullptr) return;
 
 	// パスを連結する
-	std::string TexName = "data\\TEXTURE\\";
+	std::string TexName = "data/TEXTURE/";
 	TexName += pRegisterName;
 
 	// インデックスに割り当て

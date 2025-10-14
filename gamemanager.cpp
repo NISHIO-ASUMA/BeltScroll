@@ -10,6 +10,7 @@
 //******************************
 #include "gamemanager.h"
 #include "meshfield.h"
+#include "ui.h"
 
 //******************************
 // Ã“Iƒƒ“ƒo•Ï”
@@ -30,6 +31,8 @@ HRESULT CGameManager::Init(void)
 {
 	// TODO : ŒŸØ—p¶¬
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+
+	// CUi::Create(CENTERPOS,0,60.0f,60.0f,"PointUi.png",false);
 
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;

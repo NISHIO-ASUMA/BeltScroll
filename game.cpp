@@ -60,6 +60,7 @@ HRESULT CGame::Init(void)
 	// マネージャー生成
 	CGameManager::GetInstance()->Init();
 
+	
 	// 通常進行状態
 	m_nGametype = GAMESTATE_NORMAL;
 
