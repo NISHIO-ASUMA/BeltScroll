@@ -47,7 +47,10 @@
 #define FVF_VERTEX_3D_MULTI (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_DIFFUSE | D3DFVF_TEX2) // 座標,法線,カラー,マルチテクスチャ
 
 #define VECTOR3_NULL (D3DXVECTOR3(0.0f, 0.0f, 0.0f))		// 座標初期化
-#define CENTERPOS (D3DXVECTOR3(640.0f, 360.0f, 0.0f))		// 座標初期化
+#define INITSCALE (D3DXVECTOR3(1.0f, 1.0f, 1.0f))			// 初期拡大率
+#define CENTERPOS (D3DXVECTOR3(640.0f, 360.0f, 0.0f))		// 中心
+
+
 #define COLOR_BLACK (D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f))		// 黒
 #define COLOR_WHITE (D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f))		// 白
 #define COLOR_RED	(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f))		// 赤

@@ -92,5 +92,4 @@ private:
 
 	bool m_isDeath;			// Ž€–Sƒtƒ‰ƒO
 };
-
 #endif

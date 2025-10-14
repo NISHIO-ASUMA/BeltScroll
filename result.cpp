@@ -9,6 +9,9 @@
 // インクルードファイル宣言
 //**************************
 #include "result.h"
+#include "ui.h"
+#include "manager.h"
+#include "ranking.h"
 
 //=================================
 // オーバーロードコンストラクタ
@@ -48,6 +51,9 @@ CResult* CResult::Create(void)
 //=================================
 HRESULT CResult::Init(void)
 {
+	// ui生成
+	CUi::Create(CENTERPOS,0,60.0f,60.0f,"Enterkey.png",false);
+
 	// 初期化結果を返す
 	return S_OK;
 }
@@ -63,7 +69,14 @@ void CResult::Uninit(void)
 //=================================
 void CResult::Update(void)
 {
+	// キー入力で遷移
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	{
+		// ランキング
+		CManager::GetFade()->SetFade(new CRanking());
 
+		return;
+	}
 }
 //=================================
 // 描画処理

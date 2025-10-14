@@ -13,6 +13,7 @@
 #include "input.h"
 #include "fade.h"
 #include "title.h"
+#include "ui.h"
 
 //******************************
 // 静的メンバ変数
@@ -62,6 +63,7 @@ CRanking* CRanking::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 //===================================
 HRESULT CRanking::Init(D3DXVECTOR3 pos, float fWidth, float fHeight)
 {
+<<<<<<< HEAD
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
@@ -91,6 +93,10 @@ HRESULT CRanking::Init(D3DXVECTOR3 pos, float fWidth, float fHeight)
 
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
+=======
+	// ui生成
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
+>>>>>>> 86d6d662c778adf96efd45d35b7b64a92dcdbfff
 
 	// 初期化結果を返す
 	return S_OK;
