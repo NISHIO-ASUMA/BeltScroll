@@ -14,6 +14,7 @@
 #include "manager.h"
 #include "result.h"
 #include "player.h"
+#include "blockmanager.h"
 
 //******************************
 // 静的メンバ変数
@@ -36,8 +37,11 @@ HRESULT CGameManager::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
-	CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
+	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
+	// 生成
+	m_pBlockManager = new CBlockManager;
+	m_pBlockManager->Init();
 
 	// 初期化結果を返す
 	return S_OK;
@@ -47,6 +51,19 @@ HRESULT CGameManager::Init(void)
 //===============================
 void CGameManager::Uninit(void)
 {
+	// nullチェック
+	if (m_pBlockManager != nullptr)
+	{
+		// 終了処理
+		m_pBlockManager->Uninit();
+
+		// 破棄
+		delete m_pBlockManager;
+
+		// null初期化
+		m_pBlockManager = nullptr;
+	}
+
 	// インスタンスの破棄
 	if (m_pInstance != nullptr)
 	{
@@ -86,6 +103,10 @@ CGameManager* CGameManager::GetInstance(void)
 	{
 		// ポインタ生成
 		m_pInstance = new CGameManager();
+
+		m_pInstance->m_pBlockManager = nullptr;
+		m_pInstance->m_pPlayer = nullptr;
+
 	}
 
 	// 生成ポインタを返す
