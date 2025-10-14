@@ -43,14 +43,14 @@ CRanking::~CRanking()
 //===================================
 // 生成処理
 //===================================
-CRanking* CRanking::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
+CRanking* CRanking::Create()
 {
 	// インスタンス生成
 	CRanking* pRanking = new CRanking;
 	if (pRanking == nullptr) return nullptr;
 
 	// 初期化失敗時
-	if (FAILED(pRanking->Init(pos,fWidth,fHeight)))
+	if (FAILED(pRanking->Init()))
 	{
 		return nullptr;
 	}
@@ -61,9 +61,8 @@ CRanking* CRanking::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 //===================================
 // 初期化処理
 //===================================
-HRESULT CRanking::Init(D3DXVECTOR3 pos, float fWidth, float fHeight)
+HRESULT CRanking::Init()
 {
-<<<<<<< HEAD
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
@@ -93,10 +92,8 @@ HRESULT CRanking::Init(D3DXVECTOR3 pos, float fWidth, float fHeight)
 
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
-=======
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
->>>>>>> 86d6d662c778adf96efd45d35b7b64a92dcdbfff
 
 	// 初期化結果を返す
 	return S_OK;
@@ -131,7 +128,7 @@ void CRanking::Update(void)
 		if (pFade == nullptr) return;
 
 		// 画面遷移
-		pFade->SetFade(new CTitle(true));
+		pFade->SetFade(new CTitle());
 
 		return;
 	}

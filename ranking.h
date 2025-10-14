@@ -31,7 +31,7 @@ public:
 	~CRanking();
 
 	// ƒƒ“ƒoŠÖ”
-	HRESULT Init(D3DXVECTOR3 pos, float fWidth, float fHeight);
+	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
@@ -40,7 +40,7 @@ public:
 	void TxtSave(const char* pFileName);
 
 	// Ã“Iƒƒ“ƒoŠÖ”
-	static CRanking* Create(D3DXVECTOR3 pos, float fWidth, float fHeight);
+	static CRanking* Create();
 
 private:
 

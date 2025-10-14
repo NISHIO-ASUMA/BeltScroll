@@ -17,7 +17,7 @@
 //=====================================
 // コンストラクタ
 //=====================================
-CTitle::CTitle(bool isFirst) : CScene(CScene::MODE_TITLE), m_isCreate(isFirst)
+CTitle::CTitle() : CScene(CScene::MODE_TITLE)
 {
 	//無し
 }
@@ -77,10 +77,10 @@ void CTitle::Draw(void)
 //=====================================
 // 生成処理
 //=====================================
-CTitle* CTitle::Create(bool isFirst)
+CTitle* CTitle::Create()
 {
 	// インスタンス生成
-	CTitle* pTitle = new CTitle(isFirst);
+	CTitle* pTitle = new CTitle();
 
 	// nullだったら
 	if (pTitle == nullptr) return nullptr;
