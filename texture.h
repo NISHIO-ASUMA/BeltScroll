@@ -31,11 +31,21 @@ public:
 
 private:
 
+	HRESULT LoadJson(void);
+
+	//*************************
+	// テクスチャデータ構造体
+	//*************************
+	struct TEXDATA
+	{
+		std::string TexName; // テクスチャ名
+		LPDIRECT3DTEXTURE9 TexData; // テクスチャポインタ
+	};
+
 	static constexpr int NUM_TEXTURE = 128;	// 最大テクスチャ数
 
-	std::string TEXTURE[NUM_TEXTURE];				// 配列
-	LPDIRECT3DTEXTURE9 m_apTexture[NUM_TEXTURE];	// テクスチャポインタ
-	static int m_nNumAll;							// テクスチャカウント変数
+	TEXDATA m_pTextureData[NUM_TEXTURE]; // テクスチャ管理配列
+	static int m_nNumAll;				 // テクスチャカウント変数
 };
 
 #endif

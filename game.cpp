@@ -55,7 +55,7 @@ HRESULT CGame::Init(void)
 	m_pPausemanager->Init();
 
 	// TODO : 検証用生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	// CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// マネージャー生成
 	CGameManager::GetInstance()->Init();
