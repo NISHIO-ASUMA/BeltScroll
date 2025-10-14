@@ -47,6 +47,9 @@ HRESULT CBlockManager::Init(void)
 	// ”z—ñ‚ğØ‚è—£‚µ
 	m_block.clear();
 
+	// jsonŠJ‚­
+	LoadJsonScript("data/JSON/NewDataStage.json");
+
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }
@@ -123,7 +126,7 @@ void CBlockManager::LoadJsonScript(const char* jsonName)
 	// SetObjects‚Ì”z—ñ‚ğ‰ñ‚·
 	for (const auto& b : j["SetObjects"])
 	{
-		std::string filepath = b["filepass"];
+		std::string filepath = b["filepath"];
 		int idx = b["idx"];
 
 		D3DXVECTOR3 pos(

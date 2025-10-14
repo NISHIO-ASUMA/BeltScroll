@@ -9,6 +9,11 @@
 #define _GAMEMANAGER_H_ // 2重インクルード防止のマクロ定義
 
 //**************************
+// 前方宣言
+//**************************
+class CBlockManager;
+
+//**************************
 // ゲーム管理クラスを定義
 //**************************
 class CGameManager
@@ -29,6 +34,8 @@ public:
 private:
 	CGameManager() {}
 	static CGameManager* m_pInstance; 	// シングルトン変数
+	CBlockManager* m_pBlockManager;
+
 };
 
 #endif
