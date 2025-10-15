@@ -8,6 +8,8 @@
 //**********************
 // インクルードファイル
 //**********************
+#define _CRTDBG_MAP_ALLOC
+
 #include <crtdbg.h>
 #include "main.h"
 #include "renderer.h"
@@ -26,6 +28,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE /*hInstancePrev
 {
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF);			// メモリリーク検知用のフラグ
+	// _CrtSetBreakAlloc(14999);
+
 #endif // _DEBUG
 
 	// マネージャーのインスタンスを生成

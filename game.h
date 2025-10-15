@@ -13,6 +13,7 @@
 //****************************
 #include "scene.h"
 #include "pausemanager.h"
+#include "gamemanager.h"
 #include "time.h"
 
 //****************************
@@ -49,9 +50,12 @@ public:
 	// 静的メンバ関数
 	static CGame* Create(void);
 	static CPauseManager* GetPause(void) { return m_pPausemanager; }
+	static CGameManager* GetGameManager(void) { return m_pGameManager; }
 
 private:
 	static CPauseManager* m_pPausemanager;		// ポーズマネージャーポインタ
+	static CGameManager* m_pGameManager;		// ゲームマネージャーポインタ
+
 	int m_nGametype;
 	int m_nStateCount;
 };

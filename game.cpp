@@ -14,12 +14,12 @@
 #include "title.h"
 #include "result.h"
 #include "meshfield.h"
-#include "gamemanager.h"
 
 //**************************
 // 静的メンバ変数宣言
 //**************************
 CPauseManager* CGame::m_pPausemanager = nullptr; // ポーズマネージャーのポインタ
+CGameManager* CGame::m_pGameManager = nullptr;	// ゲームマネージャーのポインタ
 
 //==================================
 // コンストラクタ
@@ -54,13 +54,10 @@ HRESULT CGame::Init(void)
 	// ポーズマネージャー初期化処理
 	m_pPausemanager->Init();
 
-	// TODO : 検証用生成
-	// CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
-
 	// マネージャー生成
-	CGameManager::GetInstance()->Init();
+	m_pGameManager = new CGameManager;
+	m_pGameManager->Init();
 
-	
 	// 通常進行状態
 	m_nGametype = GAMESTATE_NORMAL;
 
@@ -86,8 +83,18 @@ void CGame::Uninit(void)
 		m_pPausemanager = nullptr;
 	}
 
-	// 破棄
-	CGameManager::GetInstance()->Uninit();
+	// nullチェック
+	if (m_pGameManager != nullptr)
+	{
+		// 終了処理
+		m_pGameManager->Uninit();
+
+		// ポインタの破棄
+		delete m_pGameManager;
+
+		// nullptrにする
+		m_pGameManager = nullptr;
+	}
 }
 //==================================
 // 更新処理
@@ -158,10 +165,8 @@ void CGame::Update(void)
 	// falseの時に更新
 	if (m_pPausemanager->GetPause() == false)
 	{
-		CGameManager::GetInstance()->Update();
-
 		// ゲームマネージャー更新
-		// m_pGameManager->Update();
+		m_pGameManager->Update();
 
 		//// 経過時間を取得
 		//int Numtime = m_pGameManager->GetTime()->GetAllTime();

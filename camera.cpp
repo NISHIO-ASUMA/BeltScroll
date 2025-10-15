@@ -16,6 +16,7 @@
 #include "template.h"
 #include "player.h"
 #include "gamemanager.h"
+#include "game.h"
 
 //**********************
 // 定数宣言
@@ -102,6 +103,9 @@ void CCamera::Update(void)
 
 	// マウス更新
 	MouseView(pMouse, pInput);
+
+	// 追従カメラ
+	// PlayerFllow();
 
 #else
 
@@ -276,8 +280,8 @@ void CCamera::WheelMouse(int nDelta)
 void CCamera::PlayerFllow(void)
 {
 #if 1
-	// プレイヤー取得 ここを考える
-	CPlayer* pPlayer = CGameManager::GetInstance()->GetPlayer();
+	// プレイヤー取得
+	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
 
 	// nullptrチェック
 	if (pPlayer == nullptr)

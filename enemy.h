@@ -51,6 +51,8 @@ public:
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRot(D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetScale(D3DXVECTOR3 scale) { m_scale = scale; }
+	void AddBlow(const D3DXVECTOR3 Vec) { m_move += Vec; }
+	void SetBlow(bool isFlags) { m_isBlow = isFlags; }
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
@@ -71,5 +73,6 @@ private:
 	CMotion* m_pMotion; // モーションポインタ
 	CShadow* m_pShadow; // シャドウ
 	const char* m_pScriptName; // モーションファイル名
+	bool m_isBlow;			// 吹き飛ばしが有効か
 };
 
