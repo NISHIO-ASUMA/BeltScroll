@@ -105,7 +105,7 @@ void CCamera::Update(void)
 	MouseView(pMouse, pInput);
 
 	// 追従カメラ
-	// PlayerFllow();
+	PlayerFllow();
 
 #else
 
@@ -280,6 +280,14 @@ void CCamera::WheelMouse(int nDelta)
 void CCamera::PlayerFllow(void)
 {
 #if 1
+	// 現在のモード取得
+	CScene::MODE nMode = CManager::GetScene();
+
+	if (nMode != CScene::MODE_GAME)
+	{
+		return;
+	}
+
 	// プレイヤー取得
 	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
 
@@ -289,6 +297,7 @@ void CCamera::PlayerFllow(void)
 		// ここで処理を返す
 		return;
 	}
+	
 
 	// 追従カメラ用に設定
 	m_pCamera.posRDest.x = pPlayer->GetPos().x + sinf(pPlayer->GetRotDest().y) * 1.0f;
