@@ -34,7 +34,7 @@ CTitle::~CTitle()
 HRESULT CTitle::Init(void)
 {
 
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	// CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;

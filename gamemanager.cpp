@@ -15,6 +15,7 @@
 #include "result.h"
 #include "player.h"
 #include "blockmanager.h"
+#include "enemy.h"
 
 //******************************
 // 静的メンバ変数
@@ -38,6 +39,9 @@ HRESULT CGameManager::Init(void)
 
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
+
+	// 敵生成
+	CEnemy::Create(VECTOR3_NULL, VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
 
 	// 生成
 	m_pBlockManager = new CBlockManager;

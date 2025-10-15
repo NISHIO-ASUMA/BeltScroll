@@ -33,11 +33,7 @@ public:
 	// 静的メンバ関数
 	static CShadow* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 
-	// セッター
-	void SetTexture(void);
-
 private:
-	int m_nTexIdx;  // テクスチャインデックス番号
 };
 
 #endif
