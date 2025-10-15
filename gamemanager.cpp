@@ -39,13 +39,13 @@ CGameManager::~CGameManager()
 HRESULT CGameManager::Init(void)
 {
 	//メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
 	// 敵生成
-	CEnemy::Create(VECTOR3_NULL, VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
+	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
 	CEnemy::Create(D3DXVECTOR3(-550.0f,0.0f,-550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
 	CEnemy::Create(D3DXVECTOR3(550.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
 

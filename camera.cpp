@@ -64,10 +64,10 @@ CCamera::~CCamera()
 HRESULT CCamera::Init(void)
 {
 	// 初期値を設定する
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 650.0f, -1000.0f);		// カメラの位置
+	m_pCamera.posV = D3DXVECTOR3(0.0f, 650.0f, -900.0f);		// カメラの位置
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
-	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.55f, 0.0f, 0.0f);	// 角度
+	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
 
 	// 距離を計算
 	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
@@ -103,9 +103,6 @@ void CCamera::Update(void)
 
 	// マウス更新
 	MouseView(pMouse, pInput);
-
-	// 追従カメラ
-	PlayerFllow();
 
 #else
 

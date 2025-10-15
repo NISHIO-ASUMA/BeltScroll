@@ -29,13 +29,11 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+#if 0
 	void SetSort(void);
 	void TxtLoad(const char* pFileName);
 	void TxtSave(const char* pFileName);
-
-	// Ã“Iƒƒ“ƒoŠÖ”
-	static CRanking* Create();
-
+#endif
 private:
 	static constexpr int MAX_RANK = 5;
 	static constexpr int MAX_RANKTEX = 2;

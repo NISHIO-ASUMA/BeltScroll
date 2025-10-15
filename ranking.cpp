@@ -27,13 +27,8 @@ CRankingScore* CRanking::m_Score[MAX_RANK] = {};
 //===================================
 CRanking::CRanking() : CScene(CScene::MODE_RANKING)
 {
-	//CObject::SetObjType(CObject::TYPE_SCENE);
+	// 値のクリア
 
-	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
-	{
-		//m_Score[nCnt] = NULL;
-		m_nNumData[nCnt] = 0;
-	}
 }
 //===================================
 // デストラクタ
@@ -43,28 +38,11 @@ CRanking::~CRanking()
 	// 無し
 }
 //===================================
-// 生成処理
-//===================================
-CRanking* CRanking::Create(void)
-{
-	// インスタンス生成
-	CRanking* pRanking = new CRanking;
-	if (pRanking == nullptr) return nullptr;
-
-	// 初期化失敗時
-	if (FAILED(pRanking->Init()))
-	{
-		return nullptr;
-	}
-
-	// 生成されたポインタを返す
-	return pRanking;
-}
-//===================================
 // 初期化処理
 //===================================
 HRESULT CRanking::Init(void)
 {
+#if 0
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
@@ -80,6 +58,7 @@ HRESULT CRanking::Init(void)
 
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
+#endif
 
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
@@ -96,7 +75,6 @@ void CRanking::Uninit(void)
 	{
 		m_apNumbers[nCnt]->CNumber::Uninit();
 	}
-
 }
 //===================================
 // 更新処理
@@ -124,6 +102,7 @@ void CRanking::Draw(void)
 	// 無し
 }
 
+#if 0
 //===================================
 // ランキングの入替処理(降順)
 //===================================
@@ -234,3 +213,4 @@ void CRanking::TxtSave(const char* pFileName)
 		}
 	}
 }
+#endif
