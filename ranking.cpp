@@ -68,24 +68,15 @@ HRESULT CRanking::Init(void)
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
-	// ランキングの背景と文字
-
-
-	TxtLoad("data\\Text\\Rank.txt");	// 読込
-
-	SetSort();	// 並び替え
-
-	//for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
-	//{
-		//m_Score[nCnt] = CScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
-		//m_Score[nCnt]->Add(m_nNumData[nCnt]);
-	//}
-
 	// 順位の数
 	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
 	{
 		m_Score[nCnt] = CRankingScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
 	}
+
+	TxtLoad("data\\Text\\Rank.txt");	// 読込
+
+	SetSort();	// 並び替え
 
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
