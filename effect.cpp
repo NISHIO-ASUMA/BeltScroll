@@ -49,7 +49,7 @@ CEffect* CEffect::Create(D3DXVECTOR3 pos, D3DXCOLOR col, D3DXVECTOR3 move, int n
 	pEffect->SetSize(fRadius, fRadius);
 	pEffect->SetPos(pos);
 	pEffect->SetCol(col);
-	pEffect->SetTexture("effect000.jpg");
+	pEffect->SetTexture("effectwind.jpg");
 
 	// ”¼Œa‚ğ‘ã“ü
 	pEffect->m_fRadius = fRadius;

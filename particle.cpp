@@ -69,7 +69,7 @@ HRESULT CParticle::Init(void)
 	// ”z—ñƒNƒŠƒA
 	m_pEffect.clear();
 
-	// —”‚Ìí‚ğéŒ¾(1‚Â‚Ì‚İ‚ÌéŒ¾)
+	//—”‚Ìí‚ğéŒ¾(1‚Â‚Ì‚İ‚ÌéŒ¾)
 	srand((unsigned int)time(NULL));
 
 	return S_OK;

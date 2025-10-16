@@ -25,6 +25,7 @@
 #include "sound.h"
 #include "enemy.h"
 #include "effect.h"
+#include "particlepiler.h"
 
 //**********************
 // 名前空間
@@ -419,7 +420,15 @@ void CPlayer::Update(void)
 	// Lキーで範囲攻撃
 	if (CManager::GetInputKeyboard()->GetPress(DIK_L))
 	{
+		// 吹き飛ばし
 		EnemyBlow();
+
+#ifdef _DEBUG
+
+		// パーティクル生成
+		CParticlePiler::Create(m_pos, D3DXCOLOR(0.12f, 1.0f, 0.03f, 1.0f), 20, 50.0f, 50.0f, 25, m_rot.y);
+
+#endif // _DEBUG
 	}
 
 	// 重力加算
@@ -791,13 +800,13 @@ void CPlayer::HitDamage(int nDamage)
 
 #endif
 }
-//===============================
-// 敵吹き飛ばし処理
-//===============================
+//=======================================
+// 敵吹き飛ばし処理 ( 範囲をどうするか )
+//=======================================
 void CPlayer::EnemyBlow(void)
 {
 	// 範囲と威力
-	const float fBlowRange =200.0f;   // 有効範囲
+	const float fBlowRange = 100.0f;   // 有効範囲
 	const float fBlowPower = 50.0f;    // 吹き飛ばし強度
 
 	// 敵オブジェクトの先頭取得
