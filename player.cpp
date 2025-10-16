@@ -410,11 +410,11 @@ void CPlayer::Update(void)
 		// ジャンプ可能状態に変更
 		m_isJump = false;
 
-		// モーション終了時　かつ 種類が着地モーション
-		if (m_pMotion->GetMotionType() == PLAYERMOTION_LANDING && m_pMotion->GetFinishMotion())
-		{
-			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
-		}
+		//// モーション終了時　かつ 種類が着地モーション
+		//if (m_pMotion->GetMotionType() == PLAYERMOTION_LANDING && m_pMotion->GetFinishMotion())
+		//{
+		//	m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
+		//}
 	}
 
 	// Lキーで範囲攻撃

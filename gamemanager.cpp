@@ -45,7 +45,7 @@ HRESULT CGameManager::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 1500.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
-	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
+	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player.txt");
 
 	// 敵管理クラスを定義
 	m_pEnemyManager = CEnemyManager::Create();

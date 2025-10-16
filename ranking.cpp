@@ -61,7 +61,7 @@ HRESULT CRanking::Init(void)
 #endif
 
 	// ui¶¬
-	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "ranking.jpg", false);
 
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;

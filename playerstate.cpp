@@ -76,8 +76,7 @@ void CPlayerStateNeutral::OnUpdate()
 	if (m_pPlayer->GetStateMachine()->GetNowStateID() == ID_DAMAGE) return;
 
 	// 移動入力があれば移動状態へ
-	if ((m_pPlayer->isMoveInputKey(pInput) || m_pPlayer->isMovePadButton(pPad) || pPad->GetLeftStick()) &&
-		m_pPlayer->GetNowMotion() != CPlayer::PLAYERMOTION_DAMAGE)
+	if ((m_pPlayer->isMoveInputKey(pInput) || m_pPlayer->isMovePadButton(pPad) || pPad->GetLeftStick()))
 	{
 		// 状態変更
 		m_pPlayer->ChangeState(new CPlayerStateMove, ID_MOVE);
@@ -87,8 +86,7 @@ void CPlayerStateNeutral::OnUpdate()
 	}
 
 	// 攻撃キー入力時
-	if ((pInput->GetPress(DIK_RETURN) || pPad->GetPress(CJoyPad::JOYKEY_X)) &&
-		m_pPlayer->GetNowMotion() != CPlayer::PLAYERMOTION_DAMAGE)
+	if ((pInput->GetPress(DIK_RETURN) || pPad->GetPress(CJoyPad::JOYKEY_X)))
 	{
 		// ステート変更
 		m_pPlayer->ChangeState(new CPlayerStateAction, ID_ACTION);
@@ -98,8 +96,8 @@ void CPlayerStateNeutral::OnUpdate()
 	}
 
 	// Spaceキー もしくは PadのAキー
-	if ((pInput->GetPress(DIK_SPACE) || pPad->GetPress(CJoyPad::JOYKEY_A)) &&
-		m_pPlayer->GetNowMotion() != CPlayer::PLAYERMOTION_DAMAGE)
+	if ((pInput->GetPress(DIK_SPACE) || pPad->GetPress(CJoyPad::JOYKEY_A)))
+		
 	{
 		// ステート変更
 		m_pPlayer->ChangeState(new CPlayerStateJump, ID_JUMP);
@@ -138,7 +136,7 @@ CPlayerStateAction::~CPlayerStateAction()
 void CPlayerStateAction::OnStart()
 {
 	// 攻撃モーションに変更
-	m_pPlayer->GetMotion()->SetMotion(CPlayer::PLAYERMOTION_ACTION);
+	// m_pPlayer->GetMotion()->SetMotion(CPlayer::PLAYERMOTION_ACTION);
 }
 //==================================
 // 攻撃状態更新関数
@@ -238,8 +236,7 @@ void CPlayerStateMove::OnUpdate()
 	m_pPlayer->UpdateMove(pInput, pPad);
 
 	// キー入力が無い
-	if (!m_pPlayer->isMoveInputKey(pInput) && !m_pPlayer->isMovePadButton(pPad)
-		&& m_pPlayer->GetNowMotion() != CPlayer::PLAYERMOTION_DAMAGE)
+	if (!m_pPlayer->isMoveInputKey(pInput) && !m_pPlayer->isMovePadButton(pPad))
 	{
 		// ニュートラルに遷移
 		m_pPlayer->ChangeState(new CPlayerStateNeutral, ID_NEUTRAL);
@@ -281,6 +278,7 @@ CPlayerStateDamage::~CPlayerStateDamage()
 //==================================
 void CPlayerStateDamage::OnStart()
 {
+#if 0
 	// モーションセット
 	m_pPlayer->GetMotion()->SetMotion(CPlayer::PLAYERMOTION_DAMAGE, false, 0, false);
 
@@ -300,6 +298,7 @@ void CPlayerStateDamage::OnStart()
 
 	// 振動開始
 	pJoyPad->SetVibration(53000, 53000, 600);
+#endif
 }
 //==================================
 // ダメージ状態更新関数

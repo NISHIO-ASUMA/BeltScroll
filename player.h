@@ -39,12 +39,7 @@ public:
 	{
 		PLAYERMOTION_NEUTRAL,		// ニュートラル
 		PLAYERMOTION_MOVE,			// 移動
-		PLAYERMOTION_ACTION,		// アクション
 		PLAYERMOTION_JUMP,			// ジャンプ
-		PLAYERMOTION_LANDING,		// 着地
-		PLAYERMOTION_JUMPATTACK,	// ジャンプ攻撃
-		PLAYERMOTION_DAMAGE,		// ダメージ
-		PLAYERMOTION_AVOID,			// 回避
 		PLAYERMOTION_MAX
 	};
 
@@ -105,7 +100,7 @@ public:
 	static bool IsDeath(void) { return m_isDeath; }
 
 private:
-	static inline constexpr int MAX_MODEL = 19; // プレイヤーで使うモデルの数
+	static inline constexpr int MAX_MODEL = 16; // プレイヤーで使うモデルの数
 
 	D3DXVECTOR3 m_move;		// 移動量
 	D3DXVECTOR3 m_rotDest;  // 目的角
