@@ -162,14 +162,13 @@
     <ClCompile Include="trushSim.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="particlepiler.cpp">
-=======
+		<Filter>ソース ファイル</Filter>
+	</ClCompile>
     <ClCompile Include="collider.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="collision.cpp">
->>>>>>> 9d06683a5fd3abc20418b98c989bdbef6f88b6c1
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -327,14 +326,13 @@
     <ClInclude Include="trushSim.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="particlepiler.h">
-=======
+		<Filter>ヘッダー ファイル</Filter>
+	</ClInclude>
     <ClInclude Include="collider.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="collision.h">
->>>>>>> 9d06683a5fd3abc20418b98c989bdbef6f88b6c1
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
