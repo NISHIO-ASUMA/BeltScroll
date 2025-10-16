@@ -17,11 +17,15 @@
 #include "blockmanager.h"
 #include "enemy.h"
 
-//******************************
-// 静的メンバ変数
-//******************************
-CGameManager* CGameManager::m_pInstance = nullptr; // インスタンス
-
+//===============================
+// コンストラクタ
+//===============================
+CGameManager::CGameManager()
+{
+	// 値のクリア
+	m_pBlockManager = nullptr;
+	m_pPlayer = nullptr;
+}
 //===============================
 // デストラクタ
 //===============================
@@ -35,13 +39,15 @@ CGameManager::~CGameManager()
 HRESULT CGameManager::Init(void)
 {
 	//メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
 	// 敵生成
-	CEnemy::Create(VECTOR3_NULL, VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
+	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
+	CEnemy::Create(D3DXVECTOR3(-550.0f,0.0f,-550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
+	CEnemy::Create(D3DXVECTOR3(550.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
 
 	// 生成
 	m_pBlockManager = new CBlockManager;
@@ -67,27 +73,21 @@ void CGameManager::Uninit(void)
 		// null初期化
 		m_pBlockManager = nullptr;
 	}
-
-	// インスタンスの破棄
-	if (m_pInstance != nullptr)
-	{
-		delete m_pInstance;
-		m_pInstance = nullptr;
-	}
 }
 //===============================
 // 更新処理
 //===============================
 void CGameManager::Update(void)
 {
-	// キー入力
+	// キー入力で遷移
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
 	{
-		// 遷移
+		// ランキング
 		CManager::GetFade()->SetFade(new CResult());
 
 		return;
 	}
+
 }
 //===============================
 // 描画処理
@@ -96,23 +96,4 @@ void CGameManager::Draw(void)
 {
 	// 描画するものがあればここに追加
 	// Object継承の物は書くな
-}
-//===============================
-// インスタンス取得
-//===============================
-CGameManager* CGameManager::GetInstance(void)
-{
-	// インスタンスがnullなら
-	if (m_pInstance == nullptr)
-	{
-		// ポインタ生成
-		m_pInstance = new CGameManager();
-
-		m_pInstance->m_pBlockManager = nullptr;
-		m_pInstance->m_pPlayer = nullptr;
-
-	}
-
-	// 生成ポインタを返す
-	return m_pInstance;
 }

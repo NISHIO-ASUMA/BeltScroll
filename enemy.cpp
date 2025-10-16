@@ -13,6 +13,7 @@
 #include "manager.h"
 #include "player.h"
 #include "gamemanager.h"
+#include "game.h"
 
 //==============================
 // コンストラクタ
@@ -36,6 +37,8 @@ CEnemy::CEnemy(int nPriority) : CObject(nPriority)
 	{
 		m_pModel[nCnt] = nullptr;
 	}
+
+	m_isBlow = false;
 }
 //==============================
 // デストラクタ
@@ -131,7 +134,8 @@ void CEnemy::Uninit(void)
 void CEnemy::Update(void)
 {
 	// プレイヤー取得
-	CPlayer* pPlayer = CGameManager::GetInstance()->GetPlayer();
+	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
+
 	if (pPlayer == nullptr) return;
 
 	// プレイヤーに向かってくる処理
@@ -140,8 +144,21 @@ void CEnemy::Update(void)
 	float dist = D3DXVec3Length(&dir);			// 距離
 
 	D3DXVec3Normalize(&dir, &dir);			// 正規化
-	float speed = 0.6f;						// 追従スピード
+	float speed = 1.2f;						// 追従スピード
 	m_move += dir * speed;					// 移動ベクトルに加算
+
+	// 吹き飛ばしが有効の時
+	if (m_isBlow)
+	{
+		// 摩擦係数を計算する
+		m_move *= 0.9f; // 減速
+
+		if (D3DXVec3Length(&m_move) < 0.05f)
+		{
+			m_isBlow = false;
+			m_move = VECTOR3_NULL;
+		}
+	}
 
 	// 過去の位置情報を保存
 	m_Oldpos = m_pos;

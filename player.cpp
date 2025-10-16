@@ -23,6 +23,8 @@
 #include "playerstate.h"
 #include "state.h"
 #include "sound.h"
+#include "enemy.h"
+#include "effect.h"
 
 //**********************
 // 名前空間
@@ -415,6 +417,15 @@ void CPlayer::Update(void)
 		}
 	}
 
+	// oキーで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_O))
+	{
+		EnemyBlow();
+	}
+
+	// TODO : 範囲知るためのエフェクト生成
+	CEffect::Create(m_pos,COLOR_GREEN,VECTOR3_NULL,60,50.0f);
+
 	// 重力加算
 	m_move.y -= PLAYERINFO::GRAVITY;
 
@@ -786,4 +797,51 @@ void CPlayer::HitDamage(int nDamage)
 	}
 
 #endif
+}
+//===============================
+// 敵吹き飛ばし処理
+//===============================
+void CPlayer::EnemyBlow(void)
+{
+	// 範囲と威力
+	const float fBlowRange =200.0f;   // 有効範囲
+	const float fBlowPower = 50.0f;    // 吹き飛ばし強度
+
+	// 敵オブジェクトの先頭取得
+	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::CHARACTOR));
+
+	while (pObj != nullptr)
+	{
+		// 敵取得
+		if (pObj->GetObjType() == CObject::TYPE_ENEMY)
+		{
+			// キャスト
+			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
+
+			// 敵座標取得
+			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
+
+			// プレイヤーとの距離
+			D3DXVECTOR3 vDiff = vEnemyPos - m_pos;
+
+			float fDist = D3DXVec3Length(&vDiff);
+
+			// 範囲内なら吹き飛ばし
+			if (fDist < fBlowRange)
+			{
+				// 正規化
+				D3DXVec3Normalize(&vDiff, &vDiff);
+
+				// 吹き飛ばし方向
+				D3DXVECTOR3 vBlow = vDiff * fBlowPower;
+
+				// 敵側に速度を加える
+				pEnemy->AddBlow(vBlow);
+				pEnemy->SetBlow(true);
+			}
+		}
+
+		// 次の敵を取得
+		pObj = pObj->GetNext();
+	}
 }
