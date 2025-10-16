@@ -1,0 +1,47 @@
+//=====================================
+//
+// 試しのごみ処理 [ trushSim.h ]
+// Author: Soichiro Sasaki
+//
+//=====================================
+
+#ifndef _TRUSHSIM_H_ // このマクロ定義がされてなかったら
+#define _TRUSHSIM_H_ // 2重インクルード防止のマクロ定義
+
+//**********************
+// インクルードファイル
+//**********************
+#include "objectX.h"
+
+//**********************
+// 前方宣言
+//**********************
+class CObject;
+
+//**********************
+// 動く床クラスを定義
+//**********************
+class CTrushSim : public CObjectX
+{
+public:
+	// コンストラクタ・デストラクタ
+	CTrushSim(int nPriority = static_cast<int>(CObject::PRIORITY::MODELOBJECT));
+	~CTrushSim();
+
+	// メンバ関数
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
+	void Controll(void);
+	bool Collision(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove, float fDestSize, bool& isLanding);
+
+	// 静的メンバ関数
+	static CTrushSim* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale, const char* FileName);
+
+private:
+	D3DXVECTOR3 m_posOld;
+	static constexpr float BLOCKHALF = 0.5f;	// ハーフサイズの固定値
+};
+
+#endif
