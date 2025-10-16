@@ -36,9 +36,11 @@ public:
 	~CSphereCollider();
 
 	// ƒƒ“ƒoŠÖ”
+	static CSphereCollider* Create(D3DXVECTOR3 pos, float fRadius);
+
+	void SetRadius(float radius) { m_fRadius = radius; }
 	float GetRadius(void) { return m_fRadius; }
 private:
-	D3DXVECTOR3 m_pos;	// ˆÊ’u
 	float m_fRadius;	// ”¼Œa
 };
 
