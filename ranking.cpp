@@ -73,7 +73,7 @@ void CRanking::Uninit(void)
 {
 	for (int nCnt = 0; nCnt < 8; nCnt++)
 	{
-		m_apNumbers[nCnt]->CNumber::Uninit();
+		//m_apNumbers[nCnt]->CNumber::Uninit();
 	}
 }
 //===================================
