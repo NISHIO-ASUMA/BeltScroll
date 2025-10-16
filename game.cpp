@@ -14,6 +14,7 @@
 #include "title.h"
 #include "result.h"
 #include "meshfield.h"
+#include <memory>
 
 //**************************
 // 静的メンバ変数宣言
@@ -130,7 +131,7 @@ void CGame::Update(void)
 			if (pFade != nullptr)
 			{
 				// リザルトシーンに遷移
-				pFade->SetFade(new CResult());
+				pFade->SetFade(std::make_unique<CResult>());
 
 				// ここで処理を返す
 				return;

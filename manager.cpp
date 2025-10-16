@@ -14,7 +14,6 @@
 #include "tutorial.h"
 #include "result.h"
 #include "ranking.h"
-
 //**************************
 // 静的メンバ変数宣言
 //**************************
@@ -26,7 +25,7 @@ CInputMouse* CManager::m_pInputMouse = nullptr;			// マウスへのポインタ
 CTexture* CManager::m_pTexture = nullptr;				// テクスチャクラスへのポインタ
 CCamera* CManager::m_pCamera = nullptr;					// カメラクラスへのポインタ
 CLight* CManager::m_pLight = nullptr;					// ライトクラスへのポインタ
-CScene* CManager::m_pScene = nullptr;					// シーンクラスへのポインタ
+std::unique_ptr<CScene> CManager::m_pScene = nullptr; // シーン
 CFade* CManager::m_pFade = nullptr;						// フェードクラスへのポインタ
 
 //===========================
@@ -134,11 +133,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	m_pTexture->Load();
 
 #ifdef _DEBUG
-	// シーンセット
-	m_pFade->SetFade(new CTitle());
+	// フェード経由でタイトルシーンをセット
+	m_pFade->SetFade(std::make_unique<CTitle>()); 
 #else
 	// シーンセット
-	m_pFade->SetFade(new CTitle());
+	m_pFade->SetFade(std::make_unique<CTitle>());
 
 #endif // _DEBUG
 
@@ -243,6 +242,13 @@ void CManager::Uninit(void)
 		m_pTexture = nullptr;
 	}
 
+	// シーンの破棄
+	if (m_pScene) 
+	{	
+		m_pScene->Uninit(); 
+		m_pScene.reset(); 
+	}
+
 	// フェードの破棄
 	if (m_pFade != nullptr)
 	{
@@ -254,19 +260,6 @@ void CManager::Uninit(void)
 
 		// nullptrにする
 		m_pFade = nullptr;
-	}
-
-	// シーンの破棄
-	if (m_pScene != nullptr)
-	{
-		// 終了処理
-		m_pScene->Uninit();
-
-		// ポインタの破棄
-		delete m_pScene;
-
-		// nullptrにする
-		m_pScene = nullptr;
 	}
 
 	// レンダラーの破棄
@@ -327,19 +320,13 @@ void CManager::Draw(void)
 //===========================
 // シーンのセット
 //===========================
-void CManager::SetScene(CScene * pNewscene)
+void CManager::SetScene(std::unique_ptr<CScene> pNewScene)
 {
 	// nullptrじゃない
 	if (m_pScene != nullptr)
 	{
 		// 終了処理
 		m_pScene->Uninit();
-
-		// ポインタの破棄
-		delete m_pScene;
-
-		// nullptrにする
-		m_pScene = nullptr;
 
 		// nullじゃない
 		if (m_pSound)
@@ -350,28 +337,28 @@ void CManager::SetScene(CScene * pNewscene)
 
 		// 全オブジェクト破棄
 		CObject::ReleaseAll();
+
+		// 古いシーンを破棄
+		m_pScene.reset();
 	}
 
 	// もしシーンが無かったら
-	if (m_pScene == nullptr)
+	if (pNewScene)
 	{
-		// 新しいシーンをセットする
-		m_pScene = pNewscene;
-
 		// シーンの初期化
-		if (FAILED(m_pScene->Init()))
+		if (FAILED(pNewScene->Init()))
 		{
 			// 失敗時
 			MessageBox(GetActiveWindow(), "シーン初期化失敗", "例外スロー", MB_OK);
-
-			// 破棄
-			delete m_pScene;
-
-			// nullptr代入
-			m_pScene = nullptr;
+			pNewScene.reset();
+			return;
 		}
+
+		// 所有権をマネージャに移動
+		m_pScene = std::move(pNewScene);
 	}
 }
+
 //===========================
 // 現在シーン取得
 //===========================

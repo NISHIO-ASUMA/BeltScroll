@@ -73,7 +73,7 @@ void CResult::Update(void)
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
 	{
 		// ƒ‰ƒ“ƒLƒ“ƒO
-		CManager::GetFade()->SetFade(new CRanking());
+		CManager::GetFade()->SetFade(std::make_unique<CRanking>());
 
 		return;
 	}

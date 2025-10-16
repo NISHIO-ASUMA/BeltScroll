@@ -9,6 +9,11 @@
 #define _FADE_H_ // 2重インクルード防止のマクロ定義
 
 //**********************
+// インクルードファイル
+//**********************
+#include <memory>
+
+//**********************
 // 前方宣言
 //**********************
 class CScene;
@@ -41,8 +46,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// セッター
-	void SetFade(CScene * pNewScene);
+	// ユニークポインタで渡す
+	void SetFade(std::unique_ptr<CScene> pNewScene);
 
 	// ゲッター
 	FADE GetFade(void) { return m_fade; }
@@ -54,7 +59,9 @@ private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtx; // 頂点バッファ
 	D3DXCOLOR m_col;				// ポリゴンカラー
 	FADE m_fade;					// フェードの列挙型変数
-	CScene* m_pScene;				// シーンクラスのポインタ
+
+	// 所有権を持つ
+	std::unique_ptr<CScene> m_pScene;
 };
 
 #endif

@@ -89,7 +89,7 @@ void CRanking::Update(void)
 		if (pFade == nullptr) return;
 
 		// ‰æ–Ê‘JˆÚ
-		pFade->SetFade(new CTitle());
+		pFade->SetFade(std::make_unique<CTitle>());
 
 		return;
 	}

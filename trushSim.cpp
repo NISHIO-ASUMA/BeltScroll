@@ -102,27 +102,26 @@ void CTrushSim::Controll(void)
 	CCamera* pCamera = CManager::GetCamera();
 
 	if (pKeyboard->GetPress(DIK_UP))
-	{
-		pos.x -= sinf(pCamera->GetRot().y) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y) * 0.1f;
+	{// ‰œ‘¤
+		pos.x += sinf(pCamera->GetRot().y) * 0.1f;
+		pos.z += cosf(pCamera->GetRot().y) * 0.1f;
 
 	}
 	else if (pKeyboard->GetPress(DIK_DOWN))
-	{
-		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
-
+	{// Žè‘O
+		pos.x -= sinf(pCamera->GetRot().y) * 0.1f;
+		pos.z -= cosf(pCamera->GetRot().y) * 0.1f;
 	}
 	else if (pKeyboard->GetPress(DIK_RIGHT))
-	{
-		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
+	{// ‰E•ûŒü
+		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
+		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
 
 	}
 	else if (pKeyboard->GetPress(DIK_LEFT))
-	{
-		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.75f) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.75f) * 0.1f;
+	{// ¶•ûŒü
+		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
+		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
 
 	}
 

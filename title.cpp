@@ -34,15 +34,15 @@ CTitle::~CTitle()
 //=====================================
 HRESULT CTitle::Init(void)
 {
-	// メッシュフィールド
-	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
+	//// メッシュフィールド
+	//CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
 
-	// ロゴ生成 ( のちにテクスチャ変更 )
-	CTitleLogo::Create(D3DXVECTOR3(1200.0f, 70.0f, 0.0f));
+	//// ロゴ生成 ( のちにテクスチャ変更 )
+	//CTitleLogo::Create(D3DXVECTOR3(1200.0f, 70.0f, 0.0f));
 
-	// UI生成
-	CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "titlename.png", false);
-	CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "titeenter.png", false);
+	//// UI生成
+	//CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "titlename.png", false);
+	//CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "titeenter.png", false);
 
 	// 初期化結果を返す
 	return S_OK;
@@ -63,7 +63,7 @@ void CTitle::Update(void)
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
 	{
 		// ランキング
-		CManager::GetFade()->SetFade(new CGame());
+		CManager::GetFade()->SetFade(std::make_unique<CGame>());
 
 		return;
 	}

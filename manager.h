@@ -21,6 +21,7 @@
 #include "object3D.h"
 #include "scene.h"
 #include "fade.h"
+#include <memory>
 
 //**************************
 // マネージャークラス宣言
@@ -47,10 +48,11 @@ public:
 	static CTexture* GetTexture(void) { return m_pTexture; }
 	static CCamera* GetCamera(void) { return m_pCamera; }
 	static CLight* GetLight(void) { return m_pLight; }
-	static CScene* Getscene(void) { return m_pScene; }
 	static CFade* GetFade(void) { return m_pFade; }
 
-	static void SetScene(CScene * pNewScene);
+	// シーン関連
+	static CScene* GetSceneRaw(void) { return m_pScene.get(); }	// 生ポインタを返す
+	static void SetScene(std::unique_ptr<CScene> pNewScene);	// unique_ptrで受け取る	static CFade* GetFade(void) { return m_pFade; }
 	static CScene::MODE GetScene(void);
 
 private:
@@ -62,7 +64,7 @@ private:
 	static CTexture* m_pTexture;			// テクスチャクラスのポインタ
 	static CCamera* m_pCamera;				// カメラクラスのポインタ
 	static CLight* m_pLight;				// ライトクラスのポインタ
-	static CScene* m_pScene;				// シーン管理クラスのポインタ
+	static std::unique_ptr<CScene> m_pScene;;	// シーン管理クラスのポインタ
 	static CFade* m_pFade;					// フェードクラスのポインタ
 };
 #endif

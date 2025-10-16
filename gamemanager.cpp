@@ -17,6 +17,7 @@
 #include "blockmanager.h"
 #include "shredder.h"
 #include "enemymanager.h"
+#include "trushSim.h"
 
 //===============================
 // コンストラクタ
@@ -46,12 +47,11 @@ HRESULT CGameManager::Init(void)
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
-	// TODO : 検証用でやったからもういらないクラス
-	// CShredder::Create(D3DXVECTOR3 (-500.0f, 200.0f, 0.0f));
-
 	// 敵管理クラスを定義
 	m_pEnemyManager = CEnemyManager::Create();
 
+	// 壁生成
+	CTrushSim::Create(D3DXVECTOR3(-550.0f, 200.0f, 00.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/Shredder.x");
 	//// マップモデル配置情報生成
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();
@@ -99,7 +99,7 @@ void CGameManager::Update(void)
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
 	{
 		// ランキング
-		CManager::GetFade()->SetFade(new CResult());
+		CManager::GetFade()->SetFade(std::make_unique<CResult>());
 
 		return;
 	}
