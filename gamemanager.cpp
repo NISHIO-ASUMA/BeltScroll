@@ -46,8 +46,8 @@ HRESULT CGameManager::Init(void)
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
-	// シュレッダー
-	CShredder::Create(D3DXVECTOR3 (-500.0f, 200.0f, 0.0f));
+	// TODO : 検証用でやったからもういらないクラス
+	// CShredder::Create(D3DXVECTOR3 (-500.0f, 200.0f, 0.0f));
 
 	// 敵管理クラスを定義
 	m_pEnemyManager = CEnemyManager::Create();
