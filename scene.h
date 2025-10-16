@@ -26,8 +26,6 @@ public:
 		MODE_RESULT,	// リザルト
 		MODE_LOSERESULT,// 負けリザルト
 		MODE_RANKING,	// ランキング
-		MODE_EDIT,		// 配置モード
-		MODE_CAMERAEDIT,// 配置モード
 		MODE_MAX
 	};
 

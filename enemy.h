@@ -26,15 +26,17 @@ class CShadow;
 class CEnemy : public CObjectX
 {
 public:
-
+	// コンストラクタ・デストラクタ
 	CEnemy(int nPriority = static_cast<int>(CObject::PRIORITY::MODELOBJECT));
 	~CEnemy();
 
+	// メンバ関数
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
 
+	// 静的メンバ関数
 	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName);
 
 	// セッター
@@ -45,6 +47,6 @@ private:
 	D3DXVECTOR3 m_move; // 移動量
 	CShadow* m_pShadow; // シャドウ
 
-	bool m_isBlow;			// 吹き飛ばしが有効か
+	bool m_isBlow;		// 吹き飛ばしが有効か
 };
 

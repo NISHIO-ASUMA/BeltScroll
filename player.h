@@ -98,6 +98,7 @@ public:
 	bool isLanding(void) { return m_isJump; }
 	bool GetLanding(void) { return m_isLanding; }
 	bool GetIsDamege(void) { return m_isDecHp; }
+	bool GetIsAttack(void) { return m_isAttack; }
 
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static CPlayer* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nLife,const char* pFilename); // ¶¬ˆ—
