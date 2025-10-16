@@ -156,6 +156,7 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="blockmanager.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="collider.cpp" />
     <ClCompile Include="debugproc.cpp" />
     <ClCompile Include="easing.cpp" />
     <ClCompile Include="effect.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="blockmanager.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="collider.h" />
     <ClInclude Include="debugproc.h" />
     <ClInclude Include="easing.h" />
     <ClInclude Include="effect.h" />
