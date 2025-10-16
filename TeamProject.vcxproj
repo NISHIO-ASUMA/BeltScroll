@@ -160,6 +160,7 @@
     <ClCompile Include="easing.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemymanager.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gamemanager.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="shadowS.cpp" />
+    <ClCompile Include="shredder.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -210,6 +212,7 @@
     <ClInclude Include="easing.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemymanager.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gamemanager.h" />
@@ -240,6 +243,7 @@
     <ClInclude Include="scene.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="shadowS.h" />
+    <ClInclude Include="shredder.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="template.h" />

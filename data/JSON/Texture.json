@@ -5,6 +5,6 @@
   { "Texture": "data/TEXTURE/pausemenu_retry.png" },
   { "Texture": "data/TEXTURE/wall001.jpg" },
   { "Texture": "data/TEXTURE/TitleLogo.png" },
-  { "Texture": "data/TEXTURE/GameName.png" },
-  { "Texture": "data/TEXTURE/EnterKey.png" }
+  { "Texture": "data/TEXTURE/titlename.png" },
+  { "Texture": "data/TEXTURE/titeenter.png" }
 ]

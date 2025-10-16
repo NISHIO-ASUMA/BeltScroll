@@ -13,6 +13,7 @@
 //**************************
 class CBlockManager;
 class CPlayer;
+class CEnemyManager;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -35,6 +36,7 @@ public:
 private:
 	CBlockManager* m_pBlockManager; // ブロックマネージャー
 	CPlayer* m_pPlayer;				// プレイヤー
+	CEnemyManager* m_pEnemyManager; // 敵管理クラス
 };
 
 #endif

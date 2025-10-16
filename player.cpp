@@ -362,7 +362,6 @@ void CPlayer::Update(void)
 			//　タイプ切り替え
 			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
 		}
-
 	}
 
 	if (m_rotDest.y - m_rot.y > D3DX_PI)
@@ -417,14 +416,11 @@ void CPlayer::Update(void)
 		}
 	}
 
-	// oキーで範囲攻撃
-	if (CManager::GetInputKeyboard()->GetPress(DIK_O))
+	// Lキーで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_L))
 	{
 		EnemyBlow();
 	}
-
-	// TODO : 範囲知るためのエフェクト生成
-	CEffect::Create(m_pos,COLOR_GREEN,VECTOR3_NULL,60,50.0f);
 
 	// 重力加算
 	m_move.y -= PLAYERINFO::GRAVITY;
@@ -699,9 +695,6 @@ void CPlayer::UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, 
 //=============================
 void CPlayer::Collision(void)
 {
-	// カメラ取得
-	CCamera* pCamera = CManager::GetCamera();
-
 #if 0
 
 	// ダメージ中か確認
@@ -808,7 +801,7 @@ void CPlayer::EnemyBlow(void)
 	const float fBlowPower = 50.0f;    // 吹き飛ばし強度
 
 	// 敵オブジェクトの先頭取得
-	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::CHARACTOR));
+	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
 
 	while (pObj != nullptr)
 	{

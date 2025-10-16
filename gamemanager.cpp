@@ -15,7 +15,8 @@
 #include "result.h"
 #include "player.h"
 #include "blockmanager.h"
-#include "enemy.h"
+#include "shredder.h"
+#include "enemymanager.h"
 
 //===============================
 // コンストラクタ
@@ -25,6 +26,7 @@ CGameManager::CGameManager()
 	// 値のクリア
 	m_pBlockManager = nullptr;
 	m_pPlayer = nullptr;
+	m_pEnemyManager = nullptr;
 }
 //===============================
 // デストラクタ
@@ -39,19 +41,20 @@ CGameManager::~CGameManager()
 HRESULT CGameManager::Init(void)
 {
 	//メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 1500.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player100motion.txt");
 
-	// 敵生成
-	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
-	CEnemy::Create(D3DXVECTOR3(-550.0f,0.0f,-550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
-	CEnemy::Create(D3DXVECTOR3(550.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MOTION/Enemy/MotionEnemy.txt");
+	// シュレッダー
+	CShredder::Create(D3DXVECTOR3 (-500.0f, 200.0f, 0.0f));
 
-	// 生成
-	m_pBlockManager = new CBlockManager;
-	m_pBlockManager->Init();
+	// 敵管理クラスを定義
+	m_pEnemyManager = CEnemyManager::Create();
+
+	//// マップモデル配置情報生成
+	//m_pBlockManager = new CBlockManager;
+	//m_pBlockManager->Init();
 
 	// 初期化結果を返す
 	return S_OK;
@@ -73,6 +76,19 @@ void CGameManager::Uninit(void)
 		// null初期化
 		m_pBlockManager = nullptr;
 	}
+
+	// nullチェック
+	if (m_pEnemyManager != nullptr)
+	{
+		// 終了処理
+		m_pEnemyManager->Uninit();
+
+		// 破棄
+		delete m_pEnemyManager;
+
+		// null初期化
+		m_pEnemyManager = nullptr;
+	}
 }
 //===============================
 // 更新処理
@@ -88,6 +104,12 @@ void CGameManager::Update(void)
 		return;
 	}
 
+	// nullチェック
+	if (m_pEnemyManager != nullptr)
+	{
+		// 敵管理の更新処理
+		m_pEnemyManager->Update();
+	}
 }
 //===============================
 // 描画処理

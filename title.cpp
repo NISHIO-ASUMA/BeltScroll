@@ -41,8 +41,8 @@ HRESULT CTitle::Init(void)
 	CTitleLogo::Create(D3DXVECTOR3(1200.0f, 70.0f, 0.0f));
 
 	// UIê∂ê¨
-	CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "GameName.png", false);
-	CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "Enterkey.png", false);
+	CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "titlename.png", false);
+	CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "titeenter.png", false);
 
 	// èâä˙âªåãâ Çï‘Ç∑
 	return S_OK;

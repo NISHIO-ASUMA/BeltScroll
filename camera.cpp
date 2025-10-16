@@ -104,6 +104,8 @@ void CCamera::Update(void)
 	// マウス更新
 	MouseView(pMouse, pInput);
 
+	// 追従
+	PlayerFllow();
 #else
 
 	// 追従カメラ
