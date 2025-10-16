@@ -9,6 +9,10 @@
 // インクルードファイル
 //**********************
 #include "gimmickfloor.h"
+#include "gamemanager.h"
+#include "trushSim.h"
+#include "game.h"
+#include "collider.h"
 
 //================================
 // オーバーロードコンストラクタ
@@ -16,6 +20,7 @@
 CGimmickFloor::CGimmickFloor(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
+	m_fMoveCnt = 0.0f;
 }
 //================================
 // デストラクタ
@@ -56,6 +61,8 @@ HRESULT CGimmickFloor::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
+	m_pCollider = CSphereCollider::Create(GetPos(), 100.0f);
+
 	return S_OK;
 }
 //================================
@@ -63,6 +70,10 @@ HRESULT CGimmickFloor::Init(void)
 //================================
 void CGimmickFloor::Uninit(void)
 {
+
+	delete m_pCollider;
+	m_pCollider = nullptr;
+
 	// 親クラスの終了
 	CObjectX::Uninit();
 }
@@ -93,22 +104,20 @@ void CGimmickFloor::Move(void)
 {
 	// 位置取得
 	D3DXVECTOR3 pos = CObjectX::GetPos();
+	
+	CGameManager* pGameManager = CGame::GetGameManager();
+	CTrushSim* pTrush = pGameManager->GetTrush();
 
-	// サインでZ方向に動かす
-	pos.z = sinf(m_fMoveCnt);
+	if (!pTrush->Collision(m_pCollider))
+	{
+		// サインでZ方向に動かす
+		pos.z += sinf(m_fMoveCnt)*10.0f;
+	}
 
+	m_pCollider->SetPos(pos);
 	// 反映
 	CObjectX::SetPos(pos);
 	
 	// カウント
-	m_fMoveCnt = COUNTSPEED;
-}
-
-//================================
-// 当たり判定
-//================================
-bool CGimmickFloor::Collision(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove, float fDestSize, bool& isLanding)
-{
-	// 当たらない時
-	return false;
+	m_fMoveCnt += COUNTSPEED;
 }

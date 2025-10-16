@@ -18,6 +18,7 @@
 #include "shredder.h"
 #include "enemymanager.h"
 #include "trushSim.h"
+#include "gimmickfloor.h"
 
 //===============================
 // コンストラクタ
@@ -28,6 +29,7 @@ CGameManager::CGameManager()
 	m_pBlockManager = nullptr;
 	m_pPlayer = nullptr;
 	m_pEnemyManager = nullptr;
+	m_pTrushSim = nullptr;
 }
 //===============================
 // デストラクタ
@@ -51,7 +53,9 @@ HRESULT CGameManager::Init(void)
 	m_pEnemyManager = CEnemyManager::Create();
 
 	// 壁生成
-	CTrushSim::Create(D3DXVECTOR3(-550.0f, 200.0f, 00.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/Shredder.x");
+	m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(-550.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
+
+	CGimmickFloor::Create(D3DXVECTOR3(-550.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
 	//// マップモデル配置情報生成
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();

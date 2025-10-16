@@ -11,6 +11,8 @@
 #include "trushSim.h"
 #include "manager.h"
 #include "input.h"
+#include "collider.h"
+#include "collision.h"
 
 //================================
 // オーバーロードコンストラクタ
@@ -19,6 +21,7 @@ CTrushSim::CTrushSim(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
 	m_posOld = VECTOR3_NULL;
+	m_pCollider = nullptr;
 }
 //================================
 // デストラクタ
@@ -59,6 +62,7 @@ HRESULT CTrushSim::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
+	m_pCollider = CSphereCollider::Create(GetPos(), 50.0f);
 	return S_OK;
 }
 //================================
@@ -66,6 +70,9 @@ HRESULT CTrushSim::Init(void)
 //================================
 void CTrushSim::Uninit(void)
 {
+	delete m_pCollider;
+	m_pCollider = nullptr;
+
 	// 親クラスの終了
 	CObjectX::Uninit();
 }
@@ -101,39 +108,41 @@ void CTrushSim::Controll(void)
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 	CCamera* pCamera = CManager::GetCamera();
 
+	m_posOld = pos;
+
 	if (pKeyboard->GetPress(DIK_UP))
 	{// 奥側
-		pos.x += sinf(pCamera->GetRot().y) * 0.1f;
-		pos.z += cosf(pCamera->GetRot().y) * 0.1f;
+		pos.x += sinf(pCamera->GetRot().y) * SPEED;
+		pos.z += cosf(pCamera->GetRot().y) * SPEED;
 
 	}
 	else if (pKeyboard->GetPress(DIK_DOWN))
 	{// 手前
-		pos.x -= sinf(pCamera->GetRot().y) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y) * 0.1f;
+		pos.x -= sinf(pCamera->GetRot().y) * SPEED;
+		pos.z -= cosf(pCamera->GetRot().y) * SPEED;
 	}
 	else if (pKeyboard->GetPress(DIK_RIGHT))
 	{// 右方向
-		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
-		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * 0.1f;
+		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * SPEED;
+		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * SPEED;
 
 	}
 	else if (pKeyboard->GetPress(DIK_LEFT))
 	{// 左方向
-		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
-		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * 0.1f;
+		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 
 	}
 
 	// 反映
+	m_pCollider->SetPos(pos);
 	CObjectX::SetPos(pos);
 }
 
 //================================
 // 当たり判定
 //================================
-bool CTrushSim::Collision(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove, float fDestSize, bool& isLanding)
+bool CTrushSim::Collision(CSphereCollider*pCollider)
 {
-	// 当たらない時
-	return false;
+	return CSphereSphereCollision::Collision(m_pCollider, pCollider);
 }
