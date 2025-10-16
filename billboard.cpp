@@ -260,7 +260,7 @@ void CBillboard::SetTexture(const char * pTexName)
 	if (pTexture == nullptr) return;
 
 	// ƒpƒX‚ð˜AŒ‹
-	std::string TexName = "data\\TEXTURE\\";
+	std::string TexName = "data/TEXTURE/";
 	TexName += pTexName;
 
 	// Š„‚è“–‚Ä

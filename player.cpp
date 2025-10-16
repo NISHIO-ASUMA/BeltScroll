@@ -2,9 +2,9 @@
 //
 // プレイヤー処理 [ player.cpp ]
 // Author: Asuma Nishio
-// 
-// TODO : ステートマシン考える
 //
+// TODO : ブロワーの処理入れる
+// 
 //=========================================
 
 //**********************
@@ -23,6 +23,9 @@
 #include "playerstate.h"
 #include "state.h"
 #include "sound.h"
+#include "enemy.h"
+#include "effect.h"
+#include "particlepiler.h"
 
 //**********************
 // 名前空間
@@ -360,7 +363,6 @@ void CPlayer::Update(void)
 			//　タイプ切り替え
 			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
 		}
-
 	}
 
 	if (m_rotDest.y - m_rot.y > D3DX_PI)
@@ -413,6 +415,20 @@ void CPlayer::Update(void)
 		{
 			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
 		}
+	}
+
+	// Lキーで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_L))
+	{
+		// 吹き飛ばし
+		EnemyBlow();
+
+#ifdef _DEBUG
+
+		// パーティクル生成
+		CParticlePiler::Create(m_pos, D3DXCOLOR(0.12f, 1.0f, 0.03f, 1.0f), 20, 50.0f, 50.0f, 25, m_rot.y);
+
+#endif // _DEBUG
 	}
 
 	// 重力加算
@@ -688,9 +704,6 @@ void CPlayer::UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, 
 //=============================
 void CPlayer::Collision(void)
 {
-	// カメラ取得
-	CCamera* pCamera = CManager::GetCamera();
-
 #if 0
 
 	// ダメージ中か確認
@@ -786,4 +799,51 @@ void CPlayer::HitDamage(int nDamage)
 	}
 
 #endif
+}
+//=======================================
+// 敵吹き飛ばし処理 ( 範囲をどうするか )
+//=======================================
+void CPlayer::EnemyBlow(void)
+{
+	// 範囲と威力
+	const float fBlowRange = 100.0f;   // 有効範囲
+	const float fBlowPower = 50.0f;    // 吹き飛ばし強度
+
+	// 敵オブジェクトの先頭取得
+	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
+
+	while (pObj != nullptr)
+	{
+		// 敵取得
+		if (pObj->GetObjType() == CObject::TYPE_ENEMY)
+		{
+			// キャスト
+			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
+
+			// 敵座標取得
+			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
+
+			// プレイヤーとの距離
+			D3DXVECTOR3 vDiff = vEnemyPos - m_pos;
+
+			float fDist = D3DXVec3Length(&vDiff);
+
+			// 範囲内なら吹き飛ばし
+			if (fDist < fBlowRange)
+			{
+				// 正規化
+				D3DXVec3Normalize(&vDiff, &vDiff);
+
+				// 吹き飛ばし方向
+				D3DXVECTOR3 vBlow = vDiff * fBlowPower;
+
+				// 敵側に速度を加える
+				pEnemy->AddBlow(vBlow);
+				pEnemy->SetBlow(true);
+			}
+		}
+
+		// 次の敵を取得
+		pObj = pObj->GetNext();
+	}
 }

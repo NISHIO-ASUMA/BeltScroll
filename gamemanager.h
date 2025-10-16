@@ -13,6 +13,7 @@
 //**************************
 class CBlockManager;
 class CPlayer;
+class CEnemyManager;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -20,7 +21,8 @@ class CPlayer;
 class CGameManager
 {
 public:
-	// デストラクタ
+	// コンストラクタ・デストラクタ
+	CGameManager();
 	~CGameManager();
 
 	// メンバ関数
@@ -31,15 +33,10 @@ public:
 
 	CPlayer* GetPlayer(void) { return m_pPlayer; }
 
-	// 静的メンバ関数
-	static CGameManager* GetInstance(void);
-
 private:
-	CGameManager() {}
-	static CGameManager* m_pInstance; 	// シングルトン変数
-	CBlockManager* m_pBlockManager;
-	CPlayer* m_pPlayer;
-
+	CBlockManager* m_pBlockManager; // ブロックマネージャー
+	CPlayer* m_pPlayer;				// プレイヤー
+	CEnemyManager* m_pEnemyManager; // 敵管理クラス
 };
 
 #endif

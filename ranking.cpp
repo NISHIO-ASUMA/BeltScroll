@@ -14,24 +14,21 @@
 #include "fade.h"
 #include "title.h"
 #include "ui.h"
+#include "rankingscore.h"
+#include "number.h"
 
 //******************************
 // 静的メンバ変数
 //******************************
-CObject2D* CRanking::m_pRankObj[MAX_RANK] = {};
+CRankingScore* CRanking::m_Score[MAX_RANK] = {};
 
 //===================================
 // オーバーロードコンストラクタ
 //===================================
 CRanking::CRanking() : CScene(CScene::MODE_RANKING)
 {
-	//CObject::SetObjType(CObject::TYPE_SCENE);
+	// 値のクリア
 
-	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
-	{
-		//m_Score[nCnt] = NULL;
-		m_nNumData[nCnt] = 0;
-	}
 }
 //===================================
 // デストラクタ
@@ -41,57 +38,28 @@ CRanking::~CRanking()
 	// 無し
 }
 //===================================
-// 生成処理
-//===================================
-CRanking* CRanking::Create()
-{
-	// インスタンス生成
-	CRanking* pRanking = new CRanking;
-	if (pRanking == nullptr) return nullptr;
-
-	// 初期化失敗時
-	if (FAILED(pRanking->Init()))
-	{
-		return nullptr;
-	}
-
-	// 生成されたポインタを返す
-	return pRanking;
-}
-//===================================
 // 初期化処理
 //===================================
-HRESULT CRanking::Init()
+HRESULT CRanking::Init(void)
 {
+#if 0
 	//// サウンドへのポインタ(サウンドの取得)
 	//CSound* pSound = CManager::GetSound();
 
-	for (int nRank = 0; nRank < 2; nRank++)
+	// 順位の数
+	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
 	{
-		if (nRank == 0)	// ランキング背景
-		{
-			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f, 360.0f, 0.0f), 1280.0f, 720.0f);
-			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
-		}
-		if (nRank == 1)	// 文字
-		{
-			m_pRankObj[nRank] = CObject2D::Create(D3DXVECTOR3(640.0f * nRank, 70.0f, 0.0f), 600.0f, 100.0f);
-			m_pRankObj[nRank]->SetTexture("data/TEXTURE/");
-		}
+		m_Score[nCnt] = CRankingScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
 	}
 
-	TxtLoad("data\\txt\\Rank.txt");	// 読込
+	TxtLoad("data\\Text\\Rank.txt");	// 読込
 
 	SetSort();	// 並び替え
 
-	//for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
-	//{
-		//m_Score[nCnt] = CScore::Create(D3DXVECTOR3(1100.0f, 200.0f + 100.0f * nCnt, 0.0f), 100.0f, 100.0f);
-		//m_Score[nCnt]->Add(m_nNumData[nCnt]);
-	//}
-
 	//// BGMを流す
 	//pSound->PlaySound(CSound::SOUND_LABEL_RESULTDATA);
+#endif
+
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "RankBack.jpg", false);
 
@@ -103,17 +71,10 @@ HRESULT CRanking::Init()
 //===================================
 void CRanking::Uninit(void)
 {
-	// オブジェクト2Dの終了処理
-	for (int nCnt = 0; nCnt < MAX_RANK; nCnt++)
+	for (int nCnt = 0; nCnt < 8; nCnt++)
 	{
-		if (m_pRankObj[nCnt] != NULL)
-		{
-			m_pRankObj[nCnt]->Uninit();
-		}
+		//m_apNumbers[nCnt]->CNumber::Uninit();
 	}
-
-	//// オブジェクトの破棄
-	//CObject::Release();
 }
 //===================================
 // 更新処理
@@ -128,7 +89,7 @@ void CRanking::Update(void)
 		if (pFade == nullptr) return;
 
 		// 画面遷移
-		pFade->SetFade(new CTitle());
+		pFade->SetFade(std::make_unique<CTitle>());
 
 		return;
 	}
@@ -141,6 +102,7 @@ void CRanking::Draw(void)
 	// 無し
 }
 
+#if 0
 //===================================
 // ランキングの入替処理(降順)
 //===================================
@@ -179,7 +141,7 @@ void CRanking::SetSort(void)
 	}
 
 	// ランキングの保存
-	TxtSave("data\\txt\\Rank.txt");
+	TxtSave("data\\Text\\Rank.txt");
 }
 
 //===================================
@@ -251,3 +213,4 @@ void CRanking::TxtSave(const char* pFileName)
 		}
 	}
 }
+#endif

@@ -25,7 +25,6 @@ namespace SHADOWINFO
 CShadow::CShadow(int nPriority) : CObject3D(nPriority)
 {
 	// 値のクリア
-	m_nTexIdx = NULL;
 }
 //=================================
 // デストラクタ
@@ -49,7 +48,7 @@ CShadow* CShadow::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 	pShadow->SetPos(pos);
 	pShadow->SetRot(rot);
 	pShadow->SetSize(SHADOWINFO::SHADOW_SIZE, SHADOWINFO::SHADOW_SIZE);
-	pShadow->SetTexture();
+	pShadow->SetTexture("shadow000.jpg");
 
 	// 初期化失敗時
 	if (FAILED(pShadow->Init()))
@@ -102,9 +101,6 @@ void CShadow::Draw(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	// テクスチャセット
-	pDevice->SetTexture(0, pTexture->GetAddress(m_nTexIdx));
-
 	// 親クラスの描画
 	CObject3D::Draw();
 
@@ -112,17 +108,6 @@ void CShadow::Draw(void)
 	pDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-}
-//=================================
-// テクスチャ設定処理
-//=================================
-void CShadow::SetTexture(void)
-{
-	// テクスチャポインタ取得
-	CTexture* pTexture = CManager::GetTexture();
-
-	// テクスチャクラスに登録
-	m_nTexIdx = pTexture->Register("data\\TEXTURE\\shadow000.jpg");
 }
 //=================================
 // 影座標更新処理

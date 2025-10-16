@@ -16,6 +16,7 @@
 #include "template.h"
 #include "player.h"
 #include "gamemanager.h"
+#include "game.h"
 
 //**********************
 // 定数宣言
@@ -63,10 +64,10 @@ CCamera::~CCamera()
 HRESULT CCamera::Init(void)
 {
 	// 初期値を設定する
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 650.0f, -1000.0f);		// カメラの位置
+	m_pCamera.posV = D3DXVECTOR3(0.0f, 650.0f, -700.0f);		// カメラの位置
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
-	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.55f, 0.0f, 0.0f);	// 角度
+	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
 
 	// 距離を計算
 	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
@@ -103,6 +104,8 @@ void CCamera::Update(void)
 	// マウス更新
 	MouseView(pMouse, pInput);
 
+	// 追従
+	PlayerFllow();
 #else
 
 	// 追従カメラ
@@ -276,8 +279,16 @@ void CCamera::WheelMouse(int nDelta)
 void CCamera::PlayerFllow(void)
 {
 #if 1
-	// プレイヤー取得 ここを考える
-	CPlayer* pPlayer = CGameManager::GetInstance()->GetPlayer();
+	// 現在のモード取得
+	CScene::MODE nMode = CManager::GetScene();
+
+	if (nMode != CScene::MODE_GAME)
+	{
+		return;
+	}
+
+	// プレイヤー取得
+	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
 
 	// nullptrチェック
 	if (pPlayer == nullptr)
@@ -285,6 +296,7 @@ void CCamera::PlayerFllow(void)
 		// ここで処理を返す
 		return;
 	}
+	
 
 	// 追従カメラ用に設定
 	m_pCamera.posRDest.x = pPlayer->GetPos().x + sinf(pPlayer->GetRotDest().y) * 1.0f;

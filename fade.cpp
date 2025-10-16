@@ -27,7 +27,16 @@ CFade::CFade()
 //==============================
 CFade::~CFade()
 {
-	// 無し
+	// 破棄
+	m_pScene.reset();
+
+	//// シーンの破棄
+	//if (m_pScene)
+	//{
+	//	//m_pScene->Uninit();
+	//	delete m_pScene;
+	//	m_pScene = nullptr;
+	//}
 }
 //==============================
 // 初期化処理
@@ -86,6 +95,9 @@ HRESULT CFade::Init(void)
 //==============================
 void CFade::Uninit(void)
 {
+	// 破棄
+	m_pScene.reset();
+
 	// nullptrチェック
 	if (m_pVtx != nullptr)
 	{
@@ -131,7 +143,7 @@ void CFade::Update(void)
 			m_fade = FADE_IN;
 
 			// 次のモード設定
-			CManager::SetScene(m_pScene);
+			CManager::SetScene(std::move(m_pScene));
 
 			// ここで処理返す
 			return;
@@ -173,34 +185,19 @@ void CFade::Draw(void)
 //==============================
 // 設定処理
 //==============================
-void CFade::SetFade(CScene * pNewScene)
+void CFade::SetFade(std::unique_ptr<CScene> pNewScene)
 {
 	// タイプがNONEじゃ無かったら
 	if (m_fade != FADE_NONE)
 	{
-		// 新しいシーンの破棄
-		delete pNewScene;
-
-		// nullptrにする
-		pNewScene = nullptr;
-
-		// ここで処理を返す
+		// すでにフェード中なら破棄
+		pNewScene.reset();
 		return;
 	}
 
-	// 現在シーンをnullにする
-	if (m_pScene != nullptr)
-	{
-		m_pScene = nullptr;
-	}
+	// 現在のシーンをクリアして、新しいシーンを保持
+	m_pScene = std::move(pNewScene);
 
-	// nullptrなので新しいシーンを生成する
-	if (m_pScene == nullptr)
-	{
-		// シーンをセットする
-		m_pScene = pNewScene;
-
-		// フェードアウト状態を作る
-		m_fade = FADE_OUT;
-	}
+	// フェードアウト開始
+	m_fade = FADE_OUT;
 }

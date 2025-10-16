@@ -402,7 +402,7 @@ void CRenderer::Draw(void)
 		CObject::DrawAll();
 
 		// ƒV[ƒ“æ“¾
-		CScene*pScene = CManager::Getscene();
+		CScene * pScene = CManager::GetSceneRaw();
 
 		// null‚¶‚á‚È‚©‚Á‚½‚ç
 		if (pScene != nullptr)

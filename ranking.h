@@ -12,13 +12,7 @@
 // インクルードファイル宣言
 //******************************
 #include "scene.h"
-#include "object2D.h"
-
-//******************************
-// マクロ定義
-//******************************
-#define MAX_RANKTEX (2)
-#define MAX_RANK (5)
+#include "rankingscore.h"
 
 //******************************
 // ランキングシーンクラスを定義
@@ -35,21 +29,20 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+#if 0
 	void SetSort(void);
 	void TxtLoad(const char* pFileName);
 	void TxtSave(const char* pFileName);
-
-	// 静的メンバ関数
-	static CRanking* Create();
-
+#endif
 private:
+	static constexpr int MAX_RANK = 5;
+	static constexpr int MAX_RANKTEX = 2;
 
 	static LPDIRECT3DTEXTURE9 m_pTexture[MAX_RANKTEX];		// テクスチャのポインタ
-	static CObject2D* m_pRankObj[MAX_RANK];					// オブジェクト2Dのポインタ
+	static CRankingScore* m_Score[MAX_RANK];
 
+	CNumber* m_apNumbers[8];								// 数字のポインタ
 	int m_nNumData[MAX_RANK];								// 数字のデータ数
-
-	//CScore* m_Score[MAX_RANK];
 };
 
 #endif
