@@ -12,7 +12,7 @@
 #include "collider.h"
 
 //===============================
-// オーバーロードコンストラクタ
+// コンストラクタ
 //===============================
 CCollision::CCollision()
 {
@@ -28,7 +28,7 @@ CCollision::~CCollision()
 
 
 //===============================
-// オーバーロードコンストラクタ
+// コンストラクタ
 //===============================
 CSphereSphereCollision::CSphereSphereCollision()
 {
@@ -73,3 +73,48 @@ bool CSphereSphereCollision::Collision(CSphereCollider* me, CSphereCollider* oth
 	return false;
 }
 
+//===============================
+// コンストラクタ
+//===============================
+CAABBAABBCollision::CAABBAABBCollision()
+{
+}
+//===============================
+// デストラクタ
+//===============================
+CAABBAABBCollision::~CAABBAABBCollision()
+{
+	// 無し
+}
+
+//===============================
+// 球と球のあたり判定
+//===============================
+bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
+{
+	// ポインタ
+	CAABBCollider* pMe = me;
+	CAABBCollider* pOther = other;
+
+	// 位置取得
+	D3DXVECTOR3 mePos = pMe->GetPos();
+	D3DXVECTOR3 otherPos = pOther->GetPos();
+
+	// サイズ取得
+	D3DXVECTOR3 fMeSize = pMe->GetSize();
+	D3DXVECTOR3 fOtherSize = pOther->GetSize();
+
+	// 中心点同士の距離
+	D3DXVECTOR3 dist = mePos - otherPos;
+	float fDist = D3DXVec3Length(&dist);
+
+	// 半径の合計
+	//float fRadSum = fMeRad + fOtherRad;
+
+	//if (fDist < fRadSum)
+	//{// 半径の合計をより距離が近い
+	//	return true;
+	//}
+
+	return false;
+}

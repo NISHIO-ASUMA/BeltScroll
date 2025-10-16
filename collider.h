@@ -44,4 +44,24 @@ private:
 	float m_fRadius;	// 半径
 };
 
+//**************************************************
+// AABBコライダークラスを定義
+//**************************************************
+class CAABBCollider :public CCollider
+{
+public:
+	// コンストラクタ・デストラクタ
+	CAABBCollider() { m_size = VECTOR3_NULL; }
+	~CAABBCollider() {}
+
+	// メンバ関数
+	static CAABBCollider* Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+
+	void SetSize(D3DXVECTOR3 size) { m_size = size; }
+	D3DXVECTOR3 GetSize(void) { return m_size; }
+private:
+	D3DXVECTOR3 m_size;	// 半径
+};
+
+
 #endif

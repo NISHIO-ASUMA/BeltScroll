@@ -12,6 +12,7 @@
 // 前方宣言
 //*************************
 class CSphereCollider;
+class CAABBCollider;
 
 
 //*************************
@@ -44,5 +45,19 @@ private:
 };
 
 
+//**************************************************
+// 矩形と矩形のあたり判定クラスを定義
+//**************************************************
+class CAABBAABBCollision :public CCollision
+{
+public:
+	// コンストラクタ・デストラクタ
+	CAABBAABBCollision();
+	~CAABBAABBCollision();
+
+	// メンバ関数
+	static bool Collision(CAABBCollider* me, CAABBCollider* other);
+private:
+};
 
 #endif
