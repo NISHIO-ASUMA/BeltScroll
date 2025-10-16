@@ -14,6 +14,7 @@
 class CBlockManager;
 class CPlayer;
 class CEnemyManager;
+class CTrushSim;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -32,11 +33,13 @@ public:
 	void Draw(void);
 
 	CPlayer* GetPlayer(void) { return m_pPlayer; }
+	CTrushSim* GetTrush(void) { return m_pTrushSim; }
 
 private:
 	CBlockManager* m_pBlockManager; // ブロックマネージャー
 	CPlayer* m_pPlayer;				// プレイヤー
 	CEnemyManager* m_pEnemyManager; // 敵管理クラス
+	CTrushSim* m_pTrushSim;			// 試し
 };
 
 #endif
