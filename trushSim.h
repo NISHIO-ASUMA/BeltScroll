@@ -44,7 +44,7 @@ private:
 	D3DXVECTOR3 m_posOld;
 	CSphereCollider* m_pCollider;				// コライダー
 	static constexpr float BLOCKHALF = 0.5f;	// ハーフサイズの固定値
-	static constexpr float SPEED = 2.0f;		// 進む速度の固定値
+	static constexpr float SPEED = 3.0f;		// 進む速度の固定値
 };
 
 #endif

@@ -84,6 +84,9 @@ void CGimmickFloor::Update(void)
 {
 	// 動かす
 	Move();
+	
+	// あたり判定
+	Collision();
 
 	// 親クラスの更新
 	CObjectX::Update();
@@ -103,13 +106,106 @@ void CGimmickFloor::Draw(void)
 void CGimmickFloor::Move(void)
 {
 	// 位置取得
+	D3DXVECTOR3 pos = CObjectX::GetPos();
 	D3DXVECTOR3 rot = CObjectX::GetRot();
-	
-	rot.y += 0.02f;
+	D3DXMATRIX mat = GetMtxWorld();
 
+	CGameManager* pManager = CGame::GetGameManager();
+	CTrushSim* pTrush = pManager->GetTrush();
 	// 反映
+	CObjectX::SetPos(pos);
 	CObjectX::SetRot(rot);
-	
+
+	//pTrush->SetPos(D3DXVECTOR3(mat._41, mat._42, mat._43));
+
 	// カウント
 	m_fMoveCnt += COUNTSPEED;
+}
+
+//================================
+// あたり判定処理
+//================================
+void CGimmickFloor::Collision(void)
+{
+	D3DXVECTOR3 vec[4];
+	D3DXVECTOR3 vecTrush[4];
+
+	D3DXVECTOR3 pos = GetPos();
+	D3DXVECTOR3 rot = GetRot();
+	D3DXMATRIX mat = GetMtxWorld();
+
+	D3DXVECTOR3 size = GetSize();
+
+	size.x = (size.x * 0.5f) * 1.414f;
+	size.y = (size.y * 0.5f);
+	size.z = (size.z * 0.5f) * 1.414f;
+
+	CGameManager* pManager = CGame::GetGameManager();
+	CTrushSim* pTrush = pManager->GetTrush();
+	D3DXMATRIX trushMat = pTrush->GetMtxWorld();
+	D3DXVECTOR3 trushPos = pTrush->GetPos();
+
+	D3DXVECTOR3 ePos[4];
+
+	ePos[0].x = pos.x + sinf(rot.y + (D3DX_PI * 0.25f)) * size.x;
+	ePos[0].z = pos.z + cosf(rot.y + (D3DX_PI * 0.25f)) * size.z;
+	ePos[1].x = pos.x + sinf(rot.y + (D3DX_PI * 0.75f)) * size.x;
+	ePos[1].z = pos.z + cosf(rot.y + (D3DX_PI * 0.75f)) * size.z;
+	ePos[2].x = pos.x + sinf(rot.y - (D3DX_PI * 0.75f)) * size.x;
+	ePos[2].z = pos.z + cosf(rot.y - (D3DX_PI * 0.75f)) * size.z;
+	ePos[3].x = pos.x + sinf(rot.y - (D3DX_PI * 0.25f)) * size.x;
+	ePos[3].z = pos.z + cosf(rot.y - (D3DX_PI * 0.25f)) * size.z;
+
+	vec[0].x = ePos[1].x - ePos[0].x;
+	vec[0].z = ePos[1].z - ePos[0].z;
+	vec[1].x = ePos[2].x - ePos[1].x;
+	vec[1].z = ePos[2].z - ePos[1].z;
+	vec[2].x = ePos[3].x - ePos[2].x;
+	vec[2].z = ePos[3].z - ePos[2].z;
+	vec[3].x = ePos[0].x - ePos[3].x;
+	vec[3].z = ePos[0].z - ePos[3].z;
+
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		vec[nCnt].y = 0.0f;
+		vecTrush[nCnt].y = 0.0f;
+	}
+
+	vecTrush[0].x = trushPos.x - ePos[0].x;
+	vecTrush[0].z = trushPos.z - ePos[0].z;
+	vecTrush[1].x = trushPos.x - ePos[1].x;
+	vecTrush[1].z = trushPos.z - ePos[1].z;
+	vecTrush[2].x = trushPos.x - ePos[2].x;
+	vecTrush[2].z = trushPos.z - ePos[2].z;
+	vecTrush[3].x = trushPos.x - ePos[3].x;
+	vecTrush[3].z = trushPos.z - ePos[3].z;
+
+
+	D3DXVECTOR3 nor[4];
+
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		D3DXVec3Cross(&nor[nCnt], &vec[nCnt],&vecTrush[nCnt]);
+	}
+
+	if (nor[0].y > 1.0f && nor[1].y > 1.0f && nor[2].y > 1.0f && nor[3].y > 1.0f
+		|| nor[0].y < 1.0f && nor[1].y < 1.0f && nor[2].y < 1.0f && nor[3].y < 1.0f)
+	{
+		rot.y += 0.01f;
+
+		trushPos.x = mat._41 - (mat._41 - trushMat._41);
+		trushPos.y = pos.y + size.y;
+		trushPos.z = mat._43 - (mat._43 - trushMat._43);
+
+		trushPos.x = mat._41 - sinf(rot.y) * trushPos.x;
+		trushPos.z = mat._43 - cosf(rot.y) * trushPos.z;
+
+		pTrush->SetPos(trushPos);
+		SetRot(rot);
+	}
+	else
+	{
+		trushPos.y = 0.0f;
+		pTrush->SetPos(trushPos);
+	}
 }
