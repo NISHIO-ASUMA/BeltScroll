@@ -193,11 +193,20 @@ void CGimmickFloor::Collision(void)
 	{
 		rot.y += 0.01f;
 
-		trushPos.x += 0.1f;
+		D3DXVECTOR3 dir = trushPos - pos;
+
+		float fRadius = D3DXVec3Length(&dir);
+
+		float v = 0.01f * fRadius;
+
+		D3DXVec3Normalize(&dir, &dir);
+
+		trushPos.x += dir.z * v;
 		trushPos.y = pos.y + size.y;
-		trushPos.z += 0.1f;
+		trushPos.z += -dir.x * v;
 
 		pTrush->SetPos(trushPos);
+		pTrush->SetRot(rot);
 		SetRot(rot);
 	}
 	else
