@@ -103,20 +103,12 @@ void CGimmickFloor::Draw(void)
 void CGimmickFloor::Move(void)
 {
 	// 位置取得
-	D3DXVECTOR3 pos = CObjectX::GetPos();
+	D3DXVECTOR3 rot = CObjectX::GetRot();
 	
-	CGameManager* pGameManager = CGame::GetGameManager();
-	CTrushSim* pTrush = pGameManager->GetTrush();
+	rot.y += 0.02f;
 
-	if (!pTrush->Collision(m_pCollider))
-	{
-		// サインでZ方向に動かす
-		pos.z += sinf(m_fMoveCnt)*10.0f;
-	}
-
-	m_pCollider->SetPos(pos);
 	// 反映
-	CObjectX::SetPos(pos);
+	CObjectX::SetRot(rot);
 	
 	// カウント
 	m_fMoveCnt += COUNTSPEED;
