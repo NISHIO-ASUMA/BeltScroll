@@ -52,7 +52,7 @@ public:
 
 	// シーン関連
 	static CScene* GetSceneRaw(void) { return m_pScene.get(); }	// 生ポインタを返す
-	static void SetScene(std::unique_ptr<CScene> pNewScene);	// unique_ptrで受け取る	static CFade* GetFade(void) { return m_pFade; }
+	static void SetScene(std::unique_ptr<CScene> pNewScene);	// unique_ptrで受け取る
 	static CScene::MODE GetScene(void);
 
 private:

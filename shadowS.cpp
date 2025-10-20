@@ -18,6 +18,7 @@ CShadowS::CShadowS(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
 	m_pVtx = {};
+	m_isDraw = false;
 }
 //==================================
 // デストラクタ
@@ -97,16 +98,22 @@ void CShadowS::Update(void)
 	// 無し
 }
 //==================================
-// 描画処理
+// 描画処理 ( ポリゴンの描画を一回だけに設定する ( プレイヤー影→敵影→情報をまとめて一回だけポリゴン出す ) )
 //==================================
 void CShadowS::Draw(void)
 {
+#if 1
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-//*****************************************************:
+//*****************************************************
 	// ステンシルテストを有効にする
 	pDevice->SetRenderState(D3DRS_STENCILENABLE, TRUE);
+
+	// ステンシルバッファの画面クリア
+	pDevice->Clear(0,
+		NULL, D3DCLEAR_STENCIL,
+		D3DCOLOR_RGBA(0, 0, 0, 255), 1.0f, 0);
 
 	// Zバッファへの書き込みを無効化する
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
@@ -117,14 +124,14 @@ void CShadowS::Draw(void)
 	// ステンシルバッファの比較パラメーター設定
 	pDevice->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
 
-	pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_KEEP); // 両方合格
+	pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_DECR); // 両方合格
 	pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_INCRSAT); // ステンシルテスト合格,Zバッファ不合格
-	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP); // ステンシルテスト不合格
+	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_ZERO); // ステンシルテスト不合格
 
 	// 表面をカリングする(表面を描画しない)
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 
-	// 影モデルを描画する
+	// モデルを描画する
 	CObjectX::Draw();
 
 	// ステンシルバッファの参照値を設定("1"にする)
@@ -134,8 +141,8 @@ void CShadowS::Draw(void)
 	pDevice->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL); // イコールに設定
 
 	pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_INCRSAT); // 両方合格
-	pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP); // ステンシルテスト合格,Zバッファ不合格
-	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP); // ステンシルテスト不合格
+	pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_DECR); // ステンシルテスト合格,Zバッファ不合格
+	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_ZERO); // ステンシルテスト不合格
 
 	// 裏面をカリングする (裏を描画しない)
 	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
@@ -152,11 +159,11 @@ void CShadowS::Draw(void)
 	// ステンシルバッファの比較パラメーター設定
 	pDevice->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL); // イコールに設定
 
-	pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_INCRSAT); // 両方合格
-	pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_INCRSAT); // ステンシルテスト合格,Zバッファ不合格
-	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_INCRSAT); // ステンシルテスト不合格
+	pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_KEEP); // 両方合格
+	pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP); // ステンシルテスト合格,Zバッファ不合格
+	pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP); // ステンシルテスト不合格
 
-//*****************************************************:
+//*****************************************************
 
 	// 頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtx, 0, sizeof(VERTEX_2D));
@@ -165,7 +172,7 @@ void CShadowS::Draw(void)
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
 	// テクスチャを戻す
-	pDevice->SetTexture(0, NULL);
+	pDevice->SetTexture(0, nullptr);
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -183,6 +190,8 @@ void CShadowS::Draw(void)
 
 	// カラーバッファ書き込みを有効化する
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0x0000000F);
+
+#endif
 }
 //==================================
 // 生成処理
@@ -200,12 +209,6 @@ CShadowS* CShadowS::Create(const char* pFileName, D3DXVECTOR3 pos,D3DXVECTOR3 ro
 	// 初期化失敗時
 	if (FAILED(pShadowS->Init()))
 	{
-		// ポインタの破棄
-		delete pShadowS;
-
-		// nullptr初期化
-		pShadowS = nullptr;
-
 		// 失敗結果をかえす
 		return nullptr;
 	}

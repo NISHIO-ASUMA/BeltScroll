@@ -41,10 +41,10 @@ public:
 		BASENUMBER, // 基準番号
 		MODELOBJECT,// Xファイルのモデル
 		BULLET,		// 弾
-		SHADOW,		// 影
 		IMPACT,		// 衝撃波
 		CHARACTOR,	// キャラクター
 		BILLBOARD,	// ビルボード
+		SHADOW,		// 影
 		EFFECT,		// エフェクト
 		UI,			// 2DUI
 		PAUSE,		// ポーズ

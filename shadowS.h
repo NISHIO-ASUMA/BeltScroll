@@ -12,8 +12,6 @@
 // インクルードファイル
 //**********************
 #include "objectX.h"
-#include "object.h"
-#include "object2D.h"
 
 //**********************************
 // シャドウステンシルクラスを定義
@@ -36,7 +34,7 @@ public:
 
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtx;		// 頂点バッファ
-
+	bool m_isDraw;
 };
 
 #endif

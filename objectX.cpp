@@ -251,7 +251,7 @@ void CObjectX::Draw(void)
 		}
 		else
 		{
-			pDevice->SetTexture(0, NULL); // テクスチャなし
+			pDevice->SetTexture(0, nullptr); // テクスチャなし
 		}
 
 		// モデル(パーツ)の描画

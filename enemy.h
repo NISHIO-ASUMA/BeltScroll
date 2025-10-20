@@ -19,6 +19,7 @@
 // 前方宣言
 //******************************
 class CShadow;
+class CShadowS;
 
 //******************************
 // 敵クラスを定義
@@ -46,6 +47,8 @@ public:
 private:
 	D3DXVECTOR3 m_move; // 移動量
 	CShadow* m_pShadow; // シャドウ
+
+	CShadowS* m_pShadowS;
 
 	bool m_isBlow;		// 吹き飛ばしが有効か
 };

@@ -14,6 +14,7 @@
 #include "player.h"
 #include "gamemanager.h"
 #include "game.h"
+#include "shadowS.h"
 
 //==============================
 // コンストラクタ
@@ -23,7 +24,7 @@ CEnemy::CEnemy(int nPriority) : CObjectX(nPriority)
 	// 値のクリア
 	m_move = VECTOR3_NULL;
 	m_pShadow = nullptr;
-
+	m_pShadowS = nullptr;
 	m_isBlow = false;
 }
 //==============================
@@ -68,7 +69,9 @@ HRESULT CEnemy::Init(void)
 	SetObjType(TYPE_ENEMY);
 
 	// シャドウ生成
-	m_pShadow = CShadow::Create(D3DXVECTOR3(GetPos().x,2.0f,GetPos().z), GetRot());
+	// m_pShadow = CShadow::Create(D3DXVECTOR3(GetPos().x,2.0f,GetPos().z), GetRot());
+
+	m_pShadowS = CShadowS::Create("data/MODEL/STAGEOBJ/Shadowmodel.x", D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
 	// 移動量をセット
 	m_move.x = 3.0f;
@@ -136,11 +139,11 @@ void CEnemy::Update(void)
 	SetPos(NowPos);
 
 	 // ステンシルシャドウが存在
-	if (m_pShadow)
+	if (m_pShadowS)
 	{
 		// オブジェクト設定
-		m_pShadow->SetPos(D3DXVECTOR3(GetPos().x, 2.0f, GetPos().z));
-		m_pShadow->SetRot(GetRot());
+		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x,0.0f, GetPos().z));
+		m_pShadowS->SetRot(GetRot());
 	}
 }
 //==============================
