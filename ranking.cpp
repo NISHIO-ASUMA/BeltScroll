@@ -63,6 +63,9 @@ HRESULT CRanking::Init(void)
 	// ui¶¬
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "ranking.jpg", false);
 
+	// ƒ‰ƒ“ƒLƒ“ƒOBGMÄ¶
+	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);
+
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }

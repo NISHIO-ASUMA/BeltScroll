@@ -73,6 +73,8 @@ void CTitle::Update(void)
 		// ƒ‰ƒ“ƒLƒ“ƒO
 		CManager::GetFade()->SetFade(std::make_unique<CGame>());
 
+		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_CLICKSE);
+
 		return;
 	}
 
