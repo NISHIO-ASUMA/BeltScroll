@@ -193,12 +193,9 @@ void CGimmickFloor::Collision(void)
 	{
 		rot.y += 0.01f;
 
-		trushPos.x = mat._41 - (mat._41 - trushMat._41);
+		trushPos.x += 0.1f;
 		trushPos.y = pos.y + size.y;
-		trushPos.z = mat._43 - (mat._43 - trushMat._43);
-
-		trushPos.x = mat._41 - sinf(rot.y) * trushPos.x;
-		trushPos.z = mat._43 - cosf(rot.y) * trushPos.z;
+		trushPos.z += 0.1f;
 
 		pTrush->SetPos(trushPos);
 		SetRot(rot);
