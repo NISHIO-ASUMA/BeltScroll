@@ -54,6 +54,8 @@ HRESULT CResult::Init(void)
 	// ui¶¬
 	CUi::Create(CENTERPOS,0,60.0f,60.0f,"Enterkey.png",false);
 
+	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
+
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }
