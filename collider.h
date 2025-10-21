@@ -60,7 +60,7 @@ public:
 	void SetSize(D3DXVECTOR3 size) { m_size = size; }
 	D3DXVECTOR3 GetSize(void) { return m_size; }
 private:
-	D3DXVECTOR3 m_size;	// ”¼Œa
+	D3DXVECTOR3 m_size;	// ‘å‚«‚³
 };
 
 

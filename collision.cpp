@@ -104,17 +104,53 @@ bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
 	D3DXVECTOR3 fMeSize = pMe->GetSize();
 	D3DXVECTOR3 fOtherSize = pOther->GetSize();
 
-	// 中心点同士の距離
-	D3DXVECTOR3 dist = mePos - otherPos;
-	float fDist = D3DXVec3Length(&dist);
+	// 半分のサイズ
+	D3DXVECTOR3 fHalfMeSize = fMeSize * 0.5f;
+	D3DXVECTOR3 fHalfOtherSize = fOtherSize * 0.5f;
 
-	// 半径の合計
-	//float fRadSum = fMeRad + fOtherRad;
+	if (mePos.y - fHalfMeSize.y< otherPos.y + fHalfOtherSize.y && mePos.y + fHalfMeSize.y > otherPos.y - fHalfOtherSize.y)
+	{// Y軸が重なっているとき
+		if (mePos.x - fHalfMeSize.x< otherPos.x + fHalfOtherSize.x && mePos.x + fHalfMeSize.x > otherPos.x - fHalfOtherSize.x)
+		{// X軸が重なっているとき
 
-	//if (fDist < fRadSum)
-	//{// 半径の合計をより距離が近い
-	//	return true;
-	//}
+			// Z軸の判定
+			if (mePos.z - fHalfMeSize.z < otherPos.z + fHalfOtherSize.z)
+			{
+				return true;
+			}
+			else if (mePos.z + fHalfMeSize.z > otherPos.z - fHalfOtherSize.z)
+			{
+				return true;
+			}
+
+		}
+		else if (mePos.z - fHalfMeSize.z< otherPos.z + fHalfOtherSize.z && mePos.z + fHalfMeSize.z > otherPos.z - fHalfOtherSize.z)
+		{// Z軸が重なっているとき
+
+			// X軸の判定
+			if (mePos.x - fHalfMeSize.x < otherPos.x + fHalfOtherSize.x)
+			{
+				return true;
+			}
+			else if (mePos.x + fHalfMeSize.x > otherPos.x - fHalfOtherSize.x)
+			{
+				return true;
+			}
+
+		}
+	}
+	if (mePos.x - fHalfMeSize.x< otherPos.x + fHalfOtherSize.x && mePos.x + fHalfMeSize.x > otherPos.x - fHalfOtherSize.x &&
+		mePos.z - fHalfMeSize.z < otherPos.z + fHalfOtherSize.z && mePos.z + fHalfMeSize.z > otherPos.z - fHalfOtherSize.z)
+	{// X軸とZ軸が重なっているとき
+		if (mePos.y - fHalfMeSize.y < otherPos.y + fHalfOtherSize.y)
+		{// 上から
+			return true;
+		}
+		else if (mePos.y + fHalfMeSize.y > otherPos.y - fHalfOtherSize.y)
+		{// 下から
+			return true;
+		}
+	}
 
 	return false;
 }
