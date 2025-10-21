@@ -153,7 +153,6 @@ HRESULT CPlayer::Init(void)
 	// ステンシルシャドウ生成
 	m_pShadowS = 
 		CShadowS::Create(
-		"data\\MODEL\\STAGEOBJ\\Shadowmodel.x",
 		m_pos, 
 		m_rot
 		);

@@ -196,13 +196,13 @@ void CShadowS::Draw(void)
 //==================================
 // 生成処理
 //==================================
-CShadowS* CShadowS::Create(const char* pFileName, D3DXVECTOR3 pos,D3DXVECTOR3 rot)
+CShadowS* CShadowS::Create(D3DXVECTOR3 pos,D3DXVECTOR3 rot)
 {
 	// インスタンス生成
 	CShadowS* pShadowS = new CShadowS;
 
 	// オブジェクトX設定
-	pShadowS->SetFilePass(pFileName);
+	pShadowS->SetFilePass("data/MODEL/STAGEOBJ/Shadowmodel.x");
 	pShadowS->SetPos(pos);
 	pShadowS->SetRot(rot);
 

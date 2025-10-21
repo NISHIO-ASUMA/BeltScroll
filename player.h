@@ -39,7 +39,9 @@ public:
 	{
 		PLAYERMOTION_NEUTRAL,		// ニュートラル
 		PLAYERMOTION_MOVE,			// 移動
+		PLAUERMOTION_ATTACK,		// 攻撃
 		PLAYERMOTION_JUMP,			// ジャンプ
+		PLAYERMOTION_LANDING,		// 着地
 		PLAYERMOTION_MAX
 	};
 

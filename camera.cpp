@@ -29,7 +29,6 @@ namespace CAMERAINFO
 	constexpr float CAMERABACKPOS = 450.0f;		// 後方カメラ
 	constexpr float SHAKEVALUE = 12.0f;			// 振動の値
 	constexpr float DIGITVALUE = 1.5f;		// 割る値
-	constexpr int RANDOMBASE = 2;			// ランダム基準値
 }
 
 //=================================

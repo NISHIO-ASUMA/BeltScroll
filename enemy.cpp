@@ -68,10 +68,8 @@ HRESULT CEnemy::Init(void)
 	// オブジェクトの種類をセット
 	SetObjType(TYPE_ENEMY);
 
-	// シャドウ生成
-	// m_pShadow = CShadow::Create(D3DXVECTOR3(GetPos().x,2.0f,GetPos().z), GetRot());
-
-	m_pShadowS = CShadowS::Create("data/MODEL/STAGEOBJ/Shadowmodel.x", D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
+	// ステンシルシャドウの生成
+	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
 	// 移動量をセット
 	m_move.x = 3.0f;
