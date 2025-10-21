@@ -123,8 +123,8 @@ void CTrushSim::Controll(void)
 	}
 	else if (pKeyboard->GetPress(DIK_RIGHT))
 	{// ‰E•ûŒü
-		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * SPEED;
-		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * SPEED;
+		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 
 	}
 	else if (pKeyboard->GetPress(DIK_LEFT))
