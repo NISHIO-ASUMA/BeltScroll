@@ -22,6 +22,7 @@ CTrushSim::CTrushSim(int nPriority) : CObjectX(nPriority)
 	// 値のクリア
 	m_posOld = VECTOR3_NULL;
 	m_pCollider = nullptr;
+	m_fJump = 0.0f;
 }
 //================================
 // デストラクタ
@@ -132,6 +133,21 @@ void CTrushSim::Controll(void)
 		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 
+	}
+
+	if (pKeyboard->GetTrigger(DIK_RSHIFT))
+	{// 左方向
+		m_fJump = JUMP;
+	}
+
+	m_fJump -= 0.1f;
+
+	pos.y += m_fJump;
+
+	if (pos.y < 0.0f)
+	{
+		pos.y = 0.0f;
+		m_fJump = 0.0f;
 	}
 
 	// 反映

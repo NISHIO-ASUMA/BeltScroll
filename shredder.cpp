@@ -9,6 +9,9 @@
 // インクルードファイル
 //**********************
 #include "shredder.h"
+#include "game.h"
+#include "gamemanager.h"
+#include "player.h"
 
 //===============================
 // コンストラクタ
@@ -71,7 +74,19 @@ void CShredder::Uninit(void)
 //===============================
 void CShredder::Update(void)
 {
-	// 無し
+	D3DXVECTOR3 pos = GetPos();
+
+	CGameManager* pGameManager = CGame::GetGameManager();
+	CPlayer* pPlayer = pGameManager->GetPlayer();
+	D3DXVECTOR3 pPos = pPlayer->GetPos();
+	D3DXVECTOR3 pPosOld = pPlayer->GetOldPos();
+
+	if (pPosOld.x < pPos.x)
+	{
+		pos.x += pPos.x - pPosOld.x;
+		SetPos(pos);
+	}
+
 }
 //===============================
 // 描画処理
