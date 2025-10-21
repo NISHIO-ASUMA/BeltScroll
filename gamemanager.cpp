@@ -55,7 +55,7 @@ HRESULT CGameManager::Init(void)
 	// 壁生成
 	m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(0.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
 
-	CGimmickFloor::Create(D3DXVECTOR3(-550.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
+	CGimmickFloor::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
 	//// マップモデル配置情報生成
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();
