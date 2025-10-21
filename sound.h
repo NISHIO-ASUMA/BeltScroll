@@ -57,12 +57,12 @@ private:
 	//******************************
 	SOUNDINFO m_aSoundInfo[SOUND_LABEL_MAX] =
 	{
-		{"data/BGM/titlebgm.wav", -1},		 // タイトルBGM
+		{"data/BGM/Title001.wav", -1},		 // タイトルBGM
 		{"data/BGM/gamebgm.wav",-1},		 // ゲームBGM
 		{"data/BGM/Result.wav",-1},		 // リザルトBGM
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
 		{"data/BGM/rankingbgm.wav",-1},		 // ランキングBGM
-		{"data/SE/Click.wav",1},			 // 決定音
+		{"data/SE/ClickEnter.wav",1},			 // 決定音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

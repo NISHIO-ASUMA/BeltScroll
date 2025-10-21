@@ -52,6 +52,9 @@ HRESULT CTitle::Init(void)
 	CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "titlename.png", false);
 	CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "titeenter.png", false);
 
+	// ƒ^ƒCƒgƒ‹BGMÄ¶
+	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_TITLE_BGM);
+
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }
