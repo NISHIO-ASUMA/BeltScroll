@@ -149,6 +149,7 @@ void CTrushSim::Controll(void)
 		pos.y = 0.0f;
 		m_fJump = 0.0f;
 	}
+
 	// ”½‰f
 	m_pCollider->SetPos(pos);
 	CObjectX::SetPos(pos);

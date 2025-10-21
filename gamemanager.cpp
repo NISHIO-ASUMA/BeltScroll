@@ -60,6 +60,8 @@ HRESULT CGameManager::Init(void)
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();
 
+	CShredder::Create(D3DXVECTOR3(-300.0f, 0.0f, 0.0f));
+
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }

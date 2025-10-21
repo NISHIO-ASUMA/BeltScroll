@@ -105,7 +105,9 @@ void CCamera::Update(void)
 	MouseView(pMouse, pInput);
 
 	// 追従
-	PlayerFllow();
+	Tameshi();
+
+	//PlayerFllow();
 #else
 
 	// 追従カメラ
@@ -296,7 +298,10 @@ void CCamera::PlayerFllow(void)
 		// ここで処理を返す
 		return;
 	}
-	
+	if (PlayerCollisionScreen(pPlayer->GetPos()))
+	{
+
+	}
 
 	// 追従カメラ用に設定
 	m_pCamera.posRDest.x = pPlayer->GetPos().x + sinf(pPlayer->GetRotDest().y) * 1.0f;
@@ -313,4 +318,76 @@ void CCamera::PlayerFllow(void)
 	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 
 #endif
+}
+
+//**********************************************************
+// プレイヤーが画面端に行ったときにカメラを動かすための判定
+//**********************************************************
+bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
+{
+
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice;
+	CRenderer* renderer = CManager::GetRenderer();
+	pDevice = renderer->GetDevice();
+
+	D3DXMATRIX matProj, matView, matWorld;
+	D3DVIEWPORT9 viewport;
+	D3DXVECTOR3 pos;
+	pDevice->GetViewport(&viewport);
+	pDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	pDevice->GetTransform(D3DTS_VIEW, &matView);
+	D3DXMatrixIdentity(&matWorld);
+	D3DXVec3Project(&pos, &playerPos, &viewport, &matProj, &matView, &matWorld);
+
+	if (pos.x > SCREEN_WIDTH * 0.75f)
+	{
+		return true;
+	}
+
+	return false;
+
+}
+
+//**********************************************************
+// 試しです
+//**********************************************************
+void CCamera::Tameshi(void)
+{
+#if 1
+	// 現在のモード取得
+	CScene::MODE nMode = CManager::GetScene();
+
+	if (nMode != CScene::MODE_GAME)
+	{
+		return;
+	}
+
+	// プレイヤー取得
+	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
+
+	// nullptrチェック
+	if (pPlayer == nullptr)
+	{
+		// ここで処理を返す
+		return;
+	}
+	if (PlayerCollisionScreen(pPlayer->GetPos())&& pPlayer->GetPos().x > pPlayer->GetOldPos().x)
+	{
+		// 追従カメラ用に設定
+		m_pCamera.posRDest.x += pPlayer->GetPos().x - pPlayer->GetOldPos().x;
+
+		m_pCamera.posR.x += ((m_pCamera.posRDest.x - m_pCamera.posR.x) * 0.3f);
+		m_pCamera.posR.y += ((m_pCamera.posRDest.y - m_pCamera.posR.y) * 0.3f);
+		m_pCamera.posR.z += ((m_pCamera.posRDest.z - m_pCamera.posR.z) * 0.3f);
+
+		// カメラの視点の情報
+		m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+		m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+		m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+	}
+
+
+#endif
+
 }
