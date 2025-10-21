@@ -106,20 +106,10 @@ void CGimmickFloor::Draw(void)
 void CGimmickFloor::Move(void)
 {
 	// 位置取得
-	D3DXVECTOR3 pos = CObjectX::GetPos();
 	D3DXVECTOR3 rot = CObjectX::GetRot();
-	D3DXMATRIX mat = GetMtxWorld();
-
-	CGameManager* pManager = CGame::GetGameManager();
-	CTrushSim* pTrush = pManager->GetTrush();
+	rot.y += 0.01f;
 	// 反映
-	CObjectX::SetPos(pos);
 	CObjectX::SetRot(rot);
-
-	//pTrush->SetPos(D3DXVECTOR3(mat._41, mat._42, mat._43));
-
-	// カウント
-	m_fMoveCnt += COUNTSPEED;
 }
 
 //================================
@@ -144,6 +134,7 @@ void CGimmickFloor::Collision(void)
 	CTrushSim* pTrush = pManager->GetTrush();
 	D3DXMATRIX trushMat = pTrush->GetMtxWorld();
 	D3DXVECTOR3 trushPos = pTrush->GetPos();
+	D3DXVECTOR3 trushPosOld = pTrush->GetPosOld();
 
 	D3DXVECTOR3 ePos[4];
 
@@ -188,30 +179,56 @@ void CGimmickFloor::Collision(void)
 		D3DXVec3Cross(&nor[nCnt], &vec[nCnt],&vecTrush[nCnt]);
 	}
 
+	D3DXVECTOR3 oldNor[4];
+
+	vecTrush[0].x = trushPosOld.x - ePos[0].x;
+	vecTrush[0].z = trushPosOld.z - ePos[0].z;
+	vecTrush[1].x = trushPosOld.x - ePos[1].x;
+	vecTrush[1].z = trushPosOld.z - ePos[1].z;
+	vecTrush[2].x = trushPosOld.x - ePos[2].x;
+	vecTrush[2].z = trushPosOld.z - ePos[2].z;
+	vecTrush[3].x = trushPosOld.x - ePos[3].x;
+	vecTrush[3].z = trushPosOld.z - ePos[3].z;
+
+	for (int nCnt = 0; nCnt < 4; nCnt++)
+	{
+		D3DXVec3Cross(&oldNor[nCnt], &vec[nCnt], &vecTrush[nCnt]);
+	}
+
 	if (nor[0].y > 1.0f && nor[1].y > 1.0f && nor[2].y > 1.0f && nor[3].y > 1.0f
 		|| nor[0].y < 1.0f && nor[1].y < 1.0f && nor[2].y < 1.0f && nor[3].y < 1.0f)
 	{
-		rot.y += 0.01f;
+		if (trushPos.y - 15.0f < pos.y + size.y&& trushPosOld.y - 15.0f > pos.y + size.y)
+		{
 
-		D3DXVECTOR3 dir = trushPos - pos;
+			D3DXVECTOR3 dir = trushPos - pos;
 
-		float fRadius = D3DXVec3Length(&dir);
+			float fRadius = D3DXVec3Length(&dir);
 
-		float v = 0.01f * fRadius;
+			float v = 0.01f * fRadius;
 
-		D3DXVec3Normalize(&dir, &dir);
+			D3DXVec3Normalize(&dir, &dir);
 
-		trushPos.x += dir.z * v;
-		trushPos.y = pos.y + size.y;
-		trushPos.z += -dir.x * v;
+			trushPos.x += dir.z * v;
+			trushPos.y = trushPosOld.y;
+			trushPos.z += -dir.x * v;
 
-		pTrush->SetPos(trushPos);
-		pTrush->SetRot(rot);
-		SetRot(rot);
-	}
-	else
-	{
-		trushPos.y = 0.0f;
-		pTrush->SetPos(trushPos);
+			pTrush->SetPos(trushPos);
+			pTrush->SetRot(rot);
+			SetRot(rot);
+		}
+		else if (trushPos.y + 15.0f > pos.y - size.y && trushPosOld.y + 15.0f < pos.y - size.y)
+		{
+			trushPos.y = trushPosOld.y;
+			pTrush->SetPos(trushPos);
+		}
+		else if(trushPos.y + 15.0f > pos.y - size.y && trushPos.y - 15.0f < pos.y - size.y||
+			trushPos.y - 15.0f < pos.y + size.y && trushPos.y + 15.0f > pos.y + size.y)
+		{
+			trushPos.x = trushPosOld.x;
+			trushPos.z = trushPosOld.z;
+			pTrush->SetPos(trushPos);
+		}
+
 	}
 }

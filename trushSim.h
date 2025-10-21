@@ -36,6 +36,7 @@ public:
 	void Draw(void);
 	void Controll(void);
 	bool Collision(CSphereCollider* pCollider);
+	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
 
 	// 静的メンバ関数
 	static CTrushSim* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale, const char* FileName);
@@ -43,6 +44,8 @@ public:
 private:
 	D3DXVECTOR3 m_posOld;
 	CSphereCollider* m_pCollider;				// コライダー
+	float m_fJump;
+	static constexpr float JUMP = 8.0f;
 	static constexpr float BLOCKHALF = 0.5f;	// ハーフサイズの固定値
 	static constexpr float SPEED = 3.0f;		// 進む速度の固定値
 };
