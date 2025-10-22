@@ -52,7 +52,7 @@ CResult* CResult::Create(void)
 HRESULT CResult::Init(void)
 {
 	// ui¶¬
-	CUi::Create(CENTERPOS,0,60.0f,60.0f,"Enterkey.png",false);
+	CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.png",false);
 
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
 
