@@ -63,6 +63,7 @@ public:
 	D3DXMATRIX GetMtxProjection(void) { return m_pCamera.mtxprojection; }
 	int GetMode(void) { return m_pCamera.nMode; }
 	float GetDistance(void) { return m_pCamera.fDistance; }
+	bool GetMove(void) { return m_bMove; }
 
 private:
 
@@ -85,6 +86,7 @@ private:
 
 	Camera m_pCamera;		// カメラ構造体変数
 	D3DXVECTOR3 m_Zoom;		// ズーム
-};
+	bool m_bMove;			// カメラを動かすか
+};	
 
 #endif

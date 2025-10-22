@@ -15,6 +15,7 @@ class CBlockManager;
 class CPlayer;
 class CEnemyManager;
 class CTrushSim;
+class CShredderManager;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -40,6 +41,7 @@ private:
 	CPlayer* m_pPlayer;				// プレイヤー
 	CEnemyManager* m_pEnemyManager; // 敵管理クラス
 	CTrushSim* m_pTrushSim;			// 試し
+	CShredderManager* m_pShredderManaher;// シュレッダーマネージャー
 };
 
 #endif

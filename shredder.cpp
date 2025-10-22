@@ -12,6 +12,8 @@
 #include "game.h"
 #include "gamemanager.h"
 #include "player.h"
+#include "manager.h"
+#include "shreddermanager.h"
 
 //===============================
 // コンストラクタ
@@ -31,7 +33,7 @@ CShredder::~CShredder()
 //===============================
 // 生成処理
 //===============================
-CShredder* CShredder::Create(D3DXVECTOR3 pos)
+CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 {
 	// インスタンス生成
 	CShredder* pShredder = new CShredder;
@@ -40,7 +42,17 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos)
 	// オブジェクト設定
 	pShredder->SetPos(pos);
 	pShredder->SetRot(VECTOR3_NULL);
-	pShredder->SetFilePass("data/MODEL/STAGEOBJ/Shredder.x");
+	pShredder->m_nType = nType;
+
+	switch (nType)
+	{
+	case CShredderManager::TYPE_RED:
+		pShredder->SetFilePass("data/MODEL/STAGEOBJ/aaaaa.x");
+		break;
+	case CShredderManager::TYPE_GREEN:
+		pShredder->SetFilePass("data/MODEL/STAGEOBJ/bbbbb.x");
+		break;
+	}
 
 	// 初期化失敗時
 	if (FAILED(pShredder->Init()))
@@ -74,6 +86,7 @@ void CShredder::Uninit(void)
 //===============================
 void CShredder::Update(void)
 {
+	// 位置
 	D3DXVECTOR3 pos = GetPos();
 
 	CGameManager* pGameManager = CGame::GetGameManager();
@@ -81,12 +94,13 @@ void CShredder::Update(void)
 	D3DXVECTOR3 pPos = pPlayer->GetPos();
 	D3DXVECTOR3 pPosOld = pPlayer->GetOldPos();
 
-	if (pPosOld.x < pPos.x)
+	CCamera* pCamera = CManager::GetCamera();
+
+	if (pCamera->GetMove())
 	{
 		pos.x += pPos.x - pPosOld.x;
 		SetPos(pos);
 	}
-
 }
 //===============================
 // 描画処理
@@ -95,4 +109,14 @@ void CShredder::Draw(void)
 {
 	// 親クラスの描画
 	CObjectX::Draw();
+}
+
+//===============================
+// Z軸だけを動かしたいとき
+//===============================
+void CShredder::SetPosZ(float posZ)
+{
+	D3DXVECTOR3 pos = GetPos();
+	pos.z = posZ;
+	SetPos(pos);
 }

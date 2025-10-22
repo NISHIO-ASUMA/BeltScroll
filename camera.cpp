@@ -50,6 +50,7 @@ CCamera::CCamera()
 	m_pCamera.nUseKey = NULL;
 	m_pCamera.nCntAnim = NULL;
 	m_Zoom = VECTOR3_NULL;
+	m_bMove = false;
 }
 //=================================
 // デストラクタ
@@ -64,7 +65,7 @@ CCamera::~CCamera()
 HRESULT CCamera::Init(void)
 {
 	// 初期値を設定する
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 650.0f, -700.0f);		// カメラの位置
+	m_pCamera.posV = D3DXVECTOR3(0.0f, 800.0f, -700.0f);		// カメラの位置
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
 	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
@@ -340,7 +341,7 @@ bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	D3DXMatrixIdentity(&matWorld);
 	D3DXVec3Project(&pos, &playerPos, &viewport, &matProj, &matView, &matWorld);
 
-	if (pos.x > SCREEN_WIDTH * 0.75f)
+	if (pos.x > SCREEN_WIDTH * 0.9f)
 	{
 		return true;
 	}
@@ -385,6 +386,12 @@ void CCamera::Tameshi(void)
 		m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
 		m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 		m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
+
+		m_bMove = true;
+	}
+	else
+	{
+		m_bMove = false;
 	}
 
 

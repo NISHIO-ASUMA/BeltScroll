@@ -30,10 +30,12 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	void SetPosZ(float posZ);
 
 	// Ã“Iƒƒ“ƒoŠÖ”
-	static CShredder* Create(D3DXVECTOR3 pos);
+	static CShredder* Create(D3DXVECTOR3 pos,int nType);
 
 private:
 	D3DXVECTOR3 m_move; // ˆÚ“®—Ê
+	int m_nType;		// í—Ş
 };

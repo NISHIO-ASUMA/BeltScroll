@@ -19,6 +19,7 @@
 #include "enemymanager.h"
 #include "trushSim.h"
 #include "gimmickfloor.h"
+#include "shreddermanager.h"
 
 //===============================
 // コンストラクタ
@@ -44,7 +45,7 @@ CGameManager::~CGameManager()
 HRESULT CGameManager::Init(void)
 {
 	//メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 1500.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 1000.0f, 1, 1);
 
 	// プレイヤー生成 ( のちにモデル変更 )
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player.txt");
@@ -60,7 +61,8 @@ HRESULT CGameManager::Init(void)
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();
 
-	CShredder::Create(D3DXVECTOR3(-300.0f, 0.0f, 0.0f));
+	m_pShredderManaher = new CShredderManager;
+	m_pShredderManaher->Init();
 
 	// 初期化結果を返す
 	return S_OK;
@@ -95,6 +97,18 @@ void CGameManager::Uninit(void)
 		// null初期化
 		m_pEnemyManager = nullptr;
 	}
+
+	if (m_pShredderManaher != nullptr)
+	{
+		// 終了処理
+		m_pShredderManaher->Uninit();
+
+		// 破棄
+		delete m_pShredderManaher;
+
+		// null初期化
+		m_pShredderManaher = nullptr;
+	}
 }
 //===============================
 // 更新処理
@@ -116,6 +130,13 @@ void CGameManager::Update(void)
 		// 敵管理の更新処理
 		m_pEnemyManager->Update();
 	}
+	// nullチェック
+	if (m_pShredderManaher != nullptr)
+	{
+		// 敵管理の更新処理
+		m_pShredderManaher->Update();
+	}
+
 }
 //===============================
 // 描画処理

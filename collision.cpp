@@ -88,7 +88,7 @@ CAABBAABBCollision::~CAABBAABBCollision()
 }
 
 //===============================
-// ‹…‚Æ‹…‚Ì‚ ‚½‚è”»’è
+// ‹éŒ`‚Æ‹éŒ`‚Ì“–‚½‚è”»’è
 //===============================
 bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
 {
