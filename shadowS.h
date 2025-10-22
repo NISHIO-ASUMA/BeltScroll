@@ -30,7 +30,7 @@ public:
 	void Draw(void);
 
 	// 静的メンバ関数
-	static CShadowS* Create(const char * pFileName,D3DXVECTOR3 pos, D3DXVECTOR3 rot);
+	static CShadowS* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot);
 
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtx;		// 頂点バッファ

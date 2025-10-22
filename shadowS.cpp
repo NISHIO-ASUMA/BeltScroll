@@ -98,11 +98,10 @@ void CShadowS::Update(void)
 	// 無し
 }
 //==================================
-// 描画処理 ( ポリゴンの描画を一回だけに設定する ( プレイヤー影→敵影→情報をまとめて一回だけポリゴン出す ) )
+// 描画処理
 //==================================
 void CShadowS::Draw(void)
 {
-#if 1
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
@@ -190,19 +189,17 @@ void CShadowS::Draw(void)
 
 	// カラーバッファ書き込みを有効化する
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0x0000000F);
-
-#endif
 }
 //==================================
 // 生成処理
 //==================================
-CShadowS* CShadowS::Create(const char* pFileName, D3DXVECTOR3 pos,D3DXVECTOR3 rot)
+CShadowS* CShadowS::Create(D3DXVECTOR3 pos,D3DXVECTOR3 rot)
 {
 	// インスタンス生成
 	CShadowS* pShadowS = new CShadowS;
 
 	// オブジェクトX設定
-	pShadowS->SetFilePass(pFileName);
+	pShadowS->SetFilePass("data/MODEL/STAGEOBJ/Shadowmodel.x");
 	pShadowS->SetPos(pos);
 	pShadowS->SetRot(rot);
 

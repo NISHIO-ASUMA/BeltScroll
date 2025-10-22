@@ -195,7 +195,9 @@
     <ClCompile Include="rankingscore.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
+    <ClCompile Include="resultscore.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="shadowS.cpp" />
     <ClCompile Include="shredder.cpp" />
@@ -251,8 +253,11 @@
     <ClInclude Include="ranking.h" />
     <ClInclude Include="rankingscore.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="result.h" />
+    <ClInclude Include="resultscore.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="shadowS.h" />
     <ClInclude Include="shredder.h" />
@@ -267,6 +272,12 @@
     <ClInclude Include="trushSim.h" />
     <ClInclude Include="tutorial.h" />
     <ClInclude Include="ui.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TeamProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
