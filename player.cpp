@@ -385,7 +385,6 @@ void CPlayer::Update(void)
 		if (CManager::GetInputKeyboard()->GetTrigger(DIK_SPACE))
 		{
 			m_isJump = true;
-
 			m_isLanding = false;
 
 			// ジャンプキーが押された
@@ -503,7 +502,6 @@ void CPlayer::Draw(void)
 		m_apModel[nCnt]->Draw();
 	}
 
-
 	// 識別描画
 	CDebugproc::Print("プレイヤーの座標 { %.2f,%.2f,%.2f }", m_pos.x, m_pos.y, m_pos.z);
 	// デバッグフォント描画
@@ -554,7 +552,7 @@ void CPlayer::ChangeState(CPlayerStateBase* pNewState,int id)
 }
 
 //=========================================
-// 識別番号ごとの攻撃更新処理
+// 攻撃更新処理
 //=========================================
 void CPlayer::UpdateAction(CInputKeyboard* pInputKeyboard,D3DXMATRIX pMtx,const D3DXVECTOR3 DestMove, CJoyPad* pPad)
 {
@@ -562,7 +560,7 @@ void CPlayer::UpdateAction(CInputKeyboard* pInputKeyboard,D3DXMATRIX pMtx,const 
 }
 
 //=========================================
-// 識別番号ごとの移動更新処理
+// 移動更新処理
 //=========================================
 void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 {
@@ -693,7 +691,7 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
 }
 //=========================================
-// 識別番号ごとのジャンプ更新処理
+// ジャンプ更新処理
 //=========================================
 void CPlayer::UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad)
 {
@@ -801,8 +799,7 @@ void CPlayer::HitDamage(int nDamage)
 #endif
 }
 //=======================================
-// 敵吹き飛ばし処理 ( 範囲をどうするか )
-// 距離減衰,集め方(まとめて投げるために)
+// 敵吹き飛ばし処理 ( 範囲をどうするか ) 距離減衰,集め方(まとめて投げるために)
 //=======================================
 void CPlayer::EnemyBlow(void)
 {

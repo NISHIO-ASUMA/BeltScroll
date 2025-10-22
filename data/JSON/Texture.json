@@ -6,5 +6,11 @@
   { "Texture": "data/TEXTURE/wall001.jpg" },
   { "Texture": "data/TEXTURE/TitleLogo.png" },
   { "Texture": "data/TEXTURE/titlename.png" },
-  { "Texture": "data/TEXTURE/titeenter.png" }
+  { "Texture": "data/TEXTURE/titeenter.png" },
+  { "Texture": "data/TEXTURE/shadow000.jpg" },
+  { "Texture": "data/TEXTURE/number003.png" },
+  { "Texture": "data/TEXTURE/effect000.jpg" },
+  { "Texture": "data/TEXTURE/effectwind.jpg" },
+  { "Texture": "data/TEXTURE/coron.png" },
+  { "Texture": "data/TEXTURE/ranking.jpg" }
 ]

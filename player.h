@@ -25,6 +25,7 @@ class CCamera;
 class CShadowS;
 class CStateMachine;
 class CPlayerStateBase;
+class CAABBCollider;
 
 //*************************
 // プレイヤークラスを定義
@@ -42,6 +43,8 @@ public:
 		PLAUERMOTION_ATTACK,		// 攻撃
 		PLAYERMOTION_JUMP,			// ジャンプ
 		PLAYERMOTION_LANDING,		// 着地
+		PLAYERMOTION_BLOWOFF,		// ダメージ
+		PLAYERMOTION_WIN,			// 勝ちモーション
 		PLAYERMOTION_MAX
 	};
 
