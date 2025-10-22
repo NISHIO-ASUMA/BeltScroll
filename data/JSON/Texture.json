@@ -6,5 +6,7 @@
   { "Texture": "data/TEXTURE/wall001.jpg" },
   { "Texture": "data/TEXTURE/TitleLogo.png" },
   { "Texture": "data/TEXTURE/titlename.png" },
-  { "Texture": "data/TEXTURE/titeenter.png" }
+  { "Texture": "data/TEXTURE/titeenter.png" },
+  { "Texture": "data/TEXTURE/GameClear.png" },
+  { "Texture": "data/TEXTURE/GridFloor003.png" }
 ]
