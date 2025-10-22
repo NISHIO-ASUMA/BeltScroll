@@ -135,7 +135,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE /*hInstancePrev
 
 				dwFrameCount = 0;				// 0‚É–ß‚·
 
-				// FPS¶¬
+				// FPSŽæ“¾
 				CManager::GetRenderer()->GetFps(nCountFPS);
 			}
 
