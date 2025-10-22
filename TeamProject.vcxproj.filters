@@ -174,14 +174,13 @@
     <ClCompile Include="blowerui.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="shreddermanager.cpp">
-=======
+		<Filter>ソース ファイル</Filter>
+	</ClCompile>
     <ClCompile Include="score.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="resultscore.cpp">
->>>>>>> 21976d1995f49ec3d47a2c67b7fa9dddaea78d77
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -351,11 +350,9 @@
     <ClInclude Include="blowerui.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="shreddermanager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-=======
     <ClInclude Include="score.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -375,6 +372,5 @@
     <Image Include="icon1.ico">
       <Filter>リソース ファイル</Filter>
     </Image>
->>>>>>> 21976d1995f49ec3d47a2c67b7fa9dddaea78d77
   </ItemGroup>
 </Project>
