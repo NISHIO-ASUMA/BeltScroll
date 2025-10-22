@@ -151,11 +151,11 @@ HRESULT CPlayer::Init(void)
 	}
 	
 	// ステンシルシャドウ生成
-	m_pShadowS = 
-		CShadowS::Create(
+	m_pShadowS = CShadowS::Create
+	(
 		m_pos, 
 		m_rot
-		);
+	);
 	
 
 	// ステートマシンを生成
