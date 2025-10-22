@@ -98,11 +98,10 @@ void CShadowS::Update(void)
 	// 無し
 }
 //==================================
-// 描画処理 ( ポリゴンの描画を一回だけに設定する ( プレイヤー影→敵影→情報をまとめて一回だけポリゴン出す ) )
+// 描画処理
 //==================================
 void CShadowS::Draw(void)
 {
-#if 1
 	// デバイス取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
@@ -190,8 +189,6 @@ void CShadowS::Draw(void)
 
 	// カラーバッファ書き込みを有効化する
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0x0000000F);
-
-#endif
 }
 //==================================
 // 生成処理
