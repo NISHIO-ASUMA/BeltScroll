@@ -129,9 +129,6 @@
     <ClCompile Include="blockmanager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="playerstate.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -190,7 +187,10 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="loseplayer.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
