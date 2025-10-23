@@ -425,8 +425,6 @@ void CPlayer::Update(void)
 		EnemyBlow();
 
 #ifdef _DEBUG
-		// パーティクル生成
-		CParticlePiler::Create(m_pos, D3DXCOLOR(0.12f, 1.0f, 0.03f, 1.0f), 20, 50.0f, 50.0f, 25, m_rot.y);
 #endif // _DEBUG
 	}
 
@@ -697,19 +695,6 @@ void CPlayer::UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, 
 {
 
 }
-//=============================
-// コリジョン処理関数
-//=============================
-void CPlayer::Collision(void)
-{
-#if 0
-
-	// ダメージ中か確認
-	if (GetStateMachine()->GetNowStateID() == CPlayerStateBase::ID_DAMAGE)
-		return;
-
-#endif
-}
 //===============================
 // キー押下時の入力取得
 //===============================
@@ -799,13 +784,23 @@ void CPlayer::HitDamage(int nDamage)
 #endif
 }
 //=======================================
-// 敵吹き飛ばし処理 ( 範囲をどうするか ) 距離減衰,集め方(まとめて投げるために)
+// 敵吹き飛ばし処理 ( 範囲をどうするか )
 //=======================================
 void CPlayer::EnemyBlow(void)
 {
-	// 範囲と威力
-	const float fBlowRange = 100.0f;	// 有効範囲
-	const float fBlowPower = 50.0f;		// 吹き飛ばし強度
+	// 範囲パラメータ
+	const float fBlowRange = 60.0f;	// 有効距離
+	const float fBlowPower = 60.0f;	// 吹き飛ばし強度
+	const float fBlowAngle = D3DXToRadian(30.0f); // 扇形の角度
+
+	// プレイヤーの前方ベクトル
+	D3DXVECTOR3 vForward(
+		sinf(m_rot.y), 0.0f,
+		cosf(m_rot.y)
+	);
+
+	// 正規化
+	D3DXVec3Normalize(&vForward, &vForward);
 
 	// 敵オブジェクトの先頭取得
 	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
@@ -818,26 +813,27 @@ void CPlayer::EnemyBlow(void)
 			// キャスト
 			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
 
-			// 敵座標取得
 			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
 
 			// プレイヤーとの距離
-			D3DXVECTOR3 vDiff = vEnemyPos - m_pos;
-
-			float fDist = D3DXVec3Length(&vDiff);
+			D3DXVECTOR3 vToEnemy = vEnemyPos - m_pos;
+			float fDist = D3DXVec3Length(&vToEnemy);
 
 			// 範囲内なら吹き飛ばし
 			if (fDist < fBlowRange)
 			{
-				// 正規化
-				D3DXVec3Normalize(&vDiff, &vDiff);
+				// 角度判定
+				D3DXVec3Normalize(&vToEnemy, &vToEnemy);
+				float fDot = D3DXVec3Dot(&vForward, &vToEnemy);
 
-				// 吹き飛ばし方向
-				D3DXVECTOR3 vBlow = vDiff * fBlowPower;
-
-				// 敵側に速度を加える
-				pEnemy->AddBlow(vBlow);
-				pEnemy->SetBlow(true);
+				// コサイン値で角度を判定
+				if (fDot < cosf(fBlowAngle * 0.5f))
+				{
+					// 吹き飛ばし
+					D3DXVECTOR3 vBlow = vToEnemy * fBlowPower;
+					pEnemy->AddBlow(vBlow);
+					pEnemy->SetBlow(true);
+				}
 			}
 		}
 

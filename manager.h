@@ -18,7 +18,6 @@
 #include "texture.h"
 #include "camera.h"
 #include "light.h"
-#include "object3D.h"
 #include "scene.h"
 #include "fade.h"
 #include <memory>
@@ -50,7 +49,6 @@ public:
 	static CLight* GetLight(void) { return m_pLight; }
 	static CFade* GetFade(void) { return m_pFade; }
 
-	// シーン関連
 	static CScene* GetSceneRaw(void) { return m_pScene.get(); }	// 生ポインタを返す
 	static void SetScene(std::unique_ptr<CScene> pNewScene);	// unique_ptrで受け取る
 	static CScene::MODE GetScene(void);
@@ -64,7 +62,7 @@ private:
 	static CTexture* m_pTexture;			// テクスチャクラスのポインタ
 	static CCamera* m_pCamera;				// カメラクラスのポインタ
 	static CLight* m_pLight;				// ライトクラスのポインタ
-	static std::unique_ptr<CScene> m_pScene;;	// シーン管理クラスのポインタ
+	static std::unique_ptr<CScene> m_pScene;// シーン管理クラスのポインタ
 	static CFade* m_pFade;					// フェードクラスのポインタ
 };
 #endif

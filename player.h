@@ -61,7 +61,6 @@ public:
 	void UpdateAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad); // 通常攻撃更新関数
 	void UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad);					  // 移動更新関数
 	void UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad);
-	void Collision(void);
 	void StartJump(void);
 	void HitDamage(int nDamage);
 	void EnemyBlow(void);

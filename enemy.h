@@ -27,6 +27,18 @@ class CShadowS;
 class CEnemy : public CObjectX
 {
 public:
+	//***************************
+	// 種類の列挙型
+	//***************************
+	enum TYPE
+	{
+		TYPE_NONE,			// 無し
+		TYPE_LIGHTTRUSH,	// 軽い
+		TYPE_HEAVYTRUSH,	// 重い
+		TYPE_ROLLTRUSH,		// 転がる
+		TYPE_MAX
+	};
+
 	// コンストラクタ・デストラクタ
 	CEnemy(int nPriority = static_cast<int>(CObject::PRIORITY::MODELOBJECT));
 	~CEnemy();
@@ -46,10 +58,8 @@ public:
 
 private:
 	D3DXVECTOR3 m_move; // 移動量
-	CShadow* m_pShadow; // シャドウ
-
-	CShadowS* m_pShadowS;
-
+	CShadowS* m_pShadowS; // ステンシルシャドウ
+	TYPE m_TrushType;	 // ゴミの種類
 	bool m_isBlow;		// 吹き飛ばしが有効か
 };
 

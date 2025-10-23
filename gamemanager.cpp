@@ -20,6 +20,7 @@
 #include "trushSim.h"
 #include "gimmickfloor.h"
 #include "shreddermanager.h"
+#include "loseresult.h"
 
 //===============================
 // コンストラクタ
@@ -57,6 +58,7 @@ HRESULT CGameManager::Init(void)
 	m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(0.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
 
 	CGimmickFloor::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
+
 	//// マップモデル配置情報生成
 	//m_pBlockManager = new CBlockManager;
 	//m_pBlockManager->Init();
@@ -118,8 +120,17 @@ void CGameManager::Update(void)
 	// キー入力で遷移
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
 	{
-		// ランキング
+		// リザルト
 		CManager::GetFade()->SetFade(std::make_unique<CResult>());
+		
+		return;
+	}
+
+	// キー入力で遷移
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_F6))
+	{
+		// ランキング
+		CManager::GetFade()->SetFade(std::make_unique<CLoseResult>());
 
 		return;
 	}
