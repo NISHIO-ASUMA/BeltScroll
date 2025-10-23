@@ -34,10 +34,10 @@ CLoseResult::~CLoseResult()
 //==============================
 HRESULT CLoseResult::Init(void)
 {
+	// UI生成
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "gameover.jpg", false);
 	// リザルトプレイヤー生成
-	CLosePlayer::Create(D3DXVECTOR3(0.0f,0.0f,-200.0f));
-
-	return S_OK;
+	CLosePlayer::Create(D3DXVECTOR3(0.0f,0.0f,-200.0f));	return S_OK;
 }
 //==============================
 // 終了処理
