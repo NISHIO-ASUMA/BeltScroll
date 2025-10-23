@@ -280,7 +280,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.25f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 		else
 		{// 単体
@@ -289,7 +289,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.5f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 
 		// 角度の正規化
@@ -308,7 +308,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.75f);
 
 			// タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		}
 		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
@@ -318,7 +318,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.25f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 		else
 		{// Dキーのみ押した
@@ -327,7 +327,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.5f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 
 		// 角度の正規化
@@ -344,7 +344,7 @@ void CPlayer::Update(void)
 		m_rotDest.y = pCamera->GetRot().y - (D3DX_PI);
 
 		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		// 角度を正規化
 		if (m_rot.y < -D3DX_PI)
@@ -361,7 +361,7 @@ void CPlayer::Update(void)
 		m_rotDest.y = pCamera->GetRot().y;
 
 		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		// 角度の正規化
 		if (m_rot.y > D3DX_PI)
@@ -371,7 +371,7 @@ void CPlayer::Update(void)
 	}
 	else
 	{
-		if (m_pMotion->GetMotionType() == PLAYERMOTION_MOVE || !m_isJump)
+		if (m_pMotion->GetMotionType() == PLAYERMOTION_ATTACK || !m_isJump)
 		{
 			//　タイプ切り替え
 			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
