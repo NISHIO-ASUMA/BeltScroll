@@ -36,6 +36,7 @@ public:
 	void SetScale(D3DXVECTOR3 Scale) { m_Scale = Scale; }
 	void SetUseQuat(bool isFlags) { m_isUseQaut = isFlags; }
 	void SetMtxWorld(D3DXMATRIX mtxworld) { m_mtxWorld = mtxworld; }
+	void SetParent(CObjectX* pParent) { m_pParent = pParent; }
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; };
@@ -43,6 +44,8 @@ public:
 	D3DXVECTOR3 GetScale(void) { return m_Scale; }
 	D3DXVECTOR3 GetSize(void) { return m_fsize; }
 	D3DXMATRIX GetMtxWorld(void) { return m_mtxWorld; }
+	CObjectX*GetParent(void) { return m_pParent; }
+
 
 	const char* GetFileName()const { return m_pFileName; }
 
@@ -54,6 +57,7 @@ private:
 	LPD3DXMESH m_pMesh;	   // メッシュ情報
 	LPD3DXBUFFER m_pBuffMat; // マテリアル情報
 	DWORD m_dwNumMat;		// マテリアル数
+	CObjectX* m_pParent;	// 親
 
 	D3DXVECTOR3 m_pos;		// 座標
 	D3DXVECTOR3 m_rot;		// 角度

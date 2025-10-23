@@ -37,6 +37,7 @@ public:
 	void Controll(void);
 	bool Collision(CSphereCollider* pCollider);
 	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
+	D3DXVECTOR3 MoveIP(D3DXVECTOR3 p);
 
 	// ê√ìIÉÅÉìÉoä÷êî
 	static CTrushSim* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale, const char* FileName);

@@ -88,6 +88,8 @@ void CGimmickFloor::Update(void)
 	// あたり判定
 	Collision();
 
+	PartCollision();
+
 	// 親クラスの更新
 	CObjectX::Update();
 }
@@ -198,24 +200,41 @@ void CGimmickFloor::Collision(void)
 	if (nor[0].y > 1.0f && nor[1].y > 1.0f && nor[2].y > 1.0f && nor[3].y > 1.0f
 		|| nor[0].y < 1.0f && nor[1].y < 1.0f && nor[2].y < 1.0f && nor[3].y < 1.0f)
 	{
-		if (trushPos.y - 15.0f < pos.y + size.y&& trushPosOld.y - 15.0f > pos.y + size.y)
+		if (trushPos.y/* - 15.0f*/ < pos.y + size.y&& trushPosOld.y/* - 15.0f*/ > pos.y + size.y)
 		{
-
 			D3DXVECTOR3 dir = trushPos - pos;
 
-			float fRadius = D3DXVec3Length(&dir);
+			pTrush->SetParent(this);
+			//dir.x = sinf(rot.y) * dir.x;
+			//dir.z = cosf(rot.y) * dir.z;
 
-			float v = 0.01f * fRadius;
+			// 逆行列作成
+			D3DXMATRIX invCarMtx;
 
-			D3DXVec3Normalize(&dir, &dir);
+			D3DXMatrixInverse(&invCarMtx, nullptr, &mat);
 
-			trushPos.x += dir.z * v;
-			trushPos.y = trushPosOld.y;
-			trushPos.z += -dir.x * v;
+			D3DXVECTOR3 wldPos = trushPos;
+			D3DXVECTOR3 lclPos;
 
-			pTrush->SetPos(trushPos);
-			pTrush->SetRot(rot);
-			SetRot(rot);
+			D3DXVec3TransformCoord(&lclPos, &wldPos, &invCarMtx);
+
+			//lclPos.y += 20.0f;
+
+			pTrush->SetPos(lclPos);
+
+			//float fRadius = D3DXVec3Length(&dir);
+
+			//float v = 0.01f * fRadius;
+
+			//D3DXVec3Normalize(&dir, &dir);
+
+			//trushPos.x += dir.z * v;
+			//trushPos.y = trushPosOld.y;
+			//trushPos.z += -dir.x * v;
+
+			//pTrush->SetPos(trushPos);
+			//pTrush->SetRot(rot);
+			//SetRot(rot);
 		}
 		else if (trushPos.y + 15.0f > pos.y - size.y && trushPosOld.y + 15.0f < pos.y - size.y)
 		{
@@ -229,6 +248,36 @@ void CGimmickFloor::Collision(void)
 			trushPos.z = trushPosOld.z;
 			pTrush->SetPos(trushPos);
 		}
+
+	}
+}
+
+void CGimmickFloor::PartCollision(void)
+{
+	CGameManager* pManager = CGame::GetGameManager();
+	CTrushSim* pTrush = pManager->GetTrush();
+
+	if (pTrush->GetParent() == nullptr)
+	{
+		return;
+	}
+	D3DXVECTOR3 trushPos = pTrush->GetPos();
+	D3DXVECTOR3 rot = GetRot();
+	D3DXVECTOR3 size = GetSize();
+
+	if (trushPos.x > size.x * 0.5f || trushPos.x < -size.x * 0.5f
+		|| trushPos.z>size.z * 0.5f || trushPos.z < -size.z * 0.5f
+		|| trushPos.y>size.y * 0.5f || trushPos.y < -size.y * 0.5f)
+	{
+		D3DXMATRIX mat = pTrush->GetMtxWorld();
+		trushPos = D3DXVECTOR3(mat._41, mat._42, mat._43);
+		pTrush->SetParent(nullptr);
+		pTrush->SetPos(trushPos);
+	}
+	else
+	{
+		trushPos.y = size.y * 0.5f;
+		pTrush->SetPos(trushPos);
 
 	}
 }
