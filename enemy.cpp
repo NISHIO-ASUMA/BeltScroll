@@ -19,13 +19,13 @@
 //==============================
 // コンストラクタ
 //==============================
-CEnemy::CEnemy(int nPriority) : CObjectX(nPriority)
+CEnemy::CEnemy(int nPriority) : CObjectX(nPriority),
+m_move(VECTOR3_NULL),
+m_pShadowS(nullptr),
+m_isBlow(false),
+m_TrushType(TYPE_NONE)
 {
 	// 値のクリア
-	m_move = VECTOR3_NULL;
-	m_pShadow = nullptr;
-	m_pShadowS = nullptr;
-	m_isBlow = false;
 }
 //==============================
 // デストラクタ
