@@ -16,6 +16,9 @@
     <Filter Include="ソース ファイル\Player">
       <UniqueIdentifier>{83bb31a9-8a85-4118-90be-1fdff7f15161}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Player">
+      <UniqueIdentifier>{8ac56c80-0983-46a7-b786-86da33544f50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="billboard.cpp">
@@ -192,6 +195,9 @@
     <ClCompile Include="player.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="winplayer.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -311,9 +317,6 @@
     <ClInclude Include="blockmanager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="playerstate.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -375,7 +378,13 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="loseplayer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="winplayer.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
