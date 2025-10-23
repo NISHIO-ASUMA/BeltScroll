@@ -34,7 +34,7 @@ CLoseResult::~CLoseResult()
 HRESULT CLoseResult::Init(void)
 {
 	// UIê∂ê¨
-	CUi::Create(CENTERPOS, 0, 400.0f, 200.0f, "PointUi.png", false);
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "gameover.jpg", false);
 
 	return S_OK;
 }
