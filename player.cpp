@@ -2,8 +2,6 @@
 //
 // プレイヤー処理 [ player.cpp ]
 // Author: Asuma Nishio
-//
-// TODO : ブロワーの処理入れる
 // 
 //=========================================
 
@@ -28,7 +26,7 @@
 #include "particlepiler.h"
 
 //**********************
-// 名前空間
+// プレイヤー情報
 //**********************
 namespace PLAYERINFO
 {
@@ -38,6 +36,15 @@ namespace PLAYERINFO
 	constexpr float HITRADIUS = 25.0f;	 // 当たり判定の半径
 	constexpr int   KeyRepeatCount = 15; // キーのリピート最大カウント
 };
+//**********************
+// ブロワー定数値
+//**********************
+namespace BLOWERINFO
+{
+	constexpr float SMALLVALUE = 40.0f; // 初期値
+	constexpr float MEDIUMVALUE = 70.0f; // 中間
+	constexpr float MAXVALUE = 110.0f; // 最大値
+}
 
 //**********************
 // 静的メンバ変数宣言
@@ -61,7 +68,7 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_pFilename = {};
 	m_nIdxPlayer = NULL;
 	m_fAngle = NULL;
-	m_fAvoidTime = NULL;
+	m_fBlowerRange = NULL;
 
 	// モデルのポインタのクリア
 	for (int nCnt = 0; nCnt < MAX_MODEL; nCnt++)
@@ -79,6 +86,9 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_isJump = false;
 	m_isAttack = false;
 	m_isMoving = false;
+
+	// 初期状態
+	m_blower = BLOWER_SMALLPOW;
 }
 //===============================
 // デストラクタ
@@ -163,6 +173,10 @@ HRESULT CPlayer::Init(void)
 
 	// 初期状態をセット
 	ChangeState(new CPlayerStateNeutral,CPlayerStateBase::ID_NEUTRAL); 
+
+	// 初期値をセット
+	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
+	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
 
 	// 結果を返す
 	return S_OK;
@@ -266,7 +280,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.25f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 		else
 		{// 単体
@@ -275,7 +289,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.5f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 
 		// 角度の正規化
@@ -294,7 +308,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.75f);
 
 			// タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		}
 		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
@@ -304,7 +318,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.25f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 		else
 		{// Dキーのみ押した
@@ -313,7 +327,7 @@ void CPlayer::Update(void)
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.5f);
 
 			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 		}
 
 		// 角度の正規化
@@ -330,7 +344,7 @@ void CPlayer::Update(void)
 		m_rotDest.y = pCamera->GetRot().y - (D3DX_PI);
 
 		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		// 角度を正規化
 		if (m_rot.y < -D3DX_PI)
@@ -347,7 +361,7 @@ void CPlayer::Update(void)
 		m_rotDest.y = pCamera->GetRot().y;
 
 		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_MOVE);
+		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
 
 		// 角度の正規化
 		if (m_rot.y > D3DX_PI)
@@ -357,7 +371,7 @@ void CPlayer::Update(void)
 	}
 	else
 	{
-		if (m_pMotion->GetMotionType() == PLAYERMOTION_MOVE || !m_isJump)
+		if (m_pMotion->GetMotionType() == PLAYERMOTION_ATTACK || !m_isJump)
 		{
 			//　タイプ切り替え
 			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
@@ -413,6 +427,29 @@ void CPlayer::Update(void)
 		//{
 		//	m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
 		//}
+	}
+
+	// ブロワー強度設定
+	if (CManager::GetInputKeyboard()->GetPress(DIK_1))
+	{
+		// 各種設定
+		m_blower = BLOWER_MIDIUMPOW;
+		m_fBlowerPow = BLOWERINFO::MEDIUMVALUE;
+		m_fBlowerRange = BLOWERINFO::MEDIUMVALUE;
+	}
+	else if (CManager::GetInputKeyboard()->GetPress(DIK_2))
+	{
+		// 各種設定
+		m_blower = BLOWER_MAXPOW;
+		m_fBlowerPow = BLOWERINFO::MAXVALUE;
+		m_fBlowerRange = BLOWERINFO::MAXVALUE;
+	}
+	else if (CManager::GetInputKeyboard()->GetPress(DIK_3))
+	{
+		// 各種設定
+		m_blower = BLOWER_SMALLPOW;
+		m_fBlowerPow = BLOWERINFO::SMALLVALUE;
+		m_fBlowerRange = BLOWERINFO::SMALLVALUE;
 	}
 
 	// Lキーで範囲攻撃
@@ -789,13 +826,14 @@ void CPlayer::HitDamage(int nDamage)
 void CPlayer::EnemyBlow(void)
 {
 	// 範囲パラメータ
-	const float fBlowRange = 60.0f;	// 有効距離
-	const float fBlowPower = 60.0f;	// 吹き飛ばし強度
-	const float fBlowAngle = D3DXToRadian(30.0f); // 扇形の角度
+	const float fBlowRange = m_fBlowerRange;	// 有効距離
+	const float fBlowPower = m_fBlowerPow;	// 吹き飛ばし強度
+	const float fBlowAngle = D3DXToRadian(45.0f); // 扇形の角度
 
 	// プレイヤーの前方ベクトル
 	D3DXVECTOR3 vForward(
-		sinf(m_rot.y), 0.0f,
+		sinf(m_rot.y), 
+		0.0f,
 		cosf(m_rot.y)
 	);
 
@@ -826,7 +864,7 @@ void CPlayer::EnemyBlow(void)
 				D3DXVec3Normalize(&vToEnemy, &vToEnemy);
 				float fDot = D3DXVec3Dot(&vForward, &vToEnemy);
 
-				// コサイン値で角度を判定
+				// 角度を判定
 				if (fDot < cosf(fBlowAngle * 0.5f))
 				{
 					// 吹き飛ばし

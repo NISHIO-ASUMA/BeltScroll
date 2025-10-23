@@ -36,6 +36,7 @@ public:
 	void Draw(void);
 	void Move(void);
 	void Collision(void);
+	void PartCollision(void);
 
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static CGimmickFloor* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale, const char* FileName);

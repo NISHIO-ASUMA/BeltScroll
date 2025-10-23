@@ -14,6 +14,7 @@
 #include "tutorial.h"
 #include "result.h"
 #include "ranking.h"
+
 //**************************
 // 静的メンバ変数宣言
 //**************************
@@ -133,7 +134,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	m_pTexture->Load();
 
 #ifdef _DEBUG
-	// フェード経由でタイトルシーンをセット
+	// タイトルシーンをセット
 	m_pFade->SetFade(std::make_unique<CTitle>()); 
 #else
 	// シーンセット

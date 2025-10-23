@@ -170,6 +170,7 @@
     <ClCompile Include="gimmickfloor.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="light.cpp" />
+    <ClCompile Include="loseplayer.cpp" />
     <ClCompile Include="loseresult.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="light.h" />
+    <ClInclude Include="loseplayer.h" />
     <ClInclude Include="loseresult.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />

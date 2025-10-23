@@ -28,7 +28,7 @@ namespace CAMERAINFO
 	constexpr float NorRot = D3DX_PI * 2.0f;	// 正規化値
 	constexpr float CAMERABACKPOS = 450.0f;		// 後方カメラ
 	constexpr float SHAKEVALUE = 12.0f;			// 振動の値
-	constexpr float DIGITVALUE = 1.5f;		// 割る値
+	constexpr float DIGITVALUE = 1.5f;			// 割る値
 }
 
 //=================================

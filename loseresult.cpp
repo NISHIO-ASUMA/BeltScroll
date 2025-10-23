@@ -13,6 +13,7 @@
 #include "manager.h"
 #include "fade.h"
 #include "ranking.h"
+#include "loseplayer.h"
 
 //==============================
 // コンストラクタ
@@ -34,9 +35,9 @@ CLoseResult::~CLoseResult()
 HRESULT CLoseResult::Init(void)
 {
 	// UI生成
-	CUi::Create(CENTERPOS, 0, 400.0f, 200.0f, "PointUi.png", false);
-
-	return S_OK;
+	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "gameover.jpg", false);
+	// リザルトプレイヤー生成
+	CLosePlayer::Create(D3DXVECTOR3(0.0f,0.0f,-200.0f));	return S_OK;
 }
 //==============================
 // 終了処理

@@ -13,6 +13,7 @@
   { "Texture": "data/TEXTURE/effectwind.jpg" },
   { "Texture": "data/TEXTURE/coron.png" },
   { "Texture": "data/TEXTURE/ranking.jpg" },
-  { "Texture": "data/TEXTURE/GameClear.png" }
+  { "Texture": "data/TEXTURE/GameClear.png" },
+  { "Texture": "data/TEXTURE/gameover.jpg"}
 ]
 ]

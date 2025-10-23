@@ -72,8 +72,8 @@ HRESULT CEnemy::Init(void)
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
 	// 移動量をセット
-	m_move.x = 3.0f;
-	m_move.z = 3.0f;
+	m_move.x = 5.0f;
+	m_move.z = 5.0f;
 
 	return S_OK;
 }
@@ -103,7 +103,7 @@ void CEnemy::Update(void)
 	float dist = D3DXVec3Length(&dir);			// 距離
 
 	D3DXVec3Normalize(&dir, &dir);			// 正規化
-	float speed = 1.0f;						// 追従スピード
+	float speed = 2.0f;						// 追従スピード
 	m_move += dir * speed;					// 移動ベクトルに加算
 
 	// 吹き飛ばしが有効の時
@@ -119,6 +119,7 @@ void CEnemy::Update(void)
 		}
 	}
 
+	// 重力値
 	m_move.y -= 0.5f;
 
 	// 位置更新
