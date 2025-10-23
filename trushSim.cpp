@@ -104,8 +104,8 @@ void CTrushSim::Controll(void)
 {
 	// 位置と向き取得
 	D3DXMATRIX mtx = GetMtxWorld();
-	//D3DXVECTOR3 pos = CObjectX::GetPos();
-	D3DXVECTOR3 pos = D3DXVECTOR3(mtx._41, mtx._42, mtx._43);
+	D3DXVECTOR3 pos = CObjectX::GetPos();
+	//D3DXVECTOR3 pos = D3DXVECTOR3(mtx._41, mtx._42, mtx._43);
 	D3DXVECTOR3 rot = CObjectX::GetRot();
 	// 入力とカメラ取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
@@ -141,20 +141,20 @@ void CTrushSim::Controll(void)
 		m_fJump = JUMP;
 	}
 
-	if (GetParent() != nullptr)
-	{
-		CObjectX* parent = GetParent();
-		D3DXMATRIX parentMtx = parent->GetMtxWorld();
-		// 逆行列作成
-		D3DXMATRIX invMtx;
+	//if (GetParent() != nullptr)
+	//{
+	//	CObjectX* parent = GetParent();
+	//	D3DXMATRIX parentMtx = parent->GetMtxWorld();
+	//	// 逆行列作成
+	//	D3DXMATRIX invMtx;
 
-		D3DXMatrixInverse(&invMtx, nullptr, &parentMtx);
+	//	D3DXMatrixInverse(&invMtx, nullptr, &parentMtx);
 
-		D3DXVECTOR3 wldPos = pos;
-		D3DXVECTOR3 lclPos;
+	//	D3DXVECTOR3 wldPos = pos;
+	//	D3DXVECTOR3 lclPos;
 
-		D3DXVec3TransformCoord(&pos, &wldPos, &invMtx);
-	}
+	//	D3DXVec3TransformCoord(&pos, &wldPos, &invMtx);
+	//}
 
 	m_fJump -= 0.1f;
 
