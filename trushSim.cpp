@@ -103,7 +103,9 @@ void CTrushSim::Draw(void)
 void CTrushSim::Controll(void)
 {
 	// à íuÇ∆å¸Ç´éÊìæ
-	D3DXVECTOR3 pos = CObjectX::GetPos();
+	D3DXMATRIX mtx = GetMtxWorld();
+	//D3DXVECTOR3 pos = CObjectX::GetPos();
+	D3DXVECTOR3 pos = D3DXVECTOR3(mtx._41, mtx._42, mtx._43);
 	D3DXVECTOR3 rot = CObjectX::GetRot();
 	// ì¸óÕÇ∆ÉJÉÅÉâéÊìæ
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
@@ -132,12 +134,26 @@ void CTrushSim::Controll(void)
 	{// ç∂ï˚å¸
 		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
-
 	}
 
 	if (pKeyboard->GetTrigger(DIK_RSHIFT))
 	{// ç∂ï˚å¸
 		m_fJump = JUMP;
+	}
+
+	if (GetParent() != nullptr)
+	{
+		CObjectX* parent = GetParent();
+		D3DXMATRIX parentMtx = parent->GetMtxWorld();
+		// ãtçsóÒçÏê¨
+		D3DXMATRIX invMtx;
+
+		D3DXMatrixInverse(&invMtx, nullptr, &parentMtx);
+
+		D3DXVECTOR3 wldPos = pos;
+		D3DXVECTOR3 lclPos;
+
+		D3DXVec3TransformCoord(&pos, &wldPos, &invMtx);
 	}
 
 	m_fJump -= 0.1f;

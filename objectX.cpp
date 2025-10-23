@@ -32,6 +32,8 @@ CObjectX::CObjectX(int nPriority) : CObject(nPriority)
 	m_pFileName = {};
 
 	m_isUseQaut = false;
+
+	m_pParent = nullptr;
 }
 //=============================
 // デストラクタ
@@ -224,6 +226,24 @@ void CObjectX::Draw(void)
 	// 位置を反映
 	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
 	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	// 親のペアネント格納用変数
+	D3DXMATRIX mtxParent;
+
+	if (m_pParent != nullptr)
+	{// 親が存在する
+		// ワールドマトリックス取得
+		mtxParent = m_pParent->GetMtxWorld();
+		// 親のマトリックスとかけ合わせる
+		D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxParent);
+	}
+	else
+	{// 親が存在しない
+		// マトリックス取得
+		pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
+	}
+
+
 
 	// ワールドマトリックスの設定
 	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
