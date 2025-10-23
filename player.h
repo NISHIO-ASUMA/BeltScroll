@@ -40,12 +40,23 @@ public:
 	{
 		PLAYERMOTION_NEUTRAL,		// ニュートラル
 		PLAYERMOTION_MOVE,			// 移動
-		PLAUERMOTION_ATTACK,		// 攻撃
+		PLAYERMOTION_ATTACK,		// 攻撃
 		PLAYERMOTION_JUMP,			// ジャンプ
 		PLAYERMOTION_LANDING,		// 着地
 		PLAYERMOTION_BLOWOFF,		// ダメージ
-		PLAYERMOTION_WIN,			// 勝ちモーション
+		PLAYERMOTION_MOVEATTACK,	// 移動しながらのブロワーモーション
 		PLAYERMOTION_MAX
+	};
+
+	//***********************************
+	// ブロワーモード列挙型
+	//***********************************
+	enum BLOWER
+	{
+		BLOWER_SMALLPOW,
+		BLOWER_MIDIUMPOW,
+		BLOWER_MAXPOW,
+		BLOWER_MAX
 	};
 
 	// コンストラクタ・デストラクタ
@@ -88,7 +99,6 @@ public:
 
 	int GetType(void) { return m_type; }
 	int GetPlayerIndex() const { return m_nIdxPlayer; }
-	float GetCoolTime(void) { return m_fAvoidTime; }
 
 	// フラグメント関数
 	bool IsJumping() { return m_isJump; } 	// ジャンプ状態の確認
@@ -119,6 +129,7 @@ private:
 	CMotion* m_pMotion;				// モーションのポインタ
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
+	BLOWER m_blower;
 
 	int m_type;				// モーションの種類変数
 	int m_nNumAll;			// モデル総数
@@ -134,8 +145,8 @@ private:
 
 	float m_fAngle;			// 現在の角度
 	float m_fValue;
-	float m_fAvoidTime;
-
+	float m_fBlowerRange;	// 影響範囲
+	float m_fBlowerPow;		// ブロワーの強度
 	const char* m_pFilename; // 読み込むファイル名
 
 	static bool m_isDeath; // 静的
