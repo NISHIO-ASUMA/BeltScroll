@@ -23,6 +23,7 @@ CTrushSim::CTrushSim(int nPriority) : CObjectX(nPriority)
 	m_posOld = VECTOR3_NULL;
 	m_pCollider = nullptr;
 	m_fJump = 0.0f;
+	m_bMove = false;
 }
 //================================
 // デストラクタ
@@ -123,27 +124,31 @@ void CTrushSim::Controll(void)
 	{// 奥側
 		pos.x += sinf(pCamera->GetRot().y) * SPEED;
 		pos.z += cosf(pCamera->GetRot().y) * SPEED;
+		m_bMove = true;
 
 	}
 	else if (pKeyboard->GetPress(DIK_DOWN))
 	{// 手前
 		pos.x -= sinf(pCamera->GetRot().y) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y) * SPEED;
+		m_bMove = true;
 	}
 	else if (pKeyboard->GetPress(DIK_RIGHT))
 	{// 右方向
 		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		m_bMove = true;
 
 	}
 	else if (pKeyboard->GetPress(DIK_LEFT))
 	{// 左方向
 		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		m_bMove = true;
 	}
 	else
 	{
-		pos = CObjectX::GetPos();
+		m_bMove = false;
 	}
 
 	if (pKeyboard->GetTrigger(DIK_RSHIFT))
@@ -151,7 +156,12 @@ void CTrushSim::Controll(void)
 		m_fJump = JUMP;
 	}
 
-	if (GetParent() != nullptr)
+	if (!m_bMove)
+	{
+		pos = CObjectX::GetPos();
+	}
+
+	if (GetParent() != nullptr&& m_bMove)
 	{
 		CObjectX* parent = GetParent();
 		D3DXMATRIX parentMtx = parent->GetMtxWorld();
