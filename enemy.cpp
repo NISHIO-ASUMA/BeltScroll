@@ -90,6 +90,9 @@ void CEnemy::Uninit(void)
 {
 	// 親クラスの終了処理
 	CObjectX::Uninit();
+
+	delete m_pCollider;
+	m_pCollider = nullptr;
 }
 //==============================
 // 更新処理
