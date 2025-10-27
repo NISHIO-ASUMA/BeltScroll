@@ -203,19 +203,19 @@ bool CAABBSphereCollision::Collision(CAABBCollider* me, CSphereCollider* other)
 	mePosCornor[7] = D3DXVECTOR3(mePos.x - fHalfMeSize.x, mePos.y - fHalfMeSize.y, mePos.z - fHalfMeSize.z);
 
 	if (otherPos.x<mePos.x + fHalfMeSize.x + fOtherRadius || otherPos.x > mePos.x - fHalfMeSize.x- fOtherRadius)
-	{
+	{// XŽ²‚Ì”»’è
 		return true;
 	}
 	else if (otherPos.y<mePos.y + fHalfMeSize.y + fOtherRadius || otherPos.y > mePos.y - fHalfMeSize.y - fOtherRadius)
-	{
+	{// YŽ²‚Ì”»’è
 		return true;
 	}
 	else if (otherPos.z<mePos.z + fHalfMeSize.z + fOtherRadius || otherPos.z > mePos.z - fHalfMeSize.z - fOtherRadius)
-	{
+	{// ZŽ²‚Ì”»’è
 		return true;
 	}
 	for (int nCnt = 0; nCnt < 8; nCnt++)
-	{
+	{// ”ªŠp‚Æ‚Ì‚ ‚½‚è”»’è
 		D3DXVECTOR3 Dist = mePosCornor[nCnt] - otherPos;
 
 		float fDist= D3DXVec3Length(&Dist);
