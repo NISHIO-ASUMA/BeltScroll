@@ -45,7 +45,7 @@ HRESULT CTitle::Init(void)
 	// メッシュフィールド
 	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
 
-	// ロゴ生成 ( のちにテクスチャ変更 )
+	// ロゴ生成
 	CTitleLogo::Create(D3DXVECTOR3(1200.0f, 70.0f, 0.0f));
 
 	// UI生成
@@ -94,24 +94,4 @@ void CTitle::Update(void)
 void CTitle::Draw(void)
 {
 	// 無し
-}
-//=====================================
-// 生成処理
-//=====================================
-CTitle* CTitle::Create()
-{
-	// インスタンス生成
-	CTitle* pTitle = new CTitle();
-
-	// nullだったら
-	if (pTitle == nullptr) return nullptr;
-
-	// 初期化失敗時
-	if (FAILED(pTitle->Init()))
-	{
-		return nullptr;
-	}
-
-	// 生成されたポインタを返す
-	return pTitle;
 }

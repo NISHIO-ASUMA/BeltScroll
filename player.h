@@ -84,6 +84,7 @@ public:
 	void SetValue(float fValue) { m_fValue = fValue; }
 	void JumpMove(void) { m_move.y = m_fValue; }
 	void SetIsDamege(bool isFlags) { m_isDecHp = isFlags; }
+	void SetBlower(int nType);
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; }			// 現在の座標を取得
@@ -96,9 +97,7 @@ public:
 	CMotion* GetMotion(void) { return m_pMotion; }
 	CStateMachine* GetStateMachine() { return m_pStateMachine; }	// プレイヤーのステートマシンを取得
 	CModel** GetModel(void) { return m_apModel; }
-
-	int GetType(void) { return m_type; }
-	int GetPlayerIndex() const { return m_nIdxPlayer; }
+	int GetBlowType() const { return static_cast<int>(m_blower); }
 
 	// フラグメント関数
 	bool IsJumping() { return m_isJump; } 	// ジャンプ状態の確認
@@ -129,13 +128,10 @@ private:
 	CMotion* m_pMotion;				// モーションのポインタ
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
-	BLOWER m_blower;
+	int m_blower;
 
-	int m_type;				// モーションの種類変数
 	int m_nNumAll;			// モデル総数
 	int m_State;			// 状態管理カウンター
-	int m_nIdxTexture;		// テクスチャID
-	int m_nIdxPlayer;		// プレイヤーの識別番号
 
 	bool m_isLanding;		// 着地判定
 	bool m_isJump;			// ジャンプ判定

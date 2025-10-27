@@ -50,10 +50,7 @@ CLosePlayer* CLosePlayer::Create(D3DXVECTOR3 pos)
 	loseplayer->m_rot = VECTOR3_NULL;
 	loseplayer->m_pFilename = "data/MOTION/Player/LosePlayer.txt";
 
-	if (FAILED(loseplayer->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(loseplayer->Init())) return nullptr;
 
 	return loseplayer;
 }
@@ -83,6 +80,7 @@ HRESULT CLosePlayer::Init(void)
 //==============================
 void CLosePlayer::Uninit(void)
 {
+	// モデルの破棄
 	for (auto& model : m_apModel)
 	{
 		if (model != nullptr)
@@ -95,12 +93,14 @@ void CLosePlayer::Uninit(void)
 		}
 	}
 
+	// モーションの破棄
 	if (m_pMotion)
 	{
 		delete m_pMotion;
 		m_pMotion = nullptr;
 	}
 
+	// 自身の破棄
 	CObject::Release();
 }
 //==============================
@@ -111,7 +111,7 @@ void CLosePlayer::Update(void)
 	// ステンシルシャドウが存在
 	if (m_pShadowS)
 	{
-		// オブジェクト設定
+		// 更新処理
 		m_pShadowS->SetPos(D3DXVECTOR3(m_pos.x, 0.0f, m_pos.z));
 		m_pShadowS->SetRot(m_rot);
 	}
@@ -153,5 +153,4 @@ void CLosePlayer::Draw(void)
 	{
 		m_apModel[nCnt]->Draw();
 	}
-
 }

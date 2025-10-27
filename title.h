@@ -34,12 +34,6 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// 静的メンバ関数
-	static CTitle* Create();
-
 private:
-	CTitleManager* m_pTitleManager; // マネージャークラスポインタ
-	bool m_isCreate;				// ロゴ生成フラグ
-
 };
 #endif

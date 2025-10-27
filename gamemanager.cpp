@@ -46,9 +46,9 @@ CGameManager::~CGameManager()
 HRESULT CGameManager::Init(void)
 {
 	//メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 6000.0f, 1000.0f, 1, 1);
+	CMeshField::Create(D3DXVECTOR3(2500.0f,0.0f,0.0f), 6000.0f, 1000.0f, 1, 1);
 
-	// プレイヤー生成 ( のちにモデル変更 )
+	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player.txt");
 
 	// 敵管理クラスを定義

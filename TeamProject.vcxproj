@@ -167,6 +167,7 @@
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gamemanager.cpp" />
+    <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="gimmickfloor.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="light.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gamemanager.h" />
+    <ClInclude Include="gameobject.h" />
     <ClInclude Include="gimmickfloor.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="json.hpp" />

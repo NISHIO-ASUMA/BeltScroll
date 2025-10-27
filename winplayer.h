@@ -50,7 +50,7 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	//ê∂ê¨ä÷êî
+	// ê∂ê¨ä÷êî
 	static CWinPlayer* Create(D3DXVECTOR3 pos);
 
 private:

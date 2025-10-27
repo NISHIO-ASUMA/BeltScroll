@@ -60,13 +60,10 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_move = VECTOR3_NULL;
 	m_Scal = INITSCALE;
 	m_State = NULL;
-	m_nIdxTexture = NULL;
 	m_rotDest = VECTOR3_NULL;
 	m_nNumAll = NULL;
-	m_type = NULL;
 	m_posOld = VECTOR3_NULL;
 	m_pFilename = {};
-	m_nIdxPlayer = NULL;
 	m_fAngle = NULL;
 	m_fBlowerRange = NULL;
 
@@ -133,9 +130,6 @@ HRESULT CPlayer::Init(void)
 
 	// モデル総数を代入
 	m_nNumAll = MAX_MODEL;
-
-	// モーション種類数を代入
-	m_type = PLAYERMOTION_MAX;
 
 	// フラグを設定
 	m_isDeath = false;
@@ -433,23 +427,17 @@ void CPlayer::Update(void)
 	if (CManager::GetInputKeyboard()->GetPress(DIK_1))
 	{
 		// 各種設定
-		m_blower = BLOWER_MIDIUMPOW;
-		m_fBlowerPow = BLOWERINFO::MEDIUMVALUE;
-		m_fBlowerRange = BLOWERINFO::MEDIUMVALUE;
+		SetBlower(BLOWER_MIDIUMPOW);
 	}
 	else if (CManager::GetInputKeyboard()->GetPress(DIK_2))
 	{
 		// 各種設定
-		m_blower = BLOWER_MAXPOW;
-		m_fBlowerPow = BLOWERINFO::MAXVALUE;
-		m_fBlowerRange = BLOWERINFO::MAXVALUE;
+		SetBlower(BLOWER_MAXPOW);
 	}
 	else if (CManager::GetInputKeyboard()->GetPress(DIK_3))
 	{
 		// 各種設定
-		m_blower = BLOWER_SMALLPOW;
-		m_fBlowerPow = BLOWERINFO::SMALLVALUE;
-		m_fBlowerRange = BLOWERINFO::SMALLVALUE;
+		SetBlower(BLOWER_SMALLPOW);
 	}
 
 	// Lキーで範囲攻撃
@@ -770,6 +758,36 @@ void CPlayer::StartJump(void)
 
 		// 移動更新
 		AddMove();
+	}
+}
+//===============================
+// ブロワーの強度設定
+//===============================
+void CPlayer::SetBlower(int nType)
+{
+	// 代入
+	m_blower = nType;
+
+	// 種類に応じた強さ
+	switch (m_blower)
+	{
+	case CPlayer::BLOWER_SMALLPOW:
+		m_fBlowerPow = BLOWERINFO::SMALLVALUE;
+		m_fBlowerRange = BLOWERINFO::SMALLVALUE;
+		break;
+
+	case CPlayer::BLOWER_MIDIUMPOW:
+		m_fBlowerPow = BLOWERINFO::MEDIUMVALUE;
+		m_fBlowerRange = BLOWERINFO::MEDIUMVALUE;
+		break;
+
+	case CPlayer::BLOWER_MAXPOW:
+		m_fBlowerPow = BLOWERINFO::MAXVALUE;
+		m_fBlowerRange = BLOWERINFO::MAXVALUE;
+		break;
+
+	default:
+		break;
 	}
 }
 //===============================

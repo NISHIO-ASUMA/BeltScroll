@@ -12,6 +12,7 @@
 #include "ui.h"
 #include "manager.h"
 #include "ranking.h"
+#include "winplayer.h"
 
 //=================================
 // オーバーロードコンストラクタ
@@ -27,26 +28,6 @@ CResult::~CResult()
 	// 無し
 }
 //=================================
-// 生成処理
-//=================================
-CResult* CResult::Create(void)
-{
-	// インスタンス生成
-	CResult* pResult = new CResult;
-
-	// 生成に失敗したら
-	if (pResult == nullptr) return nullptr;
-
-	// 初期化失敗時
-	if (FAILED(pResult->Init()))
-	{
-		return nullptr;
-	}
-
-	// 生成されたポインタを返す
-	return pResult;
-}
-//=================================
 // 初期化処理
 //=================================
 HRESULT CResult::Init(void)
@@ -54,6 +35,10 @@ HRESULT CResult::Init(void)
 	// ui生成
 	CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.jpg",false);
 
+	// プレイヤー生成
+	CWinPlayer::Create(VECTOR3_NULL);
+
+	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
 
 	// 初期化結果を返す

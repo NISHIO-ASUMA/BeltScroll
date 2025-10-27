@@ -29,9 +29,6 @@ public:
 	void Update(void);
 	void Draw(void);
 
-	// Ã“Iƒƒ“ƒoŠÖ”
-	static CResult* Create(void);
-
 private:
 };
 

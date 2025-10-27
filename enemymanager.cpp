@@ -48,7 +48,7 @@ CEnemyManager* CEnemyManager::Create(void)
 //==============================
 HRESULT CEnemyManager::Init(void)
 {
-	// 初期敵生成
+	// 初期敵生成 ( のちにスクリプト変更 )
 	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x");
 	CEnemy::Create(D3DXVECTOR3(-550.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x");
 	CEnemy::Create(D3DXVECTOR3(550.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x");

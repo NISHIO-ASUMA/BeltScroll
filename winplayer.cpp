@@ -49,8 +49,7 @@ CWinPlayer* CWinPlayer::Create(D3DXVECTOR3 pos)
 	winplayer->m_rot = VECTOR3_NULL;
 	winplayer->m_pFilename = "data/MOTION/Player/WinPlayer.txt";
 
-	if (FAILED(winplayer->Init()))
-	return nullptr;
+	if (FAILED(winplayer->Init())) 	return nullptr;
 
 	return winplayer;
 }
@@ -80,6 +79,7 @@ HRESULT CWinPlayer::Init(void)
 //================================
 void CWinPlayer::Uninit(void)
 {
+	// モデルの破棄
 	for (auto& model : m_apModel)
 	{
 		if (model != nullptr)
@@ -92,14 +92,15 @@ void CWinPlayer::Uninit(void)
 		}
 	}
 
+	// モーションの破棄
 	if (m_pMotion)
 	{
 		delete m_pMotion;
 		m_pMotion = nullptr;
 	}
 
+	// 自身の破棄
 	CObject::Release();
-
 }
 //================================
 // 更新処理
@@ -109,7 +110,7 @@ void CWinPlayer::Update(void)
 	// ステンシルシャドウが存在
 	if (m_pShadowS)
 	{
-		// オブジェクト設定
+		// 更新する
 		m_pShadowS->SetPos(D3DXVECTOR3(m_pos.x, 0.0f, m_pos.z));
 		m_pShadowS->SetRot(m_rot);
 	}
