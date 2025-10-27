@@ -137,6 +137,7 @@ void CGimmickFloor::Collision(void)
 	D3DXMATRIX trushMat = pTrush->GetMtxWorld();
 	D3DXVECTOR3 trushPos = pTrush->GetPos();
 	D3DXVECTOR3 trushPosOld = pTrush->GetPosOld();
+	D3DXVECTOR3 trushRot = pTrush->GetRot();
 
 	D3DXVECTOR3 ePos[4];
 
@@ -202,11 +203,7 @@ void CGimmickFloor::Collision(void)
 	{
 		if (trushPos.y/* - 15.0f*/ < pos.y + size.y&& trushPosOld.y/* - 15.0f*/ > pos.y + size.y)
 		{
-			D3DXVECTOR3 dir = trushPos - pos;
-
 			pTrush->SetParent(this);
-			//dir.x = sinf(rot.y) * dir.x;
-			//dir.z = cosf(rot.y) * dir.z;
 
 			// ‹ts—ñì¬
 			D3DXMATRIX invCarMtx;
@@ -217,24 +214,11 @@ void CGimmickFloor::Collision(void)
 			D3DXVECTOR3 lclPos;
 
 			D3DXVec3TransformCoord(&lclPos, &wldPos, &invCarMtx);
-
-			//lclPos.y += 20.0f;
-
 			pTrush->SetPos(lclPos);
 
-			//float fRadius = D3DXVec3Length(&dir);
+			trushRot.y = trushRot.y + rot.y;
+			pTrush->SetRot(trushRot);
 
-			//float v = 0.01f * fRadius;
-
-			//D3DXVec3Normalize(&dir, &dir);
-
-			//trushPos.x += dir.z * v;
-			//trushPos.y = trushPosOld.y;
-			//trushPos.z += -dir.x * v;
-
-			//pTrush->SetPos(trushPos);
-			//pTrush->SetRot(rot);
-			//SetRot(rot);
 		}
 		else if (trushPos.y + 15.0f > pos.y - size.y && trushPosOld.y + 15.0f < pos.y - size.y)
 		{
@@ -262,6 +246,7 @@ void CGimmickFloor::PartCollision(void)
 		return;
 	}
 	D3DXVECTOR3 trushPos = pTrush->GetPos();
+	D3DXVECTOR3 trushRot = pTrush->GetRot();
 	D3DXVECTOR3 rot = GetRot();
 	D3DXVECTOR3 size = GetSize();
 
@@ -271,8 +256,10 @@ void CGimmickFloor::PartCollision(void)
 	{
 		D3DXMATRIX mat = pTrush->GetMtxWorld();
 		trushPos = D3DXVECTOR3(mat._41, mat._42, mat._43);
+		trushRot.y = trushRot.y + rot.y;
 		pTrush->SetParent(nullptr);
 		pTrush->SetPos(trushPos);
+		pTrush->SetRot(trushRot);
 	}
 	else
 	{
