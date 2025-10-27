@@ -60,4 +60,20 @@ public:
 private:
 };
 
+//**************************************************
+// 矩形と球のあたり判定クラスを定義
+//**************************************************
+class CAABBSphereCollision :public CCollision
+{
+public:
+	// コンストラクタ・デストラクタ
+	CAABBSphereCollision();
+	~CAABBSphereCollision();
+
+	// メンバ関数
+	static bool Collision(CAABBCollider* me, CSphereCollider* other);
+private:
+};
+
+
 #endif
