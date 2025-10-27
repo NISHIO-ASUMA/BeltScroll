@@ -21,6 +21,7 @@ CGimmickFloor::CGimmickFloor(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
 	m_fMoveCnt = 0.0f;
+	m_fMoveRotation = 0.0f;
 }
 //================================
 // デストラクタ
@@ -109,7 +110,12 @@ void CGimmickFloor::Move(void)
 {
 	// 位置取得
 	D3DXVECTOR3 rot = CObjectX::GetRot();
-	rot.y += 0.01f;
+	D3DXVECTOR3 pos = CObjectX::GetPos();
+	m_fMoveRotation += 0.01f;
+	pos.x = sinf(m_fMoveRotation) * 300.0f;
+	pos.z = cosf(m_fMoveRotation) * 300.0f;
+	rot.y += 0.02f;
+	CObjectX::SetPos(pos);
 	// 反映
 	CObjectX::SetRot(rot);
 }

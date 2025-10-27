@@ -43,6 +43,7 @@ public:
 
 private:
 	float m_fMoveCnt;		// ブロックを動かすカウント
+	float m_fMoveRotation;
 	CSphereCollider* m_pCollider;
 	static constexpr float COUNTSPEED = 0.01f;	// 1フレームのカウント量
 	static constexpr float BLOCKHALF = 0.5f;	// ハーフサイズの固定値
