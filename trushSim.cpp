@@ -178,6 +178,7 @@ void CTrushSim::Controll(void)
 		D3DXMatrixInverse(&invMtx, nullptr, &parentMtx);
 
 		D3DXVECTOR3 wldPos = pos;
+		// プレイヤーが進む方向に向ける計算
 		float parentRotY = parent->GetRot().y;
 		rot.y = rot.y - parentRotY;
 

@@ -340,6 +340,8 @@ bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	D3DXMatrixIdentity(&matWorld);
 	D3DXVec3Project(&pos, &playerPos, &viewport, &matProj, &matView, &matWorld);
 
+
+	// 画面の一定以上の割合右に行くと更新
 	if (pos.x > SCREEN_WIDTH * 0.75f)
 	{
 		return true;

@@ -112,6 +112,7 @@ void CGimmickFloor::Move(void)
 	D3DXVECTOR3 rot = CObjectX::GetRot();
 	D3DXVECTOR3 pos = CObjectX::GetPos();
 	m_fMoveRotation += 0.01f;
+	// 中心位置も回転させる
 	pos.x = sinf(m_fMoveRotation) * 300.0f;
 	pos.z = cosf(m_fMoveRotation) * 300.0f;
 	rot.y += 0.02f;
@@ -145,8 +146,11 @@ void CGimmickFloor::Collision(void)
 	D3DXVECTOR3 trushPosOld = pTrush->GetPosOld();
 	D3DXVECTOR3 trushRot = pTrush->GetRot();
 
+	// 前フレームと現在のフレームを比較してあたり判定を行うための事前計算
+
 	D3DXVECTOR3 ePos[4];
 
+	// 平面で考えたときの4津の角の位置
 	ePos[0].x = pos.x + sinf(rot.y + (D3DX_PI * 0.25f)) * size.x;
 	ePos[0].z = pos.z + cosf(rot.y + (D3DX_PI * 0.25f)) * size.z;
 	ePos[1].x = pos.x + sinf(rot.y + (D3DX_PI * 0.75f)) * size.x;
@@ -156,6 +160,8 @@ void CGimmickFloor::Collision(void)
 	ePos[3].x = pos.x + sinf(rot.y - (D3DX_PI * 0.25f)) * size.x;
 	ePos[3].z = pos.z + cosf(rot.y - (D3DX_PI * 0.25f)) * size.z;
 
+
+	// 4辺のベクトル
 	vec[0].x = ePos[1].x - ePos[0].x;
 	vec[0].z = ePos[1].z - ePos[0].z;
 	vec[1].x = ePos[2].x - ePos[1].x;
@@ -166,11 +172,12 @@ void CGimmickFloor::Collision(void)
 	vec[3].z = ePos[0].z - ePos[3].z;
 
 	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
+	{// 高さはここでは考えない
 		vec[nCnt].y = 0.0f;
 		vecTrush[nCnt].y = 0.0f;
 	}
 
+	// ごみと4つの角のベクトル
 	vecTrush[0].x = trushPos.x - ePos[0].x;
 	vecTrush[0].z = trushPos.z - ePos[0].z;
 	vecTrush[1].x = trushPos.x - ePos[1].x;
@@ -184,12 +191,12 @@ void CGimmickFloor::Collision(void)
 	D3DXVECTOR3 nor[4];
 
 	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
+	{// 現在のフレームのあたり判定用の外積計算
 		D3DXVec3Cross(&nor[nCnt], &vec[nCnt],&vecTrush[nCnt]);
 	}
 
 	D3DXVECTOR3 oldNor[4];
-
+	// 前フレームのごみと4つの角のベクトル
 	vecTrush[0].x = trushPosOld.x - ePos[0].x;
 	vecTrush[0].z = trushPosOld.z - ePos[0].z;
 	vecTrush[1].x = trushPosOld.x - ePos[1].x;
@@ -200,20 +207,22 @@ void CGimmickFloor::Collision(void)
 	vecTrush[3].z = trushPosOld.z - ePos[3].z;
 
 	for (int nCnt = 0; nCnt < 4; nCnt++)
-	{
+	{// 前フレームのあたり判定用の外積計算
 		D3DXVec3Cross(&oldNor[nCnt], &vec[nCnt], &vecTrush[nCnt]);
 	}
 
 	if (nor[0].y > 1.0f && nor[1].y > 1.0f && nor[2].y > 1.0f && nor[3].y > 1.0f
 		|| nor[0].y < 1.0f && nor[1].y < 1.0f && nor[2].y < 1.0f && nor[3].y < 1.0f)
-	{
+	{// 4つの辺が全て1.0fより上または全て1.0f未満だったら
 		if (trushPos.y/* - 15.0f*/ < pos.y + size.y&& trushPosOld.y/* - 15.0f*/ > pos.y + size.y)
-		{
+		{// 上から当たったら乗る
+			// 階層構造にして自動で床についてくるようにする
 			pTrush->SetParent(this);
 
 			// 逆行列作成
 			D3DXMATRIX invCarMtx;
 
+			// 床の上でも動かすための計算
 			D3DXMatrixInverse(&invCarMtx, nullptr, &mat);
 
 			D3DXVECTOR3 wldPos = trushPos;
@@ -227,13 +236,13 @@ void CGimmickFloor::Collision(void)
 
 		}
 		else if (trushPos.y + 15.0f > pos.y - size.y && trushPosOld.y + 15.0f < pos.y - size.y)
-		{
+		{// 下から
 			trushPos.y = trushPosOld.y;
 			pTrush->SetPos(trushPos);
 		}
 		else if(trushPos.y + 15.0f > pos.y - size.y && trushPos.y - 15.0f < pos.y - size.y||
 			trushPos.y - 15.0f < pos.y + size.y && trushPos.y + 15.0f > pos.y + size.y)
-		{
+		{// 横から
 			trushPos.x = trushPosOld.x;
 			trushPos.z = trushPosOld.z;
 			pTrush->SetPos(trushPos);
@@ -242,27 +251,35 @@ void CGimmickFloor::Collision(void)
 	}
 }
 
+//================================
+// 床から離れた判定
+//================================
 void CGimmickFloor::PartCollision(void)
 {
 	CGameManager* pManager = CGame::GetGameManager();
 	CTrushSim* pTrush = pManager->GetTrush();
 
+	// 地面に乗っていることが前提条件
 	if (pTrush->GetParent() == nullptr)
 	{
 		return;
 	}
+
 	D3DXVECTOR3 trushPos = pTrush->GetPos();
 	D3DXVECTOR3 trushRot = pTrush->GetRot();
 	D3DXVECTOR3 rot = GetRot();
 	D3DXVECTOR3 size = GetSize();
 
+	// ローカル座標の計算
 	if (trushPos.x > size.x * 0.5f || trushPos.x < -size.x * 0.5f
 		|| trushPos.z>size.z * 0.5f || trushPos.z < -size.z * 0.5f
 		|| trushPos.y>size.y * 0.5f || trushPos.y < -size.y * 0.5f)
 	{
+		// 離れたらローカル座標からワールド座標に切り替わる
 		D3DXMATRIX mat = pTrush->GetMtxWorld();
 		trushPos = D3DXVECTOR3(mat._41, mat._42, mat._43);
 		trushRot.y = trushRot.y + rot.y;
+		// 親子関係を切り離す
 		pTrush->SetParent(nullptr);
 		pTrush->SetPos(trushPos);
 		pTrush->SetRot(trushRot);
