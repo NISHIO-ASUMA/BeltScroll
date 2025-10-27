@@ -124,6 +124,7 @@ void CTrushSim::Controll(void)
 	{// ‰œ‘¤
 		pos.x += sinf(pCamera->GetRot().y) * SPEED;
 		pos.z += cosf(pCamera->GetRot().y) * SPEED;
+		rot.y = pCamera->GetRot().y;
 		m_bMove = true;
 
 	}
@@ -131,12 +132,15 @@ void CTrushSim::Controll(void)
 	{// Žè‘O
 		pos.x -= sinf(pCamera->GetRot().y) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y) * SPEED;
+		rot.y = pCamera->GetRot().y+D3DX_PI;
 		m_bMove = true;
 	}
 	else if (pKeyboard->GetPress(DIK_RIGHT))
 	{// ‰E•ûŒü
 		pos.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		rot.y = pCamera->GetRot().y - D3DX_PI * 0.5f;
+
 		m_bMove = true;
 
 	}
@@ -144,6 +148,8 @@ void CTrushSim::Controll(void)
 	{// ¶•ûŒü
 		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
+		rot.y = pCamera->GetRot().y + D3DX_PI * 0.5f;
+
 		m_bMove = true;
 	}
 	else
@@ -159,6 +165,7 @@ void CTrushSim::Controll(void)
 	if (!m_bMove)
 	{
 		pos = CObjectX::GetPos();
+		rot = CObjectX::GetRot();
 	}
 
 	if (GetParent() != nullptr&& m_bMove)
@@ -171,7 +178,8 @@ void CTrushSim::Controll(void)
 		D3DXMatrixInverse(&invMtx, nullptr, &parentMtx);
 
 		D3DXVECTOR3 wldPos = pos;
-		D3DXVECTOR3 lclPos;
+		float parentRotY = parent->GetRot().y;
+		rot.y = rot.y - parentRotY;
 
 		D3DXVec3TransformCoord(&pos, &wldPos, &invMtx);
 	}
@@ -189,6 +197,7 @@ void CTrushSim::Controll(void)
 	// ”½‰f
 	m_pCollider->SetPos(pos);
 	CObjectX::SetPos(pos);
+	CObjectX::SetRot(rot);
 }
 
 //================================
