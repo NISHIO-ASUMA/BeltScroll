@@ -20,6 +20,8 @@
 //******************************
 class CShadow;
 class CShadowS;
+class CSphereCollider;
+class CSphereSphereCollision;
 
 //******************************
 // 敵クラスを定義
@@ -48,6 +50,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	bool Collision(CSphereCollider * pOtherCollider);
 
 	// 静的メンバ関数
 	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName);
@@ -65,5 +68,6 @@ private:
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
 	int m_TrushType;		// ゴミの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
+	CSphereCollider* m_pCollider; // コライダー
 };
 

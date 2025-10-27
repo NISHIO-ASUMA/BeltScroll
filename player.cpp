@@ -24,6 +24,8 @@
 #include "enemy.h"
 #include "effect.h"
 #include "particlepiler.h"
+#include "collider.h"
+#include "collision.h"
 
 //**********************
 // プレイヤー情報
@@ -77,6 +79,7 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_pMotion = nullptr;
 	m_pShadowS = nullptr;
 	m_pStateMachine = nullptr;
+	m_pSphereCollider = nullptr;
 
 	// フラグメント
 	m_isLanding = false;
@@ -168,6 +171,9 @@ HRESULT CPlayer::Init(void)
 	// 初期状態をセット
 	ChangeState(new CPlayerStateNeutral,CPlayerStateBase::ID_NEUTRAL); 
 
+	// コライダ―生成
+	m_pSphereCollider = CSphereCollider::Create(m_pos, 40.0f);
+
 	// 初期値をセット
 	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
 	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
@@ -218,6 +224,13 @@ void CPlayer::Uninit(void)
 
 		// nullptrにする
 		m_pStateMachine = nullptr;
+	}
+
+	// コライダーの破棄
+	if (m_pSphereCollider)
+	{
+		delete m_pSphereCollider;
+		m_pSphereCollider = nullptr;
 	}
 
 	// オブジェクト自身の破棄
@@ -896,4 +909,11 @@ void CPlayer::EnemyBlow(void)
 		// 次の敵を取得
 		pObj = pObj->GetNext();
 	}
+}
+//===============================
+// 当たり判定関数
+//================================
+bool CPlayer::Collision(CSphereCollider* pOther)
+{
+	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
 }

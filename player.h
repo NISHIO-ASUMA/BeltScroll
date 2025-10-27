@@ -26,6 +26,7 @@ class CShadowS;
 class CStateMachine;
 class CPlayerStateBase;
 class CAABBCollider;
+class CSphereCollider;
 
 //*************************
 // プレイヤークラスを定義
@@ -75,6 +76,7 @@ public:
 	void StartJump(void);
 	void HitDamage(int nDamage);
 	void EnemyBlow(void);
+	bool Collision(CSphereCollider * pOther);
 
 	// セッター
 	void SetRotDest(D3DXVECTOR3 rotDest) { m_rotDest = rotDest; }
@@ -128,6 +130,8 @@ private:
 	CMotion* m_pMotion;				// モーションのポインタ
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
+	CSphereCollider* m_pSphereCollider; // 球のコライダー
+
 	int m_blower;
 
 	int m_nNumAll;			// モデル総数

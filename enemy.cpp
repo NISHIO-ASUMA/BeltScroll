@@ -15,6 +15,8 @@
 #include "gamemanager.h"
 #include "game.h"
 #include "shadowS.h"
+#include "collider.h"
+#include "collision.h"
 
 //==============================
 // コンストラクタ
@@ -23,7 +25,8 @@ CEnemy::CEnemy(int nPriority) : CObjectX(nPriority),
 m_move(VECTOR3_NULL),
 m_pShadowS(nullptr),
 m_isBlow(false),
-m_TrushType(TYPE_NONE)
+m_TrushType(TYPE_NONE),
+m_pCollider(nullptr)
 {
 	// 値のクリア
 }
@@ -71,6 +74,9 @@ HRESULT CEnemy::Init(void)
 	// ステンシルシャドウの生成
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
+	// コライダー生成
+	m_pCollider = CSphereCollider::Create(GetPos(), 30.0f);
+
 	// 移動量をセット
 	m_move.x = 5.0f;
 	m_move.z = 5.0f;
@@ -102,9 +108,9 @@ void CEnemy::Update(void)
 	D3DXVECTOR3 dir = playerPos - NowPos;		// プレイヤーへのベクトル
 	float dist = D3DXVec3Length(&dir);			// 距離
 
-	D3DXVec3Normalize(&dir, &dir);			// 正規化
-	float speed = 2.0f;						// 追従スピード
-	m_move += dir * speed;					// 移動ベクトルに加算
+	D3DXVec3Normalize(&dir, &dir);	// 正規化
+	float speed = 2.0f;				// 追従スピード
+	m_move += dir * speed;			// 移動ベクトルに加算
 
 	// 吹き飛ばしが有効の時
 	if (m_isBlow)
@@ -152,4 +158,11 @@ void CEnemy::Draw(void)
 {
 	// 親クラスの描画
 	CObjectX::Draw();
+}
+//==============================
+// 当たり判定処理
+//==============================
+bool CEnemy::Collision(CSphereCollider* pOtherCollider)
+{
+	return CSphereSphereCollision::Collision(m_pCollider, pOtherCollider);
 }

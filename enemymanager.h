@@ -14,6 +14,7 @@
 // インクルードファイル
 //******************************
 #include <vector>
+#include <string>
 
 //******************************
 // 前方宣言
@@ -46,4 +47,6 @@ private:
 	int m_nCount; // 出現カウント
 
 	std::vector<CEnemy*>m_pEnemys;		// 敵の動的配列
+	std::vector<std::string> m_SubListFiles;	// 読み込むファイル群
+
 };

@@ -11,6 +11,8 @@
 #include "enemymanager.h"
 #include "enemy.h"
 #include <fstream>
+#include <iostream>
+#include <sstream>
 
 //==============================
 // コンストラクタ
@@ -38,10 +40,7 @@ CEnemyManager* CEnemyManager::Create(void)
 	if (pManager == nullptr) return nullptr;
 
 	// 初期化失敗時
-	if (FAILED(pManager->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pManager->Init())) return nullptr;
 
 	return pManager;
 }
@@ -90,8 +89,46 @@ void CEnemyManager::LoadFile(void)
 		return;
 	}
 
-	// 使用変数
+	// ローカル変数
+	std::string line;
+	int nNumFile = NULL;
 
+	// 配列のクリア処理
+	m_SubListFiles.clear();
+
+	// 読み込み終わりまで回す
+	while (std::getline(openfile, line))
+	{
+		// 一行読む
+		std::istringstream iss(line);
+		std::string token;
+		iss >> token;
+
+		// "="読み取り
+		if (token == "WAVES")
+		{
+			std::string eq;
+			iss >> eq >> nNumFile;
+
+			// ファイル配列のサイズを確保
+			m_SubListFiles.resize(nNumFile);
+		}
+		// "FILE"読み取り時
+		else if (token == "FILE")
+		{
+			// パスと"="を代入
+			std::string eq, filepath;
+
+			// ファイルパスを変数に格納
+			iss >> eq >> filepath;
+
+			// 動的配列に追加
+			m_SubListFiles.push_back(filepath);
+		}
+	}
+
+	// ファイルを閉じる
+	openfile.close();
 }
 //==============================
 // 分割ファイル読み込み
