@@ -10,6 +10,7 @@
 //******************************
 #include "enemymanager.h"
 #include "enemy.h"
+#include <fstream>
 
 //==============================
 // コンストラクタ
@@ -18,6 +19,7 @@ CEnemyManager::CEnemyManager()
 {
 	// 値のクリア
 	m_nCount = NULL;
+	m_pEnemys.clear();
 }
 //==============================
 // デストラクタ
@@ -64,7 +66,8 @@ HRESULT CEnemyManager::Init(void)
 //==============================
 void CEnemyManager::Uninit(void)
 {
-	// 今は無し
+	// 破棄
+	m_pEnemys.clear();
 }
 //==============================
 // 更新処理
@@ -72,4 +75,35 @@ void CEnemyManager::Uninit(void)
 void CEnemyManager::Update(void)
 {
 	// のちに時間によって出現 または 場面ごとに出す敵をここで呼び出す
+}
+//==============================
+// ファイル読み込み
+//==============================
+void CEnemyManager::LoadFile(void)
+{
+	// 開くファイルをセット
+	std::ifstream openfile("data/SCRIPT/EnemySystem.txt");
+	if (!openfile)
+	{
+		// 例外
+		MessageBox(GetActiveWindow(), "ファイルが見つかりません", "data/SCRIPT/EnemySystem.txt", MB_OK);
+		return;
+	}
+
+	// 使用変数
+
+}
+//==============================
+// 分割ファイル読み込み
+//==============================
+void CEnemyManager::LoadSplit(const char* pFileName)
+{
+	// 開くファイルをセット
+	std::ifstream opensplit(pFileName);
+	if (!opensplit)
+	{
+		// 例外
+		MessageBox(GetActiveWindow(), "このファイルパスはありません", "読み込みエラー", MB_OK);
+		return;
+	}
 }

@@ -53,13 +53,17 @@ public:
 	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName);
 
 	// セッター
+	void SetType(int Type) { m_TrushType = Type; }
 	void AddBlow(const D3DXVECTOR3 Vec) { m_move += Vec; }
 	void SetBlow(bool isFlags) { m_isBlow = isFlags; }
+
+	// ゲッター
+	int GetType(void) { return m_TrushType; }
 
 private:
 	D3DXVECTOR3 m_move;		// 移動量
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
-	TYPE m_TrushType;		// ゴミの種類
+	int m_TrushType;		// ゴミの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
 };
 

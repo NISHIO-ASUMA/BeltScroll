@@ -11,6 +11,16 @@
 #pragma once
 
 //******************************
+// インクルードファイル
+//******************************
+#include <vector>
+
+//******************************
+// 前方宣言
+//******************************
+class CEnemy;
+
+//******************************
 // 敵管理クラスを定義
 //******************************
 class CEnemyManager
@@ -29,5 +39,11 @@ public:
 	static CEnemyManager* Create(void);
 
 private:
+
+	void LoadFile(void);				   // ファイル読み込み関数
+	void LoadSplit(const char* pFileName); // 分割読み込み
+
 	int m_nCount; // 出現カウント
+
+	std::vector<CEnemy*>m_pEnemys;		// 敵の動的配列
 };
