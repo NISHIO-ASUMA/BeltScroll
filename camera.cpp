@@ -340,7 +340,7 @@ bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	D3DXMatrixIdentity(&matWorld);
 	D3DXVec3Project(&pos, &playerPos, &viewport, &matProj, &matView, &matWorld);
 
-	if (pos.x > SCREEN_WIDTH * 0.9f)
+	if (pos.x > SCREEN_WIDTH * 0.75f)
 	{
 		return true;
 	}
