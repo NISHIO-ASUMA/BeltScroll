@@ -555,6 +555,72 @@ void CPlayer::Draw(void)
 	// デバッグフォント描画
 	CDebugproc::Draw(0, 160);
 }
+//=======================================
+// 敵吹き飛ばし処理
+//=======================================
+void CPlayer::EnemyBlow(void)
+{
+	// 範囲パラメータ
+	const float fBlowRange = m_fBlowerRange;	// 有効距離
+	const float fBlowPower = m_fBlowerPow;	// 吹き飛ばし強度
+	const float fBlowAngle = D3DXToRadian(45.0f); // 扇形の角度
+
+	// プレイヤーの前方ベクトル
+	D3DXVECTOR3 vForward(
+		sinf(m_rot.y),
+		0.0f,
+		cosf(m_rot.y)
+	);
+
+	// 正規化
+	D3DXVec3Normalize(&vForward, &vForward);
+
+	// 敵オブジェクトの先頭取得
+	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
+
+	while (pObj != nullptr)
+	{
+		// 敵取得
+		if (pObj->GetObjType() == CObject::TYPE_ENEMY)
+		{
+			// キャスト
+			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
+
+			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
+
+			// プレイヤーとの距離
+			D3DXVECTOR3 vToEnemy = vEnemyPos - m_pos;
+			float fDist = D3DXVec3Length(&vToEnemy);
+
+			// 範囲内なら吹き飛ばし
+			if (fDist < fBlowRange)
+			{
+				// 角度判定
+				D3DXVec3Normalize(&vToEnemy, &vToEnemy);
+				float fDot = D3DXVec3Dot(&vForward, &vToEnemy);
+
+				// 角度を判定
+				if (fDot < cosf(fBlowAngle * 0.5f))
+				{
+					// 吹き飛ばし
+					D3DXVECTOR3 vBlow = vToEnemy * fBlowPower;
+					pEnemy->AddBlow(vBlow);
+					pEnemy->SetBlow(true);
+				}
+			}
+		}
+
+		// 次の敵を取得
+		pObj = pObj->GetNext();
+	}
+}
+//===============================
+// 当たり判定関数
+//================================
+bool CPlayer::Collision(CSphereCollider* pOther)
+{
+	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
+}
 //=========================================
 // モデルの特定部分パーツの取得関数
 //=========================================
@@ -850,70 +916,4 @@ void CPlayer::HitDamage(int nDamage)
 	}
 
 #endif
-}
-//=======================================
-// 敵吹き飛ばし処理 ( 範囲をどうするか )
-//=======================================
-void CPlayer::EnemyBlow(void)
-{
-	// 範囲パラメータ
-	const float fBlowRange = m_fBlowerRange;	// 有効距離
-	const float fBlowPower = m_fBlowerPow;	// 吹き飛ばし強度
-	const float fBlowAngle = D3DXToRadian(45.0f); // 扇形の角度
-
-	// プレイヤーの前方ベクトル
-	D3DXVECTOR3 vForward(
-		sinf(m_rot.y), 
-		0.0f,
-		cosf(m_rot.y)
-	);
-
-	// 正規化
-	D3DXVec3Normalize(&vForward, &vForward);
-
-	// 敵オブジェクトの先頭取得
-	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
-
-	while (pObj != nullptr)
-	{
-		// 敵取得
-		if (pObj->GetObjType() == CObject::TYPE_ENEMY)
-		{
-			// キャスト
-			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
-
-			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
-
-			// プレイヤーとの距離
-			D3DXVECTOR3 vToEnemy = vEnemyPos - m_pos;
-			float fDist = D3DXVec3Length(&vToEnemy);
-
-			// 範囲内なら吹き飛ばし
-			if (fDist < fBlowRange)
-			{
-				// 角度判定
-				D3DXVec3Normalize(&vToEnemy, &vToEnemy);
-				float fDot = D3DXVec3Dot(&vForward, &vToEnemy);
-
-				// 角度を判定
-				if (fDot < cosf(fBlowAngle * 0.5f))
-				{
-					// 吹き飛ばし
-					D3DXVECTOR3 vBlow = vToEnemy * fBlowPower;
-					pEnemy->AddBlow(vBlow);
-					pEnemy->SetBlow(true);
-				}
-			}
-		}
-
-		// 次の敵を取得
-		pObj = pObj->GetNext();
-	}
-}
-//===============================
-// 当たり判定関数
-//================================
-bool CPlayer::Collision(CSphereCollider* pOther)
-{
-	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
 }

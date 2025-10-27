@@ -3,7 +3,6 @@
 // プレイヤー処理 [ player.h ]
 // Author: Asuma Nishio
 //
-// 
 //=====================================
 
 #ifndef _PLAYER_H_ // このマクロ定義がされてなかったら
@@ -87,6 +86,7 @@ public:
 	void JumpMove(void) { m_move.y = m_fValue; }
 	void SetIsDamege(bool isFlags) { m_isDecHp = isFlags; }
 	void SetBlower(int nType);
+	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; }			// 現在の座標を取得

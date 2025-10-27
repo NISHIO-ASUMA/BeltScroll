@@ -14,6 +14,8 @@
 #include "player.h"
 #include "manager.h"
 #include "shreddermanager.h"
+#include "collider.h"
+#include "collision.h"
 
 //===============================
 // コンストラクタ
@@ -70,6 +72,9 @@ HRESULT CShredder::Init(void)
 {
 	// 親クラスの初期化
 	CObjectX::Init();
+
+	// コライダー生成 ( 矩形と球の判定を使う )
+
 
 	return S_OK;
 }

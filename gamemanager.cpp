@@ -21,6 +21,7 @@
 #include "gimmickfloor.h"
 #include "shreddermanager.h"
 #include "loseresult.h"
+#include "goal.h"
 
 //===============================
 // コンストラクタ
@@ -32,6 +33,7 @@ CGameManager::CGameManager()
 	m_pPlayer = nullptr;
 	m_pEnemyManager = nullptr;
 	m_pTrushSim = nullptr;
+	m_pGoal = nullptr;
 }
 //===============================
 // デストラクタ
@@ -66,6 +68,9 @@ HRESULT CGameManager::Init(void)
 
 	m_pShredderManaher = new CShredderManager;
 	m_pShredderManaher->Init();
+
+	// ゴール生成
+	m_pGoal = CGoal::Create(D3DXVECTOR3(4000.0f,60.0f,0.0f));
 
 	// 初期化結果を返す
 	return S_OK;
@@ -148,7 +153,6 @@ void CGameManager::Update(void)
 		// 敵管理の更新処理
 		m_pShredderManaher->Update();
 	}
-
 }
 //===============================
 // 描画処理

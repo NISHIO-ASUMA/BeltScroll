@@ -16,6 +16,7 @@ class CPlayer;
 class CEnemyManager;
 class CTrushSim;
 class CShredderManager;
+class CGoal;
 
 //**************************
 // ゲーム管理クラスを定義
@@ -35,6 +36,7 @@ public:
 
 	CPlayer* GetPlayer(void) { return m_pPlayer; }
 	CTrushSim* GetTrush(void) { return m_pTrushSim; }
+	CGoal* GetGoal(void) { return m_pGoal; }
 
 private:
 	CBlockManager* m_pBlockManager; // ブロックマネージャー
@@ -42,6 +44,7 @@ private:
 	CEnemyManager* m_pEnemyManager; // 敵管理クラス
 	CTrushSim* m_pTrushSim;			// 試し
 	CShredderManager* m_pShredderManaher;// シュレッダーマネージャー
+	CGoal* m_pGoal;					// ゴールクラス
 };
 
 #endif

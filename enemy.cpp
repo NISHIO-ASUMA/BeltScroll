@@ -1,9 +1,12 @@
-//===================================
+//==================================================
 //
 // 敵の処理 [ enemy.cpp ]
 // Author: Asuma Nishio
 //
-//===================================
+// 
+// TODO : 矩形と球が出来次第、コライダー変更する
+// 
+//==================================================
 
 //******************************
 // インクルードファイル
@@ -91,6 +94,7 @@ void CEnemy::Uninit(void)
 	// 親クラスの終了処理
 	CObjectX::Uninit();
 
+	// コライダーの破棄
 	delete m_pCollider;
 	m_pCollider = nullptr;
 }
@@ -167,5 +171,6 @@ void CEnemy::Draw(void)
 //==============================
 bool CEnemy::Collision(CSphereCollider* pOtherCollider)
 {
+	// 判定結果を返す
 	return CSphereSphereCollision::Collision(m_pCollider, pOtherCollider);
 }

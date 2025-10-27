@@ -15,6 +15,16 @@
 #include "result.h"
 #include "meshfield.h"
 #include <memory>
+#include "goal.h"
+#include "player.h"
+
+//**************************
+// 定数空間
+//**************************
+namespace GAMEINFO
+{
+	constexpr int GAMECOUNT = 30; // リザルト遷移カウント
+};
 
 //**************************
 // 静的メンバ変数宣言
@@ -25,11 +35,9 @@ CGameManager* CGame::m_pGameManager = nullptr;	// ゲームマネージャーのポインタ
 //==================================
 // コンストラクタ
 //==================================
-CGame::CGame() : CScene(CScene::MODE_GAME)
+CGame::CGame() : CScene(CScene::MODE_GAME),m_nGametype(GAMESTATE_NONE),m_nStateCount(NULL)
 {
 	// 値のクリア
-	m_nGametype = GAMESTATE_NONE;
-	m_nStateCount = NULL;
 }
 //==================================
 // デストラクタ
@@ -142,13 +150,13 @@ void CGame::Update(void)
 	case GAMESTATE_LOSEEND:
 		m_nStateCount++;
 
-		if (m_nStateCount >= 30)
+		if (m_nStateCount >= GAMEINFO::GAMECOUNT)
 		{
 			// カウンターを初期化
 			m_nStateCount = 0;
 
 			// 1秒経過
-			m_nGametype = GAMESTATE_NONE;//何もしていない状態
+			m_nGametype = GAMESTATE_NONE;
 
 			// フェードが取得できたら
 			if (pFade != nullptr)
@@ -164,10 +172,30 @@ void CGame::Update(void)
 	}
 
 	// falseの時に更新
-	if (m_pPausemanager->GetPause() == false)
+	if (m_nGametype == GAMESTATE_NORMAL &&
+		m_pPausemanager->GetPause() == false)
 	{
 		// ゲームマネージャー更新
 		m_pGameManager->Update();
+
+		// ゴール取得
+		auto Goal = m_pGameManager->GetGoal();
+		if (Goal == nullptr) return;
+
+		// プレイヤー取得
+		auto Player = m_pGameManager->GetPlayer();
+		if (Player == nullptr) return;
+
+		// 範囲内にいるか判定
+		if (Goal->CheckPos(Player->GetPos()))
+		{
+			// タイプ変更
+			m_nGametype = GAMESTATE_END;
+
+			// プレイヤーの動きを止める
+			Player->SetMove(VECTOR3_NULL);
+			return;
+		}
 
 		//// 経過時間を取得
 		//int Numtime = m_pGameManager->GetTime()->GetAllTime();
@@ -180,7 +208,7 @@ void CGame::Update(void)
 		//	return;
 		//}
 
-			// 状態変更
+		// 状態変更
 		// m_nGametype = GAMESTATE_END;
 	}
 }

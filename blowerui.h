@@ -21,6 +21,18 @@
 class CBlowerUi : public CObject2D
 {
 public:
+	//***************************
+	// 種類を定義
+	//***************************
+	enum TYPE
+	{
+		TYPE_NONE,
+		TYPE_SMALL,
+		TYPE_MIDIUM,
+		TYPE_FULL,
+		TYPE_MAX
+	};
+
 	// コンストラクタ・デストラクタ
 	CBlowerUi(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CBlowerUi();

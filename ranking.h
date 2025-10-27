@@ -29,20 +29,8 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-#if 0
-	void SetSort(void);
-	void TxtLoad(const char* pFileName);
-	void TxtSave(const char* pFileName);
-#endif
+
 private:
-	static constexpr int MAX_RANK = 5;
-	static constexpr int MAX_RANKTEX = 2;
-
-	static LPDIRECT3DTEXTURE9 m_pTexture[MAX_RANKTEX];		// テクスチャのポインタ
-	static CRankingScore* m_Score[MAX_RANK];
-
-	CNumber* m_apNumbers[8];								// 数字のポインタ
-	int m_nNumData[MAX_RANK];								// 数字のデータ数
 };
 
 #endif

@@ -62,6 +62,7 @@ public:
 
 	// ƒQƒbƒ^[
 	int GetType(void) { return m_TrushType; }
+	CSphereCollider* GetCollider(void) { return m_pCollider; }
 
 private:
 	D3DXVECTOR3 m_move;		// ˆÚ“®—Ê
