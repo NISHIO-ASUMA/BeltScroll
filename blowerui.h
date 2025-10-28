@@ -16,7 +16,7 @@
 #include "object2D.h"
 
 //****************************
-// インクルードファイル宣言
+// UIクラスを宣言
 //****************************
 class CBlowerUi : public CObject2D
 {
@@ -26,7 +26,6 @@ public:
 	//***************************
 	enum TYPE
 	{
-		TYPE_NONE,
 		TYPE_SMALL,
 		TYPE_MIDIUM,
 		TYPE_FULL,
@@ -42,11 +41,12 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	void SetTexture(int nType);
 
 	// 静的メンバ関数
-	static CBlowerUi* Create(D3DXVECTOR3 pos, const char* pFileName);
+	static CBlowerUi* Create(D3DXVECTOR3 pos, int nType);
 
 private:
-
+	int m_nIdxTexture;
 };
 

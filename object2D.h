@@ -79,8 +79,6 @@ public:
 	int GetDrawType(void) { return m_nDrawType; }
 
 private:
-
-	LPDIRECT3DTEXTURE9 m_pTexture;		// テクスチャポインタ
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff; // 頂点バッファのポインタ
 
 	D3DXVECTOR3 m_Rot;	// 角度情報
