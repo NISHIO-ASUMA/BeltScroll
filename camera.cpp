@@ -50,6 +50,7 @@ CCamera::CCamera()
 	m_pCamera.nCntAnim = NULL;
 	m_Zoom = VECTOR3_NULL;
 	m_bMove = false;
+	m_bPlayerInit = false;
 }
 //=================================
 // デストラクタ
@@ -68,6 +69,8 @@ HRESULT CCamera::Init(void)
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
 	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
+	m_pCamera.posRDest = VECTOR3_NULL;
+	m_bPlayerInit = false;
 
 	// 距離を計算
 	float fRotx = m_pCamera.posV.x - m_pCamera.posR.x;
@@ -79,6 +82,15 @@ HRESULT CCamera::Init(void)
 
 	// モードの初期化
 	m_pCamera.nMode = MODE_NONE;
+
+	m_pCamera.posR.x += ((m_pCamera.posRDest.x - m_pCamera.posR.x) * 0.3f);
+	m_pCamera.posR.y += ((m_pCamera.posRDest.y - m_pCamera.posR.y) * 0.3f);
+	m_pCamera.posR.z += ((m_pCamera.posRDest.z - m_pCamera.posR.z) * 0.3f);
+
+	// カメラの視点の情報
+	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
+	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
+	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 
 	// 初期化結果を返す
 	return S_OK;
@@ -107,7 +119,6 @@ void CCamera::Update(void)
 	// 追従
 	Tameshi();
 
-	//PlayerFllow();
 #else
 
 	// 追従カメラ
@@ -374,6 +385,7 @@ void CCamera::Tameshi(void)
 		// ここで処理を返す
 		return;
 	}
+
 	if (PlayerCollisionScreen(pPlayer->GetPos())&& pPlayer->GetPos().x > pPlayer->GetOldPos().x)
 	{
 		// 追従カメラ用に設定

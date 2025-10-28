@@ -86,6 +86,7 @@ private:
 
 	Camera m_pCamera;		// カメラ構造体変数
 	D3DXVECTOR3 m_Zoom;		// ズーム
+	bool m_bPlayerInit;		// プレイヤーの初期化
 	bool m_bMove;			// カメラを動かすか
 };	
 
