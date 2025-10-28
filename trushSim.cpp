@@ -64,7 +64,7 @@ HRESULT CTrushSim::Init(void)
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»
 	CObjectX::Init();
 
-	m_pCollider = CSphereCollider::Create(GetPos(), 20.0f);
+	m_pCollider = CAABBCollider::Create(GetPos(), GetSize());
 	return S_OK;
 }
 //================================
@@ -204,7 +204,7 @@ void CTrushSim::Controll(void)
 //================================
 // “–‚½‚è”»’è
 //================================
-bool CTrushSim::Collision(CSphereCollider*pCollider)
+bool CTrushSim::Collision(CSphereCollider *pCollider)
 {
-	return CSphereSphereCollision::Collision(m_pCollider, pCollider);
+	return CAABBSphereCollision::Collision(m_pCollider, pCollider);
 }

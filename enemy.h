@@ -22,6 +22,7 @@ class CShadow;
 class CShadowS;
 class CSphereCollider;
 class CSphereSphereCollision;
+class CAABBCollider;
 
 //******************************
 // 敵クラスを定義
@@ -50,10 +51,10 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool Collision(CSphereCollider * pOtherCollider);
+	bool Collision(CAABBCollider * pOtherCollider);
 
 	// 静的メンバ関数
-	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName);
+	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nType);
 
 	// セッター
 	void SetType(int Type) { m_TrushType = Type; }

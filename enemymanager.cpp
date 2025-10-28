@@ -49,13 +49,13 @@ CEnemyManager* CEnemyManager::Create(void)
 //==============================
 HRESULT CEnemyManager::Init(void)
 {
-	// 初期敵生成 ( のちにスクリプト変更 )
-	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x");
-	CEnemy::Create(D3DXVECTOR3(-550.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x");
-	CEnemy::Create(D3DXVECTOR3(550.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x");
-	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x");
-	CEnemy::Create(D3DXVECTOR3(300.0f, 0.0f, -300.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x");
-	CEnemy::Create(D3DXVECTOR3(-300.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x");
+	// 初期敵生成
+	CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
+	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
+	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x",1);
+	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
+	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -300.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
+	CEnemy::Create(D3DXVECTOR3(-2000.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x", 1);
 
 	// 初期化処理
 	return S_OK;
