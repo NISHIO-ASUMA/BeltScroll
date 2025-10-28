@@ -22,6 +22,7 @@
 #include "shreddermanager.h"
 #include "loseresult.h"
 #include "goal.h"
+#include "confettiparticle.h"
 
 //===============================
 // コンストラクタ
