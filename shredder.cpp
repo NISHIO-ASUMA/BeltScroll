@@ -50,10 +50,10 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 	switch (nType)
 	{
 	case CShredderManager::TYPE_RED:
-		pShredder->SetFilePass("data/MODEL/STAGEOBJ/Goal.x");
+		pShredder->SetFilePass("data/MODEL/STAGEOBJ/Red.x");
 		break;
 	case CShredderManager::TYPE_GREEN:
-		pShredder->SetFilePass("data/MODEL/STAGEOBJ/bbbbb.x");
+		pShredder->SetFilePass("data/MODEL/STAGEOBJ/Green.x");
 		break;
 	}
 

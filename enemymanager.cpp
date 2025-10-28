@@ -50,12 +50,12 @@ CEnemyManager* CEnemyManager::Create(void)
 HRESULT CEnemyManager::Init(void)
 {
 	// èâä˙ìGê∂ê¨
-	//CEnemy::Create(D3DXVECTOR3(00.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
-	//CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
-	//CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x",1);
-	//CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
+	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
+	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
+	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x",1);
+	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
 	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -300.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
-	// CEnemy::Create(D3DXVECTOR3(-2000.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x", 1);
+	CEnemy::Create(D3DXVECTOR3(-2000.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x", 1);
 
 	// èâä˙âªèàóù
 	return S_OK;

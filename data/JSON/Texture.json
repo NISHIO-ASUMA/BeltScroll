@@ -11,8 +11,13 @@
   { "Texture": "data/TEXTURE/number003.png" },
   { "Texture": "data/TEXTURE/effect000.jpg" },
   { "Texture": "data/TEXTURE/effectwind.jpg" },
+  { "Texture": "data/TEXTURE/confetti.jpg" },
   { "Texture": "data/TEXTURE/coron.png" },
   { "Texture": "data/TEXTURE/ranking.jpg" },
   { "Texture": "data/TEXTURE/GameClear.jpg" },
-  { "Texture": "data/TEXTURE/gameover.jpg"}
+  { "Texture": "data/TEXTURE/gameover.jpg" },
+  { "Texture": "data/TEXTURE/blower_max.png" },
+  { "Texture": "data/TEXTURE/blower_midium.png" },
+  { "Texture": "data/TEXTURE/blower_small.png" }
+
 ]

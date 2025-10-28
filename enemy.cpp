@@ -20,6 +20,7 @@
 #include "shreddermanager.h"
 #include "shredder.h"
 #include "score.h"
+#include "confettieffect.h"
 
 //==============================
 // コンストラクタ
@@ -79,7 +80,7 @@ HRESULT CEnemy::Init(void)
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
 	// 球コライダー生成
-	m_pCollider = CSphereCollider::Create(GetPos(), 100.0f);
+	m_pCollider = CSphereCollider::Create(GetPos(), 85.0f);
 
 	// 移動量をセット
 	m_move.x = 5.0f;
@@ -159,9 +160,13 @@ void CEnemy::Update(void)
 
 		if (Collision(ShredderCol))
 		{
+			// エフェクト生成
+			CConfettiEffect::Create(GetPos(), D3DXCOLOR(0.15f, 1.0f, 0.23f, 1.0f), VECTOR3_NULL, 60, 100.0f);
+
 			// 消す
 			this->Uninit();
 
+			// 影も消す
 			m_pShadowS->Uninit();
 			
 			return;

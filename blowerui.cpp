@@ -54,6 +54,7 @@ CBlowerUi* CBlowerUi::Create(D3DXVECTOR3 pos, int nType)
 //==============================
 HRESULT CBlowerUi::Init(void)
 {
+	// オブジェクトの種類を設定
 	SetObjType(TYPE_BLOWERUI);
 
 	// 親クラス処理
