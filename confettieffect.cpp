@@ -1,7 +1,7 @@
 //====================================
 //
-// エフェクト処理 [ effect.cpp ]
-// Author: Asuma Nishio
+// エフェクト処理 [ confettieffect.cpp ]
+// Author: Soichiro Sasaki
 //
 //=====================================
 
@@ -95,7 +95,6 @@ void CConfettiEffect::Update(void)
 	// 移動量の更新
 	Effectpos += m_move;
 	m_move.y -= 0.4f;
-
 
 	// 減算する値を設定
 	const float fDecPow = 0.005f;
