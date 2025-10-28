@@ -461,9 +461,6 @@ void CPlayer::Update(void)
 
 		// 吹き飛ばし
 		EnemyBlow();
-
-#ifdef _DEBUG
-#endif // _DEBUG
 	}
 
 	// 重力加算
@@ -559,14 +556,16 @@ void CPlayer::Draw(void)
 // 敵吹き飛ばし処理
 //=======================================
 void CPlayer::EnemyBlow(void)
-{
+{// 敵の種類に応じて吹き飛ばせるものを分ける
+
 	// 範囲パラメータ
-	const float fBlowRange = m_fBlowerRange;	// 有効距離
-	const float fBlowPower = m_fBlowerPow;	// 吹き飛ばし強度
-	const float fBlowAngle = D3DXToRadian(45.0f); // 扇形の角度
+	const float fBlowRange = m_fBlowerRange;		// 有効距離
+	const float fBlowPower = m_fBlowerPow;			// 吹き飛ばし強度
+	const float fBlowAngle = D3DXToRadian(35.0f);	// 扇形の角度
 
 	// プレイヤーの前方ベクトル
-	D3DXVECTOR3 vForward(
+	D3DXVECTOR3 vForward
+	(
 		sinf(m_rot.y),
 		0.0f,
 		cosf(m_rot.y)
@@ -888,32 +887,5 @@ CPlayer::PLAYERMOTION CPlayer::GetNowMotion() const
 //===============================
 void CPlayer::HitDamage(int nDamage)
 {
-#if 0
-	// パラメーター取得
-	int nHp = m_pParameter->GetHp();
 
-	// 体力を減らす
-	nHp -= nDamage;
-
-	// 現在体力が0以下
-	if (nHp <= NULL)
-	{
-		// 現在体力をセット
-		m_pParameter->SetHp(nHp);
-
-		// 死亡フラグをセット
-		m_isDeath = true;
-
-		// モーションセット
-		m_pMotion->SetMotion(PLAYERMOTION_DAMAGE, false, 0, false);
-
-		return;
-	}
-	else
-	{
-		// 現在体力をセット
-		m_pParameter->SetHp(nHp);
-	}
-
-#endif
 }

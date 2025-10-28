@@ -17,6 +17,7 @@
 // 前方宣言
 //**********************
 class CObject;
+class CAABBCollider;
 class CSphereCollider;
 
 //**********************
@@ -44,7 +45,7 @@ public:
 
 private:
 	D3DXVECTOR3 m_posOld;
-	CSphereCollider* m_pCollider;				// コライダー
+	CAABBCollider* m_pCollider;				// コライダー
 	float m_fJump;
 	bool m_bMove;
 	static constexpr float JUMP = 8.0f;

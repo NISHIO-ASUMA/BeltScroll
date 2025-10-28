@@ -84,7 +84,6 @@ public:
 	void AddMove(void) { m_pos += m_move; }
 	void SetValue(float fValue) { m_fValue = fValue; }
 	void JumpMove(void) { m_move.y = m_fValue; }
-	void SetIsDamege(bool isFlags) { m_isDecHp = isFlags; }
 	void SetBlower(int nType);
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 
@@ -107,7 +106,6 @@ public:
 	bool isMovePadButton(CJoyPad* pPad);
 	bool isLanding(void) { return m_isJump; }
 	bool GetLanding(void) { return m_isLanding; }
-	bool GetIsDamege(void) { return m_isDecHp; }
 	bool GetIsAttack(void) { return m_isAttack; }
 
 	// 静的メンバ関数
@@ -132,7 +130,7 @@ private:
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
 	CSphereCollider* m_pSphereCollider; // 球のコライダー
 
-	int m_blower;
+	int m_blower;			// 種類
 
 	int m_nNumAll;			// モデル総数
 	int m_State;			// 状態管理カウンター
@@ -141,10 +139,9 @@ private:
 	bool m_isJump;			// ジャンプ判定
 	bool m_isMoving;		// 移動キー判定
 	bool m_isAttack;		// 攻撃判定
-	bool m_isDecHp;			// ダメージ減った判定
 
 	float m_fAngle;			// 現在の角度
-	float m_fValue;
+	float m_fValue;			// 加算量
 	float m_fBlowerRange;	// 影響範囲
 	float m_fBlowerPow;		// ブロワーの強度
 	const char* m_pFilename; // 読み込むファイル名

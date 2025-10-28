@@ -35,6 +35,9 @@ public:
 	void Update(void);
 	void Swap(void);
 
+	// ゲッター
+	CShredder* GetShredder(const int nIdx) { return m_pShredder[nIdx]; }
+
 private:
 	CShredder* m_pShredder[2];	// ポインタ
 	int m_nSwapCnt;				// 入れ替えるカウント

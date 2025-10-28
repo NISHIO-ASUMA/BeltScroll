@@ -15,6 +15,11 @@
 //**********************
 #include "objectX.h"
 
+//**********************
+// 前方宣言
+//**********************
+class CAABBCollider;
+
 //***************************
 // シュレッダークラスを定義
 //***************************
@@ -31,6 +36,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	void SetPosZ(float posZ);
+	CAABBCollider* GetCollider(void) { return m_pAABB; }
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -38,4 +44,5 @@ public:
 private:
 	D3DXVECTOR3 m_move; // 移動量
 	int m_nType;		// 種類
+	CAABBCollider* m_pAABB; // 矩形のコライダー
 };

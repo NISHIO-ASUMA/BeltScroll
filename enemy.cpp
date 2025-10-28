@@ -2,9 +2,6 @@
 //
 // 敵の処理 [ enemy.cpp ]
 // Author: Asuma Nishio
-//
-// 
-// TODO : 矩形と球が出来次第、コライダー変更する
 // 
 //==================================================
 
@@ -20,6 +17,9 @@
 #include "shadowS.h"
 #include "collider.h"
 #include "collision.h"
+#include "shreddermanager.h"
+#include "shredder.h"
+#include "score.h"
 
 //==============================
 // コンストラクタ
@@ -43,7 +43,7 @@ CEnemy::~CEnemy()
 //==============================
 // 生成処理
 //==============================
-CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName)
+CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nType)
 {
 	// インスタンス生成
 	CEnemy* pEnemy = new CEnemy;
@@ -53,6 +53,7 @@ CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
 	pEnemy->SetFilePass(pScriptName);
+	pEnemy->SetType(nType);
 
 	// 初期化失敗時
 	if (FAILED(pEnemy->Init()))
@@ -77,8 +78,8 @@ HRESULT CEnemy::Init(void)
 	// ステンシルシャドウの生成
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
-	// コライダー生成
-	m_pCollider = CSphereCollider::Create(GetPos(), 30.0f);
+	// 球コライダー生成
+	m_pCollider = CSphereCollider::Create(GetPos(), 10.0f);
 
 	// 移動量をセット
 	m_move.x = 5.0f;
@@ -91,12 +92,12 @@ HRESULT CEnemy::Init(void)
 //==============================
 void CEnemy::Uninit(void)
 {
-	// 親クラスの終了処理
-	CObjectX::Uninit();
-
 	// コライダーの破棄
 	delete m_pCollider;
 	m_pCollider = nullptr;
+
+	// 親クラスの終了処理
+	CObjectX::Uninit();
 }
 //==============================
 // 更新処理
@@ -110,51 +111,57 @@ void CEnemy::Update(void)
 	// 座標取得
 	D3DXVECTOR3 NowPos = GetPos();
 
+	// ブロワーの種類取得
+	int nBlowerType = pPlayer->GetBlowType();
+
 	// プレイヤーに向かってくる処理
 	D3DXVECTOR3 playerPos = pPlayer->GetPos();	// プレイヤー位置取得
 	D3DXVECTOR3 dir = playerPos - NowPos;		// プレイヤーへのベクトル
-	float dist = D3DXVec3Length(&dir);			// 距離
+	float dist = D3DXVec3Length(&dir);
 
-	D3DXVec3Normalize(&dir, &dir);	// 正規化
-	float speed = 2.0f;				// 追従スピード
-	m_move += dir * speed;			// 移動ベクトルに加算
+	D3DXVec3Normalize(&dir, &dir);
+	float speed = 1.5f; // 追従スピード
+	m_move += dir * speed;
 
-	// 吹き飛ばしが有効の時
-	if (m_isBlow)
+	// 現在のブロワーの種類に応じて飛ぶ敵かどうかを判断
+	if (m_TrushType <= nBlowerType)
 	{
-		// 摩擦係数を計算する
-		m_move *= 0.9f; // 減速
-
-		if (D3DXVec3Length(&m_move) < 0.05f)
-		{
-			m_isBlow = false;
-			m_move = VECTOR3_NULL;
-		}
+		// 以下または同等
+		float friction = 0.92f;
+		m_move *= friction;
+	}
+	else
+	{
+		// それ以上の敵
+		float friction = 0.65f;
+		m_move *= friction;
 	}
 
-	// 重力値
-	m_move.y -= 0.5f;
-
-	// 位置更新
-	NowPos += m_move;
+	if (D3DXVec3Length(&m_move) < 0.0f)
+	{
+		m_isBlow = false;
+		m_move = VECTOR3_NULL;
+	}
 	
+	// 座標の更新
+	m_move.y -= 0.5f;
+	NowPos += m_move;
+
+	m_pCollider->SetPos(NowPos);
+
+	if (NowPos.y <= 0.0f) NowPos.y = 0.0f;
+
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.25f;
 	m_move.z += (0.0f - m_move.z) * 0.25f;
 
-	if (NowPos.y <= 0.0f)
-	{
-		NowPos.y = 0.0f;
-	}
-
-	// 座標セット
+	// 座標をセット
 	SetPos(NowPos);
 
-	 // ステンシルシャドウが存在
+	// ステンシル更新
 	if (m_pShadowS)
 	{
-		// オブジェクト設定
-		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x,0.0f, GetPos().z));
+		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -2.0f, GetPos().z));
 		m_pShadowS->SetRot(GetRot());
 	}
 }
@@ -169,8 +176,8 @@ void CEnemy::Draw(void)
 //==============================
 // 当たり判定処理
 //==============================
-bool CEnemy::Collision(CSphereCollider* pOtherCollider)
+bool CEnemy::Collision(CAABBCollider* pOtherCollider)
 {
 	// 判定結果を返す
-	return CSphereSphereCollision::Collision(m_pCollider, pOtherCollider);
+	return CAABBSphereCollision::Collision(pOtherCollider, m_pCollider);
 }

@@ -24,6 +24,7 @@ CShredder::CShredder(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
 	m_move = VECTOR3_NULL;
+	m_pAABB = nullptr;
 }
 //===============================
 // デストラクタ
@@ -73,8 +74,8 @@ HRESULT CShredder::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
-	// コライダー生成 ( 矩形と球の判定を使う )
-
+	// 矩形コライダー生成
+	m_pAABB = CAABBCollider::Create(GetPos(), GetSize());
 
 	return S_OK;
 }
@@ -83,6 +84,10 @@ HRESULT CShredder::Init(void)
 //===============================
 void CShredder::Uninit(void)
 {
+	// 破棄
+	delete m_pAABB;
+	m_pAABB = nullptr;
+
 	// 親クラスの終了処理
 	CObjectX::Uninit();
 }
@@ -105,6 +110,7 @@ void CShredder::Update(void)
 	{
 		pos.x += pPos.x - pPosOld.x;
 		SetPos(pos);
+		m_pAABB->SetPos(pos);
 	}
 }
 //===============================
