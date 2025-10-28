@@ -13,6 +13,7 @@
 #include "input.h"
 #include "collider.h"
 #include "collision.h"
+#include "confettiparticle.h"
 
 //================================
 // オーバーロードコンストラクタ
@@ -149,7 +150,6 @@ void CTrushSim::Controll(void)
 		pos.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		pos.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.5f) * SPEED;
 		rot.y = pCamera->GetRot().y + D3DX_PI * 0.5f;
-
 		m_bMove = true;
 	}
 	else
@@ -161,6 +161,13 @@ void CTrushSim::Controll(void)
 	{// 左方向
 		m_fJump = JUMP;
 	}
+	if (pKeyboard->GetPress(DIK_0))
+	{// 左方向
+		CConfettiParticle::Create(pos, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 5, 150, 500, 40, -1.07f);
+
+	}
+
+
 
 	if (!m_bMove)
 	{
