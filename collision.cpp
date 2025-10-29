@@ -202,18 +202,29 @@ bool CAABBSphereCollision::Collision(CAABBCollider* me, CSphereCollider* other)
 	mePosCornor[6] = D3DXVECTOR3(mePos.x + fHalfMeSize.x, mePos.y - fHalfMeSize.y, mePos.z - fHalfMeSize.z);
 	mePosCornor[7] = D3DXVECTOR3(mePos.x - fHalfMeSize.x, mePos.y - fHalfMeSize.y, mePos.z - fHalfMeSize.z);
 
-	if (otherPos.x<mePos.x + fHalfMeSize.x + fOtherRadius || otherPos.x > mePos.x - fHalfMeSize.x- fOtherRadius)
+	// 定数
+	float MeMinX = mePos.x - fHalfMeSize.x - fOtherRadius;
+	float MeMinY = mePos.y - fHalfMeSize.y - fOtherRadius;
+	float MeMinZ = mePos.z - fHalfMeSize.z - fOtherRadius;
+
+	float MeMaxX = mePos.x + fHalfMeSize.x + fOtherRadius;
+	float MeMaxY = mePos.y + fHalfMeSize.y + fOtherRadius;
+	float MeMaxZ = mePos.z + fHalfMeSize.z + fOtherRadius;
+
+
+	if (otherPos.x < MeMaxX && otherPos.x > MeMinX)
 	{// X軸の判定
 		return true;
 	}
-	else if (otherPos.y<mePos.y + fHalfMeSize.y + fOtherRadius || otherPos.y > mePos.y - fHalfMeSize.y - fOtherRadius)
+	else if (otherPos.y<MeMaxY && otherPos.y > MeMinY)
 	{// Y軸の判定
 		return true;
 	}
-	else if (otherPos.z<mePos.z + fHalfMeSize.z + fOtherRadius || otherPos.z > mePos.z - fHalfMeSize.z - fOtherRadius)
+	else if (otherPos.z<MeMaxZ && otherPos.z > MeMinZ)
 	{// Z軸の判定
 		return true;
 	}
+
 	for (int nCnt = 0; nCnt < 8; nCnt++)
 	{// 八角とのあたり判定
 		D3DXVECTOR3 Dist = mePosCornor[nCnt] - otherPos;
@@ -224,6 +235,38 @@ bool CAABBSphereCollision::Collision(CAABBCollider* me, CSphereCollider* other)
 		{
 			return true;
 		}
+	}
+
+	return false;
+}
+//==========================
+// 検証関数 ( Asuma )
+//==========================
+bool CAABBSphereCollision::CollisionT(CAABBCollider* me, CSphereCollider* other)
+{
+	// 位置とサイズ
+	D3DXVECTOR3 mePos = me->GetPos();
+	D3DXVECTOR3 meSize = me->GetSize() * 0.5f;
+	D3DXVECTOR3 spherePos = other->GetPos();
+	float sphereRadius = other->GetRadius();
+
+	// AABBの最小最大座標
+	D3DXVECTOR3 boxMin = mePos - meSize;
+	D3DXVECTOR3 boxMax = mePos + meSize;
+
+	// 球の中心からAABB上の最近点を求める
+	D3DXVECTOR3 closest;
+	closest.x = max(boxMin.x, min(spherePos.x, boxMax.x));
+	closest.y = max(boxMin.y, min(spherePos.y, boxMax.y));
+	closest.z = max(boxMin.z, min(spherePos.z, boxMax.z));
+
+	// 最近点と球の中心の距離を求める
+	D3DXVECTOR3 diff = spherePos - closest;
+	float dist = D3DXVec3Length(&diff);
+
+	if (dist <= sphereRadius)
+	{
+		return true;
 	}
 
 	return false;

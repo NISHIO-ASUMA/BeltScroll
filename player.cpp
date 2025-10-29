@@ -26,6 +26,7 @@
 #include "particlepiler.h"
 #include "collider.h"
 #include "collision.h"
+#include "blowerui.h"
 
 //**********************
 // プレイヤー情報
@@ -86,6 +87,7 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_isJump = false;
 	m_isAttack = false;
 	m_isMoving = false;
+	m_pBlowerUi = nullptr;
 
 	// 初期状態
 	m_blower = BLOWER_SMALLPOW;
@@ -177,6 +179,9 @@ HRESULT CPlayer::Init(void)
 	// 初期値をセット
 	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
 	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
+
+	// UI
+	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(150.0f, 60.0f, 0.0f), m_blower);
 
 	// 結果を返す
 	return S_OK;
@@ -867,6 +872,9 @@ void CPlayer::SetBlower(int nType)
 	default:
 		break;
 	}
+
+	// 切り替え
+	m_pBlowerUi->SetTexture(m_blower);
 }
 //===============================
 // 現在のモーション種類取得

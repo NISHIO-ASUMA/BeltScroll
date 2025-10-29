@@ -26,6 +26,7 @@ class CStateMachine;
 class CPlayerStateBase;
 class CAABBCollider;
 class CSphereCollider;
+class CBlowerUi;
 
 //*************************
 // プレイヤークラスを定義
@@ -129,6 +130,7 @@ private:
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
 	CSphereCollider* m_pSphereCollider; // 球のコライダー
+	CBlowerUi* m_pBlowerUi;			// UI
 
 	int m_blower;			// 種類
 

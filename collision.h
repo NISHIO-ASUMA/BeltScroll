@@ -72,6 +72,8 @@ public:
 
 	// ƒƒ“ƒoŠÖ”
 	static bool Collision(CAABBCollider* me, CSphereCollider* other);
+	static bool CollisionT(CAABBCollider* me, CSphereCollider* other);
+
 private:
 };
 

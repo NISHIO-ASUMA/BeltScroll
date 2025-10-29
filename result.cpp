@@ -13,6 +13,7 @@
 #include "manager.h"
 #include "ranking.h"
 #include "winplayer.h"
+#include "meshfield.h"
 
 //=================================
 // オーバーロードコンストラクタ
@@ -33,10 +34,13 @@ CResult::~CResult()
 HRESULT CResult::Init(void)
 {
 	// ui生成
-	CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.jpg",false);
+	// CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.jpg",false);
 
 	// プレイヤー生成
 	CWinPlayer::Create(VECTOR3_NULL);
+
+	// メッシュフィールド生成
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);

@@ -20,6 +20,8 @@
 #include "shreddermanager.h"
 #include "shredder.h"
 #include "score.h"
+#include "confettieffect.h"
+#include "confettiparticle.h"
 
 //==============================
 // コンストラクタ
@@ -79,7 +81,7 @@ HRESULT CEnemy::Init(void)
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
 
 	// 球コライダー生成
-	m_pCollider = CSphereCollider::Create(GetPos(), 10.0f);
+	m_pCollider = CSphereCollider::Create(GetPos(), 85.0f);
 
 	// 移動量をセット
 	m_move.x = 5.0f;
@@ -146,10 +148,31 @@ void CEnemy::Update(void)
 	// 座標の更新
 	m_move.y -= 0.5f;
 	NowPos += m_move;
+	if (NowPos.y <= 0.0f) NowPos.y = 0.0f;
 
+	// コライダー座標
 	m_pCollider->SetPos(NowPos);
 
-	if (NowPos.y <= 0.0f) NowPos.y = 0.0f;
+	// 当たり判定生成
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		// コライダー取得 ( 2個のシュレッダーが存在 )
+		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
+
+		if (Collision(ShredderCol))
+		{
+			// エフェクト生成
+			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
+
+			// 消す
+			this->Uninit();
+
+			// 影も消す
+			m_pShadowS->Uninit();
+			
+			return;
+		}
+	}
 
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.25f;
@@ -179,5 +202,5 @@ void CEnemy::Draw(void)
 bool CEnemy::Collision(CAABBCollider* pOtherCollider)
 {
 	// 判定結果を返す
-	return CAABBSphereCollision::Collision(pOtherCollider, m_pCollider);
+	return CAABBSphereCollision::CollisionT(pOtherCollider, m_pCollider);
 }
