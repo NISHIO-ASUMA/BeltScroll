@@ -53,4 +53,5 @@ private:
 	D3DXVECTOR3 m_move; // 移動量
 	int m_nType;		// 種類
 	CAABBCollider* m_pAABB; // 矩形のコライダー
+	static constexpr int nNumParts = 2;
 };

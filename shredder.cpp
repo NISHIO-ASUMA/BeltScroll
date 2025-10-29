@@ -28,7 +28,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_rot = VECTOR3_NULL;
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt] = nullptr;
 	}
@@ -69,6 +69,7 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 HRESULT CShredder::Init(void)
 {
 	InitModel();
+	// モデルの向きを合わせるため
 	m_rot.y = D3DX_PI;
 	// 矩形コライダー生成
 	m_pAABB = CAABBCollider::Create(m_pos, D3DXVECTOR3(100.0f,300.0f,500.0f));
@@ -80,7 +81,7 @@ HRESULT CShredder::Init(void)
 //===============================
 void CShredder::Uninit(void)
 {
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt]->Uninit();
 		delete m_apModel[nCnt];
@@ -116,7 +117,7 @@ void CShredder::Update(void)
 	m_pAABB->SetPos(m_pos);
 
 	// モデルの更新
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt]->Update();
 	}
@@ -149,7 +150,7 @@ void CShredder::Draw(void)
 	pDevice->SetTransform(D3DTS_WORLD, &m_mtxworld);
 
 	// 全モデルパーツの描画
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt]->Draw();
 	}
@@ -161,6 +162,7 @@ void CShredder::Draw(void)
 //===============================
 void CShredder::InitModel(void)
 {
+	// タイプごとに違う部分
 	switch (m_nType)
 	{
 	case CShredderManager::TYPE_RED:
@@ -174,11 +176,12 @@ void CShredder::InitModel(void)
 									"data/MODEL/STAGEOBJ/shredder(BRUE)frame.x");
 		break;
 	}
+
+
 	// 共通部分
 	m_apModel[1] = CModel::Create(VECTOR3_NULL,
 		D3DXVECTOR3(0.0f, D3DX_PI, 0.0f),
 		"data/MODEL/STAGEOBJ/shredderblade.x");
-
 	m_apModel[1]->SetParent(m_apModel[0]);
 	m_apModel[1]->OffSetPos(VECTOR3_NULL);
 }
