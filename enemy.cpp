@@ -21,6 +21,7 @@
 #include "shredder.h"
 #include "score.h"
 #include "confettieffect.h"
+#include "confettiparticle.h"
 
 //==============================
 // コンストラクタ
@@ -161,7 +162,7 @@ void CEnemy::Update(void)
 		if (Collision(ShredderCol))
 		{
 			// エフェクト生成
-			CConfettiEffect::Create(GetPos(), D3DXCOLOR(0.15f, 1.0f, 0.23f, 1.0f), VECTOR3_NULL, 60, 100.0f);
+			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
 
 			// 消す
 			this->Uninit();
