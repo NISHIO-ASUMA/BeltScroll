@@ -164,7 +164,6 @@ void CTrushSim::Controll(void)
 	if (pKeyboard->GetPress(DIK_0))
 	{// ¶•ûŒü
 		CConfettiParticle::Create(pos, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 5, 150, 500, 40, -1.07f);
-
 	}
 
 
