@@ -15,6 +15,11 @@
 #include "block.h"
 
 //***************************
+// 前方宣言
+//***************************
+class CAABBCollider;
+
+//***************************
 // 管理クラスを定義
 //***************************
 class CBlockManager
@@ -28,6 +33,11 @@ public:
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
+	bool Collision(CAABBCollider* pCollider, D3DXVECTOR3* OutPos);
+
+	static int GetAll(void) { return static_cast<int>(m_block.size() - 1); }
+	static CBlock* GetBlock(const int nIdx) { return m_block[nIdx]; }
+	static std::vector <CBlock*> GetInfo() { return m_block; }
 
 	// 静的メンバ関数
 	static CBlock* CreateManagerBlock(D3DXVECTOR3 pos,D3DXVECTOR3 rot,D3DXVECTOR3 scale,const char * pModelName);

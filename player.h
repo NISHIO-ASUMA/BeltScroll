@@ -76,8 +76,7 @@ public:
 	void StartJump(void);
 	void HitDamage(int nDamage);
 	void EnemyBlow(void);
-	bool Collision(CSphereCollider * pOther);
-	bool CollisionShredder(CAABBCollider* pOther, D3DXVECTOR3* pOutPos);
+	bool CollisionBox(CAABBCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	// セッター
 	void SetRotDest(D3DXVECTOR3 rotDest) { m_rotDest = rotDest; }

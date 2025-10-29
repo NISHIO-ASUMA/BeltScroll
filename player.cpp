@@ -30,6 +30,7 @@
 #include "game.h"
 #include "shreddermanager.h"
 #include "shredder.h"
+#include "blockmanager.h"
 
 //**********************
 // プレイヤー情報
@@ -492,6 +493,23 @@ void CPlayer::Update(void)
 	m_pAAABB->SetPos(m_pos);
 	m_pAAABB->SetOldPos(m_posOld);
 
+	// ブロックオブジェクトとの当たり判定
+	auto Block = CGame::GetGameManager()->GetBlockManager();
+	if (Block == nullptr) return;
+
+	// 座標の押し出し用入れ物変数
+	D3DXVECTOR3 CollBlockPos = m_pos;
+
+	// 実際のコリジョン
+	if (Block->Collision(m_pAAABB, &CollBlockPos))
+	{
+		// 押し出す座標をセットする
+		m_pos = CollBlockPos;
+
+		// コライダー座標更新
+		m_pAAABB->SetPos(CollBlockPos);
+	}
+
 	// 判定の生成
 	for (int nCnt = 0; nCnt < 2; nCnt++)
 	{
@@ -502,12 +520,10 @@ void CPlayer::Update(void)
 		D3DXVECTOR3 OutPos = m_pos;
 
 		// 当たっているなら
-		if (CollisionShredder(ShredderCol,&OutPos))
+		if (CollisionBox(ShredderCol,&OutPos))
 		{
 			// 押し出す座標をセットする
 			m_pos = OutPos;
-
-			// m_posOld = OutPos;
 
 			// 矩形コライダーの更新
 			m_pAAABB->SetPos(OutPos);
@@ -656,16 +672,9 @@ void CPlayer::EnemyBlow(void)
 	}
 }
 //===============================
-// 当たり判定関数 ( 球形 )
-//================================
-bool CPlayer::Collision(CSphereCollider* pOther)
-{
-	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
-}
-//===============================
 // 当たり判定関数 ( 矩形 )
 //================================
-bool CPlayer::CollisionShredder(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
+bool CPlayer::CollisionBox(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
 {
 	return CAABBAABBCollision::CollisionT(m_pAAABB,pOther, pOutPos);
 }

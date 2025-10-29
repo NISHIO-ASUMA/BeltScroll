@@ -38,6 +38,7 @@ public:
 	CTrushSim* GetTrush(void) { return m_pTrushSim; }
 	CGoal* GetGoal(void) { return m_pGoal; }
 	CShredderManager* GetShredderM(void) { return m_pShredderManaher; }
+	CBlockManager* GetBlockManager(void) { return m_pBlockManager; }
 
 private:
 	CBlockManager* m_pBlockManager; // ブロックマネージャー

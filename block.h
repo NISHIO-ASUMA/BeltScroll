@@ -17,6 +17,7 @@
 // 前方宣言
 //**********************
 class CObject;
+class CAABBCollider;
 
 //**********************
 // ブロッククラスを定義
@@ -33,13 +34,14 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool Collision(D3DXVECTOR3 *pPos,D3DXVECTOR3* pPosOld,D3DXVECTOR3 * pMove,float fDestSize,bool &isLanding);
+	bool Collision(CAABBCollider * pOther,D3DXVECTOR3 * pOutPos);
 
 	// 静的メンバ関数
 	static CBlock* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale,const char* FileName);
 
 private:
 	static constexpr float BLOCKHALF = 0.5f;	// ハーフサイズの固定値
+	CAABBCollider* m_pAABB;		// 矩形コライダー
 };
 
 #endif

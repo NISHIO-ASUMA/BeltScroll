@@ -48,7 +48,7 @@ HRESULT CBlockManager::Init(void)
 	m_block.clear();
 
 	// json開く
-	LoadJsonScript("data/JSON/NewDataStage.json");
+	LoadJsonScript("data/JSON/Stage.json");
 
 	// 初期化結果を返す
 	return S_OK;
@@ -67,6 +67,24 @@ void CBlockManager::Uninit(void)
 void CBlockManager::Update(void)
 {
 
+}
+//===========================
+// 当たり判定を返す処理
+//===========================
+bool CBlockManager::Collision(CAABBCollider* pCollider, D3DXVECTOR3* OutPos)
+{
+	// 配置されているブロックを見る
+	for (auto iter = m_block.begin(); iter != m_block.end(); iter++)
+	{
+		// オブジェクトが存在　かつ ヒットが有効
+		if ((*iter) != nullptr && (*iter)->Collision(pCollider, OutPos))
+		{
+			return true;
+		}
+	}
+
+	// 当たらないとき
+	return false;
 }
 //===========================
 // 生成処理
