@@ -151,7 +151,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\É`Å[ÉÄCÅ{Å{ÉÇÉfÉã\\TEXTURE\\cyberpunkcity01.jpg";
+    "data/TEXTURE/cyberpunkcity01.jpg";
    }
   }
  }
