@@ -27,6 +27,9 @@
 #include "collider.h"
 #include "collision.h"
 #include "blowerui.h"
+#include "game.h"
+#include "shreddermanager.h"
+#include "shredder.h"
 
 //**********************
 // プレイヤー情報
@@ -175,6 +178,7 @@ HRESULT CPlayer::Init(void)
 
 	// コライダ―生成
 	m_pSphereCollider = CSphereCollider::Create(m_pos, 40.0f);
+	m_pAAABB = CAABBCollider::Create(m_pos,m_posOld,D3DXVECTOR3(60.0f,60.0f,60.0f));
 
 	// 初期値をセット
 	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
@@ -231,11 +235,18 @@ void CPlayer::Uninit(void)
 		m_pStateMachine = nullptr;
 	}
 
-	// コライダーの破棄
+	// 球形コライダーの破棄
 	if (m_pSphereCollider)
 	{
 		delete m_pSphereCollider;
 		m_pSphereCollider = nullptr;
+	}
+
+	// 矩形コライダーの破棄
+	if (m_pAAABB)
+	{
+		delete m_pAAABB;
+		m_pAAABB = nullptr;
 	}
 
 	// オブジェクト自身の破棄
@@ -477,6 +488,32 @@ void CPlayer::Update(void)
 	// 位置更新
 	m_pos += m_move;
 
+	// コライダー座標の設定
+	m_pAAABB->SetPos(m_pos);
+	m_pAAABB->SetOldPos(m_posOld);
+
+	// 判定の生成
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		// コライダー取得 ( 2個のシュレッダーが存在 )
+		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
+		
+		// 押し出し計算後の入れ物
+		D3DXVECTOR3 OutPos = m_pos;
+
+		// 当たっているなら
+		if (CollisionShredder(ShredderCol,&OutPos))
+		{
+			// 押し出す座標をセットする
+			m_pos = OutPos;
+
+			// m_posOld = OutPos;
+
+			// 矩形コライダーの更新
+			m_pAAABB->SetPos(OutPos);
+		}
+	}
+
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.75f;
 	m_move.z += (0.0f - m_move.z) * 0.75f;
@@ -619,11 +656,18 @@ void CPlayer::EnemyBlow(void)
 	}
 }
 //===============================
-// 当たり判定関数
+// 当たり判定関数 ( 球形 )
 //================================
 bool CPlayer::Collision(CSphereCollider* pOther)
 {
 	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
+}
+//===============================
+// 当たり判定関数 ( 矩形 )
+//================================
+bool CPlayer::CollisionShredder(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
+{
+	return CAABBAABBCollision::CollisionT(m_pAAABB,pOther, pOutPos);
 }
 //=========================================
 // モデルの特定部分パーツの取得関数

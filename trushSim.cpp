@@ -65,7 +65,7 @@ HRESULT CTrushSim::Init(void)
 	// eƒNƒ‰ƒX‚Ì‰Šú‰»
 	CObjectX::Init();
 
-	m_pCollider = CAABBCollider::Create(GetPos(), GetSize());
+	m_pCollider = CAABBCollider::Create(GetPos(), m_posOld,GetSize());
 	return S_OK;
 }
 //================================

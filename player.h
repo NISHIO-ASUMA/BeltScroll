@@ -77,6 +77,7 @@ public:
 	void HitDamage(int nDamage);
 	void EnemyBlow(void);
 	bool Collision(CSphereCollider * pOther);
+	bool CollisionShredder(CAABBCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	// セッター
 	void SetRotDest(D3DXVECTOR3 rotDest) { m_rotDest = rotDest; }
@@ -130,6 +131,7 @@ private:
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
 	CSphereCollider* m_pSphereCollider; // 球のコライダー
+	CAABBCollider* m_pAAABB;		// 矩形のコライダー
 	CBlowerUi* m_pBlowerUi;			// UI
 
 	int m_blower;			// 種類

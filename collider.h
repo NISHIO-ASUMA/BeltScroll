@@ -51,16 +51,21 @@ class CAABBCollider :public CCollider
 {
 public:
 	// コンストラクタ・デストラクタ
-	CAABBCollider() { m_size = VECTOR3_NULL; }
+	CAABBCollider() { m_size = VECTOR3_NULL,m_posOld = VECTOR3_NULL; }
 	~CAABBCollider() {}
 
 	// メンバ関数
-	static CAABBCollider* Create(D3DXVECTOR3 pos, D3DXVECTOR3 size);
+	static CAABBCollider* Create(D3DXVECTOR3 pos, D3DXVECTOR3 posOld,D3DXVECTOR3 size);
 
 	void SetSize(D3DXVECTOR3 size) { m_size = size; }
+	void SetOldPos(D3DXVECTOR3 posOld) { m_posOld = posOld; }
+
 	D3DXVECTOR3 GetSize(void) { return m_size; }
+	D3DXVECTOR3 GetPosOld(void) { return m_posOld; }
+
 private:
 	D3DXVECTOR3 m_size;	// 大きさ
+	D3DXVECTOR3 m_posOld; // 1フレーム前の座標
 };
 
 
