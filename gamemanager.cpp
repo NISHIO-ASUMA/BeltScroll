@@ -154,6 +154,15 @@ void CGameManager::Update(void)
 		// 敵管理の更新処理
 		m_pShredderManaher->Update();
 	}
+
+#ifdef _DEBUG
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_5))
+	{
+		// 検証用 : パーティクル出現
+		CConfettiParticle::Create(VECTOR3_NULL, COLOR_RED, 40, 150.0f, 60.0f, 100, 0.0f);
+	}
+#endif // _DEBUG
+
 }
 //===============================
 // 描画処理

@@ -75,7 +75,7 @@ HRESULT CShredder::Init(void)
 	CObjectX::Init();
 
 	// 矩形コライダー生成
-	m_pAABB = CAABBCollider::Create(GetPos(), GetSize());
+	m_pAABB = CAABBCollider::Create(GetPos(),GetPos(),GetSize());
 
 	return S_OK;
 }

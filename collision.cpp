@@ -90,7 +90,7 @@ CAABBAABBCollision::~CAABBAABBCollision()
 //===============================
 // 矩形と矩形の当たり判定
 //===============================
-bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
+bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other, D3DXVECTOR3* pOutPos)
 {
 	// ポインタ
 	CAABBCollider* pMe = me;
@@ -116,6 +116,7 @@ bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
 			// Z軸の判定
 			if (mePos.z - fHalfMeSize.z < otherPos.z + fHalfOtherSize.z)
 			{
+				// 押し出す座標を計算
 				return true;
 			}
 			else if (mePos.z + fHalfMeSize.z > otherPos.z - fHalfOtherSize.z)
@@ -152,6 +153,100 @@ bool CAABBAABBCollision::Collision(CAABBCollider* me, CAABBCollider* other)
 		}
 	}
 
+	return false;
+}
+//=================================
+// 矩形と矩形の当たり判定 ( Asuma )
+//=================================
+bool CAABBAABBCollision::CollisionT(CAABBCollider* me, CAABBCollider* other, D3DXVECTOR3* pOutPos)
+{
+	//===========================
+	// コライダーポインタ情報
+	//===========================
+	CAABBCollider* pMyCollider = me;
+	CAABBCollider* pOtherCollider = other;
+
+	//===========================
+	// 自分と相手の座標を取得
+	//===========================
+	D3DXVECTOR3 MyPos = pMyCollider->GetPos();
+	D3DXVECTOR3 OtherPos = pOtherCollider->GetPos();
+
+	//===========================
+	// コライダーサイズを取得
+	//===========================
+	D3DXVECTOR3 MySize = pMyCollider->GetSize();
+	D3DXVECTOR3 OtherSize = pOtherCollider->GetSize();
+
+	//================================
+	// 自分と相手の半分のサイズを取得
+	//================================
+	D3DXVECTOR3 MyHalfSize = MySize * 0.5f;
+	D3DXVECTOR3 OtherHalfSize = OtherSize * 0.5f;
+
+	//===============================
+	// 最大最小座標を計算する
+	//===============================
+	D3DXVECTOR3 MyPosMax = MyPos + MyHalfSize;
+	D3DXVECTOR3 MyPosMin = MyPos - MyHalfSize;
+	D3DXVECTOR3 OtherPosMax = OtherPos + OtherHalfSize;
+	D3DXVECTOR3 OtherPosMin = OtherPos - OtherHalfSize;
+
+	//===========================
+	// 過去の座標を取得
+	//===========================
+	D3DXVECTOR3 MyPosOldMin = pMyCollider->GetPosOld() - MyHalfSize;
+	D3DXVECTOR3 MyPosOldMax = pMyCollider->GetPosOld() + MyHalfSize;
+	D3DXVECTOR3 OtherPosOldMin = pOtherCollider->GetPosOld() - OtherHalfSize;
+	D3DXVECTOR3 OtherPosOldMax = pOtherCollider->GetPosOld() + OtherHalfSize;
+
+	// 高さの範囲内に入って無かったら判定をしない
+	const bool isHitRangeY = MyPosOldMin.y <= OtherPosOldMax.y && MyPosOldMax.y >= OtherPosOldMin.y;
+	if (!isHitRangeY) return false;
+
+	//==============================
+	// z軸の範囲内に入っているとき
+	//==============================
+	if (OtherPosMin.z < MyPosMax.z && OtherPosMax.z > MyPosOldMin.z)
+	{
+		if (MyPosOldMax.x <= OtherPosMin.x && MyPosMax.x > OtherPosMin.x)
+		{// 左からめり込む
+
+			// 左側への押し出し座標を計算
+			pOutPos->x = OtherPosMin.x - MyHalfSize.x - 0.1f;
+			return true;
+		}
+		else if (MyPosOldMin.x >= OtherPosMax.x && MyPosMin.x < OtherPosMax.x)
+		{// 右からめり込む
+
+			// 右側への押し出し座標を計算
+			pOutPos->x = OtherPosMax.x + MyHalfSize.x + 0.1f;
+			return true;
+		}
+	}
+
+	//==============================
+	// x軸の範囲内に入っているとき
+	//==============================
+	if (MyPosOldMin.x < OtherPosMax.x && MyPosMax.x > OtherPosMin.x)
+	{
+		if (MyPosOldMax.z < OtherPosMin.z && MyPosMax.z > OtherPosMin.z)
+		{// 手前からめり込む
+
+			// 手前への押しだし座標を計算
+			pOutPos->z = OtherPosMin.z - MyHalfSize.z - 0.1f;
+			return true;
+		}
+		else if (MyPosOldMin.z > OtherPosMax.z && MyPosMin.z < OtherPosMax.z)
+		{// 奥から手前にめり込む
+
+			// 奥側に押し出す座標を計算する
+			pOutPos->z = OtherPosMax.z + MyHalfSize.z + 0.1f;
+			return true;
+		}
+	}
+
+	// 未ヒット時
 	return false;
 }
 
@@ -239,9 +334,9 @@ bool CAABBSphereCollision::Collision(CAABBCollider* me, CSphereCollider* other)
 
 	return false;
 }
-//==========================
-// 検証関数 ( Asuma )
-//==========================
+//======================================
+// 球と矩形の当たり判定関数 ( Asuma )
+//======================================
 bool CAABBSphereCollision::CollisionT(CAABBCollider* me, CSphereCollider* other)
 {
 	// 位置とサイズ
