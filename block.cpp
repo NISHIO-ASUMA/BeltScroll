@@ -59,7 +59,7 @@ HRESULT CBlock::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
-	// コライダー生成
+	// AABBコライダー生成
 	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());
 
 	return S_OK;
@@ -89,7 +89,6 @@ void CBlock::Update(void)
 
 	// コライダー座標更新
 	m_pAABB->SetPos(pos);
-	m_pAABB->SetOldPos(pos);
 
 	// 親クラスの更新
 	CObjectX::Update();
@@ -108,5 +107,5 @@ void CBlock::Draw(void)
 bool CBlock::Collision(CAABBCollider* pOther, D3DXVECTOR3* pOutPos)
 {
 	// 矩形の当たり判定を返す
-	return CAABBAABBCollision::Collision(m_pAABB,pOther, pOutPos);
+	return CAABBAABBCollision::CollisionT(m_pAABB,pOther, pOutPos);
 }

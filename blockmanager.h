@@ -35,7 +35,7 @@ public:
 	void Update(void);
 	bool Collision(CAABBCollider* pCollider, D3DXVECTOR3* OutPos);
 
-	static int GetAll(void) { return static_cast<int>(m_block.size() - 1); }
+	static int GetAll(void) { return static_cast<int>(m_block.size()); }
 	static CBlock* GetBlock(const int nIdx) { return m_block[nIdx]; }
 	static std::vector <CBlock*> GetInfo() { return m_block; }
 

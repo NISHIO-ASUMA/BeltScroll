@@ -493,22 +493,30 @@ void CPlayer::Update(void)
 	m_pAAABB->SetPos(m_pos);
 	m_pAAABB->SetOldPos(m_posOld);
 
-	// ブロックオブジェクトとの当たり判定
+	// マップに配置されているブロックを取得
 	auto Block = CGame::GetGameManager()->GetBlockManager();
 	if (Block == nullptr) return;
 
-	// 座標の押し出し用入れ物変数
-	D3DXVECTOR3 CollBlockPos = m_pos;
-
-	// 実際のコリジョン
-	if (Block->Collision(m_pAAABB, &CollBlockPos))
+	// ブロックオブジェクトとの当たり判定
+	for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
 	{
-		// 押し出す座標をセットする
-		m_pos = CollBlockPos;
+		// コライダー取得
+		CAABBCollider* pCollider = Block->GetBlock(nBlock)->GetCollider();
 
-		// コライダー座標更新
-		m_pAAABB->SetPos(CollBlockPos);
+		// 座標の押し出し用入れ物変数
+		D3DXVECTOR3 CollBlockPos = m_pos;
+
+		// 実際のコリジョン
+		if (CollisionBox(pCollider, &CollBlockPos))
+		{
+			// 押し出す座標をセットする
+			m_pos = CollBlockPos;
+
+			// コライダー座標更新
+			m_pAAABB->SetPos(CollBlockPos);
+		}
 	}
+
 
 	// 判定の生成
 	for (int nCnt = 0; nCnt < 2; nCnt++)

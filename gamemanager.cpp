@@ -62,9 +62,9 @@ HRESULT CGameManager::Init(void)
 
 	// CGimmickFloor::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
 
-	//// マップモデル配置情報生成
-	//m_pBlockManager = new CBlockManager;
-	//m_pBlockManager->Init();
+	// マップモデル配置情報生成
+	m_pBlockManager = new CBlockManager;
+	m_pBlockManager->Init();
 
 	m_pShredderManaher = new CShredderManager;
 	m_pShredderManaher->Init();

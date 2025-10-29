@@ -35,6 +35,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	bool Collision(CAABBCollider * pOther,D3DXVECTOR3 * pOutPos);
+	CAABBCollider* GetCollider(void) { return m_pAABB;}
 
 	// ê√ìIÉÅÉìÉoä÷êî
 	static CBlock* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale,const char* FileName);
