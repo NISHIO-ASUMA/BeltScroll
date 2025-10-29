@@ -71,8 +71,9 @@ HRESULT CShredder::Init(void)
 	InitModel();
 	// モデルの向きを合わせるため
 	m_rot.y = D3DX_PI;
+
 	// 矩形コライダー生成
-	m_pAABB = CAABBCollider::Create(m_pos, m_pos,GetSize());
+	m_pAABB = CAABBCollider::Create(m_pos, m_pos,D3DXVECTOR3(100.0f,300.0f,500.0f));
 
 	return S_OK;
 }
@@ -92,7 +93,8 @@ void CShredder::Uninit(void)
 	delete m_pAABB;
 	m_pAABB = nullptr;
 
-	CObjectX::Uninit();
+	// 自身の破棄
+	CObject::Release();
 }
 //===============================
 // 更新処理

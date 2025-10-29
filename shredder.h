@@ -46,12 +46,12 @@ public:
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
 
 private:
-	CModel* m_apModel[2];
+	static constexpr int nNumParts = 2;
+	CModel* m_apModel[nNumParts];
 	D3DXVECTOR3 m_pos;
 	D3DXVECTOR3 m_rot;
 	D3DXMATRIX m_mtxworld;
 	D3DXVECTOR3 m_move; // 移動量
 	int m_nType;		// 種類
 	CAABBCollider* m_pAABB; // 矩形のコライダー
-	static constexpr int nNumParts = 2;
 };
