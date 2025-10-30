@@ -70,7 +70,6 @@ HRESULT CGame::Init(void)
 	// 通常進行状態
 	m_nGametype = GAMESTATE_NORMAL;
 
-
 	// 初期化結果を返す
 	return S_OK;
 }
@@ -110,11 +109,14 @@ void CGame::Uninit(void)
 //==================================
 void CGame::Update(void)
 {	
-	// ポーズのキー入力判定
-	m_pPausemanager->SetEnablePause();
+	if (m_nGametype == GAMESTATE_NORMAL)
+	{
+		// ポーズのキー入力判定
+		m_pPausemanager->SetEnablePause();
 	
-	// ポーズの更新処理
-	m_pPausemanager->Update();
+		// ポーズの更新処理
+		m_pPausemanager->Update();
+	}
 	
 	// フェード取得
 	CFade* pFade = CManager::GetFade();
@@ -169,7 +171,7 @@ void CGame::Update(void)
 	}
 
 	// falseの時に更新
-	if (m_pPausemanager->GetPause() == false)
+	if (m_nGametype == GAMESTATE_NORMAL && m_pPausemanager->GetPause() == false)
 	{
 		// ゲームマネージャー更新
 		m_pGameManager->Update();

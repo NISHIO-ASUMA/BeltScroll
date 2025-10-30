@@ -19,6 +19,11 @@ class CShredderManager;
 class CGoal;
 
 //**************************
+// インクルードファイル
+//**************************
+#include <memory>
+
+//**************************
 // ゲーム管理クラスを定義
 //**************************
 class CGameManager
@@ -39,11 +44,12 @@ public:
 	CGoal* GetGoal(void) { return m_pGoal; }
 	CShredderManager* GetShredderM(void) { return m_pShredderManaher; }
 	CBlockManager* GetBlockManager(void) { return m_pBlockManager; }
+	CEnemyManager* GetEnemyManager(void) { return m_pEnemyManager.get(); }
 
 private:
+	std::unique_ptr<CEnemyManager>m_pEnemyManager; // 敵管理
 	CBlockManager* m_pBlockManager; // ブロックマネージャー
 	CPlayer* m_pPlayer;				// プレイヤー
-	CEnemyManager* m_pEnemyManager; // 敵管理クラス
 	CTrushSim* m_pTrushSim;			// 試し
 	CShredderManager* m_pShredderManaher;// シュレッダーマネージャー
 	CGoal* m_pGoal;					// ゴールクラス

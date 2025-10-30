@@ -29,7 +29,7 @@ CEnemyManager::CEnemyManager()
 //==============================
 CEnemyManager::~CEnemyManager()
 {
-	// –³‚µ
+	Uninit();
 }
 //==============================
 // ¶¬ˆ—
