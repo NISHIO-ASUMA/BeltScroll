@@ -20,6 +20,7 @@
 //=================================
 CResult::CResult() : CScene(CScene::MODE_RESULT)
 {
+
 }
 //=================================
 // デストラクタ
@@ -33,6 +34,10 @@ CResult::~CResult()
 //=================================
 HRESULT CResult::Init(void)
 {
+	// カメラ初期化
+	CCamera* pCamera = CManager::GetCamera();
+	pCamera->Init();
+
 	// ui生成
 	// CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.jpg",false);
 

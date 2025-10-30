@@ -150,7 +150,7 @@ void CGameManager::Update(void)
 	// nullチェック
 	if (m_pShredderManaher != nullptr)
 	{
-		// 敵管理の更新処理
+		// 更新処理
 		m_pShredderManaher->Update();
 	}
 

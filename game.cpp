@@ -140,9 +140,6 @@ void CGame::Update(void)
 			{
 				// リザルトシーンに遷移
 				pFade->SetFade(std::make_unique<CResult>());
-
-				// ここで処理を返す
-				return;
 			}
 		}
 		break;
@@ -172,8 +169,7 @@ void CGame::Update(void)
 	}
 
 	// falseの時に更新
-	if (m_nGametype == GAMESTATE_NORMAL &&
-		m_pPausemanager->GetPause() == false)
+	if (m_pPausemanager->GetPause() == false)
 	{
 		// ゲームマネージャー更新
 		m_pGameManager->Update();
@@ -191,10 +187,6 @@ void CGame::Update(void)
 		{
 			// タイプ変更
 			m_nGametype = GAMESTATE_END;
-
-			// プレイヤーの動きを止める
-			Player->SetMove(VECTOR3_NULL);
-			return;
 		}
 
 		//// 経過時間を取得
