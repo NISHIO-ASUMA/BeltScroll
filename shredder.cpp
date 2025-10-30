@@ -17,6 +17,7 @@
 #include "collider.h"
 #include "collision.h"
 #include "model.h"
+#include "suckParticle.h"
 
 //===============================
 // コンストラクタ
@@ -107,6 +108,8 @@ void CShredder::Update(void)
 	D3DXVECTOR3 pPosOld = pPlayer->GetOldPos();
 
 	CCamera* pCamera = CManager::GetCamera();
+
+	CSuckParticle::Create(D3DXVECTOR3(m_pos.x+150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
 
 	if (pCamera->GetMove())
 	{

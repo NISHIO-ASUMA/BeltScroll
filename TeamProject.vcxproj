@@ -210,6 +210,8 @@
     <ClCompile Include="shreddermanager.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="state.cpp" />
+    <ClCompile Include="suckeffect.cpp" />
+    <ClCompile Include="suckParticle.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="title.cpp" />
@@ -277,6 +279,8 @@
     <ClInclude Include="shreddermanager.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="state.h" />
+    <ClInclude Include="suckeffect.h" />
+    <ClInclude Include="suckParticle.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="time.h" />
