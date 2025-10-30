@@ -14,6 +14,7 @@
 #include "ranking.h"
 #include "winplayer.h"
 #include "meshfield.h"
+#include "ui.h"
 
 //=================================
 // オーバーロードコンストラクタ
@@ -43,6 +44,9 @@ HRESULT CResult::Init(void)
 
 	// メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+
+	// UI生成
+	CUi::Create(D3DXVECTOR3(640.0f, 205.0f, 0.0f), 0, 240.0f, 60.0f, "safe.png", false);
 
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);

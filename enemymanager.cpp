@@ -22,6 +22,7 @@ CEnemyManager::CEnemyManager()
 	// 値のクリア
 	m_nCount = NULL;
 	m_pEnemys.clear();
+	m_EnemyData.clear();
 }
 //==============================
 // デストラクタ
@@ -49,13 +50,8 @@ CEnemyManager* CEnemyManager::Create(void)
 //==============================
 HRESULT CEnemyManager::Init(void)
 {
-	// 初期敵生成
-	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
-	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -550.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
-	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, 550.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x",1);
-	CEnemy::Create(D3DXVECTOR3(0.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/fish.x",0);
-	CEnemy::Create(D3DXVECTOR3(2000.0f, 0.0f, -300.0f), VECTOR3_NULL, "data/MODEL/STAGEOBJ/Dunbel.x",0);
-	CEnemy::Create(D3DXVECTOR3(-2000.0f, 0.0f, 300.0f), VECTOR3_NULL, "data/MODEL/obj/kan.x", 1);
+	// 読み込み
+	CEnemyManager::LoadFile();
 
 	// 初期化処理
 	return S_OK;
@@ -67,6 +63,7 @@ void CEnemyManager::Uninit(void)
 {
 	// 破棄
 	m_pEnemys.clear();
+	m_EnemyData.clear();
 }
 //==============================
 // 更新処理
@@ -80,55 +77,122 @@ void CEnemyManager::Update(void)
 //==============================
 void CEnemyManager::LoadFile(void)
 {
-	// 開くファイルをセット
 	std::ifstream openfile("data/SCRIPT/EnemySystem.txt");
 	if (!openfile)
 	{
-		// 例外
 		MessageBox(GetActiveWindow(), "ファイルが見つかりません", "data/SCRIPT/EnemySystem.txt", MB_OK);
 		return;
 	}
 
-	// ローカル変数
 	std::string line;
-	int nNumFile = NULL;
+	int nNumEnemy = 0;
+	bool inBlock = false;
 
-	// 配列のクリア処理
-	m_SubListFiles.clear();
+	// 配列初期化
+	ENEMYDATA current{};
+	m_EnemyData.clear();
 
-	// 読み込み終わりまで回す
+	//==============================
+	// ファイルを1行ずつ解析
+	//==============================
 	while (std::getline(openfile, line))
 	{
-		// 一行読む
+		// コメント除去
+		if (line.find('#') != std::string::npos)
+			line = line.substr(0, line.find('#'));
+
+		// 空行スキップ
+		if (line.empty())
+			continue;
+		
+		// 読み込むライン
 		std::istringstream iss(line);
 		std::string token;
 		iss >> token;
 
-		// "="読み取り
-		if (token == "WAVES")
+		if (token == "NUM_ENEMY")
 		{
 			std::string eq;
-			iss >> eq >> nNumFile;
+			iss >> eq >> nNumEnemy;
 
-			// ファイル配列のサイズを確保
-			m_SubListFiles.resize(nNumFile);
+			// サイズ確保
+			m_EnemyData.reserve(nNumEnemy);
 		}
-		// "FILE"読み取り時
-		else if (token == "FILE")
+		else if (token == "START")
 		{
-			// パスと"="を代入
-			std::string eq, filepath;
+			inBlock = true;
+			current = ENEMYDATA(); // 構造体初期化
+		}
+		else if (token == "END")
+		{
+			// リストへ格納
+			inBlock = false;
+			m_EnemyData.push_back(current);
+		}
+		else if (token == "POS" && inBlock)
+		{
+			std::string eq; float x, y, z;
 
-			// ファイルパスを変数に格納
-			iss >> eq >> filepath;
+			iss >> eq >> x >> y >> z;
 
-			// 動的配列に追加
-			m_SubListFiles.push_back(filepath);
+			// 座標設定
+			current.pos = D3DXVECTOR3(x, y, z);
+		}
+		else if (token == "ROT" && inBlock)
+		{
+			std::string eq; 
+			float x, y, z;
+
+			iss >> eq >> x >> y >> z;
+
+			// 角度設定
+			current.rot = D3DXVECTOR3(x, y, z);
+		}
+		else if (token == "TYPE" && inBlock)
+		{
+			std::string eq; 
+			int type;
+			
+			iss >> eq >> type;
+
+			// 種類設定
+			current.nType = type;
+		}
+		else if (token == "FILEPATH" && inBlock)
+		{
+			std::string eq, path;
+			iss >> eq >> path;
+
+			// モデルパス設定
+			current.Modelname = path;
+		}
+		else if (token == "END_FILE")
+		{
+			break;
 		}
 	}
 
 	// ファイルを閉じる
 	openfile.close();
+
+	//==============================
+	// 実際に敵を出現させる
+	//==============================
+	for (const auto& data : m_EnemyData)
+	{
+		// 読み取ったデータから作成
+		CEnemy* pEnemy = CEnemy::Create
+		(
+			data.pos,
+			data.rot,
+			data.Modelname.c_str(),
+			data.nType
+		);
+
+		// 動的配列に追加
+		if (pEnemy)
+			m_pEnemys.push_back(pEnemy);
+	}
 }
 //==============================
 // 分割ファイル読み込み

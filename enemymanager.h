@@ -27,6 +27,18 @@ class CEnemy;
 class CEnemyManager
 {
 public:
+
+	//*******************************
+	// 情報格納構造体
+	//*******************************
+	struct ENEMYDATA
+	{
+		D3DXVECTOR3 pos;	// 座標
+		D3DXVECTOR3 rot;	// 座標
+		std::string Modelname; // モデル名
+		int nType;			// 状態
+	};
+
 	// コンストラクタ・デストラクタ
 	CEnemyManager();
 	~CEnemyManager();
@@ -47,6 +59,9 @@ private:
 	int m_nCount; // 出現カウント
 
 	std::vector<CEnemy*>m_pEnemys;		// 敵の動的配列
+
+	std::vector< ENEMYDATA>m_EnemyData; // 敵の構造体情報
+
 	std::vector<std::string> m_SubListFiles;	// 読み込むファイル群
 
 };
