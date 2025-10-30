@@ -136,7 +136,9 @@ void CEnemy::Update(void)
 	// 座標の更新
 	m_move.y -= 0.5f;
 	NowPos += m_move;
-	if (NowPos.y <= 0.0f) NowPos.y = 0.0f;
+
+	if (NowPos.y <= 0.0f) 
+		NowPos.y = 0.0f;
 
 	// コライダー座標
 	m_pCollider->SetPos(NowPos);
@@ -144,7 +146,7 @@ void CEnemy::Update(void)
 	// 当たり判定生成
 	for (int nCnt = 0; nCnt < COLLOBJ; nCnt++)
 	{
-		// コライダー取得 ( 2個のシュレッダーが存在 )
+		// シュレッダーのコライダー取得
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 
 		if (Collision(ShredderCol))
@@ -152,7 +154,7 @@ void CEnemy::Update(void)
 			// エフェクト生成
 			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
 
-			// 消す
+			// 自身の消去
 			this->Uninit();
 
 			// 影も消す
