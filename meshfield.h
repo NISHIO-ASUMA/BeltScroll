@@ -1,4 +1,4 @@
-//============================================
+//=============================================
 //
 // メッシュフィールド処理 [ meshfield.h ]
 // Author: Asuma Nishio
@@ -38,7 +38,9 @@ public:
 
 	// 静的メンバ関数
 	static CMeshField* Create(D3DXVECTOR3 pos, float fRadiusX,float fRadiusZ, int nNumX, int nNumZ);
+
 private:
+
 	LPDIRECT3DINDEXBUFFER9 m_pIdx; // インデックスバッファ
 	LPDIRECT3DVERTEXBUFFER9 m_pVtx;	// 頂点バッファ
 
@@ -52,11 +54,8 @@ private:
 	int m_nNumPrimitive;	// プリミティブ数
 	int m_nNumIdx;			// インデックス数
 	int m_nNumAllVtx;		// 全体頂点数
-
-
 	int m_nNumX;
 	int m_nNumZ;
-
 	int m_nTexIdx; // テクスチャインデックス
 };
 #endif

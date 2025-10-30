@@ -48,7 +48,6 @@ public:
 	void OffSetPos(D3DXVECTOR3 offpos) { m_offPos = offpos; }
 	void OffSetRot(D3DXVECTOR3 offrot) { m_offRot = offrot; }
 	void SetPartType(PARTTYPE nDestPartType) { m_parttype = nDestPartType; }
-	void SetColorChange(bool isFlags) { m_isColorChange = isFlags; }
 
 	// ゲッター
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
@@ -57,8 +56,6 @@ public:
 
 	// フラグメント
 	bool IsPlayer() const { return m_isPlayer; }
-	bool IsBoss() const { return m_isBoss; }
-	void SetIsBoss(bool flag) { m_isBoss = flag; }
 	void SetIsPlayer(bool flag) { m_isPlayer = flag; }
 
 	// 静的メンバ関数
@@ -79,8 +76,6 @@ private:
 	PARTTYPE m_parttype;	// モデルの種類
 
 	bool m_isPlayer; // プレイヤーに対応したモデルかどうか
-	bool m_isBoss;
-	bool m_isColorChange;
 };
 
 #endif

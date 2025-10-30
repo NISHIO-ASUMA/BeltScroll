@@ -138,9 +138,6 @@ HRESULT CPlayer::Init(void)
 	// オブジェクトの種類をセット
 	SetObjType(TYPE_PLAYER);
 
-	// モデル総数を代入
-	m_nNumAll = MAX_MODEL;
-
 	// フラグを設定
 	m_isDeath = false;
 	m_isJump = false;
@@ -198,7 +195,7 @@ HRESULT CPlayer::Init(void)
 void CPlayer::Uninit(void)
 {
 	// モデル数分の破棄
-	for (int nCnt = 0; nCnt < m_nNumAll; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_MODEL; nCnt++)
 	{
 		// nullptrチェック
 		if (m_apModel[nCnt] != nullptr)
@@ -459,11 +456,17 @@ void CPlayer::Update(void)
 	{
 		// 強度アップ
 		m_blower = Wrap(m_blower + 1, 0, static_cast<int>(BLOWER_MAXPOW));
+
+		// サウンド再生
+		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_WIND);
 	}
 	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E))
 	{
 		// 強度ダウン
 		m_blower = Wrap(m_blower - 1, 0, static_cast<int>(BLOWER_MAXPOW));
+
+		// サウンド再生
+		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_WIND);
 	}
 
 	// 強度に応じて設定
@@ -531,7 +534,7 @@ void CPlayer::Update(void)
 	// 判定の生成
 	for (int nCnt = 0; nCnt < 2; nCnt++)
 	{
-		// コライダー取得 ( 2個のシュレッダーが存在 )
+		// シュレッダーが持つコライダー取得
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 		
 		// 押し出し計算後の入れ物
@@ -606,26 +609,19 @@ void CPlayer::Draw(void)
 	pDevice->SetTransform(D3DTS_WORLD, &m_mtxworld);
 
 	// 全モデルパーツの描画
-	for (int nCnt = 0; nCnt < m_nNumAll; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_MODEL; nCnt++)
 	{
 		m_apModel[nCnt]->Draw();
 	}
 
-	// 識別描画
+	// デバッグフォント
 	CDebugproc::Print("プレイヤーの座標 { %.2f,%.2f,%.2f }", m_pos.x, m_pos.y, m_pos.z);
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 120);
 
-	// 識別描画
 	CDebugproc::Print("プレイヤーの角度 { %.2f,%.2f,%.2f }", m_rot.x, m_rot.y, m_rot.z);
-
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 140);
 
-	// モーション描画
 	CDebugproc::Print("MAINプレイヤーのモーション { %d } ", GetNowMotion());
-
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 160);
 }
 //=======================================
