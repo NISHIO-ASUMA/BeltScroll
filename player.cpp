@@ -31,6 +31,7 @@
 #include "shreddermanager.h"
 #include "shredder.h"
 #include "blockmanager.h"
+#include "template.h"
 
 //**********************
 // プレイヤー情報
@@ -186,7 +187,7 @@ HRESULT CPlayer::Init(void)
 	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
 
 	// UI
-	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(150.0f, 60.0f, 0.0f), m_blower);
+	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(1090.0f, 650.0f, 0.0f), m_blower);
 
 	// 結果を返す
 	return S_OK;
@@ -453,25 +454,34 @@ void CPlayer::Update(void)
 		//}
 	}
 
-	// ブロワー強度設定
-	if (CManager::GetInputKeyboard()->GetPress(DIK_1))
+	// ブロワー強度切り替え
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q))
 	{
-		// 各種設定
-		SetBlower(BLOWER_MIDIUMPOW);
+		// 強度アップ
+		m_blower = Wrap(m_blower + 1, 0, static_cast<int>(BLOWER_MAXPOW));
 	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_2))
+	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E))
 	{
-		// 各種設定
-		SetBlower(BLOWER_MAXPOW);
-	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_3))
-	{
-		// 各種設定
-		SetBlower(BLOWER_SMALLPOW);
+		// 強度ダウン
+		m_blower = Wrap(m_blower - 1, 0, static_cast<int>(BLOWER_MAXPOW));
 	}
 
-	// Lキーで範囲攻撃
-	if (CManager::GetInputKeyboard()->GetPress(DIK_L))
+	// 強度に応じて設定
+	switch (m_blower)
+	{
+	case BLOWER_SMALLPOW:
+		SetBlower(BLOWER_SMALLPOW);
+		break;
+	case BLOWER_MIDIUMPOW:
+		SetBlower(BLOWER_MIDIUMPOW);
+		break;
+	case BLOWER_MAXPOW:
+		SetBlower(BLOWER_MAXPOW);
+		break;
+	}
+
+	// Enterキーで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_RETURN))
 	{
 		// 有効判定
 		m_isAttack = true;
@@ -909,11 +919,8 @@ void CPlayer::StartJump(void)
 //===============================
 void CPlayer::SetBlower(int nType)
 {
-	// 代入
-	m_blower = nType;
-
 	// 種類に応じた強さ
-	switch (m_blower)
+	switch (nType)
 	{
 	case CPlayer::BLOWER_SMALLPOW:
 		m_fBlowerPow = BLOWERINFO::SMALLVALUE;
@@ -935,7 +942,7 @@ void CPlayer::SetBlower(int nType)
 	}
 
 	// 切り替え
-	m_pBlowerUi->SetTexture(m_blower);
+	m_pBlowerUi->SetTexture(nType);
 }
 //===============================
 // 現在のモーション種類取得

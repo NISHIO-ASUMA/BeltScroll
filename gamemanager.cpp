@@ -70,7 +70,7 @@ HRESULT CGameManager::Init(void)
 	m_pShredderManaher->Init();
 
 	// ゴール生成
-	m_pGoal = CGoal::Create(D3DXVECTOR3(4000.0f,60.0f,0.0f));
+	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,60.0f,0.0f));
 
 	// 初期化結果を返す
 	return S_OK;
@@ -123,10 +123,12 @@ void CGameManager::Uninit(void)
 //===============================
 void CGameManager::Update(void)
 {
+#ifdef _DEBUG
+
 	// キー入力で遷移
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_F5))
 	{
-		// リザルト
+		// 勝ちリザルト
 		CManager::GetFade()->SetFade(std::make_unique<CResult>());
 		
 		return;
@@ -135,12 +137,13 @@ void CGameManager::Update(void)
 	// キー入力で遷移
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_F6))
 	{
-		// ランキング
+		// 負けリザルト
 		CManager::GetFade()->SetFade(std::make_unique<CLoseResult>());
 
 		return;
 	}
 
+#endif
 	// nullチェック
 	if (m_pEnemyManager != nullptr)
 	{
@@ -153,15 +156,6 @@ void CGameManager::Update(void)
 		// 更新処理
 		m_pShredderManaher->Update();
 	}
-
-#ifdef _DEBUG
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_5))
-	{
-		// 検証用 : パーティクル出現
-		CConfettiParticle::Create(VECTOR3_NULL, COLOR_RED, 40, 150.0f, 60.0f, 100, 0.0f);
-	}
-#endif // _DEBUG
-
 }
 //===============================
 // 描画処理

@@ -1,13 +1,13 @@
 {
-   "AllObject": 3,
+   "AllObject": 6,
    "SetObjects": [
       {
-         "filepath": "data/MODEL/STAGEOBJ/haikei.x",
+         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
          "idx": 0,
          "pos": [
-            2583.989990234375,
-            528.0,
-            500.0
+            250.13999938964844,
+            60.0,
+            -540.0
          ],
          "rot": [
             0.0,
@@ -21,11 +21,49 @@
          ]
       },
       {
-         "filepath": "data/MODEL/STAGEOBJ/haikei.x",
+         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
          "idx": 1,
          "pos": [
-            545.4500122070313,
-            526.0,
+            2782.340087890625,
+            60.0,
+            -540.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ]
+      },
+      {
+         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
+         "idx": 2,
+         "pos": [
+            4952.14990234375,
+            60.0,
+            -540.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ]
+      },
+      {
+         "filepath": "data/MODEL/STAGEOBJ/haikei.x",
+         "idx": 3,
+         "pos": [
+            538.0,
+            530.0,
             500.0
          ],
          "rot": [
@@ -41,10 +79,29 @@
       },
       {
          "filepath": "data/MODEL/STAGEOBJ/haikei.x",
-         "idx": 2,
+         "idx": 4,
          "pos": [
-            4649.8701171875,
-            526.0,
+            2603.52001953125,
+            530.0,
+            500.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "scale": [
+            1.0,
+            1.0,
+            1.0
+         ]
+      },
+      {
+         "filepath": "data/MODEL/STAGEOBJ/haikei.x",
+         "idx": 5,
+         "pos": [
+            4667.66015625,
+            530.0,
             500.0
          ],
          "rot": [

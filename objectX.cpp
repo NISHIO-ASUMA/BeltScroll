@@ -243,8 +243,6 @@ void CObjectX::Draw(void)
 		pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
 	}
 
-
-
 	// ワールドマトリックスの設定
 	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
 
@@ -271,7 +269,8 @@ void CObjectX::Draw(void)
 		}
 		else
 		{
-			pDevice->SetTexture(0, nullptr); // テクスチャなし
+			// テクスチャなし
+			pDevice->SetTexture(0, nullptr); 
 		}
 
 		// モデル(パーツ)の描画

@@ -93,11 +93,10 @@ void CParticlePiler::Update(void)
 	D3DXVECTOR3 pos = m_pos;
 
 	// 角度
-	float fHalfSpread = D3DXToRadian(60.0f);// 扇形の広がり
+	float fHalfSpread = D3DXToRadian(30.0f);// 扇形の広がり
 
 	for (int nCnt = 0; nCnt < m_nMaxParticle; nCnt++)
 	{
-		// プレイヤー正面を中心に ±30°の範囲で角度を決定
 		float fAngle = m_fAngle + ((float)rand() / RAND_MAX * 2.0f - 1.0f) * fHalfSpread;
 
 		// 

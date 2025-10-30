@@ -83,10 +83,6 @@ HRESULT CEnemy::Init(void)
 	// 球コライダー生成
 	m_pCollider = CSphereCollider::Create(GetPos(), 85.0f);
 
-	// 移動量をセット
-	m_move.x = 5.0f;
-	m_move.z = 5.0f;
-
 	return S_OK;
 }
 //==============================
@@ -115,15 +111,6 @@ void CEnemy::Update(void)
 
 	// ブロワーの種類取得
 	int nBlowerType = pPlayer->GetBlowType();
-
-	// プレイヤーに向かってくる処理
-	D3DXVECTOR3 playerPos = pPlayer->GetPos();	// プレイヤー位置取得
-	D3DXVECTOR3 dir = playerPos - NowPos;		// プレイヤーへのベクトル
-	float dist = D3DXVec3Length(&dir);
-
-	D3DXVec3Normalize(&dir, &dir);
-	float speed = 1.5f; // 追従スピード
-	m_move += dir * speed;
 
 	// 現在のブロワーの種類に応じて飛ぶ敵かどうかを判断
 	if (m_TrushType <= nBlowerType)
@@ -154,7 +141,7 @@ void CEnemy::Update(void)
 	m_pCollider->SetPos(NowPos);
 
 	// 当たり判定生成
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < COLLOBJ; nCnt++)
 	{
 		// コライダー取得 ( 2個のシュレッダーが存在 )
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
@@ -170,6 +157,7 @@ void CEnemy::Update(void)
 			// 影も消す
 			m_pShadowS->Uninit();
 			
+			// 下の処理を通さない
 			return;
 		}
 	}
