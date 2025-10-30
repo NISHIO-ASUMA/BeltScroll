@@ -167,4 +167,54 @@ TYPE = 1
 FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
+#--------------------
+# 16体目
+#--------------------
+START
+POS = 3789.94 0.0 -297.24
+ROT = 0.0 0.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/sentakuki.x
+END
+
+#--------------------
+# 17体目
+#--------------------
+START
+POS = 4595.66 0.0 40.67
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/Dunbel.x
+END
+
+#--------------------
+# 18体目
+#--------------------
+START
+POS = 4910.79 0.0 -353.93
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/Dunbel.x
+END
+
+#--------------------
+# 19体目
+#--------------------
+START
+POS = 3570.72 0.0 262.64
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/fish.x
+END
+
+#--------------------
+# 20体目
+#--------------------
+START
+POS = 5216.68 0.0 201.07
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/fish.x
+END
+
 END_FILE
