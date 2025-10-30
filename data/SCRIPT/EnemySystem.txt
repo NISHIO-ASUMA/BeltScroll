@@ -8,7 +8,7 @@
 #=========================================
 # 敵の総数
 #=========================================
-NUM_ENEMY = 4
+NUM_ENEMY = 25
 
 #=====================================================
 # 敵の配置情報
@@ -55,6 +55,116 @@ POS = 1100.0 0.0 280.0
 ROT = 0.0 0.0 0.0
 TYPE = 2
 FILEPATH = data/MODEL/ENEMY/tire.x
+END
+
+#--------------------
+# 5体目
+#--------------------
+START
+POS = 1500.0 0.0 250.0
+ROT = 0.0 0.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/sentakuki.x
+END
+
+#--------------------
+# 6体目
+#--------------------
+START
+POS = 1095.0 0.0 -374.0
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/fish.x
+END
+
+#--------------------
+# 7体目
+#--------------------
+START
+POS = 1860.0 0.0 65.3
+ROT = 0.0 0.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/kan.x
+END
+
+#--------------------
+# 8体目
+#--------------------
+START
+POS = 1967.6 0.0 -330.37
+ROT = 0.0 0.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/kan.x
+END
+
+#--------------------
+# 9体目
+#--------------------
+START
+POS = 2354.6 0.0 320.2
+ROT = 0.0 0.0 0.0
+TYPE = 0
+FILEPATH = data/MODEL/ENEMY/Dunbel.x
+END
+
+#--------------------
+# 10体目
+#--------------------
+START
+POS = 2229.24 0.0 305.84
+ROT = 0.0 0.0 0.0
+TYPE = 2
+FILEPATH = data/MODEL/ENEMY/tire.x
+END
+
+#--------------------
+# 11体目
+#--------------------
+START
+POS = 2377.8 0.0 -440.22
+ROT = 0.0 0.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/sentakuki.x
+END
+
+#--------------------
+# 12体目
+#--------------------
+START
+POS = 3113.31 0.0 165.74
+ROT = 0.0 0.0 0.0
+TYPE = 2
+FILEPATH = data/MODEL/ENEMY/tire.x
+END
+
+#--------------------
+# 13体目
+#--------------------
+START
+POS = 3322.67 0.0 -237.03
+ROT = 0.0 0.0 0.0
+TYPE = 2
+FILEPATH = data/MODEL/ENEMY/tire.x
+END
+
+#--------------------
+# 14体目
+#--------------------
+START
+POS = 4086.15 0.0 266.96
+ROT = 0.0 0.0 0.0
+TYPE = 2
+FILEPATH = data/MODEL/ENEMY/tire.x
+END
+
+#--------------------
+# 15体目
+#--------------------
+START
+POS = 4220.93 0.0 -276.78
+ROT = 0.0 90.0 0.0
+TYPE = 1
+FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
 END_FILE
