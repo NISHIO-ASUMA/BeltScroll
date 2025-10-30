@@ -25,6 +25,7 @@ public:
 		SOUND_LABEL_TUTORIALBGM,	// チュートリアルBGM
 		SOUND_LABEL_RANKINGBGM,		// ランキングBGM
 		SOUND_LABEL_CLICKSE,		// 決定音
+		SOUND_LABEL_WIND,			// 風っぽい音
 		SOUND_LABEL_MAX
 	};
 
@@ -63,6 +64,7 @@ private:
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
 		{"data/BGM/rankingbgm.wav",-1},		 // ランキングBGM
 		{"data/SE/ClickEnter.wav",1},			 // 決定音
+		{"data/SE/wind.wav",1}
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

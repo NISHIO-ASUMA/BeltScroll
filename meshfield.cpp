@@ -63,11 +63,7 @@ CMeshField* CMeshField::Create(D3DXVECTOR3 pos, float fRadiusX, float fRadiusZ, 
 	pMeshField->SetTexture();
 
 	// 初期化失敗時
-	if (FAILED(pMeshField->Init()))
-	{
-		// nullポインタを返す
-		return nullptr;
-	}
+	if (FAILED(pMeshField->Init())) return nullptr;
 
 	// 生成されたポインタを返す
 	return pMeshField;
@@ -116,7 +112,7 @@ HRESULT CMeshField::Init(void)
 	m_rot = VECTOR3_NULL;
 
 	// 頂点情報のポインタを宣言
-	VERTEX_3D* pVtx = NULL;
+	VERTEX_3D* pVtx = nullptr;
 
 	//頂点バッファをロック
 	m_pVtx->Lock(0, 0, (void**)&pVtx, 0);
@@ -268,8 +264,9 @@ void CMeshField::Draw(void)
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, m_nNumAllVtx, 0, m_nNumPrimitive);
 
 	// テクスチャを戻す
-	pDevice->SetTexture(0, NULL);
+	pDevice->SetTexture(0, nullptr);
 
-	CDebugproc::Print("座標 [ %.2f,%.2f,%.2f ]",m_pos.x,m_pos.y,m_pos.z);
+	// デバッグフォント
+	CDebugproc::Print("メッシュフィールド座標 [ %.2f,%.2f,%.2f ]",m_pos.x, m_pos.y, m_pos.z);
 	CDebugproc::Draw(0, 20);
 }

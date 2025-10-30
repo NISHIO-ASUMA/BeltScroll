@@ -531,7 +531,7 @@ void CPlayer::Update(void)
 	// 判定の生成
 	for (int nCnt = 0; nCnt < 2; nCnt++)
 	{
-		// コライダー取得 ( 2個のシュレッダーが存在 )
+		// シュレッダーが持つコライダー取得
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 		
 		// 押し出し計算後の入れ物
@@ -611,21 +611,14 @@ void CPlayer::Draw(void)
 		m_apModel[nCnt]->Draw();
 	}
 
-	// 識別描画
+	// デバッグフォント
 	CDebugproc::Print("プレイヤーの座標 { %.2f,%.2f,%.2f }", m_pos.x, m_pos.y, m_pos.z);
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 120);
 
-	// 識別描画
 	CDebugproc::Print("プレイヤーの角度 { %.2f,%.2f,%.2f }", m_rot.x, m_rot.y, m_rot.z);
-
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 140);
 
-	// モーション描画
 	CDebugproc::Print("MAINプレイヤーのモーション { %d } ", GetNowMotion());
-
-	// デバッグフォント描画
 	CDebugproc::Draw(0, 160);
 }
 //=======================================
