@@ -1,0 +1,34 @@
+//======================================================
+//
+// シュレッドビンマネージャー処理 [ shredbinmanager.h ]
+// Author: Soichiro Sasaki
+//
+//======================================================
+
+#ifndef _SHREDBINMANAGER_H_ // このマクロ定義がされてなかったら
+#define _SHREDBINMANAGER_H_ // 2重インクルード防止のマクロ定義
+
+//******************************
+// シュレッダー管理クラスを定義
+//******************************
+class CShredbinManager
+{
+public:
+	// コンストラクタ・デストラクタ
+	CShredbinManager();
+	~CShredbinManager();
+
+	// メンバ関数
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+
+	// ゲッター
+	static int GetNumAll(void) { return m_nNum; }
+
+private:
+	static int m_nNum;
+	D3DXVECTOR3 m_pos;
+};
+
+#endif

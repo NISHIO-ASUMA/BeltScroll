@@ -1,7 +1,7 @@
 //======================================================
 //
 // シュレッダー管理処理 [ shreddermanager.cpp ]
-// Author: Asuma Nishio
+// Author: Soichiro Sasaki
 //
 //======================================================
 
@@ -10,6 +10,7 @@
 //******************************
 #include "shreddermanager.h"
 #include "shredder.h"
+#include "shredbinmanager.h"
 
 //===============================
 // コンストラクタ
@@ -22,6 +23,7 @@ CShredderManager::CShredderManager()
 	}
 	m_nSwapCnt = 0;
 	m_bRedFlont = true;
+	m_pA = nullptr;
 }
 //===============================
 // デストラクタ
@@ -38,7 +40,8 @@ HRESULT CShredderManager::Init(void)
 
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_GREEN]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, 250.0f), TYPE_GREEN);
-
+	m_pA = new CShredbinManager;
+	m_pA->Init();
 	return S_OK;
 }
 //===============================
@@ -46,7 +49,9 @@ HRESULT CShredderManager::Init(void)
 //===============================
 void CShredderManager::Uninit(void)
 {
-
+	m_pA->Uninit();
+	delete m_pA;
+	m_pA = nullptr;
 }
 //===============================
 // 更新処理
@@ -54,6 +59,7 @@ void CShredderManager::Uninit(void)
 void CShredderManager::Update(void)
 {
 	Swap();
+	m_pA->Update();
 }
 
 //===============================

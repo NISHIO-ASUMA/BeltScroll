@@ -12,6 +12,7 @@
 // 前方宣言
 //**************************
 class CShredder;
+class CShredbinManager;
 
 //******************************
 // シュレッダー管理クラスを定義
@@ -40,6 +41,7 @@ public:
 
 private:
 	CShredder* m_pShredder[2];	// ポインタ
+	CShredbinManager* m_pA;
 	int m_nSwapCnt;				// 入れ替えるカウント
 	bool m_bRedFlont;			// 赤いほうが手前にあるか
 	static constexpr int SWAPCOUNT = 300;

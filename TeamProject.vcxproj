@@ -206,6 +206,8 @@
     <ClCompile Include="score.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="shadowS.cpp" />
+    <ClCompile Include="shredbineffect.cpp" />
+    <ClCompile Include="shredbinManager.cpp" />
     <ClCompile Include="shredder.cpp" />
     <ClCompile Include="shreddermanager.cpp" />
     <ClCompile Include="sound.cpp" />
@@ -275,6 +277,8 @@
     <ClInclude Include="score.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="shadowS.h" />
+    <ClInclude Include="shredbineffect.h" />
+    <ClInclude Include="shredbinmanager.h" />
     <ClInclude Include="shredder.h" />
     <ClInclude Include="shreddermanager.h" />
     <ClInclude Include="sound.h" />
