@@ -1,9 +1,9 @@
-//=====================================
+//=======================================
 //
-// ブロック管理処理 [ blockmanager.h ]
+// ブロック管理処理 [ blockmanager.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=======================================
 
 //***************************
 // インクルードファイル
@@ -48,7 +48,7 @@ HRESULT CBlockManager::Init(void)
 	m_block.clear();
 
 	// json開く
-	LoadJsonScript("data/JSON/NewDataStage.json");
+	LoadJsonScript("data/JSON/Stage.json");
 
 	// 初期化結果を返す
 	return S_OK;
@@ -66,7 +66,7 @@ void CBlockManager::Uninit(void)
 //===========================
 void CBlockManager::Update(void)
 {
-
+	// 無し
 }
 //===========================
 // 生成処理
@@ -129,24 +129,27 @@ void CBlockManager::LoadJsonScript(const char* jsonName)
 		std::string filepath = b["filepath"];
 		int idx = b["idx"];
 
-		D3DXVECTOR3 pos(
+		D3DXVECTOR3 pos
+		(
 			b["pos"][0],
 			b["pos"][1],
 			b["pos"][2]
 		);
-		D3DXVECTOR3 rot(
+		D3DXVECTOR3 rot
+		(
 			b["rot"][0],
 			b["rot"][1],
 			b["rot"][2]
 		);
 
-		D3DXVECTOR3 size(
+		D3DXVECTOR3 scale
+		(
 			b["scale"][0],
 			b["scale"][1],
 			b["scale"][2]
 		);
 
 		// ブロック生成
-		CBlock* block = CreateManagerBlock(pos, rot, size, filepath.c_str());
+		CBlock* block = CreateManagerBlock(pos, rot, scale, filepath.c_str());
 	}
 }

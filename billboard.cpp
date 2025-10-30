@@ -226,7 +226,7 @@ void CBillboard::Draw(void)
 	if (m_nIdxTexture == -1)
 	{
 		// テクスチャを設定
-		pDevice->SetTexture(0, NULL);
+		pDevice->SetTexture(0, nullptr);
 	}
 	else
 	{
@@ -238,7 +238,7 @@ void CBillboard::Draw(void)
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
 	// テクスチャを戻す
-	pDevice->SetTexture(0, NULL);
+	pDevice->SetTexture(0, nullptr);
 
 	if (m_isTests)
 	{

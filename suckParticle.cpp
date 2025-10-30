@@ -1,21 +1,21 @@
 //==================================================
 //
-// パーティクルウィンドウ処理 [ particlepiler.h ]
-// Author: Asuma Nishio
+// 吸い込みパーティクル処理 [ suckParticle.h ]
+// Author: Soichiro Sasaki
 //
 //==================================================
 
 //**********************
 // インクルードファイル
 //**********************
-#include "particlepiler.h"
+#include "suckParticle.h"
 #include "manager.h"
-#include "effect.h"
+#include "suckeffect.h"
 
 //=====================================
 // オーバーロードコンストラクタ
 //=====================================
-CParticlePiler::CParticlePiler(int nPriority) : CObject(nPriority)
+CSuckParticle::CSuckParticle(int nPriority) : CObject(nPriority)
 {
 	// 値のクリア
 	m_pos = VECTOR3_NULL;
@@ -24,22 +24,21 @@ CParticlePiler::CParticlePiler(int nPriority) : CObject(nPriority)
 	m_nLife = NULL;
 	m_nLength = NULL;
 	m_nRadius = NULL;
-	m_fAngle = NULL;
 }
 //=====================================
 // デストラクタ
 //=====================================
-CParticlePiler::~CParticlePiler()
+CSuckParticle::~CSuckParticle()
 {
 	// 無し
 }
 //=====================================
 // 生成処理
 //=====================================
-CParticlePiler* CParticlePiler::Create(D3DXVECTOR3 pos, D3DXCOLOR col, int nMaxParticle, int nRadius, int nLength, int nLife,float fAngle)
+CSuckParticle* CSuckParticle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 targetPos, D3DXCOLOR col, int nMaxParticle, int nRadius, int nLength, int nLife)
 {
 	// パーティクルのポインタを宣言
-	CParticlePiler* pParticle = new CParticlePiler;
+	CSuckParticle* pParticle = new CSuckParticle;
 
 	// nullだったら
 	if (pParticle == nullptr) return nullptr;
@@ -53,12 +52,12 @@ CParticlePiler* CParticlePiler::Create(D3DXVECTOR3 pos, D3DXCOLOR col, int nMaxP
 
 	// オブジェクト設定
 	pParticle->m_pos = pos;
+	pParticle->m_targetPos = targetPos;
 	pParticle->m_col = col;
 	pParticle->m_nMaxParticle = nMaxParticle;
 	pParticle->m_nLength = nLength;
 	pParticle->m_nLife = nLife;
 	pParticle->m_nRadius = nRadius;
-	pParticle->m_fAngle = fAngle;
 
 	// ポインタを返す
 	return pParticle;
@@ -66,7 +65,7 @@ CParticlePiler* CParticlePiler::Create(D3DXVECTOR3 pos, D3DXCOLOR col, int nMaxP
 //=====================================
 // 初期化処理
 //=====================================
-HRESULT CParticlePiler::Init(void)
+HRESULT CSuckParticle::Init(void)
 {
 	// 配列クリア
 	m_pEffect.clear();
@@ -76,7 +75,7 @@ HRESULT CParticlePiler::Init(void)
 //=====================================
 // 終了処理
 //=====================================
-void CParticlePiler::Uninit(void)
+void CSuckParticle::Uninit(void)
 {
 	// 配列クリア
 	m_pEffect.clear();
@@ -87,34 +86,27 @@ void CParticlePiler::Uninit(void)
 //=====================================
 // 更新処理
 //=====================================
-void CParticlePiler::Update(void)
+void CSuckParticle::Update(void)
 {
 	D3DXCOLOR col = m_col;
 	D3DXVECTOR3 pos = m_pos;
-
-	// 角度
-	float fHalfSpread = D3DXToRadian(30.0f);// 扇形の広がり
+	D3DXVECTOR3 targetPos = m_targetPos;
 
 	for (int nCnt = 0; nCnt < m_nMaxParticle; nCnt++)
 	{
-		float fAngle = m_fAngle + ((float)rand() / RAND_MAX * 2.0f - 1.0f) * fHalfSpread;
+		pos.x = pos.x + ((float)(rand() % 30) - 15.0f);
+		pos.y = pos.y + ((float)(rand() % 60) - 30.0f);
+		pos.z = pos.z + ((float)(rand() % 150) - 75.0f);
 
-		// 
 		float fRadius = ((float)(rand() % m_nRadius) / 10.0f + 0.5f);
 
-		float fRise = (float)(rand() % m_nLength) / 50.0f + 0.1f;
-
-		// 移動方向
-		D3DXVECTOR3 Move;
-		Move.x = -sinf(fAngle) * fRadius;  // 
-		Move.z = -cosf(fAngle) * fRadius;  //
-		Move.y = fRise;
+		float fRise = (float)(rand() % m_nLength) / 50.0f + 7.0f;
 
 		// 寿命
 		int nLife = ((rand() % m_nLife) + 10);
 
 		// パーティクル生成
-		CEffect* pEffect = CEffect::Create(pos, col, Move, nLife, fRadius);
+		CSuckEffect* pEffect = CSuckEffect::Create(pos, targetPos, col,VECTOR3_NULL, nLife, fRadius);
 
 		if (pEffect)
 			m_pEffect.push_back(pEffect);
@@ -128,7 +120,7 @@ void CParticlePiler::Update(void)
 //=====================================
 // 描画処理
 //=====================================
-void CParticlePiler::Draw(void)
+void CSuckParticle::Draw(void)
 {
 	// 無し
 }

@@ -56,7 +56,9 @@ public:
 	~CAABBAABBCollision();
 
 	// ÉÅÉìÉoä÷êî
-	static bool Collision(CAABBCollider* me, CAABBCollider* other);
+	static bool Collision(CAABBCollider* me, CAABBCollider* other,D3DXVECTOR3 * pOutPos);
+	static bool CollisionT(CAABBCollider* me, CAABBCollider* other, D3DXVECTOR3* pOutPos);
+
 private:
 };
 

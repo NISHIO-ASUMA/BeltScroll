@@ -58,20 +58,19 @@ HRESULT CGameManager::Init(void)
 	m_pEnemyManager = CEnemyManager::Create();
 
 	// 壁生成
-
 	m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(0.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
 
 	// CGimmickFloor::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
 
-	//// マップモデル配置情報生成
-	//m_pBlockManager = new CBlockManager;
-	//m_pBlockManager->Init();
+	// マップモデル配置情報生成
+	m_pBlockManager = new CBlockManager;
+	m_pBlockManager->Init();
 
 	m_pShredderManaher = new CShredderManager;
 	m_pShredderManaher->Init();
 
 	// ゴール生成
-	m_pGoal = CGoal::Create(D3DXVECTOR3(4000.0f,60.0f,0.0f));
+	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,60.0f,0.0f));
 
 	// 初期化結果を返す
 	return S_OK;
@@ -124,10 +123,12 @@ void CGameManager::Uninit(void)
 //===============================
 void CGameManager::Update(void)
 {
+#ifdef _DEBUG
+
 	// キー入力で遷移
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_F5))
 	{
-		// リザルト
+		// 勝ちリザルト
 		CManager::GetFade()->SetFade(std::make_unique<CResult>());
 		
 		return;
@@ -136,12 +137,13 @@ void CGameManager::Update(void)
 	// キー入力で遷移
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_F6))
 	{
-		// ランキング
+		// 負けリザルト
 		CManager::GetFade()->SetFade(std::make_unique<CLoseResult>());
 
 		return;
 	}
 
+#endif
 	// nullチェック
 	if (m_pEnemyManager != nullptr)
 	{
@@ -151,7 +153,7 @@ void CGameManager::Update(void)
 	// nullチェック
 	if (m_pShredderManaher != nullptr)
 	{
-		// 敵管理の更新処理
+		// 更新処理
 		m_pShredderManaher->Update();
 	}
 }

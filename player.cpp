@@ -27,6 +27,11 @@
 #include "collider.h"
 #include "collision.h"
 #include "blowerui.h"
+#include "game.h"
+#include "shreddermanager.h"
+#include "shredder.h"
+#include "blockmanager.h"
+#include "template.h"
 
 //**********************
 // プレイヤー情報
@@ -175,13 +180,14 @@ HRESULT CPlayer::Init(void)
 
 	// コライダ―生成
 	m_pSphereCollider = CSphereCollider::Create(m_pos, 40.0f);
+	m_pAAABB = CAABBCollider::Create(m_pos,m_posOld,D3DXVECTOR3(60.0f,60.0f,60.0f));
 
 	// 初期値をセット
 	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
 	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
 
 	// UI
-	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(150.0f, 60.0f, 0.0f), m_blower);
+	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(1090.0f, 650.0f, 0.0f), m_blower);
 
 	// 結果を返す
 	return S_OK;
@@ -231,11 +237,18 @@ void CPlayer::Uninit(void)
 		m_pStateMachine = nullptr;
 	}
 
-	// コライダーの破棄
+	// 球形コライダーの破棄
 	if (m_pSphereCollider)
 	{
 		delete m_pSphereCollider;
 		m_pSphereCollider = nullptr;
+	}
+
+	// 矩形コライダーの破棄
+	if (m_pAAABB)
+	{
+		delete m_pAAABB;
+		m_pAAABB = nullptr;
 	}
 
 	// オブジェクト自身の破棄
@@ -441,25 +454,34 @@ void CPlayer::Update(void)
 		//}
 	}
 
-	// ブロワー強度設定
-	if (CManager::GetInputKeyboard()->GetPress(DIK_1))
+	// ブロワー強度切り替え
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q))
 	{
-		// 各種設定
-		SetBlower(BLOWER_MIDIUMPOW);
+		// 強度アップ
+		m_blower = Wrap(m_blower + 1, 0, static_cast<int>(BLOWER_MAXPOW));
 	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_2))
+	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E))
 	{
-		// 各種設定
-		SetBlower(BLOWER_MAXPOW);
-	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_3))
-	{
-		// 各種設定
-		SetBlower(BLOWER_SMALLPOW);
+		// 強度ダウン
+		m_blower = Wrap(m_blower - 1, 0, static_cast<int>(BLOWER_MAXPOW));
 	}
 
-	// Lキーで範囲攻撃
-	if (CManager::GetInputKeyboard()->GetPress(DIK_L))
+	// 強度に応じて設定
+	switch (m_blower)
+	{
+	case BLOWER_SMALLPOW:
+		SetBlower(BLOWER_SMALLPOW);
+		break;
+	case BLOWER_MIDIUMPOW:
+		SetBlower(BLOWER_MIDIUMPOW);
+		break;
+	case BLOWER_MAXPOW:
+		SetBlower(BLOWER_MAXPOW);
+		break;
+	}
+
+	// Enterキーで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_RETURN))
 	{
 		// 有効判定
 		m_isAttack = true;
@@ -476,6 +498,55 @@ void CPlayer::Update(void)
 
 	// 位置更新
 	m_pos += m_move;
+
+	// コライダー座標の設定
+	m_pAAABB->SetPos(m_pos);
+	m_pAAABB->SetOldPos(m_posOld);
+
+	// マップに配置されているブロックを取得
+	auto Block = CGame::GetGameManager()->GetBlockManager();
+	if (Block == nullptr) return;
+
+	// ブロックオブジェクトとの当たり判定
+	for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
+	{
+		// コライダー取得
+		CAABBCollider* pCollider = Block->GetBlock(nBlock)->GetCollider();
+
+		// 座標の押し出し用入れ物変数
+		D3DXVECTOR3 CollBlockPos = m_pos;
+
+		// 実際のコリジョン
+		if (CollisionBox(pCollider, &CollBlockPos))
+		{
+			// 押し出す座標をセットする
+			m_pos = CollBlockPos;
+
+			// コライダー座標更新
+			m_pAAABB->SetPos(CollBlockPos);
+		}
+	}
+
+
+	// 判定の生成
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		// コライダー取得 ( 2個のシュレッダーが存在 )
+		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
+		
+		// 押し出し計算後の入れ物
+		D3DXVECTOR3 OutPos = m_pos;
+
+		// 当たっているなら
+		if (CollisionBox(ShredderCol,&OutPos))
+		{
+			// 押し出す座標をセットする
+			m_pos = OutPos;
+
+			// 矩形コライダーの更新
+			m_pAAABB->SetPos(OutPos);
+		}
+	}
 
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.75f;
@@ -619,11 +690,11 @@ void CPlayer::EnemyBlow(void)
 	}
 }
 //===============================
-// 当たり判定関数
+// 当たり判定関数 ( 矩形 )
 //================================
-bool CPlayer::Collision(CSphereCollider* pOther)
+bool CPlayer::CollisionBox(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
 {
-	return CSphereSphereCollision::Collision(m_pSphereCollider, pOther);
+	return CAABBAABBCollision::CollisionT(m_pAAABB,pOther, pOutPos);
 }
 //=========================================
 // モデルの特定部分パーツの取得関数
@@ -848,11 +919,8 @@ void CPlayer::StartJump(void)
 //===============================
 void CPlayer::SetBlower(int nType)
 {
-	// 代入
-	m_blower = nType;
-
 	// 種類に応じた強さ
-	switch (m_blower)
+	switch (nType)
 	{
 	case CPlayer::BLOWER_SMALLPOW:
 		m_fBlowerPow = BLOWERINFO::SMALLVALUE;
@@ -874,7 +942,7 @@ void CPlayer::SetBlower(int nType)
 	}
 
 	// 切り替え
-	m_pBlowerUi->SetTexture(m_blower);
+	m_pBlowerUi->SetTexture(nType);
 }
 //===============================
 // 現在のモーション種類取得

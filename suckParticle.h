@@ -1,12 +1,11 @@
 //=============================================
 //
-// 紙吹雪パーティクル処理 [ confettiparticle.h ]
+// 吸い込みパーティクル処理 [ suckParticle.h ]
 // Author: Soichiro Sasaki
-//
 //=============================================
 
-#ifndef _CONFETTIPARTICLE_H_ // このマクロ定義がされてなかったら
-#define _CONFETTIPARTICLE_H_ // 2重インクルード防止のマクロ定義
+#ifndef _SUCKPARTICLE_H_ // このマクロ定義がされてなかったら
+#define _SUCKPARTICLE_H_ // 2重インクルード防止のマクロ定義
 
 //**********************
 // インクルードファイル
@@ -17,17 +16,17 @@
 //*********************
 // 前方宣言
 //*********************
-class CConfettiEffect;
+class CSuckEffect;
 
 //**************************
 // パーティクルクラスを定義
 //**************************
-class CConfettiParticle : public CObject
+class CSuckParticle : public CObject
 {
 public:
 	// コンストラクタ・デストラクタ
-	CConfettiParticle(int nPriority = static_cast<int>(CObject::PRIORITY::EFFECT));
-	~CConfettiParticle();
+	CSuckParticle(int nPriority = static_cast<int>(CObject::PRIORITY::EFFECT));
+	~CSuckParticle();
 
 	// メンバ関数
 	HRESULT Init(void);
@@ -36,18 +35,18 @@ public:
 	void Draw(void);
 
 	// 静的メンバ関数
-	static CConfettiParticle* Create(D3DXVECTOR3 pos, D3DXCOLOR col, int nMaxParticle, int nRadius, int nLength, int nLife, float fAngle);
+	static CSuckParticle* Create(D3DXVECTOR3 pos, D3DXVECTOR3 targetPos,D3DXCOLOR col, int nMaxParticle, int nRadius, int nLength, int nLife);
 
 private:
-	std::vector<CConfettiEffect*> m_pEffect; // エフェクト配列
+	std::vector<CSuckEffect*> m_pEffect; // エフェクト配列
 
 	D3DXVECTOR3 m_pos;	// 座標
+	D3DXVECTOR3 m_targetPos;	// 目標の座標
 	D3DXCOLOR m_col;	// 色
 	int m_nMaxParticle; // 最大数
 	int m_nLife;		// 寿命
 	int m_nLength;		// 飛散する距離
 	int m_nRadius;		// 粒の大きさ
-	float m_fAngle;		// 角度
 
 };
 

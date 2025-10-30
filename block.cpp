@@ -9,6 +9,8 @@
 // インクルードファイル
 //**********************
 #include "block.h"
+#include "collider.h"
+#include "collision.h"
 
 //================================
 // オーバーロードコンストラクタ
@@ -16,6 +18,7 @@
 CBlock::CBlock(int nPriority) : CObjectX(nPriority)
 {
 	// 値のクリア
+	m_pAABB = nullptr;
 }
 //================================
 // デストラクタ
@@ -34,10 +37,10 @@ CBlock* CBlock::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 Scale, cons
 	if (pBlock == nullptr) return nullptr;
 
 	// オブジェクト設定
+	pBlock->SetFilePass(FileName);
 	pBlock->SetPos(pos);
 	pBlock->SetRot(rot);
 	pBlock->SetScale(Scale);
-	pBlock->SetFilePass(FileName);
 
 	// 初期化失敗時
 	if (FAILED(pBlock->Init()))
@@ -56,6 +59,9 @@ HRESULT CBlock::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
+	// AABBコライダー生成
+	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());
+
 	return S_OK;
 }
 //================================
@@ -63,6 +69,13 @@ HRESULT CBlock::Init(void)
 //================================
 void CBlock::Uninit(void)
 {
+	// ポインタの破棄
+	if (m_pAABB)
+	{
+		delete m_pAABB;
+		m_pAABB = nullptr;
+	}
+
 	// 親クラスの終了
 	CObjectX::Uninit();
 }
@@ -71,6 +84,12 @@ void CBlock::Uninit(void)
 //================================
 void CBlock::Update(void)
 {
+	// 座標取得
+	D3DXVECTOR3 pos = GetPos();
+
+	// コライダー座標更新
+	m_pAABB->SetPos(pos);
+
 	// 親クラスの更新
 	CObjectX::Update();
 }
@@ -83,10 +102,10 @@ void CBlock::Draw(void)
 	CObjectX::Draw();
 }
 //================================
-// 当たり判定
+// 矩形の当たり判定
 //================================
-bool CBlock::Collision(D3DXVECTOR3* pPos, D3DXVECTOR3* pPosOld, D3DXVECTOR3* pMove, float fDestSize, bool& isLanding)
+bool CBlock::Collision(CAABBCollider* pOther, D3DXVECTOR3* pOutPos)
 {
-	// 当たらない時
-	return false;
+	// 矩形の当たり判定を返す
+	return CAABBAABBCollision::CollisionT(m_pAABB,pOther, pOutPos);
 }

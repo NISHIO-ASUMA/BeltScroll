@@ -14,6 +14,7 @@
 #include "collider.h"
 #include "collision.h"
 #include "confettiparticle.h"
+#include "suckparticle.h"
 
 //================================
 // オーバーロードコンストラクタ
@@ -65,7 +66,7 @@ HRESULT CTrushSim::Init(void)
 	// 親クラスの初期化
 	CObjectX::Init();
 
-	m_pCollider = CAABBCollider::Create(GetPos(), GetSize());
+	m_pCollider = CAABBCollider::Create(GetPos(), m_posOld,GetSize());
 	return S_OK;
 }
 //================================
@@ -163,8 +164,7 @@ void CTrushSim::Controll(void)
 	}
 	if (pKeyboard->GetPress(DIK_0))
 	{// 左方向
-		CConfettiParticle::Create(pos, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 5, 150, 500, 40, -1.07f);
-
+		CSuckParticle::Create(pos,VECTOR3_NULL,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),5,30,20,20);
 	}
 
 

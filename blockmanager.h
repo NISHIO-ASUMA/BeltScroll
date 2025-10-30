@@ -15,7 +15,12 @@
 #include "block.h"
 
 //***************************
-// 管理クラスを定義
+// 前方宣言
+//***************************
+class CAABBCollider;
+
+//***************************
+// ブロック管理クラスを定義
 //***************************
 class CBlockManager
 {
@@ -31,9 +36,12 @@ public:
 
 	// 静的メンバ関数
 	static CBlock* CreateManagerBlock(D3DXVECTOR3 pos,D3DXVECTOR3 rot,D3DXVECTOR3 scale,const char * pModelName);
+	static int GetAll(void) { return static_cast<int>(m_block.size()); }
+	static CBlock* GetBlock(const int nIdx) { return m_block[nIdx]; }
+	static std::vector <CBlock*> GetInfo() { return m_block; }
 
 private:
-	void LoadJsonScript(const char* jsonName); 	// 読み込み
+	void LoadJsonScript(const char* jsonName); 	// jsonファイル読み込み関数
 
 	static std::vector<CBlock*>m_block;	// 動的配列
 };

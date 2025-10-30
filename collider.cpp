@@ -63,7 +63,7 @@ CSphereCollider* CSphereCollider::Create(D3DXVECTOR3 pos, float fRadius)
 //===============================
 // インスタンス生成
 //===============================
-CAABBCollider* CAABBCollider::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
+CAABBCollider* CAABBCollider::Create(D3DXVECTOR3 pos, D3DXVECTOR3 posOld,D3DXVECTOR3 size)
 {
 	// インスタンス生成
 	CAABBCollider* pAABBCollider = new CAABBCollider;
@@ -71,6 +71,7 @@ CAABBCollider* CAABBCollider::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size)
 
 	// 初期設定
 	pAABBCollider->SetPos(pos);
+	pAABBCollider->SetOldPos(posOld);
 	pAABBCollider->SetSize(size);
 
 	// 生成されたインスタンスを返す
