@@ -38,9 +38,6 @@ HRESULT CResult::Init(void)
 	CCamera* pCamera = CManager::GetCamera();
 	pCamera->Init();
 
-	// uiê∂ê¨
-	// CUi::Create(CENTERPOS,0,640.0f,360.0f,"GameClear.jpg",false);
-
 	// ÉvÉåÉCÉÑÅ[ê∂ê¨
 	CWinPlayer::Create(VECTOR3_NULL);
 

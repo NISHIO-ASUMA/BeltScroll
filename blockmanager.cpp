@@ -1,9 +1,9 @@
-//=====================================
+//=======================================
 //
-// ブロック管理処理 [ blockmanager.h ]
+// ブロック管理処理 [ blockmanager.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=======================================
 
 //***************************
 // インクルードファイル
@@ -66,25 +66,7 @@ void CBlockManager::Uninit(void)
 //===========================
 void CBlockManager::Update(void)
 {
-
-}
-//===========================
-// 当たり判定を返す処理
-//===========================
-bool CBlockManager::Collision(CAABBCollider* pCollider, D3DXVECTOR3* OutPos)
-{
-	// 配置されているブロックを見る
-	for (auto iter = m_block.begin(); iter != m_block.end(); iter++)
-	{
-		// オブジェクトが存在　かつ ヒットが有効
-		if ((*iter) != nullptr && (*iter)->Collision(pCollider, OutPos))
-		{
-			return true;
-		}
-	}
-
-	// 当たらないとき
-	return false;
+	// 無し
 }
 //===========================
 // 生成処理
@@ -147,24 +129,27 @@ void CBlockManager::LoadJsonScript(const char* jsonName)
 		std::string filepath = b["filepath"];
 		int idx = b["idx"];
 
-		D3DXVECTOR3 pos(
+		D3DXVECTOR3 pos
+		(
 			b["pos"][0],
 			b["pos"][1],
 			b["pos"][2]
 		);
-		D3DXVECTOR3 rot(
+		D3DXVECTOR3 rot
+		(
 			b["rot"][0],
 			b["rot"][1],
 			b["rot"][2]
 		);
 
-		D3DXVECTOR3 size(
+		D3DXVECTOR3 scale
+		(
 			b["scale"][0],
 			b["scale"][1],
 			b["scale"][2]
 		);
 
 		// ブロック生成
-		CBlock* block = CreateManagerBlock(pos, rot, size, filepath.c_str());
+		CBlock* block = CreateManagerBlock(pos, rot, scale, filepath.c_str());
 	}
 }

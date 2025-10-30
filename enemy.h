@@ -71,5 +71,8 @@ private:
 	int m_TrushType;		// ゴミの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
 	CSphereCollider* m_pCollider; // コライダー
+
+	static constexpr int COLLOBJ = 2; // シュレッダー数
+
 };
 
