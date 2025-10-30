@@ -28,8 +28,6 @@ CModel::CModel()
 	m_offRot = VECTOR3_NULL;
 	m_parttype = PARTTYPE_NONE;
 	m_isPlayer  = false;
-	m_isBoss = false;
-	m_isColorChange = false;
 }
 //=================================
 // デストラクタ
@@ -185,22 +183,22 @@ void CModel::Draw(void)
 	// マテリアル数だけ回す
 	for (int nCntMat = 0; nCntMat < (int)m_dwNumMat; nCntMat++)
 	{
-		// カラー変更マテリアル
-		if (m_isColorChange)
-		{
-			D3DXMATERIAL Col = pMat[nCntMat];
+		// マテリアル設定
+		pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
-			Col.MatD3D.Diffuse.a = 0.5f;
+		//// カラー変更マテリアル
+		//if (m_isColorChange)
+		//{
+		//	D3DXMATERIAL Col = pMat[nCntMat];
 
-			// マテリアル設定
-			pDevice->SetMaterial(&Col.MatD3D);
-		}
-		else
-		{
-			// マテリアル設定
-			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
-		}
+		//	Col.MatD3D.Diffuse.a = 0.5f;
 
+		//	// マテリアル設定
+		//	pDevice->SetMaterial(&Col.MatD3D);
+		//}
+		//else
+		//{
+		//}
 
 		// インデックスに応じて変更する
 		if (m_pTexture[nCntMat] != -1)
