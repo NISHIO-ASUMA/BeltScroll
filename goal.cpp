@@ -15,7 +15,7 @@
 //====================================
 CGoal::CGoal(int nPriority) : CObjectX(nPriority) , m_DestPos(VECTOR3_NULL)
 {
-
+	// 値のクリア
 }
 //====================================
 // デストラクタ
@@ -92,7 +92,7 @@ bool CGoal::CheckPos(D3DXVECTOR3 pos)
 	float fLength = D3DXVec3Length(&diffpos);
 
 	// 範囲内の座標に入っていたら
-	if (fLength < 100.0f)
+	if (fLength < 120.0f)
 	{
 		return true;
 	}

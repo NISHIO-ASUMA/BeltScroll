@@ -55,12 +55,11 @@ HRESULT CGameManager::Init(void)
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player.txt");
 
 	// 敵管理クラスを定義
-	m_pEnemyManager = CEnemyManager::Create();
+	m_pEnemyManager = std::make_unique<CEnemyManager>();
+	m_pEnemyManager->Init();
 
-	// 壁生成
-	m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(0.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
-
-	// CGimmickFloor::Create(D3DXVECTOR3(400.0f, 100.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/gimmick.x");
+	//// 壁生成
+	//m_pTrushSim = CTrushSim::Create(D3DXVECTOR3(0.0f, 30.0f, 0.0f), VECTOR3_NULL, INITSCALE, "data/MODEL/STAGEOBJ/block000.x");
 
 	// マップモデル配置情報生成
 	m_pBlockManager = new CBlockManager;
@@ -70,7 +69,7 @@ HRESULT CGameManager::Init(void)
 	m_pShredderManaher->Init();
 
 	// ゴール生成
-	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,60.0f,0.0f));
+	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,75.0f,0.0f));
 
 	// 初期化結果を返す
 	return S_OK;
@@ -93,18 +92,8 @@ void CGameManager::Uninit(void)
 		m_pBlockManager = nullptr;
 	}
 
-	// nullチェック
-	if (m_pEnemyManager != nullptr)
-	{
-		// 終了処理
-		m_pEnemyManager->Uninit();
-
-		// 破棄
-		delete m_pEnemyManager;
-
-		// null初期化
-		m_pEnemyManager = nullptr;
-	}
+	// 敵マネージャーの破棄
+	m_pEnemyManager.reset();
 
 	if (m_pShredderManaher != nullptr)
 	{
@@ -150,6 +139,7 @@ void CGameManager::Update(void)
 		// 敵管理の更新処理
 		m_pEnemyManager->Update();
 	}
+
 	// nullチェック
 	if (m_pShredderManaher != nullptr)
 	{
