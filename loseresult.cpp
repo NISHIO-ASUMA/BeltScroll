@@ -14,6 +14,7 @@
 #include "fade.h"
 #include "ranking.h"
 #include "loseplayer.h"
+#include "meshfield.h"
 
 //==============================
 // コンストラクタ
@@ -34,10 +35,19 @@ CLoseResult::~CLoseResult()
 //==============================
 HRESULT CLoseResult::Init(void)
 {
+	// カメラ初期化
+	CManager::GetCamera()->Init();
+
 	// UI生成
-	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "gameover.jpg", false);
-	// リザルトプレイヤー生成
-	CLosePlayer::Create(D3DXVECTOR3(0.0f,0.0f,-200.0f));	return S_OK;
+	CUi::Create(D3DXVECTOR3(640.0f, 205.0f, 0.0f), 0, 240.0f, 60.0f, "out.png", false);
+
+	// メッシュフィールド生成
+	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+
+	// 負けリザルトプレイヤー生成
+	CLosePlayer::Create(VECTOR3_NULL);	
+	
+	return S_OK;
 }
 //==============================
 // 終了処理

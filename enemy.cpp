@@ -22,6 +22,7 @@
 #include "score.h"
 #include "confettieffect.h"
 #include "confettiparticle.h"
+#include "blockmanager.h"
 
 //==============================
 // コンストラクタ
@@ -161,6 +162,24 @@ void CEnemy::Update(void)
 			return;
 		}
 	}
+
+	// TODO : 今度考える
+	//// マップに配置されているブロックを取得 
+	//auto Block = CGame::GetGameManager()->GetBlockManager();
+	//if (Block == nullptr) return;
+
+	//// ブロックオブジェクトとの当たり判定
+	//for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
+	//{
+	//	// コライダー取得
+	//	CAABBCollider* pCollider = Block->GetBlock(nBlock)->GetCollider();
+
+	//	// 実際のコリジョン
+	//	if (Collision(pCollider))
+	//	{
+
+	//	}
+	//}
 
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.25f;
