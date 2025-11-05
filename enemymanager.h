@@ -50,11 +50,14 @@ public:
 
 	// 静的メンバ関数
 	static CEnemyManager* Create(void);
+	CEnemy* CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType);
+	void PushBack(CEnemy* pEnemy) { m_pEnemys.push_back(pEnemy); }
 
 private:
 
 	void LoadFile(void);				   // ファイル読み込み関数
 	void LoadSplit(const char* pFileName); // 分割読み込み
+	void LoadJson(void);
 
 	int m_nCount; // 出現カウント
 

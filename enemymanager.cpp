@@ -3,6 +3,8 @@
 // 敵管理処理 [ enemymanager.cpp ]
 // Author: Asuma Nishio
 //
+// TODO : ここのjson読み込みを修正する
+// 
 //===================================
 
 //******************************
@@ -13,6 +15,9 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "json.hpp"
+
+using json = nlohmann::json; // jsonファイル形式を使用する
 
 //==============================
 // コンストラクタ
@@ -44,6 +49,22 @@ CEnemyManager* CEnemyManager::Create(void)
 	if (FAILED(pManager->Init())) return nullptr;
 
 	return pManager;
+}
+//==============================
+// 生成処理
+//==============================
+CEnemy* CEnemyManager::CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType)
+{
+	// インスタンス生成
+	CEnemy* pEnemy = CEnemy::Create(pos,rot,pModelName,nType);
+
+	if (pEnemy)
+	{
+		// 配列格納
+		PushBack(pEnemy);
+	}
+
+	return pEnemy;
 }
 //==============================
 // 初期化処理
@@ -206,5 +227,68 @@ void CEnemyManager::LoadSplit(const char* pFileName)
 		// 例外
 		MessageBox(GetActiveWindow(), "このファイルパスはありません", "読み込みエラー", MB_OK);
 		return;
+	}
+}
+//==============================
+// jsonファイル読み込み
+//==============================
+void CEnemyManager::LoadJson(void)
+{
+	// 開くファイル
+	std::ifstream file("data/JSON/EnemyData.json");
+
+	// 開け無かった
+	if (!file.is_open())
+	{
+		// 例外
+		MessageBox(nullptr, "ファイルの読み込みに失敗しました", "エラー", MB_OK | MB_ICONERROR);
+
+		// 終了
+		return;
+	}
+
+	// jsonから取得する
+	json j;
+	file >> j;
+
+	// ファイルを閉じる
+	file.close();
+
+	// 既存の敵を消す
+	for (auto Enemy : m_pEnemys)
+	{
+		if (Enemy != nullptr)
+		{
+			// 敵の終了処理
+			Enemy->Uninit();
+		}
+	}
+
+	// 動的配列を空にする
+	m_pEnemys.clear();
+
+	// SetObjectsの配列を回す
+	for (const auto& b : j["SetObjects"])
+	{
+		std::string filepath = b["filepath"];
+		int idx = b["idx"];
+
+		D3DXVECTOR3 pos
+		(
+			b["pos"][0],
+			b["pos"][1],
+			b["pos"][2]
+		);
+		D3DXVECTOR3 rot
+		(
+			b["rot"][0],
+			b["rot"][1],
+			b["rot"][2]
+		);
+
+		int nType = b["Type"];
+
+		// 敵生成
+		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(),nType);
 	}
 }
