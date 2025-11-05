@@ -228,11 +228,11 @@
     <ClCompile Include="shredbineffect.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="windparticle.cpp">
-=======
+	  <Filter>ソース ファイル</Filter>
+	  <ClCompile Include="windparticle.cpp">
+		  <Filter>ソース ファイル</Filter>
+	  </ClCompile>
     <ClCompile Include="bonusscore.cpp">
->>>>>>> 4d0b3bc55283ae48a52c2a35c2b0d1e0488c2555
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -447,11 +447,10 @@
     <ClInclude Include="shredbineffect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="windparticle.h">
-=======
+		<Filter>ヘッダー ファイル</Filter>
+	</ClInclude>
     <ClInclude Include="bonusscore.h">
->>>>>>> 4d0b3bc55283ae48a52c2a35c2b0d1e0488c2555
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
