@@ -54,7 +54,7 @@ public:
 	static CWinPlayer* Create(D3DXVECTOR3 pos);
 
 private:
-	static inline constexpr int WIN_MODEL = 16; // プレイヤーで使うモデルの数
+	static inline constexpr int WIN_MODEL = 17; // プレイヤーで使うモデルの数
 
 	D3DXVECTOR3 m_pos;		// 階層構造設定座標
 	D3DXVECTOR3 m_rot;		// 角度

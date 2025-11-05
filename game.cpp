@@ -51,6 +51,8 @@ CGame::~CGame()
 //==================================
 HRESULT CGame::Init(void)
 {
+	CManager::GetCamera()->Init();		// カメラ初期化
+
 	// ポーズマネージャー生成
 	m_pPausemanager = new CPauseManager;
 
@@ -63,7 +65,7 @@ HRESULT CGame::Init(void)
 	// ポーズマネージャー初期化処理
 	m_pPausemanager->Init();
 
-	// マネージャー生成
+	// ゲームマネージャー生成
 	m_pGameManager = new CGameManager;
 	m_pGameManager->Init();
 

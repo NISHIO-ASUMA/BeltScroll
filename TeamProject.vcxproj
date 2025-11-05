@@ -221,6 +221,7 @@
     <ClCompile Include="trushSim.cpp" />
     <ClCompile Include="tutorial.cpp" />
     <ClCompile Include="ui.cpp" />
+    <ClCompile Include="windparticle.cpp" />
     <ClCompile Include="winplayer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +294,7 @@
     <ClInclude Include="trushSim.h" />
     <ClInclude Include="tutorial.h" />
     <ClInclude Include="ui.h" />
+    <ClInclude Include="windparticle.h" />
     <ClInclude Include="winplayer.h" />
   </ItemGroup>
   <ItemGroup>
