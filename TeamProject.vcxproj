@@ -156,6 +156,7 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="blockmanager.cpp" />
     <ClCompile Include="blowerui.cpp" />
+    <ClCompile Include="bonusscore.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="blockmanager.h" />
     <ClInclude Include="blowerui.h" />
+    <ClInclude Include="bonusscore.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="collision.h" />
