@@ -228,7 +228,6 @@
     <ClCompile Include="shredbineffect.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-	  <Filter>ソース ファイル</Filter>
 	  <ClCompile Include="windparticle.cpp">
 		  <Filter>ソース ファイル</Filter>
 	  </ClCompile>
