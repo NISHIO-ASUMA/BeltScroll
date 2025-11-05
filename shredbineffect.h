@@ -29,12 +29,13 @@ public:
 	void Update(void);
 	void Draw(void);
 	void Collision(void);
+	void GetManagerPosition(void);
 
 	// ゲッター
 	static int GetNumAll(void) { return m_nNumAll; }
 
 	// 静的メンバ関数
-	static CShredbinEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col,float fRadius);
+	static CShredbinEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col,float fRadius,int m_nType);
 
 private:
 	static int m_nNumAll;
@@ -43,6 +44,7 @@ private:
 	D3DXVECTOR3 m_size;
 	int m_nIdx;							// 体力
 	float m_fRadius;					// 半径
+	int m_nType;						// 種類
 	D3DXVECTOR3 m_move;					// 移動量
 };
 

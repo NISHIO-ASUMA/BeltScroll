@@ -20,6 +20,7 @@
 //**********************
 class CAABBCollider;
 class CModel;
+class CShredbinManager;
 
 //***************************
 // シュレッダークラスを定義
@@ -41,6 +42,7 @@ public:
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; };
 	void SetPosZ(float posZ);
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
+	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -54,4 +56,5 @@ private:
 	D3DXVECTOR3 m_move; // 移動量
 	int m_nType;		// 種類
 	CAABBCollider* m_pAABB; // 矩形のコライダー
+	CShredbinManager* m_pShredbinManager;
 };

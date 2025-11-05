@@ -18,6 +18,7 @@
 #include "collision.h"
 #include "model.h"
 #include "suckParticle.h"
+#include "shredbinmanager.h"
 
 //===============================
 // コンストラクタ
@@ -34,6 +35,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 		m_apModel[nCnt] = nullptr;
 	}
 	m_pAABB = nullptr;
+	m_pShredbinManager = nullptr;
 }
 //===============================
 // デストラクタ
@@ -75,6 +77,8 @@ HRESULT CShredder::Init(void)
 
 	// 矩形コライダー生成
 	m_pAABB = CAABBCollider::Create(m_pos, m_pos,D3DXVECTOR3(100.0f,300.0f,500.0f));
+	m_pShredbinManager = new CShredbinManager;
+	m_pShredbinManager->Init();
 
 	return S_OK;
 }
@@ -94,6 +98,14 @@ void CShredder::Uninit(void)
 	delete m_pAABB;
 	m_pAABB = nullptr;
 
+	// 破棄
+	if (m_pShredbinManager != nullptr)
+	{
+		m_pShredbinManager->Uninit();
+		delete m_pShredbinManager;
+		m_pShredbinManager = nullptr;
+	}
+
 	// 自身の破棄
 	CObject::Release();
 }
@@ -111,11 +123,8 @@ void CShredder::Update(void)
 
 	CSuckParticle::Create(D3DXVECTOR3(m_pos.x+150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
 
-	if (pCamera->GetMove())
-	{
-		m_pos.x += pPos.x - pPosOld.x;
-		SetPos(m_pos);
-	}
+	m_pos.x += 1.0f;
+	SetPos(m_pos);
 
 	// 座標更新
 	m_pAABB->SetPos(m_pos);
@@ -126,7 +135,8 @@ void CShredder::Update(void)
 		m_apModel[nCnt]->Update();
 	}
 	UpdateModel();
-
+	m_pShredbinManager->Update();
+	m_pShredbinManager->SetPos(m_pos);
 }
 //===============================
 // 描画処理
