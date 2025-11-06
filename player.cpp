@@ -352,7 +352,7 @@ void CPlayer::Update(void)
 		// ‚«”ò‚Î‚µ
 		EnemyBlow();
 
-		// •¬ËŒû‚©‚ç¶¬
+		// •¬ËŒû‚©‚ç¶¬	‚±‚±C³‚·‚é
 		CParticlePiler::Create(D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z), COLOR_GREEN, 7, 60, 60, 5,NULL);
 	}
 

@@ -270,15 +270,19 @@ void CEnemyManager::LoadJson(void)
 	// SetObjectsの配列を回す
 	for (const auto& b : j["SetObjects"])
 	{
+		// パス情報
 		std::string filepath = b["filepath"];
 		int idx = b["idx"];
 
+		// 座標
 		D3DXVECTOR3 pos
 		(
 			b["pos"][0],
 			b["pos"][1],
 			b["pos"][2]
 		);
+
+		// 角度
 		D3DXVECTOR3 rot
 		(
 			b["rot"][0],
@@ -286,9 +290,10 @@ void CEnemyManager::LoadJson(void)
 			b["rot"][2]
 		);
 
+		// 種類
 		int nType = b["Type"];
 
-		// 敵生成
+		// y読み込んだ情報から敵を生成
 		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(),nType);
 	}
 }

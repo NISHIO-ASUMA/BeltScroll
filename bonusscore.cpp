@@ -20,7 +20,7 @@ int CBonusScore::m_nScore = NULL;
 //=================================
 // コンストラクタ
 //=================================
-CBonusScore::CBonusScore(int nPriority)
+CBonusScore::CBonusScore(int nPriority) : CObject(nPriority)
 {
 	// 値のクリア
 	m_fHeight = 0.0f;
@@ -158,7 +158,7 @@ void CBonusScore::Draw(void)
 void CBonusScore::Save(void)
 {
 	// 開くファイルをセット
-	std::ofstream OpenFile("data/SCORE/GameScore.txt");
+	std::ofstream OpenFile("data/SCORE/BonusScore.txt");
 	if (!OpenFile)
 	{
 		// 例外処理
