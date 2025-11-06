@@ -30,6 +30,7 @@ CShredbinEffect::CShredbinEffect(int nPriority) : CBillboard(nPriority)
 	m_fRadius = NULL;
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
+	m_shredMove = VECTOR3_NULL;
 }
 //===============================
 // デストラクタ
@@ -42,7 +43,7 @@ CShredbinEffect::~CShredbinEffect()
 //===============================
 // 生成処理
 //===============================
-CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, float fRadius, int m_nType)
+CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR3 size, D3DXCOLOR col, float fRadius, int m_nType)
 {
 	// エフェクトポインタ
 	CShredbinEffect* pEffect = new CShredbinEffect;
@@ -64,6 +65,7 @@ CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DX
 
 	// 半径を代入
 	pEffect->m_offsetPos = pos;
+	pEffect->m_shredMove = move;
 	pEffect->m_fRadius = fRadius;
 	pEffect->m_size = size;
 	pEffect->m_nIdx = m_nNumAll;
@@ -101,7 +103,6 @@ void CShredbinEffect::Update(void)
 {
 	// 座標,カラー取得
 	D3DXVECTOR3 Effectpos = GetPos();
-	m_oldPos = Effectpos;
 	//カラーの設定
 	D3DXCOLOR col = GetCol();
 
@@ -110,18 +111,24 @@ void CShredbinEffect::Update(void)
 
 	D3DXVECTOR3 vec;
 
+	m_oldPos = Effectpos;
+
 	// 移動量の更新
 	Effectpos += m_move;
+	Effectpos += m_shredMove;
 
 	// 減算する値を設定
 	const float fDecPow = 0.005f;
 
-	GetManagerPosition();
 
 	// 座標をセットする
 	SetPos(Effectpos);
 
+	GetManagerPosition();
 	Collision();
+
+
+
 
 	// 0以下なら
 	if (m_fRadius <= 0.0f)
@@ -185,14 +192,17 @@ void CShredbinEffect::Draw(void)
 void CShredbinEffect::Collision(void)
 {
 	D3DXVECTOR3 pos = GetPos();
-	if (m_offsetPos.x + m_size.x * 0.5f <= pos.x/* && m_offsetPos.x + m_size.x * 0.5f > m_oldPos.x*/
+	if (m_offsetPos.x + m_size.x * 0.5f <= pos.x /*&& m_offsetPos.x + m_size.x * 0.5f > m_oldPos.x*/
 		|| m_offsetPos.x - m_size.x * 0.5f >= pos.x /*&& m_offsetPos.x - m_size.x * 0.5f < m_oldPos.x*/
 		|| m_offsetPos.y + m_size.y * 0.5f <= pos.y /*&& m_offsetPos.y + m_size.y * 0.5f > m_oldPos.y*/
 		|| m_offsetPos.y - m_size.y * 0.5f >= pos.y /*&& m_offsetPos.y - m_size.y * 0.5f < m_oldPos.y*/
 		|| m_offsetPos.z + m_size.z * 0.5f <= pos.z /*&& m_offsetPos.z + m_size.z * 0.5f > m_oldPos.z*/
 		|| m_offsetPos.z - m_size.z * 0.5f >= pos.z /*&& m_offsetPos.z - m_size.z * 0.5f < m_oldPos.z*/)
 	{
-		pos = m_offsetPos;
+		pos.x = m_offsetPos.x + m_size.x * (((float)(rand() % 80) - 40.0f) * 0.01f);
+		pos.y = m_offsetPos.y + m_size.y * (((float)(rand() % 80) - 40.0f) * 0.01f);
+		pos.z = m_offsetPos.z + m_size.z * (((float)(rand() % 80) - 40.0f) * 0.01f);
+
 		D3DXVECTOR3 vecPos;
 
 		vecPos.x = ((float)(rand() % 100) - 50.0f);
@@ -201,7 +211,7 @@ void CShredbinEffect::Collision(void)
 
 		D3DXVECTOR3 nor = vecPos - VECTOR3_NULL;
 		D3DXVec3Normalize(&nor, &nor);
-		m_move = nor * 3.0f;
+		m_move = nor * 1.5f;
 	}
 
 	SetPos(pos);
@@ -215,5 +225,4 @@ void CShredbinEffect::GetManagerPosition(void)
 	CShredbinManager* pBinManager = pShredder->GetShredbinManager();
 
 	m_offsetPos = pBinManager->GetPos();
-	m_offsetPos.y += 200.0f;
 }

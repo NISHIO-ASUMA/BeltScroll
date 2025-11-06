@@ -25,6 +25,8 @@ public:
 
 	// セッター
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
+	void SetMove(D3DXVECTOR3 move) { m_move = move; }
+	void SetType(int nType) { m_nType = nType; }
 
 	// ゲッター
 	int GetNumAll(void) { return m_nNum; }
@@ -33,6 +35,8 @@ public:
 private:
 	static int m_nNum;
 	D3DXVECTOR3 m_pos;
+	D3DXVECTOR3 m_move;
+	int m_nType;
 };
 
 #endif
