@@ -35,7 +35,7 @@ public:
 	static int GetNumAll(void) { return m_nNumAll; }
 
 	// 静的メンバ関数
-	static CShredbinEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col,float fRadius,int m_nType);
+	static CShredbinEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 move,D3DXVECTOR3 size, D3DXCOLOR col,float fRadius,int m_nType);
 
 private:
 	static int m_nNumAll;
@@ -46,6 +46,7 @@ private:
 	float m_fRadius;					// 半径
 	int m_nType;						// 種類
 	D3DXVECTOR3 m_move;					// 移動量
+	D3DXVECTOR3 m_shredMove;			// シュレッダーの移動速度
 };
 
 #endif

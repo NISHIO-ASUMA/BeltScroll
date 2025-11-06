@@ -1,7 +1,7 @@
 //=====================================
 //
 // シュレッダー処理 [ shredder.cpp ]
-// Author: Asuma Nishio
+// Author: Soichiro Sasaki
 //
 //=====================================
 
@@ -78,7 +78,10 @@ HRESULT CShredder::Init(void)
 	// 矩形コライダー生成
 	m_pAABB = CAABBCollider::Create(m_pos, m_pos,D3DXVECTOR3(100.0f,300.0f,500.0f));
 	m_pShredbinManager = new CShredbinManager;
+	m_pShredbinManager->SetMove(D3DXVECTOR3(1.0f,0.0f,0.0f));
+	m_pShredbinManager->SetType(m_nType);
 	m_pShredbinManager->Init();
+
 
 	return S_OK;
 }
@@ -136,7 +139,7 @@ void CShredder::Update(void)
 	}
 	UpdateModel();
 	m_pShredbinManager->Update();
-	m_pShredbinManager->SetPos(m_pos);
+	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + 170.0f, m_pos.z));
 }
 //===============================
 // 描画処理
