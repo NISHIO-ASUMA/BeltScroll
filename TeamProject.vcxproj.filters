@@ -237,7 +237,11 @@
     <ClCompile Include="resultobject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="modeleffect.cpp">
+=======
+    <ClCompile Include="combo.cpp">
+>>>>>>> f49173c0016a1affce797edf233c3b58b5522529
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -461,7 +465,11 @@
     <ClInclude Include="resultobject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="modeleffect.h">
+=======
+    <ClInclude Include="combo.h">
+>>>>>>> f49173c0016a1affce797edf233c3b58b5522529
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -69,6 +69,7 @@ private:
 	D3DXVECTOR3 m_move;		// 移動量
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
 	int m_TrushType;		// ゴミの種類
+	int m_nType;			// 対応するシュレッダーの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
 	CSphereCollider* m_pCollider; // コライダー
 
