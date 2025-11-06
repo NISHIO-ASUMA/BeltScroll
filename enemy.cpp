@@ -32,7 +32,8 @@ m_move(VECTOR3_NULL),
 m_pShadowS(nullptr),
 m_isBlow(false),
 m_TrushType(TYPE_NONE),
-m_pCollider(nullptr)
+m_pCollider(nullptr),
+m_nType(0)
 {
 	// 値のクリア
 }
@@ -153,6 +154,7 @@ void CEnemy::Update(void)
 		{
 			// エフェクト生成
 			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
+			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nType);
 
 			// 自身の消去
 			this->Uninit();

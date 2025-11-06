@@ -13,8 +13,6 @@
 #include "input.h"
 #include "manager.h"
 
-int CShredbinManager::m_nNum = 0;
-
 //===============================
 // コンストラクタ
 //===============================
@@ -22,6 +20,8 @@ CShredbinManager::CShredbinManager()
 {
 	m_pos = VECTOR3_NULL;
 	m_move=VECTOR3_NULL;
+	m_nType = 0;
+	m_nNum = 0;
 }
 //===============================
 // デストラクタ

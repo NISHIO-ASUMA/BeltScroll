@@ -30,6 +30,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_rot = VECTOR3_NULL;
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
+	m_nShredbin = 0;
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt] = nullptr;
@@ -224,3 +225,11 @@ void CShredder::SetPosZ(float posZ)
 	m_pos.z = posZ;
 }
 
+void CShredder::AddTrush(int nType)
+{
+	if (m_nType == nType)
+	{
+		m_nShredbin+=5;
+	}
+	m_pShredbinManager->SetNum(m_nShredbin);
+}

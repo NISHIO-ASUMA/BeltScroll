@@ -27,13 +27,14 @@ public:
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 	void SetType(int nType) { m_nType = nType; }
+	void SetNum(int nNum) { m_nNum = nNum; }
 
 	// ÉQÉbÉ^Å[
 	int GetNumAll(void) { return m_nNum; }
 	D3DXVECTOR3 GetPos(void) { return m_pos; }
 
 private:
-	static int m_nNum;
+	 int m_nNum;
 	D3DXVECTOR3 m_pos;
 	D3DXVECTOR3 m_move;
 	int m_nType;
