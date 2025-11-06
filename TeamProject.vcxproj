@@ -181,6 +181,7 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="meshfield.cpp" />
     <ClCompile Include="model.cpp" />
+    <ClCompile Include="modeleffect.cpp" />
     <ClCompile Include="modellist.cpp" />
     <ClCompile Include="motion.cpp" />
     <ClCompile Include="number.cpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="meshfield.h" />
     <ClInclude Include="model.h" />
+    <ClInclude Include="modeleffect.h" />
     <ClInclude Include="modellist.h" />
     <ClInclude Include="motion.h" />
     <ClInclude Include="number.h" />

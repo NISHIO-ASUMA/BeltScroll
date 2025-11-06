@@ -34,6 +34,7 @@
 #include "template.h"
 #include "particle.h"
 #include "windparticle.h"
+#include "modeleffect.h"
 
 //**********************
 // プレイヤー情報
@@ -353,9 +354,8 @@ void CPlayer::Update(void)
 		// 吹き飛ばし
 		EnemyBlow();
 
-		// 噴射口からパーティクル
-		CWindParticle::Create(D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z - 18.0f), 7, 60, m_fBlowerPow, 50.0f,COLOR_WHITE);
-		CWindParticle::Create(D3DXVECTOR3(ModelPos.x,ModelPos.y,ModelPos.z - 18.0f),15,100,m_fBlowerPow + 30.0f,m_fBlowerRange + 150.0f,WIND);
+		// モデルエフェクト
+		CModelEffect::Create("data/MODEL/EFFECT/effectmodel.x", D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z - 18.0f), VECTOR3_NULL, INITSCALE, 30, 0.03f, m_fBlowerRange * 0.5f);
 	}
 
 	// 重力加算
