@@ -160,6 +160,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="combo.cpp" />
     <ClCompile Include="confettieffect.cpp" />
     <ClCompile Include="confettiparticle.cpp" />
     <ClCompile Include="debugproc.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="collision.h" />
+    <ClInclude Include="combo.h" />
     <ClInclude Include="confettieffect.h" />
     <ClInclude Include="confettiparticle.h" />
     <ClInclude Include="debugproc.h" />

@@ -23,6 +23,7 @@
 #include "loseresult.h"
 #include "goal.h"
 #include "confettiparticle.h"
+#include "combo.h"
 
 //===============================
 // コンストラクタ
@@ -70,6 +71,9 @@ HRESULT CGameManager::Init(void)
 
 	// ゴール生成
 	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,75.0f,0.0f));
+
+	// スコア
+	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
 
 	// 初期化結果を返す
 	return S_OK;
