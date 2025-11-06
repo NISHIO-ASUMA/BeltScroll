@@ -13,14 +13,15 @@
 #include "input.h"
 #include "manager.h"
 
-int CShredbinManager::m_nNum = 0;
-
 //===============================
 // コンストラクタ
 //===============================
 CShredbinManager::CShredbinManager()
 {
 	m_pos = VECTOR3_NULL;
+	m_move=VECTOR3_NULL;
+	m_nType = 0;
+	m_nNum = 0;
 }
 //===============================
 // デストラクタ
@@ -62,6 +63,16 @@ void CShredbinManager::Update(void)
 
 	if (m_nNum > CShredbinEffect::GetNumAll())
 	{
-		CShredbinEffect::Create(m_pos, D3DXVECTOR3(200.0f, 200.0f, 200.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f), 5,0);
+		D3DXCOLOR col = COLOR_NULL;
+		if (m_nType==0)
+		{// 赤色
+			col = D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f);
+		}
+		else
+		{// 青色
+			col = D3DXCOLOR(0.2f, 0.2f, 1.0f, 1.0f);
+		}
+
+		CShredbinEffect::Create(m_pos,m_move, D3DXVECTOR3(100.0f, 80.0f, 500.0f), col, 3,m_nType);
 	}
 }

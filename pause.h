@@ -33,6 +33,7 @@ public:
 		MENU_RETRY,		// ‚â‚è’¼‚µ
 		MENU_CONTINUE,  // Œp‘±
 		MENU_QUIT,		// ƒ^ƒCƒgƒ‹‘JˆÚ
+		MENU_OPERATION,	// ‘€ìà–¾
 		MENU_MAX
 	};
 

@@ -43,6 +43,7 @@ public:
 	void SetPosZ(float posZ);
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
 	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
+	void AddTrush(int nType);
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -55,6 +56,7 @@ private:
 	D3DXMATRIX m_mtxworld;
 	D3DXVECTOR3 m_move; // 移動量
 	int m_nType;		// 種類
+	int m_nShredbin;	// シュレッダービンに入ってるごみの量
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
 };

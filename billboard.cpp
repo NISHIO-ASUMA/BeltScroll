@@ -230,6 +230,7 @@ void CBillboard::Draw(void)
 	}
 	else
 	{
+
 		// テクスチャを設定
 		pDevice->SetTexture(0, CManager::GetTexture()->GetAddress(m_nIdxTexture));
 	}

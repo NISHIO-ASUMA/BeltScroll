@@ -14,6 +14,7 @@
 #include "input.h"
 #include "title.h"
 #include "game.h"
+#include "ui.h"
 
 //***************************
 // 名前空間
@@ -86,6 +87,13 @@ HRESULT CPauseManager::Init(void)
 		{
 			// 選択用ポリゴンの生成
 			m_pPause[nPause] = CPause::Create(pos, PAUSEMANAGEINFO::BACEWIDTH, PAUSEMANAGEINFO::BACEHEIGHT, COLOR_WHITE, nPause);
+		}
+
+		// 操作説明用UIを生成
+		if (nPause == CPause::MENU_OPERATION)
+		{
+			// 操作説明生成
+			m_pPause[nPause] = CPause::Create(D3DXVECTOR3(SCREEN_WIDTH * 0.844f, SCREEN_HEIGHT * 0.07f, 0.0f), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, COLOR_NULL, nPause);
 		}
 	}
 
@@ -200,6 +208,9 @@ void CPauseManager::Update(void)
 			if (pFade != nullptr) pFade->SetFade(std::make_unique <CTitle>());	// タイトルシーンに遷移
 			SetEnablePause(false);	// ポーズ終了
 
+			break;
+
+		case CPause::MENU_OPERATION: // 操作説明
 			break;
 		}
 	}

@@ -39,6 +39,7 @@ HRESULT CShredderManager::Init(void)
 
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_GREEN]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, 250.0f), TYPE_GREEN);
+
 	return S_OK;
 }
 //===============================

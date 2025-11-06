@@ -141,6 +141,10 @@ void CPause::SetTexture(void)
 		m_nIdxTexture = pTexture->Register("data/TEXTURE/pausemenu_quit.png"); 		// テクスチャ割り当て
 		break;
 
+	case MENU_OPERATION: // 操作説明
+		m_nIdxTexture = pTexture->Register("data/TEXTURE/operation.png");			// テクスチャ割当
+		break;
+
 	default:
 		m_nIdxTexture = -1;
 		break;

@@ -60,6 +60,7 @@
 #define COLOR_PURPLE (D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f))	// 紫
 #define COLOR_GLAY	 (D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f))	// グレー
 #define LASER		 (D3DXCOLOR(0.05f, 0.05f, 1.0f, 1.0f))	// レーザーエフェクト
+#define WIND		 (D3DXCOLOR(0.05f, 1.0f, 0.05f, 1.0f))	// レーザーエフェクト
 #define COLOR_NULL	 (D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f))	// 完全透明
 
 #define MAX_WORD (256)		// 最大文字配列数
