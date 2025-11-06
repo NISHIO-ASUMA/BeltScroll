@@ -33,6 +33,7 @@
 #include "blockmanager.h"
 #include "template.h"
 #include "particle.h"
+#include "windparticle.h"
 
 //**********************
 // プレイヤー情報
@@ -352,8 +353,9 @@ void CPlayer::Update(void)
 		// 吹き飛ばし
 		EnemyBlow();
 
-		// 噴射口から生成	ここ修正する
-		CParticlePiler::Create(D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z), COLOR_GREEN, 7, 60, 60, 5,NULL);
+		// 噴射口からパーティクル
+		CWindParticle::Create(D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z - 18.0f), 7, 60, m_fBlowerPow, 50.0f,COLOR_WHITE);
+		CWindParticle::Create(D3DXVECTOR3(ModelPos.x,ModelPos.y,ModelPos.z - 18.0f),15,100,m_fBlowerPow + 30.0f,m_fBlowerRange + 150.0f,WIND);
 	}
 
 	// 重力加算

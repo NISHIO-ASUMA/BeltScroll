@@ -113,7 +113,7 @@ void CParticlePiler::Update(void)
 		// 寿命
 		int nLife = ((rand() % m_nLife) + 10);
 
-		// パーティクル生成
+		// エフェクト生成
 		CEffect* pEffect = CEffect::Create(pos, col, Move, nLife, fRadius);
 
 		if (pEffect)
