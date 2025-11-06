@@ -23,8 +23,12 @@ public:
 	void Uninit(void);
 	void Update(void);
 
+	// セッター
+	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
+
 	// ゲッター
-	static int GetNumAll(void) { return m_nNum; }
+	int GetNumAll(void) { return m_nNum; }
+	D3DXVECTOR3 GetPos(void) { return m_pos; }
 
 private:
 	static int m_nNum;

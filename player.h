@@ -76,6 +76,7 @@ public:
 	void StartJump(void);
 	void HitDamage(int nDamage);
 	void EnemyBlow(void);
+	void MovePad(CJoyPad* pPad);
 	bool CollisionBox(CAABBCollider* pOther, D3DXVECTOR3* pOutPos);
 
 	// セッター
@@ -114,7 +115,7 @@ public:
 	static bool IsDeath(void) { return m_isDeath; }
 
 private:
-	static inline constexpr int MAX_MODEL = 16; // プレイヤーで使うモデルの数
+	static inline constexpr int MAX_MODEL = 17; // プレイヤーで使うモデルの数
 
 	D3DXVECTOR3 m_move;		// 移動量
 	D3DXVECTOR3 m_rotDest;  // 目的角

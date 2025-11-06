@@ -42,3 +42,6 @@
 /.vs
 /Debug
 /Release
+/data/SCORE/GameScore.txt
+/data/SCORE/BonusScore.txt
+/data/SCORE/Ranking.txt

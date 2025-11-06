@@ -34,7 +34,6 @@ CShredbinManager::~CShredbinManager()
 //===============================
 HRESULT CShredbinManager::Init(void)
 {
-	m_pos = D3DXVECTOR3(0.0f, 20.0f, -200.0f);
 
 	return S_OK;
 }
@@ -63,6 +62,6 @@ void CShredbinManager::Update(void)
 
 	if (m_nNum > CShredbinEffect::GetNumAll())
 	{
-		CShredbinEffect::Create(m_pos, D3DXVECTOR3(200.0f, 200.0f, 200.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f), 5);
+		CShredbinEffect::Create(m_pos, D3DXVECTOR3(200.0f, 200.0f, 200.0f), D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f), 5,0);
 	}
 }

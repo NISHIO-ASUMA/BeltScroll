@@ -9,7 +9,7 @@ SCRIPT			# この行は絶対消さないこと！
 #------------------------------------------------------------------------------
 # モデル数
 #------------------------------------------------------------------------------
-NUM_MODEL = 16
+NUM_MODEL = 17
 
 #------------------------------------------------------------------------------
 # モデルファイル名
@@ -30,12 +30,13 @@ MODEL_FILENAME = data/MODEL/PLAYER/player_L_Thighs.x	# [12]左太腿
 MODEL_FILENAME = data/MODEL/PLAYER/player_L_Shin.x	# [13]左腿
 MODEL_FILENAME = data/MODEL/PLAYER/player_L_Feet.x	# [14]左足
 MODEL_FILENAME = data/MODEL/PLAYER/playerBlower.x	# [15]武器
+MODEL_FILENAME = data/MODEL/PLAYER/blower_front.x	# [16]ポイント
 
 #------------------------------------------------------------------------------
 # キャラクター情報
 #------------------------------------------------------------------------------
 CHARACTERSET
-	NUM_PARTS = 16					# パーツ数
+	NUM_PARTS = 17					# パーツ数
 	
 	PARTSSET
 		INDEX = 0					# 腰
@@ -147,8 +148,18 @@ CHARACTERSET
 		PARENT = 5					# (親)右手
 		POS = -5.0 0.0 0.0
 		ROT = 0.0 0.0 0.0
+		PARTTYPE = WEAPON			# モデルのタイプ
 	END_PARTSSET
+	
+	PARTSSET
+		INDEX = 16					# ポイント
+		PARENT = 15					# (親)武器
+		POS = -1.0 -2.0 -54.0
+		ROT = 0.0 0.0 0.0
+	END_PARTSSET
+
 END_CHARACTERSET
+
 
 #------------------------------------------------------------------------------
 # キャラクター情報
@@ -360,6 +371,12 @@ MOTIONSET
 			POS = 0.00 0.00 0.00
 			ROT = 0.22 0.44 0.00
 		END_KEY
+		
+		KEY	# ----- [ 16 ] -----
+			POS = 0.00 0.00 0.00
+			ROT = 0.00 0.00 0.00
+		END_KEY
+
 	END_KEYSET
 
 	KEYSET			# --- << KEY : 1 / 2 >> ---
@@ -443,6 +460,12 @@ MOTIONSET
 			POS = 0.00 0.00 0.00
 			ROT = 0.00 0.35 0.00
 		END_KEY
+		
+		KEY	# ----- [ 16 ] -----
+			POS = 0.00 0.00 0.00
+			ROT = 0.00 0.00 0.00
+		END_KEY
+
 	END_KEYSET
 END_MOTIONSET
 #========================================
@@ -533,6 +556,12 @@ MOTIONSET
 			POS = 0.00 0.00 0.00
 			ROT = 0.03 -0.25 0.00
 		END_KEY
+		
+		KEY	# ----- [ 16 ] -----
+			POS = 0.00 0.00 0.00
+			ROT = 0.00 0.00 0.00
+		END_KEY
+
 	END_KEYSET
 
 	KEYSET			# --- << KEY : 1 / 2 >> ---
@@ -616,6 +645,12 @@ MOTIONSET
 			POS = 0.00 0.00 0.00
 			ROT = 0.00 0.00 0.00
 		END_KEY
+		
+		KEY	# ----- [ 16 ] -----
+			POS = 0.00 0.00 0.00
+			ROT = 0.00 0.00 0.00
+		END_KEY
+
 	END_KEYSET
 END_MOTIONSET
 

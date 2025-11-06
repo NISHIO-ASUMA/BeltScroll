@@ -199,6 +199,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerstate.cpp" />
     <ClCompile Include="ranking.cpp" />
+    <ClCompile Include="resultobject.cpp" />
     <ClCompile Include="rankingscore.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
@@ -222,6 +223,7 @@
     <ClCompile Include="trushSim.cpp" />
     <ClCompile Include="tutorial.cpp" />
     <ClCompile Include="ui.cpp" />
+    <ClCompile Include="windparticle.cpp" />
     <ClCompile Include="winplayer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +272,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="playerstate.h" />
     <ClInclude Include="ranking.h" />
+    <ClInclude Include="resultobject.h" />
     <ClInclude Include="rankingscore.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="resource.h" />
@@ -295,6 +298,7 @@
     <ClInclude Include="trushSim.h" />
     <ClInclude Include="tutorial.h" />
     <ClInclude Include="ui.h" />
+    <ClInclude Include="windparticle.h" />
     <ClInclude Include="winplayer.h" />
   </ItemGroup>
   <ItemGroup>

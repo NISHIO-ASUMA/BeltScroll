@@ -11,6 +11,10 @@
 #include "shredbineffect.h"
 #include "manager.h"
 #include "shredbinmanager.h"
+#include "shreddermanager.h"
+#include "gamemanager.h"
+#include "game.h"
+#include "shredder.h"
 
 int CShredbinEffect::m_nNumAll = 0;
 
@@ -25,6 +29,7 @@ CShredbinEffect::CShredbinEffect(int nPriority) : CBillboard(nPriority)
 	m_nIdx = NULL;
 	m_fRadius = NULL;
 	m_move = VECTOR3_NULL;
+	m_nType = 0;
 }
 //===============================
 // デストラクタ
@@ -37,7 +42,7 @@ CShredbinEffect::~CShredbinEffect()
 //===============================
 // 生成処理
 //===============================
-CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, float fRadius)
+CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DXCOLOR col, float fRadius, int m_nType)
 {
 	// エフェクトポインタ
 	CShredbinEffect* pEffect = new CShredbinEffect;
@@ -62,6 +67,7 @@ CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 size, D3DX
 	pEffect->m_fRadius = fRadius;
 	pEffect->m_size = size;
 	pEffect->m_nIdx = m_nNumAll;
+	pEffect->m_nType = m_nType;
 	m_nNumAll++;
 
 	// エフェクトポインタを返す
@@ -110,6 +116,8 @@ void CShredbinEffect::Update(void)
 	// 減算する値を設定
 	const float fDecPow = 0.005f;
 
+	GetManagerPosition();
+
 	// 座標をセットする
 	SetPos(Effectpos);
 
@@ -124,8 +132,13 @@ void CShredbinEffect::Update(void)
 	// サイズセット
 	SetSize(m_fRadius, m_fRadius);
 
+	CGameManager* pGameManager = CGame::GetGameManager();
+	CShredderManager* pShredManager = pGameManager->GetShredderM();
+	CShredder* pShredder = pShredManager->GetShredder(m_nType);
+	CShredbinManager* pBinManager = pShredder->GetShredbinManager();
+
 	// 0以下の時
-	if (m_nIdx > CShredbinManager::GetNumAll())
+	if (m_nIdx >= pBinManager->GetNumAll())
 	{
 		// 削除する
 		Uninit();
@@ -172,14 +185,14 @@ void CShredbinEffect::Draw(void)
 void CShredbinEffect::Collision(void)
 {
 	D3DXVECTOR3 pos = GetPos();
-	if (m_offsetPos.x + m_size.x * 0.5f <= pos.x && m_offsetPos.x + m_size.x * 0.5f > m_oldPos.x
-		|| m_offsetPos.x - m_size.x * 0.5f >= pos.x && m_offsetPos.x - m_size.x * 0.5f < m_oldPos.x
-		|| m_offsetPos.y + m_size.y * 0.5f <= pos.y && m_offsetPos.y + m_size.y * 0.5f > m_oldPos.y
-		|| m_offsetPos.y - m_size.y * 0.5f >= pos.y && m_offsetPos.y - m_size.y * 0.5f < m_oldPos.y
-		|| m_offsetPos.z + m_size.z * 0.5f <= pos.z && m_offsetPos.z + m_size.z * 0.5f > m_oldPos.z
-		|| m_offsetPos.z - m_size.z * 0.5f >= pos.z && m_offsetPos.z - m_size.z * 0.5f < m_oldPos.z)
+	if (m_offsetPos.x + m_size.x * 0.5f <= pos.x/* && m_offsetPos.x + m_size.x * 0.5f > m_oldPos.x*/
+		|| m_offsetPos.x - m_size.x * 0.5f >= pos.x /*&& m_offsetPos.x - m_size.x * 0.5f < m_oldPos.x*/
+		|| m_offsetPos.y + m_size.y * 0.5f <= pos.y /*&& m_offsetPos.y + m_size.y * 0.5f > m_oldPos.y*/
+		|| m_offsetPos.y - m_size.y * 0.5f >= pos.y /*&& m_offsetPos.y - m_size.y * 0.5f < m_oldPos.y*/
+		|| m_offsetPos.z + m_size.z * 0.5f <= pos.z /*&& m_offsetPos.z + m_size.z * 0.5f > m_oldPos.z*/
+		|| m_offsetPos.z - m_size.z * 0.5f >= pos.z /*&& m_offsetPos.z - m_size.z * 0.5f < m_oldPos.z*/)
 	{
-		pos = m_oldPos;
+		pos = m_offsetPos;
 		D3DXVECTOR3 vecPos;
 
 		vecPos.x = ((float)(rand() % 100) - 50.0f);
@@ -192,4 +205,15 @@ void CShredbinEffect::Collision(void)
 	}
 
 	SetPos(pos);
+}
+
+void CShredbinEffect::GetManagerPosition(void)
+{
+	CGameManager* pGameManager = CGame::GetGameManager();
+	CShredderManager* pShredManager = pGameManager->GetShredderM();
+	CShredder* pShredder = pShredManager->GetShredder(m_nType);
+	CShredbinManager* pBinManager = pShredder->GetShredbinManager();
+
+	m_offsetPos = pBinManager->GetPos();
+	m_offsetPos.y += 200.0f;
 }

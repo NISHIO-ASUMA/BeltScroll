@@ -32,6 +32,7 @@
 #include "shredder.h"
 #include "blockmanager.h"
 #include "template.h"
+#include "particle.h"
 
 //**********************
 // プレイヤー情報
@@ -43,6 +44,8 @@ namespace PLAYERINFO
 	constexpr float GRAVITY = 0.7f;		 // 重力値
 	constexpr float HITRADIUS = 25.0f;	 // 当たり判定の半径
 	constexpr int   KeyRepeatCount = 15; // キーのリピート最大カウント
+	constexpr float NorRot = D3DX_PI * 2.0f; // 正規化値
+
 };
 //**********************
 // ブロワー定数値
@@ -65,14 +68,14 @@ bool CPlayer::m_isDeath = false;  // 死亡フラグ
 CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 {
 	// 値のクリア
-	m_move = VECTOR3_NULL;
 	m_Scal = INITSCALE;
-	m_State = NULL;
-	m_rotDest = VECTOR3_NULL;
-	m_nNumAll = NULL;
+	m_move = VECTOR3_NULL;
 	m_posOld = VECTOR3_NULL;
+	m_rotDest = VECTOR3_NULL;
 	m_pFilename = {};
+	m_nNumAll = NULL;
 	m_fAngle = NULL;
+	m_State = NULL;
 	m_fBlowerRange = NULL;
 
 	// モデルのポインタのクリア
@@ -121,11 +124,7 @@ CPlayer* CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot,int nLife, const char*
 	pPlayer->m_pFilename = pFilename;
 
 	// プレイヤー初期化処理
-	if (FAILED(pPlayer->Init()))
-	{
-		// nullptrを返す
-		return nullptr;
-	}
+	if (FAILED(pPlayer->Init())) return nullptr;
 
 	// プレイヤーのポインタを返す
 	return pPlayer;
@@ -173,7 +172,7 @@ HRESULT CPlayer::Init(void)
 	m_pStateMachine = new CStateMachine;
 
 	// 初期状態をセット
-	ChangeState(new CPlayerStateNeutral,CPlayerStateBase::ID_NEUTRAL); 
+	ChangeState(new CPlayerStateNeutral(),CPlayerStateBase::ID_NEUTRAL); 
 
 	// コライダ―生成
 	m_pSphereCollider = CSphereCollider::Create(m_pos, 40.0f);
@@ -260,165 +259,35 @@ void CPlayer::Update(void)
 	if (m_isDeath) return;
 
 	// 入力デバイスのポインタ取得
-	CInputKeyboard* pInput = nullptr;
+	CInputKeyboard* pInputKeyboard = nullptr;
 	CJoyPad* pJoyPad = nullptr;
 
-	pInput = CManager::GetInputKeyboard();
+	pInputKeyboard = CManager::GetInputKeyboard();
 	pJoyPad = CManager::GetJoyPad();
-
-	//// nullptrじゃないとき
-	//if (m_pStateMachine != nullptr)
-	//{
-	//	// ステート更新
-	//	m_pStateMachine->Update();
-	//}
 
 	// カメラ取得
 	CCamera* pCamera = CManager::GetCamera();
 	if (pCamera == nullptr) return;
 
-#if 1
-	//=====================
-	// 移動処理
-	//=====================
-	if (CManager::GetInputKeyboard()->GetPress(DIK_A))
-	{// Aキー
+	// 特定モデルの取得
+	CModel* pModelWeapon = CPlayer::GetModelPartType(CModel::PARTTYPE_WEAPON);
+	if (pModelWeapon == nullptr) return;
 
-		if (CManager::GetInputKeyboard()->GetPress(DIK_W))
-		{// 左斜め上
+	// ワールドマトリックスを取得
+	D3DXMATRIX mtxweapon = pModelWeapon->GetMtxWorld();
+	if (mtxweapon == nullptr) return;
 
-			m_move.x += sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.75f);
+	// モデル座標
+	D3DXVECTOR3 ModelPos = D3DXVECTOR3(mtxweapon._41, mtxweapon._42, mtxweapon._43);
 
-			// モーション変更
-			m_pMotion->SetMotion(PLAYERMOTION_MOVE);
-		}
-		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
-		{// 右斜め下
+	// 移動関数
+	UpdateMove(pInputKeyboard, pJoyPad);
+	MovePad(pJoyPad);
 
-			m_move.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.25f);
-
-			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-		}
-		else
-		{// 単体
-			m_move.x -= sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.5f);
-
-			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-		}
-
-		// 角度の正規化
-		if (m_rot.y > D3DX_PI)
-		{// D3DX_PIより大きくなったら
-			m_rot.y -= D3DX_PI * 2.0f;
-		}
-	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_D))
-	{// Dキーを押した
-
-		if (CManager::GetInputKeyboard()->GetPress(DIK_W))
-		{// Wキーを押した
-			m_move.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.75f);
-
-			// タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-
-		}
-		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
-		{// Sキーを押した
-			m_move.x -= sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.25f);
-
-			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-		}
-		else
-		{// Dキーのみ押した
-			m_move.x += sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.5f);
-
-			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-		}
-
-		// 角度の正規化
-		if (m_rot.y > D3DX_PI)
-		{// D3DX_PIより大きくなったら
-			m_rot.y -= D3DX_PI * 2.0f;
-		}
-	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_W))
-	{// Wキーを押した
-
-		m_move.x += sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_move.z += cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_rotDest.y = pCamera->GetRot().y - (D3DX_PI);
-
-		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-
-		// 角度を正規化
-		if (m_rot.y < -D3DX_PI)
-		{// D3DX_PIより小さくなったら
-			m_rot.y += D3DX_PI * 2.0f;
-		}
-
-	}
-	else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
-	{// Sキーを押した
-
-		m_move.x -= sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_move.z -= cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_rotDest.y = pCamera->GetRot().y;
-
-		//　タイプ切り替え
-		m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
-
-		// 角度の正規化
-		if (m_rot.y > D3DX_PI)
-		{// D3DX_PIより大きくなったら
-			m_rot.y -= D3DX_PI * 2.0f;
-		}
-	}
-	else
-	{
-		if (m_pMotion->GetMotionType() == PLAYERMOTION_ATTACK || !m_isJump)
-		{
-			//　タイプ切り替え
-			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
-		}
-	}
-
-	if (m_rotDest.y - m_rot.y > D3DX_PI)
-	{// 左回転
-		// 角度
-		m_rot.y = m_rot.y + D3DX_PI * 2.0f;
-	}
-	else if (m_rot.y - m_rotDest.y > D3DX_PI)
-	{// 右回転
-		// 角度
-		m_rot.y = m_rot.y - D3DX_PI * 2.0f;
-	}
-
-	// 現在の角度
-	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
-#endif
-
-	if (m_isJump == false)
+	if (!m_isJump)
 	{// ジャンプしていなくて着地していないとき
 
-		if (CManager::GetInputKeyboard()->GetTrigger(DIK_SPACE))
+		if (CManager::GetInputKeyboard()->GetTrigger(DIK_SPACE) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_A))
 		{
 			m_isJump = true;
 			m_isLanding = false;
@@ -438,21 +307,12 @@ void CPlayer::Update(void)
 	// 着地時の処理
 	if (m_isLanding)
 	{
-		// 着地モーションに変更
-		// m_pMotion->SetMotion(PLAYERMOTION_LANDING);
-
 		// ジャンプ可能状態に変更
 		m_isJump = false;
-
-		//// モーション終了時　かつ 種類が着地モーション
-		//if (m_pMotion->GetMotionType() == PLAYERMOTION_LANDING && m_pMotion->GetFinishMotion())
-		//{
-		//	m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
-		//}
 	}
 
 	// ブロワー強度切り替え
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q))
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_LEFT_B))
 	{
 		// 強度アップ
 		m_blower = Wrap(m_blower + 1, 0, static_cast<int>(BLOWER_MAXPOW));
@@ -460,7 +320,7 @@ void CPlayer::Update(void)
 		// サウンド再生
 		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_WIND);
 	}
-	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E))
+	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_RIGHT_B))
 	{
 		// 強度ダウン
 		m_blower = Wrap(m_blower - 1, 0, static_cast<int>(BLOWER_MAXPOW));
@@ -483,14 +343,17 @@ void CPlayer::Update(void)
 		break;
 	}
 
-	// Enterキーで範囲攻撃
-	if (CManager::GetInputKeyboard()->GetPress(DIK_RETURN))
+	// Enterキー or Xボタンで範囲攻撃
+	if (CManager::GetInputKeyboard()->GetPress(DIK_RETURN) || pJoyPad->GetPress(CJoyPad::JOYKEY_X))
 	{
 		// 有効判定
 		m_isAttack = true;
 
 		// 吹き飛ばし
 		EnemyBlow();
+
+		// 噴射口から生成	ここ修正する
+		CParticlePiler::Create(D3DXVECTOR3(ModelPos.x, ModelPos.y, ModelPos.z), COLOR_GREEN, 7, 60, 60, 5,NULL);
 	}
 
 	// 重力加算
@@ -510,7 +373,7 @@ void CPlayer::Update(void)
 	auto Block = CGame::GetGameManager()->GetBlockManager();
 	if (Block == nullptr) return;
 
-	// ブロックオブジェクトとの当たり判定
+	// 配置されているブロックオブジェクトとの当たり判定
 	for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
 	{
 		// コライダー取得
@@ -529,7 +392,6 @@ void CPlayer::Update(void)
 			m_pAAABB->SetPos(CollBlockPos);
 		}
 	}
-
 
 	// 判定の生成
 	for (int nCnt = 0; nCnt < 2; nCnt++)
@@ -554,6 +416,21 @@ void CPlayer::Update(void)
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.75f;
 	m_move.z += (0.0f - m_move.z) * 0.75f;
+
+	// 角度補完
+	if (m_rotDest.y - m_rot.y > D3DX_PI)
+	{// 左回転
+		// 角度
+		m_rot.y = m_rot.y + D3DX_PI * 2.0f;
+	}
+	else if (m_rot.y - m_rotDest.y > D3DX_PI)
+	{// 右回転
+		// 角度
+		m_rot.y = m_rot.y - D3DX_PI * 2.0f;
+	}
+
+	// 現在の角度
+	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
 
 	// 現在のy座標が0.0f以下の時
 	if (m_pos.y <= 0.0f)
@@ -686,6 +563,71 @@ void CPlayer::EnemyBlow(void)
 	}
 }
 //===============================
+// スティック移動関数
+//================================
+void CPlayer::MovePad(CJoyPad* pPad)
+{
+	// パッド取得
+	XINPUT_STATE* pStick;
+	pStick = pPad->GetStickAngle();
+
+	// カメラ取得
+	CCamera* pCamera = CManager::GetCamera();
+	if (pCamera == nullptr) return;
+
+	// フラグ
+	bool isMoving = false;
+	static bool wasStick = false;
+
+	// 取得できたら
+	if (pPad->GetLeftStick())
+	{
+		// 左スティックの角度
+		float LStickAngleY = pStick->Gamepad.sThumbLY;
+		float LStickAngleX = pStick->Gamepad.sThumbLX;
+
+		// デッドゾーンを設定
+		float DeadZone = 32767.0f * 0.25f;
+		float fMag = sqrtf((LStickAngleX * LStickAngleX) + (LStickAngleY * LStickAngleY));
+
+		if (fMag > DeadZone)
+		{
+			// 正規化
+			float normalizeX = (LStickAngleX / fMag);
+			float normalizeY = (LStickAngleY / fMag);
+
+			// 移動量
+			float MoveX = normalizeX * cosf(pCamera->GetRot().y) - normalizeY * sinf(pCamera->GetRot().y);
+			float MoveZ = normalizeX * sinf(pCamera->GetRot().y) + normalizeY * cosf(pCamera->GetRot().y);
+
+			// プレイヤーの移動量を設定
+			m_move.x += MoveX * PLAYERINFO::MOVE;
+			m_move.z += MoveZ * PLAYERINFO::MOVE;
+			m_rotDest.y = atan2f(-MoveX, -MoveZ);
+			isMoving = true;
+		}
+	}
+
+	if (isMoving)
+	{
+		// MOVEじゃなかったら
+		if (m_pMotion->GetMotionType() != PLAYERMOTION_ATTACK)
+		{
+			// モーション変更
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
+		}
+	}
+	else if (!isMoving && wasStick)
+	{
+		// 離した瞬間の判定
+		if (m_pMotion->GetMotionType() == PLAYERMOTION_ATTACK)
+			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10,false);
+	}
+
+	// フラグを変更する
+	wasStick = isMoving;
+}
+//===============================
 // 当たり判定関数 ( 矩形 )
 //================================
 bool CPlayer::CollisionBox(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
@@ -737,6 +679,150 @@ void CPlayer::UpdateAction(CInputKeyboard* pInputKeyboard,D3DXMATRIX pMtx,const 
 //=========================================
 void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 {
+	// パッドがあったら
+	if (pPad->GetLeftStick()) return;
+
+	// カメラ取得
+	CCamera* pCamera = CManager::GetCamera();
+	if (pCamera == nullptr) return;
+
+	// 移動フラグ
+	bool isMove = false;
+
+	if (pInputKeyboard->GetPress(DIK_A) || pPad->GetPress(CJoyPad::JOYKEY_LEFT))
+	{// Aキー
+		if (pInputKeyboard->GetPress(DIK_W) || pPad->GetPress(CJoyPad::JOYKEY_RIGHT))
+		{// 左斜め上
+
+			m_move.x += sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.z += cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.75f);
+
+			isMove = true;
+		}
+		else if (pInputKeyboard->GetPress(DIK_S) || pPad->GetPress(CJoyPad::JOYKEY_DOWN))
+		{// 右斜め下
+
+			m_move.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.25f);
+			isMove = true;
+		}
+		else
+		{// 単体
+			m_move.x -= sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_move.z -= cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.5f);
+
+			isMove = true;
+		}
+
+		// 角度の正規化
+		if (m_rot.y > D3DX_PI)
+		{// D3DX_PIより大きくなったら
+			m_rot.y -= PLAYERINFO::NorRot;
+		}
+	}
+	else if (pInputKeyboard->GetPress(DIK_D) || pPad->GetPress(CJoyPad::JOYKEY_RIGHT))
+	{// Dキーを押した
+
+		if (pInputKeyboard->GetPress(DIK_W) || pPad->GetPress(CJoyPad::JOYKEY_UP))
+		{// Wキーを押した
+			m_move.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.75f);
+
+			isMove = true;
+		}
+		else if (pInputKeyboard->GetPress(DIK_S) || pPad->GetPress(CJoyPad::JOYKEY_DOWN))
+		{// Sキーを押した
+			m_move.x -= sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.z -= cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.25f);
+
+			isMove = true;
+		}
+		else
+		{// Dキーのみ押した
+			m_move.x += sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_move.z += cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.5f);
+
+			isMove = true;
+		}
+
+		// 角度の正規化
+		if (m_rot.y > D3DX_PI)
+		{// D3DX_PIより大きくなったら
+			m_rot.y -= PLAYERINFO::NorRot;
+		}
+	}
+	else if (pInputKeyboard->GetPress(DIK_W) || pPad->GetPress(CJoyPad::JOYKEY_UP))
+	{// Wキーを押した
+
+		m_move.x += sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_move.z += cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_rotDest.y = pCamera->GetRot().y - D3DX_PI;
+
+		isMove = true;
+
+		// 角度を正規化
+		if (m_rot.y < -D3DX_PI)
+		{// D3DX_PIより小さくなったら
+			m_rot.y += PLAYERINFO::NorRot;
+		}
+
+	}
+	else if (pInputKeyboard->GetPress(DIK_S) || pPad->GetPress(CJoyPad::JOYKEY_DOWN))
+	{// Sキーを押した
+
+		m_move.x -= sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_move.z -= cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_rotDest.y = pCamera->GetRot().y;
+
+		isMove = true;
+
+		// 角度の正規化
+		if (m_rot.y > D3DX_PI)
+		{// D3DX_PIより大きくなったら
+			m_rot.y -= PLAYERINFO::NorRot;
+		}
+	}
+
+
+	if (isMove)
+	{
+		// ATTACKじゃなかったら切り替え
+		if (m_pMotion->GetMotionType() != PLAYERMOTION_ATTACK)
+		{
+			m_pMotion->SetMotion(PLAYERMOTION_ATTACK);
+		}
+	}
+	else
+	{
+		// NEUTRALに遷移する
+		if (m_pMotion->GetMotionType() == PLAYERMOTION_ATTACK || !m_isJump)
+		{
+			//　タイプ切り替え
+			m_pMotion->SetMotion(PLAYERMOTION_NEUTRAL, true, 10, false);
+		}
+	}
+
+	if (m_rotDest.y - m_rot.y > D3DX_PI)
+	{// 左回転
+		// 角度
+		m_rot.y = m_rot.y + PLAYERINFO::NorRot;
+	}
+	else if (m_rot.y - m_rotDest.y > D3DX_PI)
+	{// 右回転
+		// 角度
+		m_rot.y = m_rot.y - PLAYERINFO::NorRot;
+	}
+
+	// 現在の角度
+	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
+
+#if 0
 	// カメラ取得
 	CCamera* pCamera = CManager::GetCamera();
 	if (pCamera == nullptr) return;
@@ -750,21 +836,21 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 		if (CManager::GetInputKeyboard()->GetPress(DIK_W))
 		{// 左斜め上
 
-			m_move.x += sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.x += sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::m_move;
+			m_move.z += cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.75f);
 		}
 		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
 		{// 右斜め下
 
-			m_move.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.x -= sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::m_move;
+			m_move.z -= cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.25f);
 		}
 		else
 		{// 単体
-			m_move.x -= sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_move.x -= sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::m_move;
+			m_move.z -= cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y + (D3DX_PI * 0.5f);
 		}
 
@@ -782,20 +868,20 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 
 		if (CManager::GetInputKeyboard()->GetPress(DIK_W))
 		{// Wキーを押した
-			m_move.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.x += sinf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::m_move;
+			m_move.z += cosf(pCamera->GetRot().y + D3DX_PI * 0.25f) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.75f);
 		}
 		else if (CManager::GetInputKeyboard()->GetPress(DIK_S))
 		{// Sキーを押した
-			m_move.x -= sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
-			m_move.z -= cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;
+			m_move.x -= sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::m_move;
+			m_move.z -= cosf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.25f);
 		}
 		else
 		{// Dキーのみ押した
-			m_move.x += sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
-			m_move.z += cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::MOVE;
+			m_move.x += sinf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::m_move;
+			m_move.z += cosf(pCamera->GetRot().y + (D3DX_PI * 0.5f)) * PLAYERINFO::m_move;
 			m_rotDest.y = pCamera->GetRot().y - (D3DX_PI * 0.5f);
 		}
 
@@ -811,8 +897,8 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 	else if (CManager::GetInputKeyboard()->GetPress(DIK_W))
 	{// Wキーを押した
 
-		m_move.x += sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_move.z += cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_move.x += sinf(pCamera->GetRot().y) * PLAYERINFO::m_move;
+		m_move.z += cosf(pCamera->GetRot().y) * PLAYERINFO::m_move;
 		m_rotDest.y = pCamera->GetRot().y - (D3DX_PI);
 
 		//　タイプ切り替え
@@ -830,8 +916,8 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 		//　タイプ切り替え
 		m_pMotion->SetMotion(PLAYERMOTION_MOVE);
 
-		m_move.x -= sinf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
-		m_move.z -= cosf(pCamera->GetRot().y) * PLAYERINFO::MOVE;
+		m_move.x -= sinf(pCamera->GetRot().y) * PLAYERINFO::m_move;
+		m_move.z -= cosf(pCamera->GetRot().y) * PLAYERINFO::m_move;
 		m_rotDest.y = pCamera->GetRot().y;
 
 		// 角度の正規化
@@ -862,6 +948,7 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 
 	// 現在の角度
 	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
+#endif
 }
 //=========================================
 // ジャンプ更新処理
