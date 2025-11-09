@@ -35,6 +35,7 @@
 #include "particle.h"
 #include "windparticle.h"
 #include "modeleffect.h"
+#include "goal.h"
 
 //**********************
 // プレイヤー情報
@@ -259,6 +260,10 @@ void CPlayer::Update(void)
 {
 	// 死んでるなら処理しない
 	if (m_isDeath) return;
+
+	// ゴールに触れたら
+	auto Goal = CGame::GetGameManager()->GetGoal();
+	if (Goal->GetIsGoal()) return;
 
 	// 入力デバイスのポインタ取得
 	CInputKeyboard* pInputKeyboard = nullptr;

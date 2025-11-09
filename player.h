@@ -88,6 +88,7 @@ public:
 	void JumpMove(void) { m_move.y = m_fValue; }
 	void SetBlower(int nType);
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
+	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; }
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; }			// 現在の座標を取得
