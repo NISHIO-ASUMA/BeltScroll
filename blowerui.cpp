@@ -88,8 +88,6 @@ void CBlowerUi::Draw(void)
 
 	// テクスチャ取得
 	CTexture* pTexture = CManager::GetTexture();
-
-	// nullだったらここで処理終了
 	if (pTexture == nullptr) return;
 
 	// テクスチャセット
@@ -111,20 +109,19 @@ void CBlowerUi::SetTexture(int nType)
 	switch (nType)
 	{
 	case TYPE_SMALL: // 
-		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_small.png"); 		// テクスチャ割り当て
+		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_small02.png"); 		// テクスチャ割り当て
 		break;
 
 	case TYPE_MIDIUM: // 
-		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_midium.png"); 		// テクスチャ割り当て
+		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_mid.png"); 		// テクスチャ割り当て
 		break;
 
 	case TYPE_FULL: // 
-		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_max.png"); 	// テクスチャ割り当て
+		m_nIdxTexture = pTexture->Register("data/TEXTURE/blower_max02.png"); 	// テクスチャ割り当て
 		break;
 
 	default:
 		m_nIdxTexture = -1;
 		break;
 	}
-
 }

@@ -14,9 +14,9 @@
 #include "title.h"
 #include "result.h"
 #include "meshfield.h"
-#include <memory>
 #include "goal.h"
 #include "player.h"
+#include "score.h"
 
 //**************************
 // 定数空間
@@ -144,6 +144,11 @@ void CGame::Update(void)
 			{
 				// リザルトシーンに遷移
 				pFade->SetFade(std::make_unique<CResult>());
+
+				auto Score = m_pGameManager->GetScore();
+				if (Score != nullptr) Score->Save(); // スコアを書き出す
+
+				return;
 			}
 		}
 		break;

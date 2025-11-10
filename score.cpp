@@ -86,9 +86,8 @@ HRESULT CScore::Init(void)
 		// 座標設定
 		m_pNumber[nCnt]->SetPos(m_pos);
 
-
 		// テクスチャセット
-		m_pNumber[nCnt]->SetTexture("number003.png");
+		m_pNumber[nCnt]->SetTexture("score001.png");
 	}
 
 	return S_OK;

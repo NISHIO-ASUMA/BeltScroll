@@ -201,7 +201,7 @@ void CCombo::Set(void)
 //*************
 void CCombo::Reset(void)
 {
-	// コンボ数加算
+	// コンボ数リセット
 	m_nCurrent = 0;
 }
 

@@ -56,10 +56,7 @@ CBonusScore* CBonusScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 	pBScore->m_pos = pos;
 
 	// 初期化失敗時
-	if (FAILED(pBScore->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pBScore->Init())) return nullptr;
 
 	return pBScore;
 }
@@ -162,7 +159,7 @@ void CBonusScore::Save(void)
 	if (!OpenFile)
 	{
 		// 例外処理
-		MessageBox(GetActiveWindow(), "スコア保存失敗", "ファイルを開けません", MB_OK);
+		MessageBox(GetActiveWindow(), "スコア保存失敗", "ファイルを開けません(BonusScore.txt)", MB_OK);
 		return;
 	}
 
