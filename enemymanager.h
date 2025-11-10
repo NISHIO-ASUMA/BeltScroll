@@ -37,6 +37,7 @@ public:
 		D3DXVECTOR3 rot;	// 座標
 		std::string Modelname; // モデル名
 		int nType;			// 状態
+		int nColorType;		// 色の種類
 	};
 
 	// コンストラクタ・デストラクタ
@@ -50,7 +51,7 @@ public:
 
 	// 静的メンバ関数
 	static CEnemyManager* Create(void);
-	CEnemy* CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType);
+	CEnemy* CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType,int nColorType);
 	void PushBack(CEnemy* pEnemy) { m_pEnemys.push_back(pEnemy); }
 
 private:

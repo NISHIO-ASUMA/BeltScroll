@@ -48,7 +48,7 @@ CEnemy::~CEnemy()
 //==============================
 // 生成処理
 //==============================
-CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nType)
+CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType, int nType)
 {
 	// インスタンス生成
 	CEnemy* pEnemy = new CEnemy;
@@ -58,6 +58,7 @@ CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
 	pEnemy->SetFilePass(pScriptName);
+	pEnemy->SetTrushType(nTrushType);
 	pEnemy->SetType(nType);
 
 	// 初期化失敗時
