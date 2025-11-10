@@ -10,7 +10,6 @@
 //******************
 // インクルード
 //******************
-#include "main.h"
 #include "object.h"
 #include "object2D.h"
 
@@ -22,7 +21,7 @@ class CNumber;
 class CCombo :public CObject
 {
 public:
-	CCombo(int nPriority = 5);	// コンストラクタ
+	CCombo(int nPriority = static_cast<int>(CObject::PRIORITY::UI));	// コンストラクタ
 	~CCombo();					// デストラクタ
 	static CCombo* Create(D3DXVECTOR3 pos);
 	HRESULT Init(void);				// 初期化
@@ -42,6 +41,7 @@ private:
 	static int m_nCurrent;					// 現在のコンボ数
 	static int m_nTime;						// 継続時間
 	static int m_nScore;					// 現在のスコア
+	static constexpr int maxNumber = 2;
 	static constexpr int maxTime = 1400;	// 最大時間
 	static constexpr float offsetX = 35.0f;	// オフセット
 	static constexpr float maxHeight = 60.0f;	// 最大の縦の大きさ
