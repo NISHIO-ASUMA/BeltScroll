@@ -72,7 +72,7 @@ CEnemy* CEnemyManager::CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot,
 HRESULT CEnemyManager::Init(void)
 {
 	// 読み込み
-	CEnemyManager::LoadFile();
+	CEnemyManager::LoadJson();
 
 	// 初期化処理
 	return S_OK;
@@ -285,6 +285,12 @@ void CEnemyManager::LoadJson(void)
 		std::string filepath = b["filepath"];
 		int idx = b["idx"];
 
+		// ゴミ自体の種類(重さ)
+		int nMassType = b["mass"];
+
+		// 色の種類
+		int nColorType = b["color"];
+
 		// 座標
 		D3DXVECTOR3 pos
 		(
@@ -300,13 +306,6 @@ void CEnemyManager::LoadJson(void)
 			b["rot"][1],
 			b["rot"][2]
 		);
-
-		// ゴミ自体の種類(重さ)
-		int nMassType = b["mass"];
-
-		// 色の種類
-		int nColorType = b["ColorType"];
-
 		// 読み込んだ情報から敵を生成
 		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(), nMassType, nColorType);
 	}

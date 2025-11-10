@@ -61,9 +61,10 @@ public:
 	void Update(void);
 	void Draw(void);
 	bool Collision(CAABBCollider * pOtherCollider);
+	bool CollisionToBlock(CAABBCollider * pOther,D3DXVECTOR3 * pOutPos);
 
 	// 静的メンバ関数
-	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType,int nnColorType);
+	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType,int nColorType);
 
 	// セッター
 	void SetTrushMassType(int trushType) { m_TrushType = trushType; }
@@ -79,6 +80,7 @@ private:
 	D3DXVECTOR3 m_move;		// 移動量
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
 	CSphereCollider* m_pCollider; // コライダー
+	CAABBCollider* m_pAABB;	// 矩形のコライダー
 
 	int m_TrushType;		// ゴミ自体の種類
 	int m_nColorType;		// 対応するシュレッダーカラーの種類
