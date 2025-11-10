@@ -175,9 +175,6 @@ void CGame::Update(void)
 	// falseの時に更新
 	if (m_nGametype == GAMESTATE_NORMAL && m_pPausemanager->GetPause() == false)
 	{
-		// ゲームマネージャー更新
-		m_pGameManager->Update();
-
 		// ゴール取得
 		auto Goal = m_pGameManager->GetGoal();
 		if (Goal == nullptr) return;
@@ -189,9 +186,15 @@ void CGame::Update(void)
 		// 範囲内にいるか判定
 		if (Goal->CheckPos(Player->GetPos()))
 		{
+			// フラグをセット
+			Goal->SetIsGoal(true);
+
 			// タイプ変更
 			m_nGametype = GAMESTATE_END;
 		}
+
+		// ゲームマネージャー更新
+		m_pGameManager->Update();
 
 		//// 経過時間を取得
 		//int Numtime = m_pGameManager->GetTime()->GetAllTime();

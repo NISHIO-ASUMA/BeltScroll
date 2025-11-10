@@ -53,10 +53,10 @@ CEnemyManager* CEnemyManager::Create(void)
 //==============================
 // 生成処理
 //==============================
-CEnemy* CEnemyManager::CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType)
+CEnemy* CEnemyManager::CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType, int nColorType)
 {
 	// インスタンス生成
-	CEnemy* pEnemy = CEnemy::Create(pos,rot,pModelName,nType);
+	CEnemy* pEnemy = CEnemy::Create(pos,rot,pModelName,nType, nColorType);
 
 	if (pEnemy)
 	{
@@ -179,6 +179,16 @@ void CEnemyManager::LoadFile(void)
 			// 種類設定
 			current.nType = type;
 		}
+		else if (token == "COLORTYPE" && inBlock)
+		{
+			std::string eq;
+			int colorType;
+
+			iss >> eq >> colorType;
+
+			// 種類設定
+			current.nColorType = colorType;
+		}
 		else if (token == "FILEPATH" && inBlock)
 		{
 			std::string eq, path;
@@ -207,7 +217,8 @@ void CEnemyManager::LoadFile(void)
 			data.pos,
 			data.rot,
 			data.Modelname.c_str(),
-			data.nType
+			data.nType,
+			data.nColorType
 		);
 
 		// 動的配列に追加
@@ -293,7 +304,10 @@ void CEnemyManager::LoadJson(void)
 		// 種類
 		int nType = b["Type"];
 
+		// 色の種類
+		int nColorType = b["ColorType"];
+
 		// y読み込んだ情報から敵を生成
-		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(),nType);
+		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(),nType, nColorType);
 	}
 }
