@@ -4,7 +4,7 @@ Format Text Ver 1.0
 Scene {
 	pos -39.9185 -44.7985 3840.0000
 	lookat 0.0000 0.0000 0.0000
-	head 6.3665
+	head 6.8365
 	pich 0.4092
 	bank 0.0100
 	ortho 0
@@ -18,7 +18,7 @@ Scene {
 	}
 }
 Material 3 {
-	"mat1" col(0.475 0.612 0.741 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
+	"mat1" col(0.102 0.349 1.000 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
 	"mat2" col(0.827 0.827 0.827 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
 	"mat3" col(0.000 0.000 0.000 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
 }
@@ -639,7 +639,7 @@ Object "obj6" {
 	}
 }
 Object "obj7" {
-	visible 0
+	visible 15
 	locking 0
 	shading 1
 	facet 59.5
