@@ -33,7 +33,7 @@ m_pShadowS(nullptr),
 m_isBlow(false),
 m_TrushType(TYPE_NONE),
 m_pCollider(nullptr),
-m_nType(0)
+m_nColorType(NULL)
 {
 	// 値のクリア
 }
@@ -47,7 +47,7 @@ CEnemy::~CEnemy()
 //==============================
 // 生成処理
 //==============================
-CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType, int nType)
+CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType, int nColorType)
 {
 	// インスタンス生成
 	CEnemy* pEnemy = new CEnemy;
@@ -57,14 +57,11 @@ CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
 	pEnemy->SetFilePass(pScriptName);
-	pEnemy->SetTrushType(nTrushType);
-	pEnemy->SetType(nType);
+	pEnemy->SetTrushMassType(nTrushType);
+	pEnemy->SetColorType(nColorType);
 
 	// 初期化失敗時
-	if (FAILED(pEnemy->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pEnemy->Init())) return nullptr;
 
 	// 生成されたインスタンスを返す
 	return pEnemy;
@@ -155,7 +152,7 @@ void CEnemy::Update(void)
 		{
 			// エフェクト生成
 			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
-			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nType);
+			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nColorType);
 
 			// 自身の消去
 			this->Uninit();

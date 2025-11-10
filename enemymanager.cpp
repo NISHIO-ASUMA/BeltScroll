@@ -301,13 +301,13 @@ void CEnemyManager::LoadJson(void)
 			b["rot"][2]
 		);
 
-		// í—Ş
-		int nType = b["Type"];
+		// ƒSƒ~©‘Ì‚Ìí—Ş(d‚³)
+		int nMassType = b["mass"];
 
 		// F‚Ìí—Ş
 		int nColorType = b["ColorType"];
 
-		// y“Ç‚İ‚ñ‚¾î•ñ‚©‚ç“G‚ğ¶¬
-		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(),nType, nColorType);
+		// “Ç‚İ‚ñ‚¾î•ñ‚©‚ç“G‚ğ¶¬
+		CEnemy* pEnemy = CreateEnemy(pos, rot,filepath.c_str(), nMassType, nColorType);
 	}
 }

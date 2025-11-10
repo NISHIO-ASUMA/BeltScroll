@@ -31,15 +31,24 @@ class CEnemy : public CObjectX
 {
 public:
 	//***************************
-	// 種類の列挙型
+	// ゴミの重さ種類の列挙型
 	//***************************
 	enum TYPE
 	{
-		TYPE_NONE,			// 無し
+		TYPE_NONE,			// なんでも飛ぶ
 		TYPE_LIGHTTRUSH,	// 軽い
 		TYPE_HEAVYTRUSH,	// 重い
-		TYPE_ROLLTRUSH,		// 転がる
 		TYPE_MAX
+	};
+
+	//***************************
+	// 色種類の列挙型
+	//***************************
+	enum COLORTYPE
+	{
+		COLORTYPE_RED,		// 赤
+		COLORTYPE_BLUE,		// 青
+		COLORTYPE_MAX
 	};
 
 	// コンストラクタ・デストラクタ
@@ -54,11 +63,11 @@ public:
 	bool Collision(CAABBCollider * pOtherCollider);
 
 	// 静的メンバ関数
-	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType,int nType);
+	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType,int nnColorType);
 
 	// セッター
-	void SetTrushType(int trushType) { m_TrushType = trushType; }
-	void SetType(int nType) { m_nType = nType; }
+	void SetTrushMassType(int trushType) { m_TrushType = trushType; }
+	void SetColorType(int nType) { m_nColorType = nType; }
 	void AddBlow(const D3DXVECTOR3 Vec) { m_move += Vec; }
 	void SetBlow(bool isFlags) { m_isBlow = isFlags; }
 
@@ -69,12 +78,11 @@ public:
 private:
 	D3DXVECTOR3 m_move;		// 移動量
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
-	int m_TrushType;		// ゴミの種類
-	int m_nType;			// 対応するシュレッダーの種類
-	bool m_isBlow;			// 吹き飛ばしが有効か
 	CSphereCollider* m_pCollider; // コライダー
 
+	int m_TrushType;		// ゴミ自体の種類
+	int m_nColorType;		// 対応するシュレッダーカラーの種類
+	bool m_isBlow;			// 吹き飛ばしが有効か
+
 	static constexpr int COLLOBJ = 2; // シュレッダー数
-
 };
-
