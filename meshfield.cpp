@@ -77,7 +77,7 @@ void CMeshField::SetTexture(void)
 	CTexture* pTexture = CManager::GetTexture();
 
 	// Š„‚è“–‚Ä
-	m_nTexIdx = pTexture->Register("data/TEXTURE/GridFloor007.png");
+	m_nTexIdx = pTexture->Register("data/TEXTURE/road.png");
 }
 //============================================
 // ‰Šú‰»ˆ—
