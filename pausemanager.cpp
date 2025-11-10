@@ -93,7 +93,8 @@ HRESULT CPauseManager::Init(void)
 		if (nPause == CPause::MENU_OPERATION)
 		{
 			// 操作説明生成
-			m_pPause[nPause] = CPause::Create(D3DXVECTOR3(SCREEN_WIDTH * 0.844f, SCREEN_HEIGHT * 0.07f, 0.0f), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, COLOR_NULL, nPause);
+			m_pPause[nPause] = CPause::Create(D3DXVECTOR3(1080.0f, SCREEN_HEIGHT * 0.4f, 0.0f), 200.0f, 80.0f, COLOR_WHITE, nPause);
+
 		}
 	}
 
@@ -125,8 +126,6 @@ void CPauseManager::Update(void)
 
 	// サウンド取得
 	CSound* pSound = CManager::GetSound();
-
-	// nullだったら
 	if (pSound == nullptr) return;
 
 	// 上キー入力
@@ -153,22 +152,18 @@ void CPauseManager::Update(void)
 
 	// フェード取得
 	CFade* pFade = CManager::GetFade();
-
-	// nullだったら
 	if (pFade == nullptr) return;
 
 	// カメラ取得
 	CCamera* pCamera = CManager::GetCamera();
-
-	// nullだったら
 	if (pCamera == nullptr) return;
 
 	// 選択されているメニューのポリゴンカラーを変更
 	for (int nCnt = 0; nCnt < SELECT_MAX; nCnt++)
 	{
-		// 背景は変えない
-		if (nCnt == CPause::MENU_BACK) continue;
-
+		// 背景とメニューは変えない
+		if (nCnt == CPause::MENU_BACK || nCnt == CPause::MENU_OPERATION) continue;
+		
 		// nullじゃなかったら
 		if (m_pPause[nCnt] != nullptr)
 		{
@@ -222,9 +217,7 @@ void CPauseManager::SetEnablePause(void)
 {
 	// カメラ取得
 	CCamera * pCamera = CManager::GetCamera();
-
-	// アニメ―ション中なら処理を通さない
-	if (pCamera->GetMode() == CCamera::MODE_ANIM) return;
+	if (pCamera == nullptr) return;
 
 	// Pキー or Start が押された
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_P) ||

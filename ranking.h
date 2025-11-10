@@ -12,7 +12,11 @@
 // インクルードファイル宣言
 //******************************
 #include "scene.h"
-#include "rankingscore.h"
+
+//******************************
+// 前方宣言
+//******************************
+class CRankingScore;
 
 //******************************
 // ランキングシーンクラスを定義
@@ -31,6 +35,9 @@ public:
 	void Draw(void);
 
 private:
+
+	CRankingScore* m_pRankScore; // ランキングスコア
+
 };
 
 #endif

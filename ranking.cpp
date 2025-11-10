@@ -19,10 +19,9 @@
 //===================================
 // オーバーロードコンストラクタ
 //===================================
-CRanking::CRanking() : CScene(CScene::MODE_RANKING)
+CRanking::CRanking() : CScene(CScene::MODE_RANKING),m_pRankScore(nullptr)
 {
 	// 値のクリア
-
 }
 //===================================
 // デストラクタ

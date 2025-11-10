@@ -53,7 +53,7 @@ CRankingScore* CRankingScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeigh
 	// オブジェクト設定
 	pRankScore->m_pos = pos;
 	pRankScore->m_fWidth = fWidth;
-	pRankScore->m_fHeight=fHeight;
+	pRankScore->m_fHeight = fHeight;
 
 	// 初期化失敗時
 	if (FAILED(pRankScore->Init()))
