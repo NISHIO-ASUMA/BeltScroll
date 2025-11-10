@@ -70,6 +70,7 @@ void CTrushBox::Uninit(void)
 //==============================
 void CTrushBox::Update(void)
 {
+
 }
 //==============================
 // •`‰æˆ—
