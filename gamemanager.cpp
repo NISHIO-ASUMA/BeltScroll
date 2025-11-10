@@ -24,6 +24,7 @@
 #include "goal.h"
 #include "confettiparticle.h"
 #include "combo.h"
+#include "trushbox.h"
 
 //===============================
 // コンストラクタ
@@ -71,6 +72,8 @@ HRESULT CGameManager::Init(void)
 
 	// ゴール生成
 	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,75.0f,0.0f));
+
+	CTrushBox::Create(D3DXVECTOR3(100.0f, 100.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),"data/MODEL/STAGEOBJ/block000.x" );
 
 	// スコア
 	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
