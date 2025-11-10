@@ -23,7 +23,6 @@
 #include "confettieffect.h"
 #include "confettiparticle.h"
 #include "blockmanager.h"
-#include "combo.h"
 
 //==============================
 // コンストラクタ
@@ -157,8 +156,6 @@ void CEnemy::Update(void)
 			// エフェクト生成
 			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
 			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nType);
-			// コンボ加算
-			CCombo::Add(100);
 
 			// 自身の消去
 			this->Uninit();
