@@ -202,6 +202,7 @@ CShadowS* CShadowS::Create(D3DXVECTOR3 pos,D3DXVECTOR3 rot)
 	pShadowS->SetFilePass("data/MODEL/STAGEOBJ/Shadowmodel.x");
 	pShadowS->SetPos(pos);
 	pShadowS->SetRot(rot);
+	pShadowS->SetScale(D3DXVECTOR3(0.8f, 0.8f, 0.8f));
 
 	// ‰Šú‰»Ž¸”sŽž
 	if (FAILED(pShadowS->Init()))

@@ -1,0 +1,73 @@
+{
+   "AllObject": 4,
+   "SetObjects": [
+      {
+         "idx": 0,
+         "Type": 0,
+         "color": 0,
+         "mass": 0,
+         "pos": [
+            -150.0,
+            100.0,
+            -290.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/box2B.x"
+      },
+      {
+         "idx": 1,
+         "Type": 1,
+         "color": 1,
+         "mass": 2,
+         "pos": [
+            15.0,
+            100.0,
+            -350.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/gear.x"
+      },
+      {
+         "idx": 2,
+         "Type": 0,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            125.0,
+            100.0,
+            -165.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/box2B.x"
+      },
+      {
+         "idx": 3,
+         "Type": 2,
+         "color": 1,
+         "mass": 0,
+         "pos": [
+            140.0,
+            100.0,
+            -480.0
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+      }
+   ]
+}
