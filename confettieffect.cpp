@@ -35,15 +35,10 @@ CConfettiEffect* CConfettiEffect::Create(D3DXVECTOR3 pos, D3DXCOLOR col, D3DXVEC
 {
 	// エフェクトポインタ
 	CConfettiEffect* pEffect = new CConfettiEffect;
-
-	// nullptrだったら
 	if (pEffect == nullptr) return nullptr;
 
 	// 初期化に失敗したら
-	if (FAILED(pEffect->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pEffect->Init())) return nullptr;
 
 	// 3Dオブジェクトセット
 	pEffect->SetSize(fRadius, fRadius);

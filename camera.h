@@ -51,7 +51,7 @@ public:
 	void WheelMouse(int nDelta);
 	void PlayerFllow(void);
 	bool PlayerCollisionScreen(D3DXVECTOR3 playerPos);
-	void Tameshi(void);
+	void Traking(void);
 
 	// セッター
 	void SetCameraMode(int nMode) { m_pCamera.nMode = nMode; }

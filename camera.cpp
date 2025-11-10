@@ -116,13 +116,13 @@ void CCamera::Update(void)
 	// マウス更新
 	MouseView(pMouse, pInput);
 
-	// 追従
-	Tameshi();
+	// 追従カメラ
+	Traking();
 
 #else
 
 	// 追従カメラ
-	PlayerFllow();
+	Traking();
 
 #endif // _DEBUG
 
@@ -169,7 +169,7 @@ void CCamera::SetCamera(void)
 		D3DXToRadian(45.0f),
 		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
 		10.0f,
-		10000.0f);
+		5000.0f);
 
 	// プロジェクションマトリックスの設定
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_pCamera.mtxprojection);
@@ -363,9 +363,9 @@ bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 }
 
 //**********************************************************
-// 試しです
+// 追従カメラ処理
 //**********************************************************
-void CCamera::Tameshi(void)
+void CCamera::Traking(void)
 {
 #if 1
 	// 現在のモード取得
@@ -406,7 +406,6 @@ void CCamera::Tameshi(void)
 	{
 		m_bMove = false;
 	}
-
 
 #endif
 

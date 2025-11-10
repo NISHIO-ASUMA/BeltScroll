@@ -17,6 +17,7 @@ class CEnemyManager;
 class CTrushSim;
 class CShredderManager;
 class CGoal;
+class CScore;
 
 //**************************
 // インクルードファイル
@@ -45,6 +46,7 @@ public:
 	CShredderManager* GetShredderM(void) { return m_pShredderManaher; }
 	CBlockManager* GetBlockManager(void) { return m_pBlockManager; }
 	CEnemyManager* GetEnemyManager(void) { return m_pEnemyManager.get(); }
+	CScore* GetScore(void) {return m_pScore;}
 
 private:
 	std::unique_ptr<CEnemyManager>m_pEnemyManager; // 敵管理
@@ -53,6 +55,7 @@ private:
 	CTrushSim* m_pTrushSim;			// 試し
 	CShredderManager* m_pShredderManaher;// シュレッダーマネージャー
 	CGoal* m_pGoal;					// ゴールクラス
+	CScore* m_pScore;				// ゲームのスコア
 };
 
 #endif

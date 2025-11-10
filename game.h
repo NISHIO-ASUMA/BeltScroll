@@ -15,6 +15,7 @@
 #include "pausemanager.h"
 #include "gamemanager.h"
 #include "time.h"
+#include <memory>
 
 //****************************
 // ゲームクラスを定義

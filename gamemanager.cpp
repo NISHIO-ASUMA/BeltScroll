@@ -25,6 +25,7 @@
 #include "confettiparticle.h"
 #include "combo.h"
 #include "trushbox.h"
+#include "score.h"
 
 //===============================
 // コンストラクタ
@@ -37,6 +38,7 @@ CGameManager::CGameManager()
 	m_pEnemyManager = nullptr;
 	m_pTrushSim = nullptr;
 	m_pGoal = nullptr;
+	m_pScore = nullptr;
 }
 //===============================
 // デストラクタ
@@ -75,8 +77,12 @@ HRESULT CGameManager::Init(void)
 
 	CTrushBox::Create(D3DXVECTOR3(100.0f, 100.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),"data/MODEL/STAGEOBJ/block000.x" );
 
-	// スコア
+	// コンボスコア
 	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
+
+	// スコア生成
+	m_pScore = CScore::Create(D3DXVECTOR3(1235.0f, 45.0f, 0.0f), 110.0f, 45.0f);
+	m_pScore->ClearScore();
 
 	// 初期化結果を返す
 	return S_OK;
