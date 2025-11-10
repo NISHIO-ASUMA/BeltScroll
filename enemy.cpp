@@ -23,7 +23,6 @@
 #include "confettieffect.h"
 #include "confettiparticle.h"
 #include "blockmanager.h"
-#include "combo.h"
 
 //==============================
 // コンストラクタ
@@ -34,7 +33,8 @@ m_pShadowS(nullptr),
 m_isBlow(false),
 m_TrushType(TYPE_NONE),
 m_pCollider(nullptr),
-m_nType(0)
+m_pAABB(nullptr),
+m_nColorType(NULL)
 {
 	// 値のクリア
 }
@@ -48,7 +48,7 @@ CEnemy::~CEnemy()
 //==============================
 // 生成処理
 //==============================
-CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType, int nType)
+CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType, int nColorType)
 {
 	// インスタンス生成
 	CEnemy* pEnemy = new CEnemy;
@@ -58,14 +58,11 @@ CEnemy* CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName
 	pEnemy->SetPos(pos);
 	pEnemy->SetRot(rot);
 	pEnemy->SetFilePass(pScriptName);
-	pEnemy->SetTrushType(nTrushType);
-	pEnemy->SetType(nType);
+	pEnemy->SetTrushMassType(nTrushType);
+	pEnemy->SetColorType(nColorType);
 
 	// 初期化失敗時
-	if (FAILED(pEnemy->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pEnemy->Init())) return nullptr;
 
 	// 生成されたインスタンスを返す
 	return pEnemy;
@@ -82,10 +79,13 @@ HRESULT CEnemy::Init(void)
 	SetObjType(TYPE_ENEMY);
 
 	// ステンシルシャドウの生成
-	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, 0.0f, GetPos().z), GetRot());
+	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z), GetRot());
 
 	// 球コライダー生成
 	m_pCollider = CSphereCollider::Create(GetPos(), 85.0f);
+
+	// 矩形コライダー生成
+	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());
 
 	return S_OK;
 }
@@ -97,6 +97,9 @@ void CEnemy::Uninit(void)
 	// コライダーの破棄
 	delete m_pCollider;
 	m_pCollider = nullptr;
+
+	delete m_pAABB;
+	m_pAABB = nullptr;
 
 	// 親クラスの終了処理
 	CObjectX::Uninit();
@@ -137,14 +140,48 @@ void CEnemy::Update(void)
 	}
 	
 	// 座標の更新
-	m_move.y -= 0.5f;
+	m_move.y -= 1.5f;
 	NowPos += m_move;
 
 	if (NowPos.y <= 0.0f) 
 		NowPos.y = 0.0f;
 
+	// 敵の座標をセット
+	SetPos(NowPos);
+
 	// コライダー座標
 	m_pCollider->SetPos(NowPos);
+	m_pAABB->SetPos(NowPos);
+
+	// 取得
+	D3DXVECTOR3 UpdatePos = GetPos();
+
+	// マップに配置されているブロックを取得 
+	auto Block = CGame::GetGameManager()->GetBlockManager();
+	if (Block == nullptr) return;
+
+	// ブロックオブジェクトとの当たり判定
+	for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
+	{
+		// コライダー取得
+		CAABBCollider* pCollider = Block->GetBlock(nBlock)->GetCollider();
+
+		// 押し出し座標
+		D3DXVECTOR3 OutPos = UpdatePos;
+
+		// 実際のコリジョン
+		if (CollisionToBlock(pCollider, &OutPos))
+		{
+			// 押し出す座標をセットする
+			UpdatePos = OutPos;
+
+			// 座標セット
+			SetPos(UpdatePos);
+
+			// 矩形コライダーの更新
+			m_pAABB->SetPos(OutPos);
+		}
+	}
 
 	// 当たり判定生成
 	for (int nCnt = 0; nCnt < COLLOBJ; nCnt++)
@@ -156,9 +193,7 @@ void CEnemy::Update(void)
 		{
 			// エフェクト生成
 			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
-			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nType);
-			// コンボ加算
-			CCombo::Add(100);
+			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nColorType);
 
 			// 自身の消去
 			this->Uninit();
@@ -171,35 +206,14 @@ void CEnemy::Update(void)
 		}
 	}
 
-	// TODO : 今度考える
-	//// マップに配置されているブロックを取得 
-	//auto Block = CGame::GetGameManager()->GetBlockManager();
-	//if (Block == nullptr) return;
-
-	//// ブロックオブジェクトとの当たり判定
-	//for (int nBlock = 0; nBlock < Block->GetAll(); nBlock++)
-	//{
-	//	// コライダー取得
-	//	CAABBCollider* pCollider = Block->GetBlock(nBlock)->GetCollider();
-
-	//	// 実際のコリジョン
-	//	if (Collision(pCollider))
-	//	{
-
-	//	}
-	//}
-
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.25f;
 	m_move.z += (0.0f - m_move.z) * 0.25f;
 
-	// 座標をセット
-	SetPos(NowPos);
-
 	// ステンシル更新
 	if (m_pShadowS)
 	{
-		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -2.0f, GetPos().z));
+		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z));
 		m_pShadowS->SetRot(GetRot());
 	}
 }
@@ -218,4 +232,11 @@ bool CEnemy::Collision(CAABBCollider* pOtherCollider)
 {
 	// 判定結果を返す
 	return CAABBSphereCollision::CollisionT(pOtherCollider, m_pCollider);
+}
+//=======================================
+// 配置されているブロックとの当たり判定
+//=======================================
+bool CEnemy::CollisionToBlock(CAABBCollider* pOther, D3DXVECTOR3* pOutPos)
+{
+	return CAABBAABBCollision::CollisionT(m_pAABB,pOther,pOutPos);
 }

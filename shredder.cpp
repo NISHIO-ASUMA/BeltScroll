@@ -19,6 +19,7 @@
 #include "model.h"
 #include "suckParticle.h"
 #include "shredbinmanager.h"
+#include "combo.h"
 
 //===============================
 // コンストラクタ
@@ -230,6 +231,14 @@ void CShredder::AddTrush(int nType)
 	if (m_nType == nType)
 	{
 		m_nShredbin+=5;
+		// コンボ加算
+		CCombo::Add(100);
 	}
+	else
+	{
+		// コンボ加算
+		CCombo::Reset();
+	}
+
 	m_pShredbinManager->SetNum(m_nShredbin);
 }

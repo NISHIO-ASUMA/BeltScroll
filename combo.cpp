@@ -19,7 +19,7 @@
 //**********************
 // 静的メンバ変数初期化
 //**********************
-CNumber* CCombo::m_pNumber[2] = {};
+CNumber* CCombo::m_pNumber[maxNumber] = {};
 int CCombo::m_nCurrent = 0;
 int CCombo::m_nTime = 0;
 int CCombo::m_nScore = 0;
@@ -56,7 +56,7 @@ HRESULT CCombo::Init(void)
 //*****************
 void CCombo::Uninit(void)
 {
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		m_pNumber[nCnt]->Uninit();
 		delete m_pNumber[nCnt];
@@ -70,9 +70,6 @@ void CCombo::Uninit(void)
 //*****************
 void CCombo::Update(void)
 {
-	// コンボ終了時のリセット
-	Reset();
-
 	// コンボ数の表示
 	Set();
 
@@ -87,7 +84,7 @@ void CCombo::Update(void)
 //*****************
 void CCombo::Draw(void)
 {
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		m_pNumber[nCnt]->Draw();
 	}
@@ -105,23 +102,19 @@ CCombo* CCombo::Create(D3DXVECTOR3 pos)
 	if (pCombo == nullptr) return nullptr;
 
 	// 初期化失敗時
-	if (FAILED(pCombo->Init()))
-	{
-		// nullポインタを返す
-		return nullptr;
-	}
+	if (FAILED(pCombo->Init())) return nullptr;
 
 	// オブジェクト設定
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		pCombo->m_pNumber[nCnt] = new CNumber;
 	}
 	m_pNumber[0]->Init(D3DXVECTOR3(pos.x + offsetX, pos.y, 0.0f), 0.0f, 0.0f);
 	m_pNumber[1]->Init(D3DXVECTOR3(pos.x - offsetX, pos.y, 0.0f), 0.0f, 0.0f);
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		m_pNumber[nCnt]->SetCol(COMBO_OFF);
-		m_pNumber[nCnt]->SetTexture("score001.png");
+		m_pNumber[nCnt]->SetTexture("number1.png");
 	}
 
 	// ポインタを返す
@@ -176,7 +169,7 @@ void CCombo::Add(int nScore)
 //****************
 void CCombo::Set(void)
 {
-	int nData[2], nTime;
+	int nData[maxNumber], nTime;
 
 	// 初期化
 	nData[0] = 10;
@@ -184,7 +177,7 @@ void CCombo::Set(void)
 	nTime = m_nTime / (maxTime / 100);
 
 	// ナンバーに値を設定
-	for (int nCntD = 0; nCntD < 2; nCntD++)
+	for (int nCntD = 0; nCntD < maxNumber; nCntD++)
 	{
 		// 計算して値を1桁ずつ設定
 		m_pNumber[nCntD]->SetDigit((m_nCurrent % nData[0]) / nData[1]);
@@ -208,21 +201,8 @@ void CCombo::Set(void)
 //*************
 void CCombo::Reset(void)
 {
-	//// ゲーム状態の取得
-	//CGame::STATE state = CGame::GetState();
-	//if (m_nTime <= 0 || state == CGame::STATE_END)
-	//{// 時間経過orゲーム終了したら
-
-	//	// コンボ数に応じてスコア加算
-	//	int nFinishCombo = m_nCurrent;
-	//	CScore::Add(m_nScore * nFinishCombo);
-
-	//	// 初期化
-	//	m_nCurrent = 0;
-	//	m_nTime = 0;
-	//	m_nScore = 0;
-	//}
-
+	// コンボ数加算
+	m_nCurrent = 0;
 }
 
 //******************
@@ -244,7 +224,7 @@ void CCombo::SizeUpdate(void)
 		m_numberSize.y = maxWidth;
 	}
 	// 反映
-	for (int nCnt = 0; nCnt < 2; nCnt++)
+	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		m_pNumber[nCnt]->SetSize(m_numberSize.x, m_numberSize.y);
 	}
