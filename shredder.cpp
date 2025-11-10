@@ -34,6 +34,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 
 	m_nType = NULL;
 	m_nShredbin = NULL;
+	m_state = STATE_MOVE;
 	
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
@@ -87,7 +88,6 @@ HRESULT CShredder::Init(void)
 	m_pShredbinManager->SetType(m_nType);
 	m_pShredbinManager->Init();
 
-
 	return S_OK;
 }
 //===============================
@@ -122,11 +122,7 @@ void CShredder::Uninit(void)
 //===============================
 void CShredder::Update(void)
 {
-	// パーティクル生成
-	CSuckParticle::Create(D3DXVECTOR3(m_pos.x+150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
-
-	// 座標移動
-	m_move.x = 1.0f;
+	State();
 
 	// シュレッダーの更新
 	m_oldPos = m_pos;
@@ -136,13 +132,19 @@ void CShredder::Update(void)
 	m_pAABB->SetPos(m_pos);
 	m_pAABB->SetOldPos(m_oldPos);
 
-	// 移動量の減衰
-	m_move.x += (0.0f - m_move.x) * 0.75f;
-
 	// モデルの更新
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt]->Update();
+	}
+
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_0))
+	{
+		m_state = STATE_DUSTBOX;
+	}
+	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_9))
+	{
+		m_state = STATE_MOVE;
 	}
 
 	UpdateModel();
@@ -239,6 +241,9 @@ void CShredder::SetPosZ(float posZ)
 	m_pos.z = posZ;
 }
 
+//===============================
+// シュレッダービンにごみ追加
+//===============================
 void CShredder::AddTrush(int nType)
 {
 	if (m_nType == nType)
@@ -254,4 +259,24 @@ void CShredder::AddTrush(int nType)
 	}
 
 	m_pShredbinManager->SetNum(m_nShredbin);
+}
+
+//===============================
+// 状態ごとの更新
+//===============================
+void CShredder::State(void)
+{
+	switch (m_state)
+	{
+	case STATE_MOVE:
+		// 座標移動
+		m_move.x = 0.5f;
+		// パーティクル生成
+		CSuckParticle::Create(D3DXVECTOR3(m_pos.x + 150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
+		break;
+	case STATE_DUSTBOX:
+		// 座標移動
+		m_move.x = 0.0f;
+		break;
+	}
 }

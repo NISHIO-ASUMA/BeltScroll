@@ -53,7 +53,7 @@ HRESULT CTrushBox::Init(void)
 	CObjectX::Init();
 
 	// オブジェクトの種類をセット
-	SetObjType(TYPE_ENEMY);
+	SetObjType(TYPE_NONE);
 
 	return S_OK;
 }

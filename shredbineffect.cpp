@@ -127,9 +127,6 @@ void CShredbinEffect::Update(void)
 	GetManagerPosition();
 	Collision();
 
-
-
-
 	// 0ˆÈ‰º‚È‚ç
 	if (m_fRadius <= 0.0f)
 	{

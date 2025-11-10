@@ -52,15 +52,6 @@ void CShredbinManager::Update(void)
 {
 	CInputKeyboard* pKey = CManager::GetInputKeyboard();
 
-	if (pKey->GetPress(DIK_9))
-	{
-		m_nNum++;
-	}
-	else if(pKey->GetPress(DIK_8)&&m_nNum>0)
-	{
-		m_nNum--;
-	}
-
 	if (m_nNum > CShredbinEffect::GetNumAll())
 	{
 		D3DXCOLOR col = COLOR_NULL;
