@@ -375,6 +375,26 @@ void CPlayer::Update(void)
 	m_pAAABB->SetPos(m_pos);
 	m_pAAABB->SetOldPos(m_posOld);
 
+	// シュレッダーとの衝突判定の生成
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		// シュレッダーが持つコライダー取得
+		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
+		
+		// 押し出し計算後の入れ物
+		D3DXVECTOR3 OutPos = m_pos;
+
+		// 当たっているなら
+		if (CollisionBox(ShredderCol,&OutPos))
+		{
+			// 押し出す座標をセットする
+			m_pos = OutPos;
+
+			// 矩形コライダーの更新
+			m_pAAABB->SetPos(OutPos);
+		}
+	}
+
 	// マップに配置されているブロックを取得
 	auto Block = CGame::GetGameManager()->GetBlockManager();
 	if (Block == nullptr) return;
@@ -396,26 +416,6 @@ void CPlayer::Update(void)
 
 			// コライダー座標更新
 			m_pAAABB->SetPos(CollBlockPos);
-		}
-	}
-
-	// 判定の生成
-	for (int nCnt = 0; nCnt < 2; nCnt++)
-	{
-		// シュレッダーが持つコライダー取得
-		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
-		
-		// 押し出し計算後の入れ物
-		D3DXVECTOR3 OutPos = m_pos;
-
-		// 当たっているなら
-		if (CollisionBox(ShredderCol,&OutPos))
-		{
-			// 押し出す座標をセットする
-			m_pos = OutPos;
-
-			// 矩形コライダーの更新
-			m_pAAABB->SetPos(OutPos);
 		}
 	}
 

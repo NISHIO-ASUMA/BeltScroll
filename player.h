@@ -96,6 +96,7 @@ public:
 	D3DXVECTOR3 GetRot(void) { return m_rot; }			// Œ»İ‚ÌŠp“x‚ğæ“¾
 	D3DXVECTOR3 GetRotDest(void) { return m_rotDest; }	// –Ú“IŠp‚ğæ“¾
 	PLAYERMOTION GetNowMotion(void) const;
+	CAABBCollider* GetAABB(void) const { return m_pAAABB; }
 
 	CModel* GetModelPartType(CModel::PARTTYPE modelpart);
 	CMotion* GetMotion(void) { return m_pMotion; }

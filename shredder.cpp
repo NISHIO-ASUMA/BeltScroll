@@ -30,12 +30,16 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_pos = VECTOR3_NULL;
 	m_rot = VECTOR3_NULL;
 	m_move = VECTOR3_NULL;
-	m_nType = 0;
-	m_nShredbin = 0;
+	m_oldPos = VECTOR3_NULL;
+
+	m_nType = NULL;
+	m_nShredbin = NULL;
+	
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt] = nullptr;
 	}
+
 	m_pAABB = nullptr;
 	m_pShredbinManager = nullptr;
 }
@@ -60,10 +64,7 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 	pShredder->m_nType = nType;
 
 	// 初期化失敗時
-	if (FAILED(pShredder->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pShredder->Init())) return nullptr;
 
 	// 生成されたポインタを返す
 	return pShredder;
@@ -73,12 +74,14 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 //===============================
 HRESULT CShredder::Init(void)
 {
+	// モデル初期化
 	InitModel();
+
 	// モデルの向きを合わせるため
 	m_rot.y = D3DX_PI;
 
 	// 矩形コライダー生成
-	m_pAABB = CAABBCollider::Create(m_pos, m_pos,D3DXVECTOR3(100.0f,300.0f,500.0f));
+	m_pAABB = CAABBCollider::Create(m_pos, m_oldPos,D3DXVECTOR3(100.0f,300.0f,500.0f));
 	m_pShredbinManager = new CShredbinManager;
 	m_pShredbinManager->SetMove(D3DXVECTOR3(1.0f,0.0f,0.0f));
 	m_pShredbinManager->SetType(m_nType);
@@ -119,27 +122,31 @@ void CShredder::Uninit(void)
 //===============================
 void CShredder::Update(void)
 {
-	CGameManager* pGameManager = CGame::GetGameManager();
-	CPlayer* pPlayer = pGameManager->GetPlayer();
-	D3DXVECTOR3 pPos = pPlayer->GetPos();
-	D3DXVECTOR3 pPosOld = pPlayer->GetOldPos();
-
-	CCamera* pCamera = CManager::GetCamera();
-
+	// パーティクル生成
 	CSuckParticle::Create(D3DXVECTOR3(m_pos.x+150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
 
-	m_pos.x += 1.0f;
-	SetPos(m_pos);
+	// 座標移動
+	m_move.x = 1.0f;
 
-	// 座標更新
+	// シュレッダーの更新
+	m_oldPos = m_pos;
+	m_pos += m_move;
+
+	// コライダー座標の更新
 	m_pAABB->SetPos(m_pos);
+	m_pAABB->SetOldPos(m_oldPos);
+
+	// 移動量の減衰
+	m_move.x += (0.0f - m_move.x) * 0.75f;
 
 	// モデルの更新
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
 		m_apModel[nCnt]->Update();
 	}
+
 	UpdateModel();
+
 	m_pShredbinManager->Update();
 	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + 170.0f, m_pos.z));
 }
@@ -173,7 +180,13 @@ void CShredder::Draw(void)
 	{
 		m_apModel[nCnt]->Draw();
 	}
-
+}
+//===============================
+// コリジョン
+//===============================
+bool CShredder::Collision(CAABBCollider* pOther, D3DXVECTOR3* pOutPos)
+{
+	return CAABBAABBCollision::Collision(m_pAABB,pOther,pOutPos);
 }
 
 //===============================
