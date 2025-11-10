@@ -15,6 +15,8 @@ NUM_ENEMY = 20
 # 敵の種類 [ TYPE : 0に該当 → fish.x Dunbel.x ]
 # 敵の種類 [ TYPE : 1に該当 → kan.x sentakuki.x ]
 # 敵の種類 [ TYPE : 2に該当 → tire.x ]
+# 色の種類 [ COLORTYPE : 0に該当 → 赤色 ]
+# 色の種類 [ COLORTYPE : 1に該当 → 青色 ]
 #======================================================
 
 #--------------------
@@ -24,6 +26,7 @@ START
 POS = 500.0 0.0 300.0
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
@@ -34,6 +37,7 @@ START
 POS = 900.0 0.0 -250.0
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/Dunbel.x
 END
 
@@ -44,6 +48,7 @@ START
 POS = 900.0 0.0 280.0
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/fish.x
 END
 
@@ -54,6 +59,7 @@ START
 POS = 1100.0 0.0 280.0
 ROT = 0.0 0.0 0.0
 TYPE = 2
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/tire.x
 END
 
@@ -64,6 +70,7 @@ START
 POS = 1500.0 0.0 250.0
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/sentakuki.x
 END
 
@@ -74,6 +81,7 @@ START
 POS = 1095.0 0.0 -374.0
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/fish.x
 END
 
@@ -84,6 +92,7 @@ START
 POS = 1860.0 0.0 65.3
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
@@ -94,6 +103,7 @@ START
 POS = 1967.6 0.0 -330.37
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
@@ -104,6 +114,7 @@ START
 POS = 2354.6 0.0 320.2
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/Dunbel.x
 END
 
@@ -114,6 +125,7 @@ START
 POS = 2229.24 0.0 305.84
 ROT = 0.0 0.0 0.0
 TYPE = 2
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/tire.x
 END
 
@@ -124,6 +136,7 @@ START
 POS = 2377.8 0.0 -440.22
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/sentakuki.x
 END
 
@@ -134,6 +147,7 @@ START
 POS = 3113.31 0.0 165.74
 ROT = 0.0 0.0 0.0
 TYPE = 2
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/tire.x
 END
 
@@ -144,6 +158,7 @@ START
 POS = 3322.67 0.0 -237.03
 ROT = 0.0 0.0 0.0
 TYPE = 2
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/tire.x
 END
 
@@ -154,6 +169,7 @@ START
 POS = 4086.15 0.0 266.96
 ROT = 0.0 0.0 0.0
 TYPE = 2
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/tire.x
 END
 
@@ -164,6 +180,7 @@ START
 POS = 4220.93 0.0 -276.78
 ROT = 0.0 90.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/kan.x
 END
 
@@ -174,6 +191,7 @@ START
 POS = 3789.94 0.0 -297.24
 ROT = 0.0 0.0 0.0
 TYPE = 1
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/sentakuki.x
 END
 
@@ -184,6 +202,7 @@ START
 POS = 4595.66 0.0 40.67
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/Dunbel.x
 END
 
@@ -194,6 +213,7 @@ START
 POS = 4910.79 0.0 -353.93
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/Dunbel.x
 END
 
@@ -204,6 +224,7 @@ START
 POS = 3570.72 0.0 262.64
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/fish.x
 END
 
@@ -214,6 +235,7 @@ START
 POS = 5216.68 0.0 201.07
 ROT = 0.0 0.0 0.0
 TYPE = 0
+COLORTYPE = 1
 FILEPATH = data/MODEL/ENEMY/fish.x
 END
 

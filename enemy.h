@@ -54,10 +54,11 @@ public:
 	bool Collision(CAABBCollider * pOtherCollider);
 
 	// 静的メンバ関数
-	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nType);
+	static CEnemy* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, const char* pScriptName,int nTrushType,int nType);
 
 	// セッター
-	void SetType(int Type) { m_TrushType = Type; }
+	void SetTrushType(int trushType) { m_TrushType = trushType; }
+	void SetType(int nType) { m_nType = nType; }
 	void AddBlow(const D3DXVECTOR3 Vec) { m_move += Vec; }
 	void SetBlow(bool isFlags) { m_isBlow = isFlags; }
 

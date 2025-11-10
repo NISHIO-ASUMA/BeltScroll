@@ -31,10 +31,10 @@ public:
 	void SetPos(D3DXVECTOR3 pos);	// 位置設定
 	int Digit(int nScore);			// 桁を返す
 	static void Add(int nScore);	// コンボ加算
+	static void Reset(void);		// コンボが途切れた時の設定
 	static int GetCombo(void) { return m_nCurrent; }// 現在のコンボ数情報取得
 private:
 	void Set(void);					// マルチテクスチャの設定
-	void Reset(void);				// コンボが途切れた時の設定
 	void SizeUpdate(void);
 	static CNumber* m_pNumber[2];	// ナンバーへのポインタ
 	static D3DXVECTOR2 m_numberSize;// ナンバーの大きさ

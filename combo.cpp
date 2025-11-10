@@ -70,9 +70,6 @@ void CCombo::Uninit(void)
 //*****************
 void CCombo::Update(void)
 {
-	// コンボ終了時のリセット
-	Reset();
-
 	// コンボ数の表示
 	Set();
 
@@ -204,21 +201,8 @@ void CCombo::Set(void)
 //*************
 void CCombo::Reset(void)
 {
-	//// ゲーム状態の取得
-	//CGame::STATE state = CGame::GetState();
-	//if (m_nTime <= 0 || state == CGame::STATE_END)
-	//{// 時間経過orゲーム終了したら
-
-	//	// コンボ数に応じてスコア加算
-	//	int nFinishCombo = m_nCurrent;
-	//	CScore::Add(m_nScore * nFinishCombo);
-
-	//	// 初期化
-	//	m_nCurrent = 0;
-	//	m_nTime = 0;
-	//	m_nScore = 0;
-	//}
-
+	// コンボ数加算
+	m_nCurrent = 0;
 }
 
 //******************
