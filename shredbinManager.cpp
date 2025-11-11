@@ -23,6 +23,7 @@ CShredbinManager::CShredbinManager()
 	m_nType = 0;
 	m_nNum = 0;
 }
+
 //===============================
 // デストラクタ
 //===============================
@@ -64,6 +65,6 @@ void CShredbinManager::Update(void)
 			col = D3DXCOLOR(0.2f, 0.2f, 1.0f, 1.0f);
 		}
 
-		CShredbinEffect::Create(m_pos,m_move, D3DXVECTOR3(100.0f, 80.0f, 500.0f), col, 3,m_nType);
+		CShredbinEffect::Create(m_pos,m_move, D3DXVECTOR3(100.0f, 80.0f, 500.0f), col, 6,m_nType);
 	}
 }

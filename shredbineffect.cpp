@@ -113,19 +113,17 @@ void CShredbinEffect::Update(void)
 
 	m_oldPos = Effectpos;
 
-	// 移動量の更新
-	Effectpos += m_move;
-	Effectpos += m_shredMove;
+	switch (CGame::GetGameManager()->GetShredderM()->GetShredder(0)->GetState())
+	{
+	case CShredder::STATE_MOVE:
+		BinUpdate();
 
-	// 減算する値を設定
-	const float fDecPow = 0.005f;
+		break;
+	case CShredder::STATE_DUSTBOX:
+		BoxUpdate();
+		break;
+	}
 
-
-	// 座標をセットする
-	SetPos(Effectpos);
-
-	GetManagerPosition();
-	Collision();
 
 	// 0以下なら
 	if (m_fRadius <= 0.0f)
@@ -186,6 +184,9 @@ void CShredbinEffect::Draw(void)
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 }
 
+//=============================================
+// シュレッダービンから出ないためのあたり判定
+//=============================================
 void CShredbinEffect::Collision(void)
 {
 	D3DXVECTOR3 pos = GetPos();
@@ -214,6 +215,62 @@ void CShredbinEffect::Collision(void)
 	SetPos(pos);
 }
 
+
+//=============================================
+// シュレッダービン状態の更新
+//=============================================
+void CShredbinEffect::BinUpdate(void)
+{
+	// 座標,カラー取得
+	D3DXVECTOR3 Effectpos = GetPos();
+
+	// 移動量の更新
+	Effectpos += m_move;
+	Effectpos += m_shredMove;
+
+	// 座標をセットする
+	SetPos(Effectpos);
+
+	GetManagerPosition();
+	Collision();
+}
+
+//=============================================
+// ごみステーション状態の更新
+//=============================================
+void CShredbinEffect::BoxUpdate(void)
+{
+	if (m_bBox == false && CGame::GetGameManager()->GetShredderM()->GetShredder(0)->GetState() == CShredder::STATE_DUSTBOX)
+	{// ごみステーション状態の初期化の役割
+		m_move = D3DXVECTOR3(20.0f, 0.0f, 0.0f);
+		m_bBox = true;
+	}
+
+	// 座標,カラー取得
+	D3DXVECTOR3 effectPos = GetPos();
+	D3DXVECTOR3 posDest = D3DXVECTOR3(300.0f, 50.0f, 0.0f);
+
+	D3DXVECTOR3 vec = (posDest - effectPos);
+
+	m_move.x = vec.x * 0.05f;
+	m_move.y = vec.y * 0.02f;
+	m_move.z = vec.z * 0.02f;
+
+	// 移動量の更新
+	effectPos += m_move;
+
+	// 座標をセットする
+	SetPos(effectPos);
+
+	if (posDest == effectPos)
+	{
+		m_bBox = false;
+	}
+}
+
+//=============================================
+// オフセット位置情報の取得
+//=============================================
 void CShredbinEffect::GetManagerPosition(void)
 {
 	CGameManager* pGameManager = CGame::GetGameManager();
