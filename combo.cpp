@@ -23,6 +23,7 @@ CNumber* CCombo::m_pNumber[maxNumber] = {};
 int CCombo::m_nCurrent = 0;
 int CCombo::m_nTime = 0;
 int CCombo::m_nScore = 0;
+int CCombo::m_nMaxComboCount = NULL;
 D3DXVECTOR2 CCombo::m_numberSize = D3DXVECTOR2(0.0f, 0.0f);
 const D3DXCOLOR CCombo::COMBO_ON = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 const D3DXCOLOR CCombo::COMBO_OFF = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);
@@ -162,6 +163,12 @@ void CCombo::Add(int nScore)
 	m_nTime = maxTime;
 	m_nScore += nScore;
 	m_numberSize = D3DXVECTOR2(0.0f, 0.0f);
+
+	// 最大コンボと比較して現在が上回ったら最大の値を更新する
+	if (m_nCurrent > m_nMaxComboCount)
+	{
+		m_nMaxComboCount = m_nCurrent;
+	}
 }
 
 //****************

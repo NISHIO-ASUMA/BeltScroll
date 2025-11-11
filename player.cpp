@@ -54,7 +54,7 @@ namespace PLAYERINFO
 //**********************
 namespace BLOWERINFO
 {
-	constexpr float SMALLVALUE = 40.0f; // 初期値
+	constexpr float SMALLVALUE = 50.0f; // 初期値
 	constexpr float MEDIUMVALUE = 70.0f; // 中間
 	constexpr float MAXVALUE = 110.0f; // 最大値
 }
@@ -635,7 +635,7 @@ void CPlayer::MovePad(CJoyPad* pPad)
 }
 //===============================
 // 当たり判定関数 ( 矩形 )
-//================================
+//===============================
 bool CPlayer::CollisionBox(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
 {
 	return CAABBAABBCollision::CollisionT(m_pAAABB,pOther, pOutPos);
@@ -697,7 +697,7 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 
 	if (pInputKeyboard->GetPress(DIK_A) || pPad->GetPress(CJoyPad::JOYKEY_LEFT))
 	{// Aキー
-		if (pInputKeyboard->GetPress(DIK_W) || pPad->GetPress(CJoyPad::JOYKEY_RIGHT))
+		if (pInputKeyboard->GetPress(DIK_W) || pPad->GetPress(CJoyPad::JOYKEY_UP))
 		{// 左斜め上
 
 			m_move.x += sinf(pCamera->GetRot().y - D3DX_PI * 0.25f) * PLAYERINFO::MOVE;

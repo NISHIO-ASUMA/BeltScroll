@@ -30,10 +30,17 @@ public:
 	void Draw(void);				// 描画
 	void SetPos(D3DXVECTOR3 pos);	// 位置設定
 	int Digit(int nScore);			// 桁を返す
+
+
 	static void Add(int nScore);	// コンボ加算
 	static void Reset(void);		// コンボが途切れた時の設定
 	static int GetCombo(void) { return m_nCurrent; }// 現在のコンボ数情報取得
+
+	static void SetMaxCombo(const int nMax) { m_nMaxComboCount = nMax; } // 最大コンボのセット
+	static int GetMaxCombo(void) { return m_nMaxComboCount; } // 最大時のコンボ取得
+
 private:
+
 	void Set(void);					// マルチテクスチャの設定
 	void SizeUpdate(void);
 	static CNumber* m_pNumber[2];	// ナンバーへのポインタ
@@ -41,6 +48,8 @@ private:
 	static int m_nCurrent;					// 現在のコンボ数
 	static int m_nTime;						// 継続時間
 	static int m_nScore;					// 現在のスコア
+	static int m_nMaxComboCount;			// 最大コンボカウント
+
 	static constexpr int maxNumber = 2;
 	static constexpr int maxTime = 1400;	// 最大時間
 	static constexpr float offsetX = 35.0f;	// オフセット

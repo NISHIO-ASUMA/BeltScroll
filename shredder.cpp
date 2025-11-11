@@ -20,6 +20,7 @@
 #include "suckParticle.h"
 #include "shredbinmanager.h"
 #include "combo.h"
+#include "score.h"
 
 //===============================
 // コンストラクタ
@@ -246,17 +247,24 @@ void CShredder::SetPosZ(float posZ)
 //===============================
 void CShredder::AddTrush(int nType)
 {
+	// 種類一致時
 	if (m_nType == nType)
 	{
-		m_nShredbin+=5;
+		// ゴミ量を加算
+		m_nShredbin += 5;
+
 		// コンボ加算
 		CCombo::Add(100);
+
+		// スコアを加算 ( コンボ値 * 基底スコア値 )
+		CScore::Add(100 * CCombo::GetCombo());
 	}
 	else
 	{
-		// コンボ加算
+		// コンボリセット
 		CCombo::Reset();
 	}
+
 
 	m_pShredbinManager->SetNum(m_nShredbin);
 }

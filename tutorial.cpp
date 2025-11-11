@@ -33,8 +33,6 @@ HRESULT CTutorial::Init(void)
 {
 	// サウンド取得
 	CSound* pSound = CManager::GetSound();
-
-	// nullだったら
 	if (pSound == nullptr) return E_FAIL;
 
 	// サウンド再生
