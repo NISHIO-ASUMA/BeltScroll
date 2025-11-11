@@ -82,7 +82,7 @@ HRESULT CEnemy::Init(void)
 	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z), GetRot());
 
 	// 球コライダー生成
-	m_pCollider = CSphereCollider::Create(GetPos(), 85.0f);
+	m_pCollider = CSphereCollider::Create(GetPos(), 90.0f);
 
 	// 矩形コライダー生成
 	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());

@@ -66,7 +66,7 @@ bool CSphereSphereCollision::Collision(CSphereCollider* me, CSphereCollider* oth
 	float fRadSum = fMeRad + fOtherRad;
 
 	if (fDist < fRadSum)
-	{// ”¼Œa‚Ì‡Œv‚ð‚æ‚è‹——£‚ª‹ß‚¢
+	{// ”¼Œa‚Ì‡Œv‚æ‚è‹——£‚ª‹ß‚¢
 		return true;
 	}
 
