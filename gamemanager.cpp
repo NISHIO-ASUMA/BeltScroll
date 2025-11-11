@@ -73,7 +73,7 @@ HRESULT CGameManager::Init(void)
 	m_pShredderManaher->Init();
 
 	// ÉSÅ[Éãê∂ê¨
-	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,75.0f,0.0f));
+	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,90.0f,0.0f));
 
 	CTrushBox::Create(D3DXVECTOR3(100.0f, 100.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),"data/MODEL/STAGEOBJ/block000.x" );
 

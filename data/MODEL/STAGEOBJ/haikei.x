@@ -177,7 +177,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\ƒ`[ƒ€C{{ƒ‚ƒfƒ‹\\TEXTURE\\steampunk001.jpg";
+    "data/TEXTURE/steampunk001.jpg";
    }
   }
   Material {
