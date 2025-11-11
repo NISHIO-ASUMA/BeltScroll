@@ -270,7 +270,7 @@ void CShredder::State(void)
 	{
 	case STATE_MOVE:
 		// 座標移動
-		m_move.x = 0.5f;
+		m_move.x = 0.3f;
 		// パーティクル生成
 		CSuckParticle::Create(D3DXVECTOR3(m_pos.x + 150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
 		break;

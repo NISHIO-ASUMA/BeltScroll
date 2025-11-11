@@ -334,7 +334,7 @@ void CCamera::PlayerFllow(void)
 //**********************************************************
 // プレイヤーが画面端に行ったときにカメラを動かすための判定
 //**********************************************************
-bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
+TRAKING CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 {
 
 	// デバイスの取得
@@ -355,10 +355,14 @@ bool CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	// 画面の一定以上の割合右に行くと更新
 	if (pos.x > SCREEN_WIDTH * 0.75f)
 	{
-		return true;
+		return TRAKING_RIGHT;
+	}
+	else if (pos.x < SCREEN_WIDTH * 0.25f)
+	{
+		return TRAKING_LEFT;
 	}
 
-	return false;
+	return TRAKING_NONE;
 
 }
 
@@ -385,8 +389,9 @@ void CCamera::Traking(void)
 		// ここで処理を返す
 		return;
 	}
-
-	if (PlayerCollisionScreen(pPlayer->GetPos())&& pPlayer->GetPos().x > pPlayer->GetOldPos().x)
+	bool bLeft = TRAKING_LEFT == PlayerCollisionScreen(pPlayer->GetPos()) && pPlayer->GetPos().x < pPlayer->GetOldPos().x;
+	bool bRight = TRAKING_RIGHT == PlayerCollisionScreen(pPlayer->GetPos()) && pPlayer->GetPos().x > pPlayer->GetOldPos().x;
+	if (bLeft|| bRight)
 	{
 		// 追従カメラ用に設定
 		m_pCamera.posRDest.x += pPlayer->GetPos().x - pPlayer->GetOldPos().x;

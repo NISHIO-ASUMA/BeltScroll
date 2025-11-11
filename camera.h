@@ -14,6 +14,16 @@
 class CInputMouse;
 class CInputKeyboard;
 
+//*************************
+// カメラ挙動のための列挙型
+//*************************
+typedef enum
+{
+	TRAKING_NONE = 0,
+	TRAKING_RIGHT,
+	TRAKING_LEFT
+}TRAKING;
+
 //**********************
 // カメラクラスを定義
 //**********************
@@ -50,7 +60,7 @@ public:
 	void MouseView(CInputMouse* pMouse, CInputKeyboard* pInput);
 	void WheelMouse(int nDelta);
 	void PlayerFllow(void);
-	bool PlayerCollisionScreen(D3DXVECTOR3 playerPos);
+	TRAKING PlayerCollisionScreen(D3DXVECTOR3 playerPos);
 	void Traking(void);
 
 	// セッター
