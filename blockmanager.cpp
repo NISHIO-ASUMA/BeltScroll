@@ -48,7 +48,7 @@ HRESULT CBlockManager::Init(void)
 	m_block.clear();
 
 	// jsonŠJ‚­
-	LoadJsonScript("data/JSON/Stage.json");
+	LoadJsonScript("data/JSON/testgame.json");
 
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
