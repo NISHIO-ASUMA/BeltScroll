@@ -79,13 +79,16 @@ HRESULT CEnemy::Init(void)
 	SetObjType(TYPE_ENEMY);
 
 	// ステンシルシャドウの生成
-	m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z), GetRot());
+	// m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z), GetRot());
 
 	// 球コライダー生成
 	m_pCollider = CSphereCollider::Create(GetPos(), 90.0f);
 
 	// 矩形コライダー生成
 	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());
+
+	// シャドウセット
+	SetShadow(true);
 
 	return S_OK;
 }
@@ -199,7 +202,7 @@ void CEnemy::Update(void)
 			this->Uninit();
 
 			// 影も消す
-			m_pShadowS->Uninit();
+			// m_pShadowS->Uninit();
 			
 			// 下の処理を通さない
 			return;
@@ -210,12 +213,12 @@ void CEnemy::Update(void)
 	m_move.x += (0.0f - m_move.x) * 0.25f;
 	m_move.z += (0.0f - m_move.z) * 0.25f;
 
-	// ステンシル更新
-	if (m_pShadowS)
-	{
-		m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z));
-		m_pShadowS->SetRot(GetRot());
-	}
+	//// ステンシル更新
+	//if (m_pShadowS)
+	//{
+	//	m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z));
+	//	m_pShadowS->SetRot(GetRot());
+	//}
 }
 //==============================
 // 描画処理

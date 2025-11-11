@@ -32,7 +32,7 @@ CObjectX::CObjectX(int nPriority) : CObject(nPriority)
 	m_pFileName = {};
 
 	m_isUseQaut = false;
-
+	m_isShadow = false;
 	m_pParent = nullptr;
 }
 //=============================
@@ -279,6 +279,59 @@ void CObjectX::Draw(void)
 
 	// マテリアルを戻す
 	pDevice->SetMaterial(&matDef);
+
+	if (m_isShadow)
+	{
+		DrawShaodow();
+	}
+}
+//=============================
+// マトリックスシャドウ処理
+//=============================
+void CObjectX::DrawShaodow(void)
+{
+	// デバイス取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+	if (!pDevice) return;
+
+	// ライト方向
+	D3DXVECTOR4 lightDir(-0.37f, -0.4f, 0.1f, 0.0f);
+	
+	// 平面投影座標を設定
+	D3DXPLANE plane;
+	D3DXVECTOR3 point = VECTOR3_NULL;
+	D3DXVECTOR3 normal = D3DXVECTOR3(0.0f, -0.5f, 0.0f);
+	D3DXPlaneFromPointNormal(&plane, &point, &normal);
+
+	// 影マトリックス生成
+	D3DXMATRIX mtxShadow;
+	D3DXMatrixShadow(&mtxShadow, &lightDir, &plane);
+
+	// 影をモデルの位置に合わせる
+	D3DXMATRIX mtxWorldShadow;
+	D3DXMatrixMultiply(&mtxWorldShadow, &m_mtxWorld, &mtxShadow);
+
+	// ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &mtxWorldShadow);
+
+	// 半透明に設定
+	D3DMATERIAL9 shadowMat = {};
+	shadowMat.Diffuse = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.75f);
+	shadowMat.Ambient = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.75f);
+
+	// マテリアルセット
+	pDevice->SetMaterial(&shadowMat);
+
+	// マテリアル数だけ回す
+	for (int nCntMat = 0; nCntMat < (int)m_dwNumMat; nCntMat++)
+	{
+		// モデル(パーツ)の描画
+		m_pMesh->DrawSubset(nCntMat);
+	}
+
+	// マテリアルを戻す
+	pDevice->SetMaterial(&shadowMat);
+
 }
 //=============================
 // 生成処理

@@ -28,6 +28,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void); 
+	void DrawShaodow(void);
 
 	// セッター
 	void SetFilePass(const char* pFilePass) { m_pFileName = pFilePass; }
@@ -37,6 +38,7 @@ public:
 	void SetUseQuat(bool isFlags) { m_isUseQaut = isFlags; }
 	void SetMtxWorld(D3DXMATRIX mtxworld) { m_mtxWorld = mtxworld; }
 	void SetParent(CObjectX* pParent) { m_pParent = pParent; }
+	void SetShadow(bool isFalgs) { m_isShadow = isFalgs; }
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void) { return m_pos; };
@@ -70,7 +72,7 @@ private:
 	int* m_pTexture;		// テクスチャポインタ
 
 	const char* m_pFileName; // ファイル名
-
+	bool m_isShadow;		// 影を出すかどうか
 	bool m_isUseQaut;		 // クォータニオンかどうか
 };
 
