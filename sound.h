@@ -63,8 +63,8 @@ private:
 		{"data/BGM/Result.wav",-1},		 // リザルトBGM
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
 		{"data/BGM/rankingbgm.wav",-1},		 // ランキングBGM
-		{"data/SE/ClickEnter.wav",1},			 // 決定音
-		{"data/SE/Change.wav",1}
+		{"data/SE/ClickEnter.wav",0},			 // 決定音
+		{"data/SE/Change.wav",0}
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス
