@@ -59,7 +59,7 @@ private:
 	SOUNDINFO m_aSoundInfo[SOUND_LABEL_MAX] =
 	{
 		{"data/BGM/Title001.wav", -1},		 // タイトルBGM
-		{"data/BGM/gamebgm.wav",-1},		 // ゲームBGM
+		{"data/BGM/game_bgm.wav",-1},		 // ゲームBGM
 		{"data/BGM/Result.wav",-1},		 // リザルトBGM
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
 		{"data/BGM/rankingbgm.wav",-1},		 // ランキングBGM
