@@ -36,6 +36,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_nType = NULL;
 	m_nShredbin = NULL;
 	m_state = STATE_MOVE;
+	m_fCnt = 0.0f;
 	
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
@@ -227,12 +228,16 @@ void CShredder::InitModel(void)
 //===============================
 void CShredder::UpdateModel(void)
 {
-	// n‚ð‰ñ‚·‚¾‚¯‚Ìˆ—
+	// n‚ð‰ñ‚·ˆ—
 	D3DXVECTOR3 rot = m_apModel[1]->GetRot();
-
 	rot.z += 0.5f;
-
 	m_apModel[1]->SetRot(rot);
+
+	D3DXVECTOR3 pos = m_apModel[1]->GetPos();
+
+	pos.y = -30.0f+sinf(m_fCnt)*50.0f;
+	m_fCnt+=0.07f;
+	m_apModel[1]->SetPos(pos);
 }
 
 //===============================

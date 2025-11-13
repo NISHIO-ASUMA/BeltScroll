@@ -75,6 +75,7 @@ private:
 
 	int m_nType;		// 種類
 	int m_nShredbin;	// シュレッダービンに入ってるごみの量
+	float m_fCnt;		// 
 	STATE m_state;		// 状態
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;

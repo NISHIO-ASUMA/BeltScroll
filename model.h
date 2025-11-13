@@ -50,6 +50,7 @@ public:
 	void SetPartType(PARTTYPE nDestPartType) { m_parttype = nDestPartType; }
 
 	// ÉQÉbÉ^Å[
+	D3DXVECTOR3 GetPos(void) { return m_pos; }
 	D3DXVECTOR3 GetRot(void) { return m_rot; }
 	D3DXMATRIX GetMtxWorld(void) { return m_mtxworld; }
 	PARTTYPE GetPartType(void) const { return m_parttype; }
