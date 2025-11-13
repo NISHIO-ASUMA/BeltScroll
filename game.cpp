@@ -131,7 +131,7 @@ void CGame::Update(void)
 	case GAMESTATE_END:
 		m_nStateCount++;
 
-		if (m_nStateCount >= 30)
+		if (m_nStateCount >= 60)
 		{
 			// カウンターを初期化
 			m_nStateCount = 0;
@@ -147,7 +147,6 @@ void CGame::Update(void)
 
 				auto Score = m_pGameManager->GetScore();
 				if (Score != nullptr) Score->Save(); // スコアを書き出す
-
 				return;
 			}
 		}
@@ -200,20 +199,6 @@ void CGame::Update(void)
 
 		// ゲームマネージャー更新
 		m_pGameManager->Update();
-
-		//// 経過時間を取得
-		//int Numtime = m_pGameManager->GetTime()->GetAllTime();
-
-		//// タイマーが0秒以下なら
-		//if (Numtime <= 0)
-		//{
-		//	// 負けリザルト遷移
-		//	m_nGametype = GAMESTATE_LOSEEND;
-		//	return;
-		//}
-
-		// 状態変更
-		// m_nGametype = GAMESTATE_END;
 	}
 }
 //==================================

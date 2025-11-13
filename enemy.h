@@ -81,10 +81,11 @@ private:
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
 	CSphereCollider* m_pCollider; // コライダー
 	CAABBCollider* m_pAABB;	// 矩形のコライダー
+	D3DXVECTOR3 m_vSuckDir;	// 吸い込み方向ベクトル
 
 	int m_TrushType;		// ゴミ自体の種類
 	int m_nColorType;		// 対応するシュレッダーカラーの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
-
+	bool m_isSuck;			// 吸い込まれているか
 	static constexpr int COLLOBJ = 2; // シュレッダー数
 };
