@@ -112,7 +112,7 @@ void CGameManager::Uninit(void)
 	}
 
 	// 敵マネージャーの破棄
-	m_pEnemyManager.reset();
+	// m_pEnemyManager.reset();
 
 	if (m_pShredderManaher != nullptr)
 	{
@@ -150,7 +150,6 @@ void CGameManager::Update(void)
 
 		return;
 	}
-
 #endif
 	// nullチェック
 	if (m_pEnemyManager != nullptr)

@@ -87,8 +87,10 @@ HRESULT CScore::Init(void)
 		m_pNumber[nCnt]->SetPos(m_pos);
 
 		// テクスチャセット
-		m_pNumber[nCnt]->SetTexture("score001.png");
+		m_pNumber[nCnt]->SetTexture("ResultScore.png");
 	}
+
+	m_nScore = NULL;
 
 	return S_OK;
 }
@@ -127,8 +129,8 @@ void CScore::Update(void)
 	for (int nCntScore = 0; nCntScore < SCORE_NUM; nCntScore++)
 	{
 		// 桁数ごとに分割する値を計算
-		int nDigit = nScore % SCORE_NUM;
-		nScore /= SCORE_NUM;
+		int nDigit = nScore % 10;
+		nScore /= 10;
 
 		// 桁更新
 		m_pNumber[nCntScore]->SetDigit(nDigit);

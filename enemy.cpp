@@ -29,8 +29,10 @@
 //==============================
 CEnemy::CEnemy(int nPriority) : CObjectX(nPriority),
 m_move(VECTOR3_NULL),
+m_vSuckDir(VECTOR3_NULL),
 m_pShadowS(nullptr),
 m_isBlow(false),
+m_isSuck(false),
 m_TrushType(TYPE_NONE),
 m_pCollider(nullptr),
 m_pAABB(nullptr),
@@ -78,9 +80,6 @@ HRESULT CEnemy::Init(void)
 	// オブジェクトの種類をセット
 	SetObjType(TYPE_ENEMY);
 
-	// ステンシルシャドウの生成
-	// m_pShadowS = CShadowS::Create(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z), GetRot());
-
 	// 球コライダー生成
 	m_pCollider = CSphereCollider::Create(GetPos(), 90.0f);
 
@@ -104,6 +103,9 @@ void CEnemy::Uninit(void)
 	delete m_pAABB;
 	m_pAABB = nullptr;
 
+	// 影を未使用にする
+	SetShadow(false);
+
 	// 親クラスの終了処理
 	CObjectX::Uninit();
 }
@@ -118,6 +120,42 @@ void CEnemy::Update(void)
 
 	// 座標取得
 	D3DXVECTOR3 NowPos = GetPos();
+	D3DXVECTOR3 rot = GetRot();
+
+	// 吸い込み中処理
+	if (m_isSuck)
+	{
+		// 回転しながら中心に引き寄せられる
+		m_vSuckDir *= 1.1f; // 徐々に加速
+		NowPos += m_vSuckDir * 0.3f; // 吸い込み速度
+
+		// 回転
+		rot.x += 0.25f;
+		rot.y += 0.35f;
+		rot.z += 0.15f;
+
+		SetRot(rot);
+		SetPos(NowPos);
+
+		m_pCollider->SetPos(NowPos);
+		m_pAABB->SetPos(NowPos);
+
+		if (D3DXVec3Length(&m_vSuckDir) > 90.0f) // 吸い込み終わり判定
+		{
+			// エフェクト生成
+			CConfettiParticle::Create
+			(
+				D3DXVECTOR3(GetPos().x + 60.0f,GetPos().y,GetPos().z),
+				D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f),
+				40, 150, 500, 40, -D3DX_PI * 0.5f
+			);
+
+			this->Uninit();
+
+			return;
+		}
+		return; // 吸い込み中は他処理スキップ
+	}
 
 	// ブロワーの種類取得
 	int nBlowerType = pPlayer->GetBlowType();
@@ -191,20 +229,29 @@ void CEnemy::Update(void)
 	{
 		// シュレッダーのコライダー取得
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
+		auto pShredder = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt);
 
 		if (Collision(ShredderCol))
 		{
-			// エフェクト生成
-			CConfettiParticle::Create(GetPos(), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 40, 150, 500, 40, -D3DX_PI * 0.5f);
-			CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->AddTrush(m_nColorType);
+			m_isSuck = true;
 
-			// 自身の消去
-			this->Uninit();
+			// 吸い込み方向をシュレッダーに設定
+			D3DXVECTOR3 shredderPos = pShredder->GetPos();
+			shredderPos.x += 50.0f;   // 少し右側
 
-			// 影も消す
-			// m_pShadowS->Uninit();
-			
-			// 下の処理を通さない
+			m_vSuckDir = shredderPos - GetPos();
+			D3DXVec3Normalize(&m_vSuckDir, &m_vSuckDir);
+
+			// シュレッダーにゴミ登録
+			pShredder->AddTrush(m_nColorType);
+			m_vSuckDir *= 2.0f;
+
+			// ランダムな回転
+			rot.x = (rand() % 360) * D3DX_PI / 180.0f;
+			rot.y = (rand() % 360) * D3DX_PI / 180.0f;
+			rot.z = (rand() % 360) * D3DX_PI / 180.0f;
+			SetRot(rot);
+
 			return;
 		}
 	}
@@ -212,13 +259,6 @@ void CEnemy::Update(void)
 	// 移動量の減衰
 	m_move.x += (0.0f - m_move.x) * 0.25f;
 	m_move.z += (0.0f - m_move.z) * 0.25f;
-
-	//// ステンシル更新
-	//if (m_pShadowS)
-	//{
-	//	m_pShadowS->SetPos(D3DXVECTOR3(GetPos().x, -5.0f, GetPos().z));
-	//	m_pShadowS->SetRot(GetRot());
-	//}
 }
 //==============================
 // 描画処理

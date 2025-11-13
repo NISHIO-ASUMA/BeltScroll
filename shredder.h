@@ -54,6 +54,7 @@ public:
 	void AddTrush(int nType);
 	void State(void);
 
+	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
 	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
 	STATE GetState(void) { return m_state; }

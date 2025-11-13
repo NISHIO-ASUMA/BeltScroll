@@ -40,7 +40,10 @@ public:
 	static CScore* Create(D3DXVECTOR3 pos,float fWidth,float fHeight);
 	static void Save(void);
 	static void ClearScore(void) { m_nScore = NULL; }
-	static void Add(int nValue) { m_nScore += nValue; }
+	static void Add(int nValue) 
+	{
+		m_nScore += nValue; 
+	}
 
 private:
 	static constexpr int SCORE_NUM = 8; // •\¦Œ…”‚Ì’è”
