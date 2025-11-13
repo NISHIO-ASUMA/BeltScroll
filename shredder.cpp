@@ -153,6 +153,7 @@ void CShredder::Update(void)
 	m_pShredbinManager->Update();
 	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + 170.0f, m_pos.z));
 }
+
 //===============================
 // •`‰æˆ—
 //===============================

@@ -46,6 +46,9 @@ private:
 	static constexpr int SWAPCOUNT = 300;
 	static constexpr float FIXED_Z00 = -250.0f;
 	static constexpr float FIXED_Z01 = 250.0f;
+	static const D3DXVECTOR3 DUSTBOX_POS00;
+	static const D3DXVECTOR3 DUSTBOX_POS01;
+	static const D3DXVECTOR3 DUSTBOX_POS02;
 };
 
 #endif
