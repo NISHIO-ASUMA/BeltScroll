@@ -12,6 +12,10 @@
 #include "shredder.h"
 #include "shredbinmanager.h"
 
+const D3DXVECTOR3 CShredderManager::DUSTBOX_POS00 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+const D3DXVECTOR3 CShredderManager::DUSTBOX_POS01 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+const D3DXVECTOR3 CShredderManager::DUSTBOX_POS02 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
 //===============================
 // コンストラクタ
 //===============================
