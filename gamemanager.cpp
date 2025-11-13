@@ -52,6 +52,9 @@ CGameManager::~CGameManager()
 //===============================
 HRESULT CGameManager::Init(void)
 {
+	// サウンド取得
+	CSound* pSound = CManager::GetSound();
+
 	//メッシュフィールド生成
 	CMeshField::Create(D3DXVECTOR3(2500.0f,0.0f,0.0f), 6000.0f, 1000.0f, 1, 1);
 
@@ -83,6 +86,9 @@ HRESULT CGameManager::Init(void)
 	// スコア生成
 	m_pScore = CScore::Create(D3DXVECTOR3(1235.0f, 45.0f, 0.0f), 110.0f, 45.0f);
 	m_pScore->ClearScore();
+
+	// ゲームBGM
+	pSound->PlaySound(CSound::SOUND_LABEL_GAMEBGM);
 
 	// 初期化結果を返す
 	return S_OK;
