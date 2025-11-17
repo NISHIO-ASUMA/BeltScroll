@@ -54,6 +54,7 @@ void CTutorial::Uninit(void)
 void CTutorial::Update(void)
 {
 
+	// ƒL[“ü—Í‚Å‘JˆÚ
 }
 //===============================
 // •`‰æˆ—

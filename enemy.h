@@ -87,5 +87,6 @@ private:
 	int m_nColorType;		// 対応するシュレッダーカラーの種類
 	bool m_isBlow;			// 吹き飛ばしが有効か
 	bool m_isSuck;			// 吸い込まれているか
+
 	static constexpr int COLLOBJ = 2; // シュレッダー数
 };

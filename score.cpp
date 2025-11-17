@@ -90,6 +90,7 @@ HRESULT CScore::Init(void)
 		m_pNumber[nCnt]->SetTexture("ResultScore.png");
 	}
 
+	// スコア初期化
 	m_nScore = NULL;
 
 	return S_OK;
@@ -141,12 +142,14 @@ void CScore::Update(void)
 //=================================
 void CScore::Draw(void)
 {
+#if 0
 	// 使っている桁数分の描画
 	for (int nCnt = 0; nCnt < SCORE_NUM; nCnt++)
 	{
 		// ナンバー描画
 		m_pNumber[nCnt]->Draw();
 	}
+#endif
 }
 //=================================
 // 書き出し処理

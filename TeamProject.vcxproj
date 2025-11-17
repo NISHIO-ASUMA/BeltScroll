@@ -163,6 +163,7 @@
     <ClCompile Include="combo.cpp" />
     <ClCompile Include="confettieffect.cpp" />
     <ClCompile Include="confettiparticle.cpp" />
+    <ClCompile Include="tutorialmanager.cpp" />
     <ClCompile Include="debugproc.cpp" />
     <ClCompile Include="easing.cpp" />
     <ClCompile Include="effect.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="combo.h" />
     <ClInclude Include="confettieffect.h" />
     <ClInclude Include="confettiparticle.h" />
+    <ClInclude Include="tutorialmanager.h" />
     <ClInclude Include="debugproc.h" />
     <ClInclude Include="easing.h" />
     <ClInclude Include="effect.h" />

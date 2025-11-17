@@ -169,7 +169,6 @@ HRESULT CPlayer::Init(void)
 		m_rot
 	);
 	
-
 	// ステートマシンを生成
 	m_pStateMachine = new CStateMachine;
 
@@ -184,7 +183,7 @@ HRESULT CPlayer::Init(void)
 	m_fBlowerPow = BLOWERINFO::SMALLVALUE;
 	m_fBlowerRange = BLOWERINFO::SMALLVALUE;
 
-	// UI
+	// ブロワーUI
 	m_pBlowerUi = CBlowerUi::Create(D3DXVECTOR3(1090.0f, 650.0f, 0.0f), m_blower);
 
 	// 結果を返す
@@ -380,7 +379,8 @@ void CPlayer::Update(void)
 	{
 		// シュレッダーが持つコライダー取得
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
-		
+		if (ShredderCol == nullptr) break;
+
 		// 押し出し計算後の入れ物
 		D3DXVECTOR3 OutPos = m_pos;
 
