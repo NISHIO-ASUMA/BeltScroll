@@ -50,7 +50,6 @@ private:
 	D3DXVECTOR3 m_move;					// 移動量
 	D3DXVECTOR3 m_shredMove;			// シュレッダーの移動速度
 	bool m_bBox;						// ボックス状態初期化用のフラグ
-	int m_nCntBox;						// ボックス状態のカウント
 };
 
 #endif

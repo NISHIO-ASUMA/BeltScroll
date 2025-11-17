@@ -12,10 +12,6 @@
 #include "shredder.h"
 #include "shredbinmanager.h"
 
-const D3DXVECTOR3 CShredderManager::DUSTBOX_POS00 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-const D3DXVECTOR3 CShredderManager::DUSTBOX_POS01 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-const D3DXVECTOR3 CShredderManager::DUSTBOX_POS02 = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
 //===============================
 // コンストラクタ
 //===============================
@@ -27,6 +23,9 @@ CShredderManager::CShredderManager()
 	}
 	m_nSwapCnt = 0;
 	m_bRedFlont = true;
+	m_trushBoxCnt = 0;
+	m_nStateCnt = 0;
+	m_state = STATE_MOVE;
 }
 //===============================
 // デストラクタ
@@ -57,7 +56,12 @@ void CShredderManager::Uninit(void)
 //===============================
 void CShredderManager::Update(void)
 {
+	// 交換の処理
 	Swap();
+	// 状態による処理
+	State();
+	// ごみステーション用の処理
+	TrushBox();
 }
 
 //===============================
@@ -85,4 +89,73 @@ void CShredderManager::Swap(void)
 	}
 
 	m_nSwapCnt++;
+}
+
+
+//===============================
+// 状態ごとの更新
+//===============================
+void CShredderManager::State(void)
+{
+
+	D3DXVECTOR3 move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+	switch (GetState())
+	{
+	case STATE_MOVE:
+		// 座標移動
+		move.x = 0.3f;
+		break;
+	case STATE_DUSTBOX:
+		// 座標移動
+		move.x = 0.0f;
+		m_nStateCnt++;
+		if (m_nStateCnt >= 180)
+		{
+			m_state = STATE_MOVE;
+			m_nStateCnt = 0;
+			m_pShredder[0]->GetShredbinManager()->SetNum(0);
+			m_pShredder[1]->GetShredbinManager()->SetNum(0);
+		}
+		break;
+	}
+
+	for (int nCnt = 0; nCnt < 2; nCnt++)
+	{
+		m_pShredder[nCnt]->SetMove(move);
+	}
+}
+
+//===============================
+// ごみステーション用の処理
+//===============================
+void CShredderManager::TrushBox(void)
+{
+	 float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 };
+
+	if (m_pShredder[0] == nullptr)
+	{
+		return;
+	}
+
+	D3DXVECTOR3 pos = m_pShredder[0]->GetPos();
+
+	float X = pos.x;
+
+	if (DUSTBOX_POSX[m_trushBoxCnt] <= X)
+	{
+		m_state = STATE_DUSTBOX;
+		m_trushBoxCnt++;
+	}
+}
+
+
+//===============================
+// ごみステーションの配置
+//===============================
+D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
+{
+	float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 };
+	int nCnt = m_trushBoxCnt-1;
+	return D3DXVECTOR3(DUSTBOX_POSX[nCnt]+200.0f, 50.0f, -600.0f);
 }
