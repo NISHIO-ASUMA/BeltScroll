@@ -31,12 +31,12 @@ CEnemy::CEnemy(int nPriority) : CObjectX(nPriority),
 m_move(VECTOR3_NULL),
 m_vSuckDir(VECTOR3_NULL),
 m_pShadowS(nullptr),
-m_isBlow(false),
-m_isSuck(false),
-m_TrushType(TYPE_NONE),
 m_pCollider(nullptr),
 m_pAABB(nullptr),
-m_nColorType(NULL)
+m_isBlow(false),
+m_isSuck(false),
+m_nColorType(NULL),
+m_TrushType(TYPE_NONE)
 {
 	// 値のクリア
 }
@@ -96,12 +96,19 @@ HRESULT CEnemy::Init(void)
 //==============================
 void CEnemy::Uninit(void)
 {
-	// コライダーの破棄
-	delete m_pCollider;
-	m_pCollider = nullptr;
+	// 球コライダーの破棄
+	if (m_pCollider)
+	{
+		delete m_pCollider;
+		m_pCollider = nullptr;
+	}
 
-	delete m_pAABB;
-	m_pAABB = nullptr;
+	// 矩形コライダーの破棄
+	if (m_pAABB)
+	{
+		delete m_pAABB;
+		m_pAABB = nullptr;
+	}
 
 	// 影を未使用にする
 	SetShadow(false);

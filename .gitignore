@@ -45,6 +45,7 @@
 /data/SCORE/GameScore.txt
 /data/SCORE/BonusScore.txt
 /data/SCORE/Ranking.txt
+/data/RANKING/Ranking.txt
 
 /data/SCORE/*
 !/data/SCORE/.gitkeep
