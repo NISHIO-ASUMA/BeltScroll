@@ -28,13 +28,6 @@ class CShredbinManager;
 class CShredder : public CObject
 {
 public:
-	typedef enum
-	{
-		STATE_MOVE=0,
-		STATE_DUSTBOX,
-		STATE_CRASH,
-	}STATE;
-
 	// コンストラクタ・デストラクタ
 	CShredder(int nPriority = static_cast<int>(CObject::PRIORITY::MODELOBJECT));
 	~CShredder();
@@ -53,11 +46,11 @@ public:
 	void SetPosZ(float posZ);
 	void AddTrush(int nType);
 	void State(void);
+	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
 	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
-	STATE GetState(void) { return m_state; }
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -76,7 +69,6 @@ private:
 	int m_nType;		// 種類
 	int m_nShredbin;	// シュレッダービンに入ってるごみの量
 	float m_fCnt;		// 
-	STATE m_state;		// 状態
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
 };

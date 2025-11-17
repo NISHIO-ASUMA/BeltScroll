@@ -31,6 +31,7 @@ CShredbinEffect::CShredbinEffect(int nPriority) : CBillboard(nPriority)
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
 	m_shredMove = VECTOR3_NULL;
+	m_bBox = false;
 }
 //===============================
 // デストラクタ
@@ -113,13 +114,13 @@ void CShredbinEffect::Update(void)
 
 	m_oldPos = Effectpos;
 
-	switch (CGame::GetGameManager()->GetShredderM()->GetShredder(0)->GetState())
+	switch (CGame::GetGameManager()->GetShredderM()->GetState())
 	{
-	case CShredder::STATE_MOVE:
+	case CShredderManager::STATE_MOVE:
 		BinUpdate();
 
 		break;
-	case CShredder::STATE_DUSTBOX:
+	case CShredderManager::STATE_DUSTBOX:
 		BoxUpdate();
 		break;
 	}
@@ -240,7 +241,7 @@ void CShredbinEffect::BinUpdate(void)
 //=============================================
 void CShredbinEffect::BoxUpdate(void)
 {
-	if (m_bBox == false && CGame::GetGameManager()->GetShredderM()->GetShredder(0)->GetState() == CShredder::STATE_DUSTBOX)
+	if (m_bBox == false && CGame::GetGameManager()->GetShredderM()->GetState() == CShredderManager::STATE_DUSTBOX)
 	{// ごみステーション状態の初期化の役割
 		m_move = D3DXVECTOR3(20.0f, 0.0f, 0.0f);
 		m_bBox = true;
@@ -248,12 +249,12 @@ void CShredbinEffect::BoxUpdate(void)
 
 	// 座標,カラー取得
 	D3DXVECTOR3 effectPos = GetPos();
-	D3DXVECTOR3 posDest = D3DXVECTOR3(300.0f, 50.0f, 0.0f);
+	D3DXVECTOR3 posDest = CGame::GetGameManager()->GetShredderM()->GetTrushBoxPos();
 
 	D3DXVECTOR3 vec = (posDest - effectPos);
 
 	m_move.x = vec.x * 0.05f;
-	m_move.y = vec.y * 0.02f;
+	m_move.y = vec.y * 0.01f;
 	m_move.z = vec.z * 0.02f;
 
 	// 移動量の更新
