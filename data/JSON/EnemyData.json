@@ -1,5 +1,5 @@
 {
-   "AllObject": 216,
+   "AllObject": 135,
    "SetObjects": [
       {
          "idx": 0,
@@ -7,9 +7,9 @@
          "color": 0,
          "mass": 0,
          "pos": [
-            441.0,
+            -80.0,
             0.0,
-            -447.0
+            -420.0
          ],
          "rot": [
             0.0,
@@ -20,20 +20,20 @@
       },
       {
          "idx": 1,
-         "Type": 1,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            -140.0,
+            35.0,
             0.0,
-            -80.0
+            -320.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
          "idx": 2,
@@ -41,9 +41,9 @@
          "color": 0,
          "mass": 0,
          "pos": [
-            -80.0,
+            150.0,
             0.0,
-            -214.0
+            -445.0
          ],
          "rot": [
             0.0,
@@ -54,217 +54,200 @@
       },
       {
          "idx": 3,
-         "Type": 3,
+         "Type": 10,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            -115.0,
+            60.0,
             0.0,
-            -355.0
+            -425.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 4,
-         "Type": 5,
+         "Type": 10,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            195.0,
+            130.0,
             0.0,
-            15.0
+            -325.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 5,
-         "Type": 8,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            195.0,
+            245.0,
             0.0,
-            -240.0
+            -220.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/dustbox.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 6,
-         "Type": 9,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            443.4800109863281,
+            300.0,
             0.0,
-            -187.32000732421875
+            -435.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 7,
-         "Type": 9,
+         "Type": 11,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            641.3099975585938,
+            300.0,
             0.0,
-            163.91000366210938
+            -315.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 8,
-         "Type": 10,
+         "Type": 11,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            750.0399780273438,
+            220.0,
             0.0,
-            -148.02000427246094
+            -395.0
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 9,
-         "Type": 10,
+         "Type": 11,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            207.69000244140625,
+            582.9400024414063,
             0.0,
-            358.0299987792969
+            -424.29998779296875
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 10,
-         "Type": 10,
+         "Type": 11,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            666.8599853515625,
+            835.25,
             0.0,
-            -376.3399963378906
+            -353.82000732421875
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 11,
-         "Type": 11,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            443.8599853515625,
+            708.1199951171875,
             0.0,
-            73.69000244140625
+            -431.8500061035156
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 12,
-         "Type": 11,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            982.3499755859375,
+            678.8400268554688,
             0.0,
-            83.5199966430664
+            -281.2900085449219
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 13,
-         "Type": 11,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1223.97998046875,
+            444.04998779296875,
             0.0,
-            -258.6300048828125
+            -263.3500061035156
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 14,
-         "Type": 12,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            1013.8599853515625,
-            0.0,
-            -160.27000427246094
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 15,
          "Type": 15,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1319.0799560546875,
+            423.1099853515625,
             0.0,
-            85.75
+            -411.8800048828125
          ],
          "rot": [
             0.0,
@@ -274,18 +257,35 @@
          "filepath": "data/MODEL/ENEMY/Redgear1.x"
       },
       {
-         "idx": 16,
+         "idx": 15,
          "Type": 16,
          "color": 0,
-         "mass": 1,
+         "mass": 2,
          "pos": [
-            1505.77001953125,
+            984.4099731445313,
             0.0,
-            -285.4800109863281
+            -334.45001220703125
          ],
          "rot": [
             0.0,
-            57.720001220703125,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+      },
+      {
+         "idx": 16,
+         "Type": 16,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            2041.8599853515625,
+            0.0,
+            226.0800018310547
+         ],
+         "rot": [
+            0.0,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
@@ -296,880 +296,880 @@
          "color": 0,
          "mass": 2,
          "pos": [
-            1672.93994140625,
+            4306.56982421875,
             0.0,
-            116.6500015258789
+            271.17999267578125
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
       },
       {
          "idx": 18,
-         "Type": 18,
+         "Type": 7,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1890.56005859375,
+            1839.3199462890625,
             0.0,
-            -82.16000366210938
+            132.5800018310547
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 19,
-         "Type": 20,
+         "Type": 7,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2039.6500244140625,
+            2344.1201171875,
             0.0,
-            166.5800018310547
+            243.52000427246094
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/tireB.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 20,
-         "Type": 23,
+         "Type": 7,
          "color": 0,
          "mass": 0,
          "pos": [
-            2194.1298828125,
+            3150.760009765625,
             0.0,
-            -130.0500030517578
+            212.52999877929688
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 21,
-         "Type": 23,
+         "Type": 7,
          "color": 0,
          "mass": 0,
          "pos": [
-            2200.909912109375,
+            3786.340087890625,
             0.0,
-            75.75
+            218.5
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 22,
-         "Type": 23,
+         "Type": 10,
          "color": 0,
          "mass": 0,
          "pos": [
-            2455.590087890625,
+            3561.1298828125,
             0.0,
-            62.9900016784668
+            241.55999755859375
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 23,
-         "Type": 24,
+         "Type": 10,
          "color": 0,
          "mass": 0,
          "pos": [
-            2634.860107421875,
+            4681.97998046875,
             0.0,
-            -56.119998931884766
+            173.39999389648438
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 24,
-         "Type": 24,
+         "Type": 10,
          "color": 0,
          "mass": 0,
          "pos": [
-            2288.530029296875,
+            4610.990234375,
             0.0,
-            -303.2300109863281
+            327.8699951171875
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 25,
-         "Type": 24,
+         "Type": 10,
          "color": 0,
          "mass": 0,
          "pos": [
-            1947.6199951171875,
+            2202.419921875,
             0.0,
-            -319.2699890136719
+            84.8499984741211
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 26,
-         "Type": 25,
+         "Type": 10,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            2893.889892578125,
+            1678.8299560546875,
             0.0,
-            -281.5199890136719
+            14.800000190734863
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 27,
-         "Type": 25,
+         "Type": 11,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            3343.18994140625,
+            2556.139892578125,
             0.0,
-            8.050000190734863
+            162.22000122070313
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 28,
-         "Type": 17,
+         "Type": 11,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2883.6201171875,
+            2981.739990234375,
             0.0,
-            184.66000366210938
+            284.1600036621094
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redkan.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 29,
-         "Type": 17,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            3396.25,
+            2730.139892578125,
             0.0,
-            -202.77999877929688
+            111.75
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redkan.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 30,
          "Type": 17,
          "color": 0,
-         "mass": 1,
+         "mass": 2,
          "pos": [
-            3818.139892578125,
+            3729.239990234375,
             0.0,
-            161.22000122070313
+            69.05000305175781
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/Redkan.x"
       },
       {
          "idx": 31,
-         "Type": 16,
+         "Type": 17,
          "color": 0,
          "mass": 2,
          "pos": [
-            3907.2099609375,
+            2210.830078125,
             0.0,
-            -117.87000274658203
+            -165.33999633789063
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+         "filepath": "data/MODEL/ENEMY/Redkan.x"
       },
       {
          "idx": 32,
-         "Type": 16,
+         "Type": 18,
          "color": 0,
-         "mass": 2,
+         "mass": 1,
          "pos": [
-            4351.47021484375,
+            1769.6300048828125,
             0.0,
-            135.6199951171875
+            -43.38999938964844
          ],
          "rot": [
             0.0,
-            1.1699999570846558,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+         "filepath": "data/MODEL/ENEMY/Redpipe.x"
       },
       {
          "idx": 33,
-         "Type": 16,
+         "Type": 18,
          "color": 0,
-         "mass": 2,
+         "mass": 1,
          "pos": [
-            4685.47998046875,
+            1168.1300048828125,
             0.0,
-            -268.79998779296875
+            -182.83999633789063
          ],
          "rot": [
             0.0,
-            86.72000122070313,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+         "filepath": "data/MODEL/ENEMY/Redpipe.x"
       },
       {
          "idx": 34,
-         "Type": 25,
+         "Type": 18,
          "color": 0,
-         "mass": 2,
+         "mass": 1,
          "pos": [
-            5142.259765625,
+            1312.8900146484375,
             0.0,
-            -60.61000061035156
+            -332.1600036621094
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+      },
+      {
+         "idx": 35,
+         "Type": 18,
+         "color": 0,
+         "mass": 1,
+         "pos": [
+            552.260009765625,
+            0.0,
+            -283.6400146484375
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+      },
+      {
+         "idx": 36,
+         "Type": 19,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            1036.81005859375,
+            0.0,
+            -0.07000000029802322
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
+      },
+      {
+         "idx": 37,
+         "Type": 19,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            1326.989990234375,
+            0.0,
+            -25.479999542236328
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
+      },
+      {
+         "idx": 38,
+         "Type": 21,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            1732.0799560546875,
+            0.0,
+            -360.0799865722656
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/tireR.x"
+      },
+      {
+         "idx": 39,
+         "Type": 21,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            1841.9100341796875,
+            0.0,
+            -262.19000244140625
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/tireR.x"
+      },
+      {
+         "idx": 40,
+         "Type": 21,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            2308.31005859375,
+            0.0,
+            -413.7300109863281
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/tireR.x"
+      },
+      {
+         "idx": 41,
+         "Type": 21,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            2440.2099609375,
+            0.0,
+            -208.1699981689453
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/tireR.x"
+      },
+      {
+         "idx": 42,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            2862.97998046875,
+            0.0,
+            -82.0999984741211
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+      },
+      {
+         "idx": 43,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            3052.419921875,
+            0.0,
+            -146.25
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+      },
+      {
+         "idx": 44,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            3105.1201171875,
+            0.0,
+            -37.400001525878906
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+      },
+      {
+         "idx": 45,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            3001.4599609375,
+            0.0,
+            43.099998474121094
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+      },
+      {
+         "idx": 46,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
+         "pos": [
+            1738.489990234375,
+            0.0,
+            -210.2100067138672
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
+      },
+      {
+         "idx": 47,
+         "Type": 5,
+         "color": 1,
+         "mass": 2,
+         "pos": [
+            728.9500122070313,
+            0.0,
+            67.72000122070313
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+      },
+      {
+         "idx": 48,
+         "Type": 5,
+         "color": 1,
+         "mass": 2,
+         "pos": [
+            3340.080078125,
+            0.0,
+            -237.02999877929688
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+      },
+      {
+         "idx": 49,
+         "Type": 25,
+         "color": 1,
+         "mass": 2,
+         "pos": [
+            2607.35009765625,
+            0.0,
+            -367.42999267578125
+         ],
+         "rot": [
+            0.0,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
       },
       {
-         "idx": 35,
-         "Type": 14,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4990.3701171875,
-            0.0,
-            -188.39999389648438
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 36,
-         "Type": 14,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4691.5,
-            0.0,
-            170.47000122070313
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 37,
-         "Type": 14,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            5160.169921875,
-            0.0,
-            250.11000061035156
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 38,
-         "Type": 14,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            5315.8798828125,
-            0.0,
-            -174.3699951171875
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 39,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4411.009765625,
-            0.0,
-            -304.7699890136719
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 40,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4297.31005859375,
-            0.0,
-            -171.75
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 41,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4109.43994140625,
-            0.0,
-            64.94999694824219
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 42,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3661.18994140625,
-            0.0,
-            -11.880000114440918
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 43,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            2993.06005859375,
-            0.0,
-            -94.54000091552734
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 44,
-         "Type": 13,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            2572.760009765625,
-            0.0,
-            -156.5
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 45,
-         "Type": 12,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3173.72998046875,
-            0.0,
-            -47.56999969482422
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 46,
-         "Type": 12,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3531.409912109375,
-            0.0,
-            86.5199966430664
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 47,
-         "Type": 12,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4045.219970703125,
-            0.0,
-            -255.8800048828125
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 48,
-         "Type": 12,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3705.139892578125,
-            0.0,
-            -343.3399963378906
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 49,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4251.9599609375,
-            0.0,
-            -332.7300109863281
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
-      },
-      {
          "idx": 50,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
+         "Type": 25,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            4562.60009765625,
+            1677.199951171875,
             0.0,
-            -102.48999786376953
+            269.1199951171875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
       },
       {
          "idx": 51,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
+         "Type": 8,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            5133.419921875,
+            395.1000061035156,
             0.0,
-            -318.30999755859375
+            -29.520000457763672
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/dustbox.x"
       },
       {
          "idx": 52,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
+         "Type": 8,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            5302.169921875,
+            1329.4000244140625,
             0.0,
-            73.52999877929688
+            250.25
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/dustbox.x"
       },
       {
          "idx": 53,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
+         "Type": 8,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            4843.83984375,
+            3788.2099609375,
             0.0,
-            309.2300109863281
+            -289.7200012207031
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/dustbox.x"
       },
       {
          "idx": 54,
-         "Type": 11,
-         "color": 0,
-         "mass": 0,
+         "Type": 4,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            4245.990234375,
+            4213.22021484375,
             0.0,
-            387.6000061035156
+            -270.7699890136719
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
       },
       {
          "idx": 55,
-         "Type": 15,
-         "color": 0,
-         "mass": 0,
+         "Type": 4,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            4162.81005859375,
+            2915.409912109375,
             0.0,
-            273.55999755859375
+            -347.82000732421875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redgear1.x"
+         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
       },
       {
          "idx": 56,
-         "Type": 15,
-         "color": 0,
-         "mass": 0,
+         "Type": 4,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            3224.949951171875,
+            1124.75,
             0.0,
-            -259.0199890136719
+            275.239990234375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redgear1.x"
+         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
       },
       {
          "idx": 57,
-         "Type": 15,
-         "color": 0,
-         "mass": 1,
+         "Type": 4,
+         "color": 1,
+         "mass": 2,
          "pos": [
-            2501.10009765625,
+            241.14999389648438,
             0.0,
-            270.9800109863281
+            74.55000305175781
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redgear1.x"
+         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
       },
       {
          "idx": 58,
-         "Type": 19,
-         "color": 0,
+         "Type": 3,
+         "color": 1,
          "mass": 1,
          "pos": [
-            2452.02001953125,
+            3.0,
             0.0,
-            -257.3299865722656
+            -149.97000122070313
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redtire.x"
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
       },
       {
          "idx": 59,
-         "Type": 19,
-         "color": 0,
+         "Type": 3,
+         "color": 1,
          "mass": 1,
          "pos": [
-            1607.760009765625,
+            265.95001220703125,
             0.0,
-            301.8500061035156
+            -44.689998626708984
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redtire.x"
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
       },
       {
          "idx": 60,
-         "Type": 20,
-         "color": 0,
+         "Type": 3,
+         "color": 1,
          "mass": 1,
          "pos": [
-            1158.3499755859375,
+            1554.510009765625,
             0.0,
-            295.9200134277344
+            63.63999938964844
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/tireB.x"
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
       },
       {
          "idx": 61,
-         "Type": 20,
-         "color": 0,
+         "Type": 3,
+         "color": 1,
          "mass": 1,
          "pos": [
-            2830.25,
+            2760.719970703125,
             0.0,
-            24.940000534057617
+            -273.70001220703125
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+      },
+      {
+         "idx": 62,
+         "Type": 3,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            3180.35009765625,
+            0.0,
+            -345.75
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+      },
+      {
+         "idx": 63,
+         "Type": 3,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            3672.110107421875,
+            0.0,
+            -188.7100067138672
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+      },
+      {
+         "idx": 64,
+         "Type": 3,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            4074.75,
+            0.0,
+            -273.1400146484375
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+      },
+      {
+         "idx": 65,
+         "Type": 3,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            5034.06982421875,
+            0.0,
+            -342.8599853515625
+         ],
+         "rot": [
+            0.0,
+            0.0,
+            0.0
+         ],
+         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+      },
+      {
+         "idx": 66,
+         "Type": 20,
+         "color": 1,
+         "mass": 1,
+         "pos": [
+            4823.0498046875,
+            0.0,
+            -283.7699890136719
+         ],
+         "rot": [
+            0.0,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/tireB.x"
       },
       {
-         "idx": 62,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3472.06005859375,
-            0.0,
-            282.2699890136719
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 63,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3866.56005859375,
-            0.0,
-            346.6700134277344
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 64,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3913.3701171875,
-            0.0,
-            26.84000015258789
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 65,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            4185.93017578125,
-            0.0,
-            -150.17999267578125
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 66,
-         "Type": 6,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            4446.77978515625,
-            0.0,
-            1.3899999856948853
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/box2B.x"
-      },
-      {
          "idx": 67,
-         "Type": 6,
-         "color": 0,
+         "Type": 20,
+         "color": 1,
          "mass": 1,
          "pos": [
-            4467.6201171875,
+            4595.9501953125,
             0.0,
-            296.989990234375
+            -244.4600067138672
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2B.x"
+         "filepath": "data/MODEL/ENEMY/tireB.x"
       },
       {
          "idx": 68,
          "Type": 6,
-         "color": 0,
-         "mass": 1,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            4986.330078125,
+            62.13999938964844,
             0.0,
-            -384.8299865722656
+            105.80000305175781
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/box2B.x"
@@ -1177,16 +1177,16 @@
       {
          "idx": 69,
          "Type": 6,
-         "color": 0,
-         "mass": 1,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            5336.2998046875,
+            406.94000244140625,
             0.0,
-            -388.3299865722656
+            216.16000366210938
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/box2B.x"
@@ -1194,427 +1194,427 @@
       {
          "idx": 70,
          "Type": 6,
-         "color": 0,
-         "mass": 1,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            5323.47021484375,
+            523.0900268554688,
             0.0,
-            331.8399963378906
+            -69.55999755859375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 71,
-         "Type": 7,
-         "color": 0,
-         "mass": 1,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            5176.5400390625,
+            859.0800170898438,
             0.0,
-            138.3000030517578
+            -110.33999633789063
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 72,
-         "Type": 7,
-         "color": 0,
-         "mass": 1,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            4929.080078125,
+            1505.2900390625,
             0.0,
-            -109.23999786376953
+            271.29998779296875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 73,
-         "Type": 7,
+         "Type": 6,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            4666.02001953125,
+            2112.27001953125,
             0.0,
-            -416.6300048828125
+            287.3500061035156
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 74,
-         "Type": 7,
-         "color": 0,
-         "mass": 1,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            3933.1201171875,
+            2594.699951171875,
             0.0,
-            -342.8399963378906
+            -153.99000549316406
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 75,
-         "Type": 5,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            3535.5,
+            3430.5,
             0.0,
-            -374.8900146484375
+            -365.57000732421875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 76,
-         "Type": 5,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            2143.1201171875,
+            4481.7099609375,
             0.0,
-            169.6300048828125
+            -251.3699951171875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 77,
-         "Type": 5,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            4757.64013671875,
+            4965.02978515625,
             0.0,
-            -79.54000091552734
+            -90.98999786376953
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluesentakuki.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 78,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            4855.72021484375,
+            5115.919921875,
             0.0,
-            146.8000030517578
+            32.63999938964844
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 79,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            3666.47998046875,
+            5333.85986328125,
             0.0,
-            -146.77000427246094
+            -76.61000061035156
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 80,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 6,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            2084.3701171875,
+            5332.06005859375,
             0.0,
-            -292.3800048828125
+            -261.6700134277344
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/box2B.x"
       },
       {
          "idx": 81,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            1707.18994140625,
+            5180.330078125,
             0.0,
-            -76.13999938964844
+            -221.27999877929688
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 82,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            1341.6300048828125,
+            5020.27001953125,
             0.0,
-            251.52999877929688
+            -162.0399932861328
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 83,
-         "Type": 4,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            878.6300048828125,
+            4654.52978515625,
             0.0,
-            275.5899963378906
+            -123.36000061035156
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 84,
-         "Type": 3,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            810.97998046875,
+            4404.56982421875,
             0.0,
-            39.900001525878906
+            -70.68000030517578
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 85,
-         "Type": 3,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            558.0900268554688,
+            4063.3798828125,
             0.0,
-            327.3800048828125
+            -63.58000183105469
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 86,
-         "Type": 3,
-         "color": 0,
-         "mass": 2,
+         "Type": 12,
+         "color": 1,
+         "mass": 0,
          "pos": [
-            944.719970703125,
+            3941.0,
             0.0,
-            -333.7799987792969
+            -158.7100067138672
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluegear2.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 87,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            1114.8800048828125,
+            3193.31005859375,
             0.0,
-            -244.0800018310547
+            -184.52999877929688
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 88,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            1118.1500244140625,
+            2697.3701171875,
             0.0,
-            -33.810001373291016
+            -151.82000732421875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 89,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            1388.3800048828125,
+            1747.1800537109375,
             0.0,
-            -11.5
+            119.22000122070313
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 90,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            1586.6199951171875,
+            981.6500244140625,
             0.0,
-            -99.94999694824219
+            147.2100067138672
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 91,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            1458.56005859375,
+            809.3400268554688,
             0.0,
-            -200.44000244140625
+            186.72000122070313
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 92,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            564.0700073242188,
+            557.25,
             0.0,
-            -203.88999938964844
+            52.279998779296875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 93,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            544.97998046875,
+            698.010009765625,
             0.0,
-            6.019999980926514
+            -172.24000549316406
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 94,
-         "Type": 2,
-         "color": 0,
+         "Type": 12,
+         "color": 1,
          "mass": 0,
          "pos": [
-            340.239990234375,
+            170.52000427246094,
             0.0,
-            -55.47999954223633
+            311.44000244140625
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Bluefish.x"
+         "filepath": "data/MODEL/ENEMY/neji2.x"
       },
       {
          "idx": 95,
@@ -1622,1573 +1622,502 @@
          "color": 0,
          "mass": 0,
          "pos": [
-            8.079999923706055,
+            1138.489990234375,
             0.0,
-            290.20001220703125
+            -340.29998779296875
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
          "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 96,
-         "Type": 8,
+         "Type": 7,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1099.7900390625,
+            1534.2099609375,
             0.0,
-            131.3800048828125
+            -174.61000061035156
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/dustbox.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 97,
-         "Type": 11,
+         "Type": 7,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1957.0899658203125,
+            2082.159912109375,
             0.0,
-            -19.729999542236328
+            -408.9100036621094
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 98,
-         "Type": 11,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1904.8800048828125,
+            2027.5699462890625,
             0.0,
-            290.5899963378906
+            -305.25
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 99,
-         "Type": 11,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2662.469970703125,
+            1935.449951171875,
             0.0,
-            148.49000549316406
+            -377.6400146484375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 100,
-         "Type": 11,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2712.719970703125,
+            1554.02001953125,
             0.0,
-            -247.39999389648438
+            -296.3399963378906
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 101,
-         "Type": 18,
+         "Type": 10,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2652.8798828125,
+            1425.27001953125,
             0.0,
-            -385.3999938964844
+            -396.7099914550781
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
          "idx": 102,
-         "Type": 18,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            2455.110107421875,
+            2023.56005859375,
             0.0,
-            382.6099853515625
+            -156.13999938964844
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 103,
-         "Type": 18,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            3095.679931640625,
+            2135.7900390625,
             0.0,
-            284.3699951171875
+            -277.19000244140625
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 104,
-         "Type": 16,
+         "Type": 13,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            3070.56005859375,
+            2332.760009765625,
             0.0,
-            106.12999725341797
+            -288.5
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 105,
-         "Type": 16,
+         "Type": 13,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            3254.050048828125,
+            2474.580078125,
             0.0,
-            364.9700012207031
+            -318.7300109863281
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 106,
-         "Type": 4,
+         "Type": 13,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            3191.7099609375,
+            2354.169921875,
             0.0,
-            157.4600067138672
+            -68.12000274658203
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 107,
-         "Type": 4,
+         "Type": 13,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            3074.93994140625,
+            2358.89990234375,
             0.0,
-            -242.77999877929688
+            74.01000213623047
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 108,
-         "Type": 4,
+         "Type": 13,
          "color": 0,
-         "mass": 2,
+         "mass": 0,
          "pos": [
-            1773.31005859375,
+            2477.31005859375,
             0.0,
-            -347.25
+            53.88999938964844
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar2.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 109,
-         "Type": 0,
+         "Type": 13,
          "color": 0,
          "mass": 0,
          "pos": [
-            1583.3499755859375,
+            2522.1201171875,
             0.0,
-            -418.8500061035156
+            264.1600036621094
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan000.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 110,
-         "Type": 0,
+         "Type": 13,
          "color": 0,
          "mass": 0,
          "pos": [
-            2340.7099609375,
+            2957.06005859375,
             0.0,
-            -32.27000045776367
+            238.49000549316406
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan000.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 111,
-         "Type": 1,
+         "Type": 13,
          "color": 0,
          "mass": 0,
          "pos": [
-            2454.889892578125,
+            3317.389892578125,
             0.0,
-            -80.12000274658203
+            296.6400146484375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 112,
-         "Type": 1,
+         "Type": 13,
          "color": 0,
          "mass": 0,
          "pos": [
-            2863.739990234375,
+            3487.4599609375,
             0.0,
-            -385.67999267578125
+            121.5
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
+         "filepath": "data/MODEL/ENEMY/petbottle.x"
       },
       {
          "idx": 113,
-         "Type": 8,
-         "color": 1,
-         "mass": 1,
+         "Type": 17,
+         "color": 0,
+         "mass": 2,
          "pos": [
-            2423.389892578125,
+            3338.580078125,
             0.0,
-            -416.2300109863281
+            102.54000091552734
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/dustbox.x"
+         "filepath": "data/MODEL/ENEMY/Redkan.x"
       },
       {
          "idx": 114,
-         "Type": 8,
-         "color": 1,
-         "mass": 1,
+         "Type": 23,
+         "color": 0,
+         "mass": 0,
          "pos": [
-            2098.080078125,
+            3920.56005859375,
             0.0,
-            8.619999885559082
+            196.22000122070313
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/dustbox.x"
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
       },
       {
          "idx": 115,
-         "Type": 8,
-         "color": 1,
-         "mass": 1,
+         "Type": 23,
+         "color": 0,
+         "mass": 2,
          "pos": [
-            2096.260009765625,
+            4085.68994140625,
             0.0,
-            373.6499938964844
+            155.80999755859375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/dustbox.x"
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
       },
       {
          "idx": 116,
-         "Type": 10,
+         "Type": 23,
          "color": 0,
-         "mass": 0,
+         "mass": 2,
          "pos": [
-            1267.22998046875,
+            4187.06982421875,
             0.0,
-            -143.13999938964844
+            254.5399932861328
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
       },
       {
          "idx": 117,
-         "Type": 10,
+         "Type": 23,
          "color": 0,
-         "mass": 0,
+         "mass": 2,
          "pos": [
-            336.3299865722656,
+            4041.360107421875,
             0.0,
-            -417.1600036621094
+            290.19000244140625
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
       },
       {
          "idx": 118,
-         "Type": 10,
+         "Type": 23,
          "color": 0,
-         "mass": 0,
+         "mass": 2,
          "pos": [
-            294.9599914550781,
+            3681.969970703125,
             0.0,
-            -270.489990234375
+            378.1400146484375
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear2.x"
+         "filepath": "data/MODEL/ENEMY/trashbag2.x"
       },
       {
          "idx": 119,
-         "Type": 9,
-         "color": 1,
+         "Type": 11,
+         "color": 0,
          "mass": 0,
          "pos": [
-            108.26000213623047,
+            4486.169921875,
             0.0,
-            -420.1400146484375
+            189.42999267578125
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 120,
-         "Type": 9,
-         "color": 1,
+         "Type": 11,
+         "color": 0,
          "mass": 0,
          "pos": [
-            -1.6200000047683716,
+            4738.75,
             0.0,
-            -113.98999786376953
+            319.5299987792969
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/gear.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 121,
-         "Type": 12,
-         "color": 1,
-         "mass": 1,
+         "Type": 11,
+         "color": 0,
+         "mass": 0,
          "pos": [
-            -162.94000244140625,
+            5063.2099609375,
             0.0,
-            387.80999755859375
+            200.52999877929688
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
+         "filepath": "data/MODEL/ENEMY/neji1.x"
       },
       {
          "idx": 122,
-         "Type": 12,
-         "color": 1,
-         "mass": 1,
+         "Type": 7,
+         "color": 0,
+         "mass": 0,
          "pos": [
-            -161.85000610351563,
+            5215.89013671875,
             0.0,
-            144.0399932861328
+            211.17999267578125
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 123,
-         "Type": 11,
+         "Type": 7,
          "color": 0,
-         "mass": 1,
+         "mass": 2,
          "pos": [
-            -16.540000915527344,
+            4872.9599609375,
             0.0,
-            147.36000061035156
+            294.3500061035156
          ],
          "rot": [
             0.0,
-            -1.25,
+            0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/box2R.x"
       },
       {
          "idx": 124,
-         "Type": 11,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            222.1999969482422,
-            0.0,
-            172.94000244140625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
-      },
-      {
-         "idx": 125,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            369.9800109863281,
-            0.0,
-            263.54998779296875
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 126,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            299.5799865722656,
-            0.0,
-            114.31999969482422
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 127,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            652.8200073242188,
-            0.0,
-            -74.43000030517578
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 128,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            686.6799926757813,
-            0.0,
-            -283.8999938964844
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 129,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            488.8999938964844,
-            0.0,
-            -339.8599853515625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 130,
-         "Type": 13,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -1.4500000476837158,
-            0.0,
-            -219.11000061035156
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 131,
-         "Type": 13,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -211.91000366210938,
-            0.0,
-            -446.1400146484375
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 132,
-         "Type": 13,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            381.6499938964844,
-            0.0,
-            56.189998626708984
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 133,
-         "Type": 13,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -73.9000015258789,
-            0.0,
-            339.1700134277344
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle.x"
-      },
-      {
-         "idx": 134,
-         "Type": 17,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            2283.0,
-            0.0,
-            278.6099853515625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redkan.x"
-      },
-      {
-         "idx": 135,
-         "Type": 17,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3670.5,
-            0.0,
-            260.5
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redkan.x"
-      },
-      {
-         "idx": 136,
-         "Type": 20,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            3974.159912109375,
-            0.0,
-            192.19000244140625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireB.x"
-      },
-      {
-         "idx": 137,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            4684.52978515625,
-            0.0,
-            326.510009765625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 138,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            5020.56005859375,
-            0.0,
-            312.3800048828125
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 139,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            5042.080078125,
-            0.0,
-            90.1500015258789
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 140,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            5213.7900390625,
-            0.0,
-            -196.0500030517578
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 141,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            5248.3701171875,
-            0.0,
-            -355.6000061035156
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 142,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            5006.009765625,
-            0.0,
-            -289.9800109863281
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 143,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4670.2998046875,
-            0.0,
-            -197.75
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 144,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4504.58984375,
-            0.0,
-            -334.739990234375
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 145,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4362.169921875,
-            0.0,
-            -413.55999755859375
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 146,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4471.56005859375,
-            0.0,
-            -173.9199981689453
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 147,
-         "Type": 22,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4319.6298828125,
-            0.0,
-            -1.1100000143051147
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
-      },
-      {
-         "idx": 148,
-         "Type": 22,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            4565.7900390625,
-            0.0,
-            85.62999725341797
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
-      },
-      {
-         "idx": 149,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            4204.330078125,
-            0.0,
-            -18.579999923706055
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 150,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            4586.85986328125,
-            0.0,
-            232.7899932861328
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 151,
-         "Type": 19,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            4105.91015625,
-            0.0,
-            -393.69000244140625
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redtire.x"
-      },
-      {
-         "idx": 152,
-         "Type": 19,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            2881.7099609375,
-            0.0,
-            -139.3800048828125
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redtire.x"
-      },
-      {
-         "idx": 153,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            2221.010009765625,
-            0.0,
-            -227.39999389648438
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 154,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            2526.219970703125,
-            0.0,
-            53.849998474121094
-         ],
-         "rot": [
-            0.0,
-            -1.25,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 155,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3057.510009765625,
-            0.0,
-            -117.8499984741211
-         ],
-         "rot": [
-            0.0,
-            83.72000122070313,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 156,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            3534.030029296875,
-            0.0,
-            -58.099998474121094
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 157,
-         "Type": 18,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            5070.080078125,
-            0.0,
-            -60.25
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redpipe.x"
-      },
-      {
-         "idx": 158,
-         "Type": 16,
-         "color": 0,
-         "mass": 2,
-         "pos": [
-            542.6199951171875,
-            0.0,
-            108.54000091552734
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Redironpillar1.x"
-      },
-      {
-         "idx": 159,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            223.19000244140625,
-            0.0,
-            -102.33000183105469
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 160,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            -106.30999755859375,
-            0.0,
-            34.95000076293945
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 161,
-         "Type": 21,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            997.52001953125,
-            0.0,
-            -15.859999656677246
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireR.x"
-      },
-      {
-         "idx": 162,
-         "Type": 20,
-         "color": 1,
-         "mass": 1,
-         "pos": [
-            1218.5799560546875,
-            0.0,
-            -391.0400085449219
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireB.x"
-      },
-      {
-         "idx": 163,
-         "Type": 20,
-         "color": 1,
-         "mass": 1,
-         "pos": [
-            1378.989990234375,
-            0.0,
-            -168.17999267578125
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/tireB.x"
-      },
-      {
-         "idx": 164,
-         "Type": 25,
-         "color": 1,
-         "mass": 2,
-         "pos": [
-            1451.530029296875,
-            0.0,
-            -14.430000305175781
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
-      },
-      {
-         "idx": 165,
-         "Type": 25,
-         "color": 1,
-         "mass": 2,
-         "pos": [
-            1000.010009765625,
-            0.0,
-            364.4200134277344
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/Blueironpillar3.x"
-      },
-      {
-         "idx": 166,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            1209.6700439453125,
-            0.0,
-            388.260009765625
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 167,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            1347.3800048828125,
-            0.0,
-            407.260009765625
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 168,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            1494.6400146484375,
-            0.0,
-            201.74000549316406
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 169,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            1158.6700439453125,
-            0.0,
-            -72.44000244140625
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 170,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            912.1300048828125,
-            0.0,
-            -271.1099853515625
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 171,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            554.6099853515625,
-            0.0,
-            -452.2300109863281
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 172,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            342.3599853515625,
-            0.0,
-            -169.0800018310547
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 173,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            70.02999877929688,
-            0.0,
-            160.05999755859375
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 174,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -219.57000732421875,
-            0.0,
-            -204.1199951171875
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 175,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -142.6999969482422,
-            0.0,
-            -165.66000366210938
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 176,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -237.16000366210938,
-            0.0,
-            36.540000915527344
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 177,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            434.17999267578125,
-            0.0,
-            185.89999389648438
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 178,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            723.3200073242188,
-            0.0,
-            317.1400146484375
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 179,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            546.1699829101563,
-            0.0,
-            -115.9800033569336
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 180,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -198.94000244140625,
-            0.0,
-            274.0
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 181,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            72.91999816894531,
-            0.0,
-            406.2699890136719
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 182,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            419.010009765625,
-            0.0,
-            426.7799987792969
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 183,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            336.9100036621094,
-            0.0,
-            283.6600036621094
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 184,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            298.7900085449219,
-            0.0,
-            207.27000427246094
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 185,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            -4.96999979019165,
-            0.0,
-            -429.95001220703125
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 186,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            77.52999877929688,
-            0.0,
-            -341.2300109863281
-         ],
-         "rot": [
-            0.0,
-            2.0399999618530273,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 187,
          "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            64.86000061035156,
+            4888.81982421875,
             0.0,
-            15.149999618530273
+            113.86000061035156
          ],
          "rot": [
             0.0,
@@ -3198,480 +2127,174 @@
          "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 188,
-         "Type": 1,
+         "idx": 125,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            137.52999877929688,
+            5004.56982421875,
             0.0,
-            -133.17999267578125
+            283.05999755859375
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 189,
-         "Type": 1,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            444.4700012207031,
-            0.0,
-            -85.4000015258789
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
-      },
-      {
-         "idx": 190,
-         "Type": 1,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            242.82000732421875,
-            0.0,
-            -409.8299865722656
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/akikan001.x"
-      },
-      {
-         "idx": 191,
-         "Type": 6,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            793.5900268554688,
-            0.0,
-            -262.8999938964844
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/box2B.x"
-      },
-      {
-         "idx": 192,
-         "Type": 7,
+         "idx": 126,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            1323.8900146484375,
+            5255.41015625,
             0.0,
-            -339.7900085449219
+            384.05999755859375
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 193,
-         "Type": 7,
+         "idx": 127,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            1717.3800048828125,
+            5388.10986328125,
             0.0,
-            -235.88999938964844
+            347.79998779296875
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/box2R.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 194,
-         "Type": 22,
+         "idx": 128,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            2032.4200439453125,
+            5396.580078125,
             0.0,
-            -173.0500030517578
+            245.07000732421875
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 195,
-         "Type": 22,
+         "idx": 129,
+         "Type": 0,
          "color": 0,
          "mass": 0,
          "pos": [
-            1923.56005859375,
+            5326.0,
             0.0,
-            134.19000244140625
+            141.89999389648438
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
+         "filepath": "data/MODEL/ENEMY/akikan000.x"
       },
       {
-         "idx": 196,
-         "Type": 22,
+         "idx": 130,
+         "Type": 10,
          "color": 0,
          "mass": 0,
          "pos": [
-            2349.3701171875,
+            3996.1201171875,
             0.0,
-            96.52999877929688
+            233.91000366210938
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
+         "filepath": "data/MODEL/ENEMY/gear2.x"
       },
       {
-         "idx": 197,
-         "Type": 22,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            2717.840087890625,
-            0.0,
-            -115.30999755859375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
-      },
-      {
-         "idx": 198,
-         "Type": 22,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3050.75,
-            0.0,
-            -370.2699890136719
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
-      },
-      {
-         "idx": 199,
-         "Type": 22,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3365.02001953125,
-            0.0,
-            -351.2699890136719
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag.x"
-      },
-      {
-         "idx": 200,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            3174.85009765625,
-            0.0,
-            -435.4200134277344
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 201,
-         "Type": 24,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            3270.3701171875,
-            0.0,
-            -401.8599853515625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag3.x"
-      },
-      {
-         "idx": 202,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3508.47998046875,
-            0.0,
-            -250.44000244140625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 203,
-         "Type": 23,
-         "color": 0,
-         "mass": 0,
-         "pos": [
-            3718.3798828125,
-            0.0,
-            -433.7200012207031
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/trashbag2.x"
-      },
-      {
-         "idx": 204,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            2742.25,
-            0.0,
-            95.7300033569336
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 205,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            2601.14990234375,
-            0.0,
-            30.979999542236328
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 206,
-         "Type": 14,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            2342.949951171875,
-            0.0,
-            -182.4600067138672
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/petbottle2.x"
-      },
-      {
-         "idx": 207,
-         "Type": 12,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            2218.699951171875,
-            0.0,
-            -32.16999816894531
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 208,
-         "Type": 12,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            2120.43994140625,
-            0.0,
-            -401.42999267578125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 209,
-         "Type": 12,
-         "color": 1,
-         "mass": 0,
-         "pos": [
-            1983.52001953125,
-            0.0,
-            -414.7200012207031
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji2.x"
-      },
-      {
-         "idx": 210,
-         "Type": 11,
+         "idx": 131,
+         "Type": 19,
          "color": 0,
          "mass": 1,
          "pos": [
-            2283.699951171875,
+            2711.090087890625,
             0.0,
-            -432.5400085449219
+            268.2799987792969
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
       },
       {
-         "idx": 211,
-         "Type": 11,
+         "idx": 132,
+         "Type": 19,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1510.43994140625,
+            4257.97021484375,
             0.0,
-            -85.70999908447266
+            41.380001068115234
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
       },
       {
-         "idx": 212,
-         "Type": 11,
+         "idx": 133,
+         "Type": 19,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            1425.25,
+            3879.85009765625,
             0.0,
-            -422.1199951171875
+            -33.130001068115234
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
       },
       {
-         "idx": 213,
-         "Type": 11,
+         "idx": 134,
+         "Type": 19,
          "color": 0,
-         "mass": 1,
+         "mass": 0,
          "pos": [
-            906.9099731445313,
+            3781.010009765625,
             0.0,
-            -171.27999877929688
+            397.9800109863281
          ],
          "rot": [
             0.0,
             0.0,
             0.0
          ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
-      },
-      {
-         "idx": 214,
-         "Type": 11,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            809.4500122070313,
-            0.0,
-            -418.4700012207031
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
-      },
-      {
-         "idx": 215,
-         "Type": 11,
-         "color": 0,
-         "mass": 1,
-         "pos": [
-            1079.3299560546875,
-            0.0,
-            -426.57000732421875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "filepath": "data/MODEL/ENEMY/neji1.x"
+         "filepath": "data/MODEL/ENEMY/Redtire.x"
       }
    ]
 }
