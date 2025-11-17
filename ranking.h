@@ -36,8 +36,6 @@ public:
 
 private:
 
-	CRankingScore* m_pRankScore; // ランキングスコア
-
 };
 
 #endif

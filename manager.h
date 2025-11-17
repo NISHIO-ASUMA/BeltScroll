@@ -62,7 +62,7 @@ private:
 	static CTexture* m_pTexture;			// テクスチャクラスのポインタ
 	static CCamera* m_pCamera;				// カメラクラスのポインタ
 	static CLight* m_pLight;				// ライトクラスのポインタ
-	static std::unique_ptr<CScene> m_pScene;// シーン管理クラスのポインタ
 	static CFade* m_pFade;					// フェードクラスのポインタ
+	static std::unique_ptr<CScene> m_pScene;// シーン管理クラスのポインタ
 };
 #endif

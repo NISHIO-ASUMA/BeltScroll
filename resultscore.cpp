@@ -12,6 +12,9 @@
 #include "number.h"
 #include <fstream>
 
+// 使用namespace
+using namespace NUMBERINFO;
+
 //=====================
 // コンストラクタ
 //=====================
@@ -122,8 +125,8 @@ void CResultScore::Update(void)
 	for (int nCntScore = 0; nCntScore < RESULT_SCORE; nCntScore++)
 	{
 		// 桁数ごとに分割する値を計算
-		int nDigit = nScore % 10;
-		nScore /= 10;
+		int nDigit = nScore % NUMBERINFO::NUMBER_DIGIT_VALUE;
+		nScore /= NUMBERINFO::NUMBER_DIGIT_VALUE;
 
 		// 更新
 		m_pNumber[nCntScore]->Update();

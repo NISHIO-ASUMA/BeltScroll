@@ -24,6 +24,7 @@ class CNumber;
 class CRankingScore : public CObject
 {
 public:
+
 	// コンストラクタ・デストラクタ
 	CRankingScore(int nPriority = static_cast<int>(CObject::PRIORITY::UI));
 	~CRankingScore();

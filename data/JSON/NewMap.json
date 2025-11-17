@@ -1,5 +1,5 @@
 {
-   "AllObject": 55,
+   "AllObject": 53,
    "SetObjects": [
       {
          "filepath": "data/MODEL/STAGEOBJ/decoration7.x",
@@ -879,9 +879,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 46,
       "pos": [
-        0.0,
-        210.0,
-        -505.0
+        765.0,
+        170.0,
+        -510.0
       ],
       "rot": [
         0.0,
@@ -898,9 +898,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 47,
       "pos": [
-        2500.0,
-        210.0,
-        -505.0
+        3285.0,
+        170.0,
+        -510.0
       ],
       "rot": [
         0.0,
@@ -917,9 +917,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 48,
       "pos": [
-        3400.0,
-        210.0,
-        -505.0
+        5810.0,
+        170.0,
+        -510.0
       ],
       "rot": [
         0.0,
@@ -936,9 +936,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 49,
       "pos": [
-        4550.0,
-        210.0,
-        -505.0
+        6550.0,
+        170.0,
+        -510.0
       ],
       "rot": [
         0.0,
@@ -955,9 +955,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 50,
       "pos": [
-        0.0,
-        212.0,
-        490.0
+        760.0,
+        170.0,
+        487.0
       ],
       "rot": [
         0.0,
@@ -974,9 +974,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 51,
       "pos": [
-        1200.0,
-        212.0,
-        490.0
+        3285.0,
+        170.0,
+        487.0
       ],
       "rot": [
         0.0,
@@ -984,7 +984,7 @@
         0.0
       ],
       "scale": [
-        2.0,
+        1.0,
         1.0,
         1.0
       ]
@@ -993,9 +993,9 @@
       "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
       "idx": 52,
       "pos": [
-        2000.0,
-        212.0,
-        490.0
+        5810.0,
+        170.0,
+        487.0
       ],
       "rot": [
         0.0,
@@ -1003,49 +1003,10 @@
         0.0
       ],
       "scale": [
-        2.0,
         1.0,
-        1.0
-      ]
-    },
-    {
-      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
-      "idx": 53,
-      "pos": [
-        2700.0,
-        212.0,
-        490.0
-      ],
-      "rot": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": [
-        2.0,
-        1.0,
-        1.0
-      ]
-    },
-    {
-      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
-      "idx": 53,
-      "pos": [
-        3300.0,
-        212.0,
-        490.0
-      ],
-      "rot": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": [
-        2.0,
         1.0,
         1.0
       ]
     }
-
    ]
 }

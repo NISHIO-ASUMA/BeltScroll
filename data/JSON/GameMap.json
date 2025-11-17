@@ -1,5 +1,5 @@
 {
-   "AllObject": 54,
+   "AllObject": 57,
    "SetObjects": [
       {
          "filepath": "data/MODEL/STAGEOBJ/decoration7.x",
@@ -1008,24 +1008,82 @@
           1.0
         ]
       },
-      {
-        "filepath": "data/MODEL/STAGEOBJ/Side_Alpha.x",
-        "idx": 53,
-        "pos": [
-          5560.0,
-          210.0,
-          0.0
-        ],
-        "rot": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "scale": [
-          1.0,
-          1.0,
-          1.0
-        ]
-      }
+    {
+      "filepath": "data/MODEL/STAGEOBJ/Side_Alpha.x",
+      "idx": 53,
+      "pos": [
+        5560.0,
+        210.0,
+        0.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
+      "idx": 54,
+      "pos": [
+        760.0,
+        175.0,
+        -515.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
+      "idx": 55,
+      "pos": [
+        3285.0,
+        175.0,
+        -515.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x",
+      "idx": 56,
+      "pos": [
+        5810.0,
+        175.0,
+        -515.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+
    ]
 }

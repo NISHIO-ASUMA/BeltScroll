@@ -9,11 +9,20 @@
 #define _NUMBER_H_ // 2重インクルード防止のマクロ定義
 
 //**********************
+// 数字の名前空間
+//**********************
+namespace NUMBERINFO
+{
+	constexpr int NUMBER_DIGIT_VALUE = 10; // 割る規定値
+}
+
+//**********************
 // ナンバークラスを定義
 //**********************
 class CNumber
 {
 public:
+
 	// コンストラクタ・デストラクタ
 	CNumber();
 	~CNumber();
@@ -48,5 +57,6 @@ private:
 	int n_nColorCount;
 	int m_nIdxTexture;				// テクスチャインデックス
 };
+
 
 #endif

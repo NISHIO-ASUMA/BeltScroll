@@ -19,7 +19,7 @@
 //===================================
 // オーバーロードコンストラクタ
 //===================================
-CRanking::CRanking() : CScene(CScene::MODE_RANKING),m_pRankScore(nullptr)
+CRanking::CRanking() : CScene(CScene::MODE_RANKING)
 {
 	// 値のクリア
 }
@@ -37,6 +37,9 @@ HRESULT CRanking::Init(void)
 {
 	// ui生成
 	CUi::Create(CENTERPOS, 0, 640.0f, 360.0f, "ranking.jpg", false);
+
+	// ランキングスコア生成
+	CRankingScore::Create(D3DXVECTOR3(850.0f, 180.0f, 0.0f), 250.0f, 40.0f);
 
 	// ランキングBGM再生
 	// CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);

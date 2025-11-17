@@ -17,6 +17,7 @@
 #include "goal.h"
 #include "player.h"
 #include "score.h"
+#include "loseresult.h"
 
 //**************************
 // 定数空間
@@ -137,7 +138,7 @@ void CGame::Update(void)
 			m_nStateCount = 0;
 			
 			// 1秒経過
-			m_nGametype = GAMESTATE_NONE;//何もしていない状態
+			m_nGametype = GAMESTATE_NONE;
 
 			// フェードが取得できたら
 			if (pFade != nullptr)
@@ -166,8 +167,12 @@ void CGame::Update(void)
 			// フェードが取得できたら
 			if (pFade != nullptr)
 			{
-				//// 負けリザルトシーンに遷移
-				//pFade->SetFade(new CLoseResult());
+				// 負けリザルトシーンに遷移
+				pFade->SetFade(std::make_unique<CLoseResult>());
+
+				// スコアをクリアしておく
+				auto Score = m_pGameManager->GetScore();
+				if (Score != nullptr) Score->ClearScore(); 
 
 				// ここで処理を返す
 				return;

@@ -14,6 +14,7 @@
 #include "tutorial.h"
 #include "result.h"
 #include "ranking.h"
+#include "loseresult.h"
 
 //**************************
 // 静的メンバ変数宣言
@@ -26,8 +27,8 @@ CInputMouse* CManager::m_pInputMouse = nullptr;			// マウスへのポインタ
 CTexture* CManager::m_pTexture = nullptr;				// テクスチャクラスへのポインタ
 CCamera* CManager::m_pCamera = nullptr;					// カメラクラスへのポインタ
 CLight* CManager::m_pLight = nullptr;					// ライトクラスへのポインタ
-std::unique_ptr<CScene> CManager::m_pScene = nullptr; // シーン
 CFade* CManager::m_pFade = nullptr;						// フェードクラスへのポインタ
+std::unique_ptr<CScene> CManager::m_pScene = nullptr;	// シーンクラスのポインタ
 
 //===========================
 // コンストラクタ
@@ -129,13 +130,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 
 	// テクスチャ生成
 	m_pTexture = new CTexture;
-
-	// テクスチャ全読み込み
 	m_pTexture->Load();
 
 #ifdef _DEBUG
 	// タイトルシーンをセット
-	m_pFade->SetFade(std::make_unique<CTitle>()); 
+	m_pFade->SetFade(std::make_unique<CTitle>());
 #else
 	// シーンセット
 	m_pFade->SetFade(std::make_unique<CTitle>());

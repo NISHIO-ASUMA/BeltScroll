@@ -36,11 +36,7 @@ HRESULT CTitle::Init(void)
 {
 	// カメラ初期化
 	CCamera* pCamera = CManager::GetCamera();
-
-	if (pCamera)
-	{
-		pCamera->Init();
-	}
+	if (pCamera) pCamera->Init();
 
 	// メッシュフィールド
 	CMeshField::Create(VECTOR3_NULL, 4000.0f, 2000.0f, 1, 1);
@@ -71,11 +67,12 @@ void CTitle::Uninit(void)
 void CTitle::Update(void)
 {
 	// キー入力で遷移
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN) || CManager::GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_A) || CManager::GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START))
 	{
-		// ランキング
+		// ゲーム画面に遷移
 		CManager::GetFade()->SetFade(std::make_unique<CGame>());
 
+		// SE再生
 		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_CLICKSE);
 
 		return;
@@ -84,6 +81,7 @@ void CTitle::Update(void)
 	// コントローラー取得
 	if (CManager::GetJoyPad()->GetTrigger(CManager::GetJoyPad()->JOYKEY_BACK))
 	{
+		// ゲーム終了
 		PostQuitMessage(0);
 		return;
 	}

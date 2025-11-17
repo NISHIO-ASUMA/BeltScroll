@@ -46,7 +46,7 @@ HRESULT CLoseResult::Init(void)
 
 	// 負けリザルトプレイヤー生成
 	CLosePlayer::Create(VECTOR3_NULL);	
-	
+		
 	return S_OK;
 }
 //==============================
