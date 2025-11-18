@@ -47,6 +47,7 @@ public:
 	void AddTrush(int nType);
 	void State(void);
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
+	void Shake(void);
 
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
@@ -65,10 +66,12 @@ private:
 	D3DXMATRIX m_mtxworld;
 	D3DXVECTOR3 m_move;		// 移動量
 	D3DXVECTOR3 m_oldPos;	// 過去の座標
+	D3DXVECTOR3 m_offsetPos;// オフセットの位置
 
 	int m_nType;		// 種類
 	int m_nShredbin;	// シュレッダービンに入ってるごみの量
 	float m_fCnt;		// 
+	int m_nShake;
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
 };
