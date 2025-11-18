@@ -55,9 +55,12 @@ private:
 	int m_nSwapCnt;				// 入れ替えるカウント
 	int m_nStateCnt;			// 状態管理のカウント
 	bool m_bRedFlont;			// 赤いほうが手前にあるか
+	bool m_isSaveScoreTrush;	// ボーナスを書き出したかどうか
 	STATE m_state;				// 状態
 	int m_trushBoxCnt;			// ごみステーションのカウント
+
 	static constexpr int SWAPCOUNT = 300;
+	static constexpr int LAST_TRASH_NUMBER = 2;
 	static constexpr float FIXED_Z00 = -250.0f;
 	static constexpr float FIXED_Z01 = 250.0f;
 

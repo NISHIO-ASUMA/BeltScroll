@@ -156,7 +156,7 @@ void CBonusScore::Draw(void)
 void CBonusScore::Save(void)
 {
 	// 開くファイルをセット
-	std::ofstream OpenFile("data/SCORE/BonusScore.txt");
+	std::ofstream OpenFile("data/TrushScore.txt");
 	if (!OpenFile)
 	{
 		// 例外処理

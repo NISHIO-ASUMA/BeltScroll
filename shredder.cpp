@@ -260,7 +260,7 @@ void CShredder::AddTrush(int nType)
 		CCombo::Add(100);
 
 		// スコアを加算 ( コンボ値 * 基底スコア値 )
-		CScore::Add(100 * CCombo::GetCombo());
+		CScore::Add(1000 * CCombo::GetCombo());
 	}
 	else
 	{

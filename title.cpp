@@ -35,6 +35,9 @@ CTitle::~CTitle()
 //=====================================
 HRESULT CTitle::Init(void)
 {
+	// 強制的にポーズを消す
+	CPauseManager::SetEnablePause(false);
+
 	// カメラ初期化
 	CCamera* pCamera = CManager::GetCamera();
 	if (pCamera) pCamera->Init();

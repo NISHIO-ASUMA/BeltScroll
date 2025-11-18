@@ -215,9 +215,8 @@ void CPauseManager::Update(void)
 //===========================
 void CPauseManager::SetEnablePause(void)
 {
-	// カメラ取得
-	CCamera * pCamera = CManager::GetCamera();
-	if (pCamera == nullptr) return;
+	// モード取得
+	CScene::MODE nMode = CManager::GetScene();
 
 	// Pキー or Start が押された
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_P) ||

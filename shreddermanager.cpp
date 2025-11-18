@@ -27,6 +27,7 @@ CShredderManager::CShredderManager()
 	m_trushBoxCnt = 0;
 	m_nStateCnt = 0;
 	m_state = STATE_MOVE;
+	m_isSaveScoreTrush = false;
 }
 //===============================
 // デストラクタ
@@ -43,6 +44,9 @@ HRESULT CShredderManager::Init(void)
 
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_GREEN]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, 250.0f), TYPE_GREEN);
+
+	// スコアをクリアする
+	CBonusScore::ClearScore();
 
 	return S_OK;
 }
@@ -149,8 +153,17 @@ void CShredderManager::TrushBox(void)
 		m_state = STATE_DUSTBOX;
 		m_trushBoxCnt++;
 	}
-}
 
+	// 最後のゴミステーションに入ったら
+	if (m_trushBoxCnt >= LAST_TRASH_NUMBER && !m_isSaveScoreTrush)
+	{
+		// フラグを有効化
+		m_isSaveScoreTrush = true;
+
+		// スコアを書き出す
+		CBonusScore::Save();
+	}
+}
 
 //===============================
 // ごみステーションの配置
@@ -159,9 +172,9 @@ D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
 {
 	float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 }; 
 	int nCnt = m_trushBoxCnt-1;
-	if (nCnt >= 2)
+	if (nCnt >= LAST_TRASH_NUMBER)
 	{// 2以上行かせない
-		nCnt = 2;
+		nCnt = LAST_TRASH_NUMBER;
 	}
 	return D3DXVECTOR3(DUSTBOX_POSX[nCnt]+200.0f, 50.0f, -600.0f);
 }
