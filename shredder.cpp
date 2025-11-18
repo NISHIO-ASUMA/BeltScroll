@@ -32,6 +32,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_rot = VECTOR3_NULL;
 	m_move = VECTOR3_NULL;
 	m_oldPos = VECTOR3_NULL;
+	m_offsetPos = VECTOR3_NULL;
 
 	m_nType = NULL;
 	m_nShredbin = NULL;
@@ -63,6 +64,7 @@ CShredder* CShredder::Create(D3DXVECTOR3 pos,int nType)
 
 	// オブジェクト設定
 	pShredder->SetPos(pos);
+	pShredder->m_offsetPos = pos;
 	pShredder->m_nType = nType;
 
 	// 初期化失敗時
@@ -125,7 +127,7 @@ void CShredder::Update(void)
 {
 	// シュレッダーの更新
 	m_oldPos = m_pos;
-	m_pos += m_move;
+	m_offsetPos += m_move;
 
 	// コライダー座標の更新
 	m_pAABB->SetPos(m_pos);
@@ -138,6 +140,9 @@ void CShredder::Update(void)
 	}
 
 	UpdateModel();
+
+	// 間違えたら揺れる
+	Shake();
 
 	m_pShredbinManager->Update();
 	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + 170.0f, m_pos.z));
@@ -226,8 +231,8 @@ void CShredder::UpdateModel(void)
 
 	D3DXVECTOR3 pos = m_apModel[1]->GetPos();
 
-	pos.y = -30.0f+sinf(m_fCnt)*50.0f;
-	m_fCnt+=0.07f;
+	pos.y = -30.0f + sinf(m_fCnt) * 50.0f;
+	m_fCnt += 0.07f;
 	m_apModel[1]->SetPos(pos);
 }
 
@@ -236,7 +241,7 @@ void CShredder::UpdateModel(void)
 //===============================
 void CShredder::SetPosZ(float posZ)
 {
-	m_pos.z = posZ;
+	m_offsetPos.z = posZ;
 }
 
 //===============================
@@ -259,9 +264,28 @@ void CShredder::AddTrush(int nType)
 	}
 	else
 	{
+		m_nShake = 30;
 		// コンボリセット
 		CCombo::Reset();
 	}
 
 	m_pShredbinManager->SetNum(m_nShredbin);
+}
+
+//===============================
+// 間違えた時の振動
+//===============================
+void CShredder::Shake(void)
+{
+	if (m_nShake > 0)
+	{
+		m_pos.x = m_offsetPos.x + sinf((float)m_nShake) * 12.0f;
+		m_pos.y = m_offsetPos.y + sinf((float)m_nShake) * 12.0f;
+		m_pos.z = m_offsetPos.z + sinf((float)m_nShake) * 12.0f;
+	}
+	else if(m_nShake <= 0)
+	{
+		m_pos = m_offsetPos;
+	}
+	m_nShake--;
 }
