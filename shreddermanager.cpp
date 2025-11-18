@@ -11,6 +11,7 @@
 #include "shreddermanager.h"
 #include "shredder.h"
 #include "shredbinmanager.h"
+#include "bonusscore.h"
 
 //===============================
 // コンストラクタ
@@ -144,6 +145,7 @@ void CShredderManager::TrushBox(void)
 
 	if (DUSTBOX_POSX[m_trushBoxCnt] <= X)
 	{
+		CBonusScore::AddTrushBox(m_pShredder[0]->GetShredbinManager()->GetNumAll()+ m_pShredder[1]->GetShredbinManager()->GetNumAll());
 		m_state = STATE_DUSTBOX;
 		m_trushBoxCnt++;
 	}

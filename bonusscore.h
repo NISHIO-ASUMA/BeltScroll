@@ -37,13 +37,19 @@ public:
 	static void Save(void);
 	static void ClearScore(void) { m_nScore = NULL; }
 	static void Add(int nValue) { m_nScore += nValue; }
+	static void AddTrushBox(int nTrushNum);
 
 private:
 	static constexpr int SCORE_NUM = 8; // 表示桁数の定数
 	static int m_nScore; // 格納スコア
 
-	CNumber* m_pNumber[SCORE_NUM];	// ナンバー配列
-	D3DXVECTOR3 m_pos;				// 座標
-	float m_fWidth;					// 横幅
-	float m_fHeight;				// 高さ
+	CNumber* m_pNumber[SCORE_NUM];			// ナンバー配列
+	D3DXVECTOR3 m_pos;						// 座標
+	float m_fWidth;							// 横幅
+	float m_fHeight;						// 高さ
+	static constexpr int MIN_TRUSH = 20;	// 最小のごみの数
+	static constexpr int MAX_TRUSH = 60;	// 最高のごみの数
+	static constexpr int MIN_SCORE = 100;	// 最小のスコアの数
+	static constexpr int NORMAL_SCORE = 500;	// 最小のスコアの数
+	static constexpr int MAX_SCORE = 1500;	// 最高のスコアの数
 };

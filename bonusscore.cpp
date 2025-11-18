@@ -11,6 +11,7 @@
 #include "bonusscore.h"
 #include "manager.h"
 #include <fstream>
+#include "combo.h"
 
 //**********************************
 // 静的メンバ変数宣言
@@ -168,4 +169,23 @@ void CBonusScore::Save(void)
 
 	// ファイルを閉じる
 	OpenFile.close();
+}
+
+//=================================
+// ごみステーションのボーナス加算
+//=================================
+void CBonusScore::AddTrushBox(int nTrushNum)
+{
+	if (nTrushNum <= MIN_TRUSH)
+	{// 最小のごみの数超えなかったら
+		Add(CCombo::GetMaxCombo() * MIN_SCORE);
+	}
+	else if (nTrushNum > MIN_TRUSH && nTrushNum < MAX_TRUSH)
+	{
+		Add(CCombo::GetMaxCombo() * NORMAL_SCORE);
+	}
+	else if (nTrushNum >= MAX_TRUSH)
+	{// 最大のごみの数超えたら
+		Add(CCombo::GetMaxCombo() * MAX_SCORE);
+	}
 }
