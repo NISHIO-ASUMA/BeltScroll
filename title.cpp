@@ -14,13 +14,14 @@
 #include "meshfield.h"
 #include "titlelogo.h"
 #include "ui.h"
+#include "titleenemymanager.h"
 
 //=====================================
 // コンストラクタ
 //=====================================
-CTitle::CTitle() : CScene(CScene::MODE_TITLE)
+CTitle::CTitle() : CScene(CScene::MODE_TITLE), m_pTitleEnemy(nullptr)
 {
-	//無し
+	
 }
 //=====================================
 // デストラクタ
@@ -48,6 +49,10 @@ HRESULT CTitle::Init(void)
 	CUi::Create(CENTERPOS, 0, 300.0f, 80.0f, "titlename.png", false);
 	CUi::Create(D3DXVECTOR3(640.0f,560.0f,0.0f), 0, 220.0f, 60.0f, "titeenter.png", false);
 
+	// 敵生成
+	m_pTitleEnemy = new CTitleEnemyManager;
+	m_pTitleEnemy->Init();
+
 	// タイトルBGM再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_TITLE_BGM);
 
@@ -59,7 +64,13 @@ HRESULT CTitle::Init(void)
 //=====================================
 void CTitle::Uninit(void)
 {
-	// 無し
+	// nullチェック
+	if (m_pTitleEnemy)
+	{
+		m_pTitleEnemy->Uninit();
+		delete m_pTitleEnemy;
+		m_pTitleEnemy = nullptr;
+	}
 }
 //=====================================
 // 更新処理

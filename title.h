@@ -13,10 +13,7 @@
 //****************************
 #include "scene.h"
 
-//**************************
-// 前方宣言
-//**************************
-class CTitleManager;
+class CTitleEnemyManager;
 
 //****************************
 // タイトルクラスを定義
@@ -35,5 +32,8 @@ public:
 	void Draw(void);
 
 private:
+
+	CTitleEnemyManager* m_pTitleEnemy; // 配置する敵
+
 };
 #endif

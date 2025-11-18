@@ -121,6 +121,11 @@ void CEnemy::Uninit(void)
 //==============================
 void CEnemy::Update(void)
 {
+
+	// 現在シーン取得
+	CScene::MODE nMode = CManager::GetScene();
+	if (nMode != CScene::MODE_GAME) return;
+
 	// プレイヤー取得
 	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
 	if (pPlayer == nullptr) return;
