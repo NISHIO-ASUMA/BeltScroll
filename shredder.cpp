@@ -244,7 +244,7 @@ void CShredder::SetPosZ(float posZ)
 //===============================
 void CShredder::AddTrush(int nType)
 {
-
+	m_nShredbin = m_pShredbinManager->GetNumAll();
 	// Ží—Þˆê’vŽž
 	if (m_nType == nType)
 	{

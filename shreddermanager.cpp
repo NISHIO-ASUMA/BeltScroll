@@ -155,7 +155,11 @@ void CShredderManager::TrushBox(void)
 //===============================
 D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
 {
-	float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 };
+	float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 }; 
 	int nCnt = m_trushBoxCnt-1;
+	if (nCnt >= 2)
+	{// 2à»è„çsÇ©ÇπÇ»Ç¢
+		nCnt = 2;
+	}
 	return D3DXVECTOR3(DUSTBOX_POSX[nCnt]+200.0f, 50.0f, -600.0f);
 }
