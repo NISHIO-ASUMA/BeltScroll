@@ -43,7 +43,7 @@ HRESULT CShredderManager::Init(void)
 {
 
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, -250.0f), TYPE_RED);
-	m_pShredder[TYPE_GREEN]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, 250.0f), TYPE_GREEN);
+	m_pShredder[TYPE_BLUE]=CShredder::Create(D3DXVECTOR3(-400.0f, 142.0f, 250.0f), TYPE_BLUE);
 
 	// スコアをクリアする
 	CBonusScore::ClearScore();
@@ -119,8 +119,8 @@ void CShredderManager::State(void)
 		{
 			m_state = STATE_MOVE;
 			m_nStateCnt = 0;
-			m_pShredder[0]->GetShredbinManager()->SetNum(0);
-			m_pShredder[1]->GetShredbinManager()->SetNum(0);
+			m_pShredder[TYPE_RED]->GetShredbinManager()->SetNum(NULL);
+			m_pShredder[TYPE_BLUE]->GetShredbinManager()->SetNum(NULL);
 		}
 		break;
 	}

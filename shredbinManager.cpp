@@ -12,6 +12,7 @@
 #include "shredbineffect.h"
 #include "input.h"
 #include "manager.h"
+#include "shreddermanager.h"
 
 //===============================
 // コンストラクタ
@@ -21,7 +22,10 @@ CShredbinManager::CShredbinManager()
 	m_pos = VECTOR3_NULL;
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
-	m_nNum = 0;
+	for (int nCnt = 0; nCnt < CShredderManager::TYPE_MAX; nCnt++)
+	{
+		m_nNum[nCnt] = 0;
+	}
 }
 
 //===============================
@@ -53,7 +57,7 @@ void CShredbinManager::Update(void)
 {
 	CInputKeyboard* pKey = CManager::GetInputKeyboard();
 
-	if (m_nNum > CShredbinEffect::GetNumAll())
+	if (m_nNum[m_nType] > CShredbinEffect::GetNum(m_nType))
 	{
 		D3DXCOLOR col = COLOR_NULL;
 		if (m_nType==0)

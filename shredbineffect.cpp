@@ -16,7 +16,7 @@
 #include "game.h"
 #include "shredder.h"
 
-int CShredbinEffect::m_nNumAll = 0;
+int CShredbinEffect::m_nNum[2] = {};
 
 //===============================
 // オーバーロードコンストラクタ
@@ -38,7 +38,6 @@ CShredbinEffect::CShredbinEffect(int nPriority) : CBillboard(nPriority)
 //===============================
 CShredbinEffect::~CShredbinEffect()
 {
-	m_nNumAll--;
 }
 
 //===============================
@@ -69,10 +68,19 @@ CShredbinEffect* CShredbinEffect::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DX
 	pEffect->m_shredMove = move;
 	pEffect->m_fRadius = fRadius;
 	pEffect->m_size = size;
-	pEffect->m_nIdx = m_nNumAll;
 	pEffect->m_nType = m_nType;
-	m_nNumAll++;
-
+	switch (m_nType)
+	{
+	case CShredderManager::TYPE_RED:
+		pEffect->m_nIdx = m_nNum[CShredderManager::TYPE_RED];
+		m_nNum[CShredderManager::TYPE_RED]++;
+		break;
+	case CShredderManager::TYPE_BLUE:
+		pEffect->m_nIdx = m_nNum[CShredderManager::TYPE_BLUE];
+		m_nNum[CShredderManager::TYPE_BLUE]++;
+		break;
+	}
+	
 	// エフェクトポインタを返す
 	return pEffect;
 }
@@ -141,10 +149,14 @@ void CShredbinEffect::Update(void)
 	CShredbinManager* pBinManager = pShredder->GetShredbinManager();
 
 	// 0以下の時
-	if (m_nIdx >= pBinManager->GetNumAll())
+	for (int nCnt = 0; nCnt < 2; nCnt++)
 	{
-		// 削除する
-		Uninit();
+		if (m_nIdx >= pBinManager->GetNumAll() && m_nType == nCnt)
+		{
+			m_nNum[nCnt]--;
+			// 削除する
+			Uninit();
+		}
 	}
 }
 //===============================

@@ -23,7 +23,8 @@ public:
 	typedef enum
 	{// Ží—Þ
 		TYPE_RED = 0,
-		TYPE_GREEN,
+		TYPE_BLUE,
+		TYPE_MAX
 	}TYPE;
 
 	typedef enum

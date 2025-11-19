@@ -74,4 +74,5 @@ private:
 	int m_nShake;
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
+	static constexpr int BIN_AMOUNT = 5;
 };
