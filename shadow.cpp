@@ -16,7 +16,7 @@
 //**********************
 namespace SHADOWINFO
 {
-	constexpr float SHADOW_SIZE = 30.0f; // ‰e‚Ì‘å‚«‚³
+	constexpr float SHADOW_SIZE = 25.0f; // ‰e‚Ì‘å‚«‚³
 }
 
 //=================================

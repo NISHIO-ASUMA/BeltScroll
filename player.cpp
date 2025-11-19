@@ -35,6 +35,7 @@
 #include "windparticle.h"
 #include "modeleffect.h"
 #include "goal.h"
+#include "shadow.h"
 
 //**********************
 // プレイヤー情報
@@ -91,6 +92,7 @@ CPlayer::CPlayer(int nPriority) : CObject(nPriority)
 	m_pShadowS = nullptr;
 	m_pStateMachine = nullptr;
 	m_pSphereCollider = nullptr;
+	m_pShadow = nullptr;
 
 	// フラグメント
 	m_isLanding = false;
@@ -162,13 +164,16 @@ HRESULT CPlayer::Init(void)
 		}
 	}
 	
-	// ステンシルシャドウ生成
-	m_pShadowS = CShadowS::Create
-	(
-		m_pos, 
-		m_rot
-	);
+	//// ステンシルシャドウ生成
+	//m_pShadowS = CShadowS::Create
+	//(
+	//	m_pos, 
+	//	m_rot
+	//);
 	
+	// 影ポリゴン
+	m_pShadow = CShadow::Create(m_pos, m_rot);
+
 	// ステートマシンを生成
 	m_pStateMachine = new CStateMachine;
 
@@ -452,11 +457,16 @@ void CPlayer::Update(void)
 	}
 
 	// ステンシルシャドウが存在
-	if (m_pShadowS)
+	//if (m_pShadowS)
+	//{
+	//	// オブジェクト設定
+	//	m_pShadowS->SetPos(D3DXVECTOR3(m_pos.x,0.0f,m_pos.z));
+	//	m_pShadowS->SetRot(m_rot); 
+	//}
+
+	if (m_pShadow)
 	{
-		// オブジェクト設定
-		m_pShadowS->SetPos(D3DXVECTOR3(m_pos.x,0.0f,m_pos.z));
-		m_pShadowS->SetRot(m_rot); 
+		m_pShadow->UpdatePos(D3DXVECTOR3(m_pos.x, 0.5f, m_pos.z));
 	}
 
 	// モーションの全体更新
