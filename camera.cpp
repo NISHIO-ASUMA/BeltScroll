@@ -65,7 +65,7 @@ CCamera::~CCamera()
 HRESULT CCamera::Init(void)
 {
 	// 初期値を設定する
-	m_pCamera.posV = D3DXVECTOR3(0.0f, 800.0f, -700.0f);		// カメラの位置
+	m_pCamera.posV = D3DXVECTOR3(0.0f, 800.0f, -850.0f);		// カメラの位置
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
 	m_pCamera.posRDest = VECTOR3_NULL;
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
