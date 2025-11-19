@@ -34,13 +34,13 @@ public:
 	void BoxUpdate(void);
 
 	// ゲッター
-	static int GetNumAll(void) { return m_nNumAll; }
+	static int GetNum(int nType) { return m_nNum[nType]; }
 
 	// 静的メンバ関数
 	static CShredbinEffect* Create(D3DXVECTOR3 pos, D3DXVECTOR3 move,D3DXVECTOR3 size, D3DXCOLOR col,float fRadius,int m_nType);
 
 private:
-	static int m_nNumAll;
+	static int m_nNum[2];
 	D3DXVECTOR3 m_oldPos;
 	D3DXVECTOR3 m_offsetPos;
 	D3DXVECTOR3 m_size;

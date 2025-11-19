@@ -203,7 +203,7 @@ void CShredder::InitModel(void)
 									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
 									"data/MODEL/STAGEOBJ/shredder(RED)frame.x");
 		break;
-	case CShredderManager::TYPE_GREEN:
+	case CShredderManager::TYPE_BLUE:
 		m_apModel[0] = CModel::Create(VECTOR3_NULL,
 									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
 									"data/MODEL/STAGEOBJ/shredder(BRUE)frame.x");
@@ -254,7 +254,7 @@ void CShredder::AddTrush(int nType)
 	if (m_nType == nType)
 	{
 		// ƒSƒ~—Ê‚ð‰ÁŽZ
-		m_nShredbin += 5;
+		m_nShredbin += BIN_AMOUNT;
 
 		// ƒRƒ“ƒ{‰ÁŽZ
 		CCombo::Add(100);
