@@ -126,11 +126,11 @@ void CShredder::Uninit(void)
 void CShredder::Update(void)
 {
 	// シュレッダーの更新
-	m_oldPos = m_pos;
+	m_oldPos = m_offsetPos;
 	m_offsetPos += m_move;
 
 	// コライダー座標の更新
-	m_pAABB->SetPos(m_pos);
+	m_pAABB->SetPos(m_offsetPos);
 	m_pAABB->SetOldPos(m_oldPos);
 
 	// モデルの更新

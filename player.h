@@ -22,6 +22,7 @@ class CInputKeyboard;
 class CJoyPad;
 class CCamera;
 class CShadowS;
+class CShadow;
 class CStateMachine;
 class CPlayerStateBase;
 class CAABBCollider;
@@ -131,6 +132,7 @@ private:
 	CModel* m_apModel[MAX_MODEL];	// 使うモデルのポインタ
 	CMotion* m_pMotion;				// モーションのポインタ
 	CShadowS* m_pShadowS;			// ステンシルシャドウクラスポインタ
+	CShadow* m_pShadow;				// 影ポリゴン
 	CStateMachine* m_pStateMachine;	// ステート基底クラスのポインタ
 	CSphereCollider* m_pSphereCollider; // 球のコライダー
 	CAABBCollider* m_pAAABB;		// 矩形のコライダー

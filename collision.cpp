@@ -230,14 +230,14 @@ bool CAABBAABBCollision::CollisionT(CAABBCollider* me, CAABBCollider* other, D3D
 	//==============================
 	if (MyPosOldMin.x < OtherPosMax.x && MyPosMax.x > OtherPosMin.x)
 	{
-		if (MyPosOldMax.z < OtherPosMin.z && MyPosMax.z > OtherPosMin.z)
+		if (MyPosOldMax.z <= OtherPosMin.z && MyPosMax.z > OtherPosMin.z)
 		{// 手前からめり込む
 
 			// 手前への押しだし座標を計算
 			pOutPos->z = OtherPosMin.z - MyHalfSize.z - 0.1f;
 			return true;
 		}
-		else if (MyPosOldMin.z > OtherPosMax.z && MyPosMin.z < OtherPosMax.z)
+		else if (MyPosOldMin.z >= OtherPosMax.z && MyPosMin.z < OtherPosMax.z)
 		{// 奥から手前にめり込む
 
 			// 奥側に押し出す座標を計算する

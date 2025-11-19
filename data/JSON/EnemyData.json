@@ -55,7 +55,7 @@
       {
          "idx": 3,
          "Type": 10,
-         "color": 0,
+         "color": 1,
          "mass": 0,
          "pos": [
             60.0,
@@ -72,7 +72,7 @@
       {
          "idx": 4,
          "Type": 10,
-         "color": 0,
+         "color": 1,
          "mass": 0,
          "pos": [
             130.0,
@@ -89,7 +89,7 @@
       {
          "idx": 5,
          "Type": 10,
-         "color": 0,
+         "color": 1,
          "mass": 0,
          "pos": [
             245.0,
@@ -106,7 +106,7 @@
       {
          "idx": 6,
          "Type": 10,
-         "color": 0,
+         "color": 1,
          "mass": 0,
          "pos": [
             300.0,

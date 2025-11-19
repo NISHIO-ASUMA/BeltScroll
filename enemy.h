@@ -78,6 +78,7 @@ public:
 
 private:
 	D3DXVECTOR3 m_move;		// 移動量
+	D3DXVECTOR3 m_oldPos;	// 過去座標
 	CShadowS* m_pShadowS;	// ステンシルシャドウ
 	CSphereCollider* m_pCollider; // コライダー
 	CAABBCollider* m_pAABB;	// 矩形のコライダー
