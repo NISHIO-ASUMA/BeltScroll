@@ -299,7 +299,7 @@ void CObjectX::DrawShaodow(void)
 	
 	// ïΩñ ìäâeç¿ïWÇê›íË
 	D3DXPLANE plane;
-	D3DXVECTOR3 point = VECTOR3_NULL;
+	D3DXVECTOR3 point = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
 	D3DXVECTOR3 normal = D3DXVECTOR3(0.0f, -0.5f, 0.0f);
 	D3DXPlaneFromPointNormal(&plane, &point, &normal);
 

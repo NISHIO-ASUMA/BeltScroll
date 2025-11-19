@@ -30,6 +30,7 @@
 CEnemy::CEnemy(int nPriority) : CObjectX(nPriority),
 m_move(VECTOR3_NULL),
 m_vSuckDir(VECTOR3_NULL),
+m_oldPos(VECTOR3_NULL),
 m_pShadowS(nullptr),
 m_pCollider(nullptr),
 m_pAABB(nullptr),
@@ -84,7 +85,7 @@ HRESULT CEnemy::Init(void)
 	m_pCollider = CSphereCollider::Create(GetPos(), 90.0f);
 
 	// 矩形コライダー生成
-	m_pAABB = CAABBCollider::Create(GetPos(), GetPos(), GetSize());
+	m_pAABB = CAABBCollider::Create(GetPos(), m_oldPos, GetSize());
 
 	// シャドウセット
 	SetShadow(true);
@@ -194,8 +195,14 @@ void CEnemy::Update(void)
 	
 	// 座標の更新
 	m_move.y -= 1.5f;
+	
+	// 過去の位置更新
+	m_oldPos = NowPos;
+
+	// 移動する
 	NowPos += m_move;
 
+	// 0以下なら
 	if (NowPos.y <= 0.0f) 
 		NowPos.y = 0.0f;
 
@@ -204,7 +211,9 @@ void CEnemy::Update(void)
 
 	// コライダー座標
 	m_pCollider->SetPos(NowPos);
+
 	m_pAABB->SetPos(NowPos);
+	m_pAABB->SetOldPos(m_oldPos);
 
 	// 取得
 	D3DXVECTOR3 UpdatePos = GetPos();
