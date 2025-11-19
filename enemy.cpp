@@ -122,7 +122,6 @@ void CEnemy::Uninit(void)
 //==============================
 void CEnemy::Update(void)
 {
-
 	// 現在シーン取得
 	CScene::MODE nMode = CManager::GetScene();
 	if (nMode != CScene::MODE_GAME) return;
@@ -139,7 +138,7 @@ void CEnemy::Update(void)
 	if (m_isSuck)
 	{
 		// 回転しながら中心に引き寄せられる
-		m_vSuckDir *= 1.1f; // 徐々に加速
+		m_vSuckDir *= 1.1f;			// 徐々に加速
 		NowPos += m_vSuckDir * 0.3f; // 吸い込み速度
 
 		// 回転
@@ -147,13 +146,16 @@ void CEnemy::Update(void)
 		rot.y += 0.35f;
 		rot.z += 0.15f;
 
+		// 適用
 		SetRot(rot);
 		SetPos(NowPos);
 
+		// コライダーの座標更新
 		m_pCollider->SetPos(NowPos);
 		m_pAABB->SetPos(NowPos);
 
-		if (D3DXVec3Length(&m_vSuckDir) > 90.0f) // 吸い込み終わり判定
+		// 吸い込み終わり判定
+		if (D3DXVec3Length(&m_vSuckDir) > 90.0f)
 		{
 			// エフェクト生成
 			CConfettiParticle::Create
@@ -163,6 +165,7 @@ void CEnemy::Update(void)
 				40, 150, 500, 40, -D3DX_PI * 0.5f
 			);
 
+			// 自身の消去
 			this->Uninit();
 
 			return;
@@ -193,7 +196,7 @@ void CEnemy::Update(void)
 		m_move = VECTOR3_NULL;
 	}
 	
-	// 座標の更新
+	// 重力値を適用
 	m_move.y -= 1.5f;
 	
 	// 過去の位置更新
@@ -209,9 +212,10 @@ void CEnemy::Update(void)
 	// 敵の座標をセット
 	SetPos(NowPos);
 
-	// コライダー座標
+	// 球形コライダー座標
 	m_pCollider->SetPos(NowPos);
 
+	// 矩形コライダー更新
 	m_pAABB->SetPos(NowPos);
 	m_pAABB->SetOldPos(m_oldPos);
 
