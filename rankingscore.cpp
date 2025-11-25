@@ -13,9 +13,6 @@
 #include <fstream>
 #include <algorithm>
 
-// 使用namespace
-using namespace NUMBERINFO;
-
 //===================================
 // コンストラクタ
 //===================================

@@ -34,20 +34,9 @@ namespace CAMERAINFO
 //=================================
 // コンストラクタ
 //=================================
-CCamera::CCamera()
+CCamera::CCamera() : m_pCamera{}
 {
 	// 値のクリア
-	m_pCamera.mtxprojection = {};
-	m_pCamera.mtxView = {};
-	m_pCamera.posR = VECTOR3_NULL;
-	m_pCamera.posV = VECTOR3_NULL;
-	m_pCamera.rot = VECTOR3_NULL;
-	m_pCamera.vecU = VECTOR3_NULL;
-	m_pCamera.posRDest = VECTOR3_NULL;
-	m_pCamera.fDistance = NULL;
-	m_pCamera.nMode = MODE_NONE;
-	m_pCamera.nUseKey = NULL;
-	m_pCamera.nCntAnim = NULL;
 	m_Zoom = VECTOR3_NULL;
 	m_bMove = false;
 	m_bPlayerInit = false;
@@ -309,10 +298,6 @@ void CCamera::PlayerFllow(void)
 		// ここで処理を返す
 		return;
 	}
-	if (PlayerCollisionScreen(pPlayer->GetPos()))
-	{
-
-	}
 
 	// 追従カメラ用に設定
 	m_pCamera.posRDest.x = pPlayer->GetPos().x + sinf(pPlayer->GetRotDest().y) * 1.0f;
@@ -375,22 +360,17 @@ void CCamera::Traking(void)
 	// 現在のモード取得
 	CScene::MODE nMode = CManager::GetScene();
 
-	if (nMode != CScene::MODE_GAME)
-	{
-		return;
-	}
+	if (nMode != CScene::MODE_GAME) return;
 
 	// プレイヤー取得
 	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
 
 	// nullptrチェック
-	if (pPlayer == nullptr)
-	{
-		// ここで処理を返す
-		return;
-	}
+	if (pPlayer == nullptr) return;
+
 	bool bLeft = TRAKING_LEFT == PlayerCollisionScreen(pPlayer->GetPos()) && pPlayer->GetPos().x < pPlayer->GetOldPos().x;
 	bool bRight = TRAKING_RIGHT == PlayerCollisionScreen(pPlayer->GetPos()) && pPlayer->GetPos().x > pPlayer->GetOldPos().x;
+
 	if (bLeft|| bRight)
 	{
 		// 追従カメラ用に設定

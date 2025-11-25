@@ -68,7 +68,6 @@ void CRanking::Update(void)
 
 		// ƒ^ƒCƒgƒ‹‘JˆÚ
 		pFade->SetFade(std::make_unique<CTitle>());
-
 		return;
 	}
 }

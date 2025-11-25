@@ -92,10 +92,7 @@ bool CGoal::CheckPos(D3DXVECTOR3 pos)
 	float fLength = D3DXVec3Length(&diffpos);
 
 	// ”ÍˆÍ“à‚ÌÀ•W‚É“ü‚Á‚Ä‚¢‚½‚ç
-	if (fLength < 120.0f)
-	{
-		return true;
-	}
+	if (fLength < 120.0f) return true;
 
 	// ”ÍˆÍŠO‚È‚ç
 	return false;

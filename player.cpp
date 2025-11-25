@@ -456,14 +456,7 @@ void CPlayer::Update(void)
 		m_move.y = 0.0f;
 	}
 
-	// ステンシルシャドウが存在
-	//if (m_pShadowS)
-	//{
-	//	// オブジェクト設定
-	//	m_pShadowS->SetPos(D3DXVECTOR3(m_pos.x,0.0f,m_pos.z));
-	//	m_pShadowS->SetRot(m_rot); 
-	//}
-
+	// 影更新
 	if (m_pShadow)
 	{
 		m_pShadow->UpdatePos(D3DXVECTOR3(m_pos.x, 0.5f, m_pos.z));

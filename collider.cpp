@@ -57,7 +57,6 @@ CSphereCollider* CSphereCollider::Create(D3DXVECTOR3 pos, float fRadius)
 
 	// 生成されたインスタンスを返す
 	return pSphereCollider;
-
 }
 
 //===============================

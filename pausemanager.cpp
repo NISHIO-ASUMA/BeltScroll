@@ -63,7 +63,7 @@ CPauseManager::~CPauseManager()
 HRESULT CPauseManager::Init(void)
 {
 	// 初期セレクト番号設定
-	m_nSelectIdx = CPause::MENU_RETRY;
+	m_nSelectIdx = CPause::MENU_CONTINUE;
 
 	// 基準座標を設定
 	D3DXVECTOR3 Bacepos = PAUSEMANAGEINFO::BACEPOS;
@@ -170,7 +170,7 @@ void CPauseManager::Update(void)
 			// カラー変更
 			if (nCnt == m_nSelectIdx)
 			{
-				m_pPause[nCnt]->SetFlash(NULL, PAUSEMANAGEINFO::FLASHFLAME,COLOR_YERROW);			// 点滅処理
+				m_pPause[nCnt]->SetFlash(NULL, PAUSEMANAGEINFO::FLASHFLAME,D3DCOLOR_RGBA(252,241,110,255));			// 点滅処理
 				m_pPause[nCnt]->SetSize(PAUSEMANAGEINFO::UPPERWIDTH, PAUSEMANAGEINFO::UPPERHEIGHT); // 少し大きくする
 			}
 			else
@@ -215,9 +215,6 @@ void CPauseManager::Update(void)
 //===========================
 void CPauseManager::SetEnablePause(void)
 {
-	// モード取得
-	CScene::MODE nMode = CManager::GetScene();
-
 	// Pキー or Start が押された
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_P) ||
 		CManager::GetJoyPad()->GetTrigger(CJoyPad::JOYKEY_START))

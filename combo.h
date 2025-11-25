@@ -34,6 +34,7 @@ public:
 
 	static void Add(int nScore);	// コンボ加算
 	static void Reset(void);		// コンボが途切れた時の設定
+	static void SetCurrentCombo(int nNum) { m_nCurrent = nNum; }
 	static int GetCombo(void) { return m_nCurrent; }// 現在のコンボ数情報取得
 
 	static void SetMaxCombo(const int nMax) { m_nMaxComboCount = nMax; } // 最大コンボのセット
@@ -43,12 +44,6 @@ private:
 
 	void Set(void);					// マルチテクスチャの設定
 	void SizeUpdate(void);
-	static CNumber* m_pNumber[2];	// ナンバーへのポインタ
-	static D3DXVECTOR2 m_numberSize;// ナンバーの大きさ
-	static int m_nCurrent;					// 現在のコンボ数
-	static int m_nTime;						// 継続時間
-	static int m_nScore;					// 現在のスコア
-	static int m_nMaxComboCount;			// 最大コンボカウント
 
 	static constexpr int maxNumber = 2;
 	static constexpr int maxTime = 1400;	// 最大時間
@@ -59,5 +54,13 @@ private:
 	static constexpr float deltaWidth = 1.5f;	// 横の大きさの変化量
 	static const D3DXCOLOR COMBO_ON;		// コンボ時の色
 	static const D3DXCOLOR COMBO_OFF;		// コンボしてないときの色
+
+	static CNumber* m_pNumber[maxNumber];	// ナンバーへのポインタ
+	static D3DXVECTOR2 m_numberSize;// ナンバーの大きさ
+	static int m_nCurrent;					// 現在のコンボ数
+	static int m_nTime;						// 継続時間
+	static int m_nScore;					// 現在のスコア
+	static int m_nMaxComboCount;			// 最大コンボカウント
+
 };
 #endif

@@ -275,6 +275,8 @@ void CEnemy::Update(void)
 			rot.x = (rand() % 360) * D3DX_PI / 180.0f;
 			rot.y = (rand() % 360) * D3DX_PI / 180.0f;
 			rot.z = (rand() % 360) * D3DX_PI / 180.0f;
+
+			// Šp“x“K—p
 			SetRot(rot);
 
 			return;

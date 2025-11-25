@@ -18,6 +18,7 @@
 #include "player.h"
 #include "score.h"
 #include "loseresult.h"
+#include "combo.h"
 
 //**************************
 // 定数空間
@@ -52,7 +53,8 @@ CGame::~CGame()
 //==================================
 HRESULT CGame::Init(void)
 {
-	CManager::GetCamera()->Init();		// カメラ初期化
+	// カメラ初期化
+	CManager::GetCamera()->Init();		
 
 	// ポーズマネージャー生成
 	m_pPausemanager = new CPauseManager;
@@ -72,6 +74,8 @@ HRESULT CGame::Init(void)
 
 	// 通常進行状態
 	m_nGametype = GAMESTATE_NORMAL;
+
+	CCombo::SetCurrentCombo(9);
 
 	// 初期化結果を返す
 	return S_OK;

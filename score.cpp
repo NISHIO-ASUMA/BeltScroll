@@ -130,8 +130,8 @@ void CScore::Update(void)
 	for (int nCntScore = 0; nCntScore < SCORE_NUM; nCntScore++)
 	{
 		// 桁数ごとに分割する値を計算
-		int nDigit = nScore % 10;
-		nScore /= 10;
+		int nDigit = nScore % NUMBERINFO::NUMBER_DIGIT_VALUE;
+		nScore /= NUMBERINFO::NUMBER_DIGIT_VALUE;
 
 		// 桁更新
 		m_pNumber[nCntScore]->SetDigit(nDigit);
