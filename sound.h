@@ -22,10 +22,12 @@ public:
 		SOUND_LABEL_TITLE_BGM,		// タイトルBGM
 		SOUND_LABEL_GAMEBGM,		// ゲームBGM
 		SOUND_LABEL_RESULTBGM,		// リザルトBGM
+		SOUND_LABEL_RESULTLOSEBGM,	// 負けリザルトBGM
 		SOUND_LABEL_TUTORIALBGM,	// チュートリアルBGM
 		SOUND_LABEL_RANKINGBGM,		// ランキングBGM
 		SOUND_LABEL_CLICKSE,		// 決定音
 		SOUND_LABEL_WIND,			// 風っぽい音
+		SOUND_LABEL_SELECTSE,		// 選択音
 		SOUND_LABEL_MAX
 	};
 
@@ -60,11 +62,13 @@ private:
 	{
 		{"data/BGM/Title001.wav", -1},		 // タイトルBGM
 		{"data/BGM/game_bgm.wav",-1},		 // ゲームBGM
-		{"data/BGM/Result.wav",-1},		 // リザルトBGM
+		{"data/BGM/Result.wav",-1},			 // リザルトBGM
+		{"data/BGM/result_lose.wav",-1},	 // 負けリザルトBGM
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
-		{"data/BGM/rankingbgm.wav",-1},		 // ランキングBGM
+		{"data/BGM/ranking_bgm.wav",-1},		 // ランキングBGM
 		{"data/SE/ClickEnter.wav",0},			 // 決定音
-		{"data/SE/Change.wav",0}
+		{"data/SE/Change.wav",0},
+		{"data/SE/select.wav",0},
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

@@ -45,7 +45,10 @@ HRESULT CLoseResult::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
 
 	// 負けリザルトプレイヤー生成
-	CLosePlayer::Create(VECTOR3_NULL);	
+	CLosePlayer::Create(VECTOR3_NULL);
+
+	//負けリザルトのBGM再生
+	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTLOSEBGM);
 		
 	return S_OK;
 }

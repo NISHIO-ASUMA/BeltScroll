@@ -137,6 +137,9 @@ void CPauseManager::Update(void)
 		// 最小値以下なら最小値に設定
 		if (m_nSelectIdx < SELECT_BEGIN)
 			m_nSelectIdx = SELECT_END;
+
+		// 選択音再生
+		pSound->PlaySound(CSound::SOUND_LABEL_SELECTSE);
 	}
 
 	// 下キー入力
@@ -148,6 +151,9 @@ void CPauseManager::Update(void)
 		// 最大値以上なら最大値に設定
 		if (m_nSelectIdx > SELECT_END)
 			m_nSelectIdx = SELECT_BEGIN;
+
+		// 選択音再生
+		pSound->PlaySound(CSound::SOUND_LABEL_SELECTSE);
 	}
 
 	// フェード取得
@@ -191,16 +197,19 @@ void CPauseManager::Update(void)
 
 		case CPause::MENU_RETRY:	// リトライ時
 			if (pFade != nullptr) pFade->SetFade(std::make_unique<CGame>());	// ゲームシーンに遷移
+			pSound->PlaySound(CSound::SOUND_LABEL_CLICKSE);		// 決定音再生
 			SetEnablePause(false);	// ポーズ終了
 
 			break;
 
 		case CPause::MENU_CONTINUE:	// コンテニュー時
+			pSound->PlaySound(CSound::SOUND_LABEL_CLICKSE);		// 決定音再生
 			SetEnablePause(false);	// ポーズ終了
 			break;
 
 		case CPause::MENU_QUIT:		// 退出時
 			if (pFade != nullptr) pFade->SetFade(std::make_unique <CTitle>());	// タイトルシーンに遷移
+			pSound->PlaySound(CSound::SOUND_LABEL_CLICKSE);		// 決定音再生
 			SetEnablePause(false);	// ポーズ終了
 
 			break;
