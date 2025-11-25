@@ -198,12 +198,12 @@ void CRankingScore::Load()
 	//****************************************************
 	// ここでゲームのスコアと比較して入れるかどうかを計算
 	//****************************************************
-	std::ifstream ScoreFile("data/SCORE/GameScore.txt");
+	std::ifstream ScoreFile("data/LastScore.txt");
 
 	if (!ScoreFile)
 	{
 		// 例外処理
-		MessageBox(GetActiveWindow(), "ファイルが開けません", "GameScore.txt", MB_OK);
+		MessageBox(GetActiveWindow(), "ファイルが開けません", "LastScore.txt", MB_OK);
 		return;
 	}
 

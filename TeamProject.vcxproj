@@ -164,7 +164,12 @@
     <ClCompile Include="confettieffect.cpp" />
     <ClCompile Include="confettiparticle.cpp" />
     <ClCompile Include="fan.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="shredderPanel.cpp" />
+=======
+    <ClCompile Include="resultenemy.cpp" />
+    <ClCompile Include="resultscoremanager.cpp" />
+>>>>>>> d89c679ed0afd2e9e08523bd6bac8b189c3d187f
     <ClCompile Include="titleenemymanager.cpp" />
     <ClCompile Include="tutorialmanager.cpp" />
     <ClCompile Include="debugproc.cpp" />
@@ -246,7 +251,12 @@
     <ClInclude Include="confettieffect.h" />
     <ClInclude Include="confettiparticle.h" />
     <ClInclude Include="fan.h" />
+<<<<<<< HEAD
     <ClInclude Include="shredderPanel.h" />
+=======
+    <ClInclude Include="resultenemy.h" />
+    <ClInclude Include="resultscoremanager.h" />
+>>>>>>> d89c679ed0afd2e9e08523bd6bac8b189c3d187f
     <ClInclude Include="titleenemymanager.h" />
     <ClInclude Include="tutorialmanager.h" />
     <ClInclude Include="debugproc.h" />
