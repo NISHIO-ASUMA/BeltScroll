@@ -16,11 +16,12 @@
 #include "meshfield.h"
 #include "ui.h"
 #include "resultscore.h"
+#include "resultenemy.h"
 
 //=================================
 // オーバーロードコンストラクタ
 //=================================
-CResult::CResult() : CScene(CScene::MODE_RESULT)
+CResult::CResult() : CScene(CScene::MODE_RESULT), m_pResultEnemy(nullptr)
 {
 
 }
@@ -52,6 +53,10 @@ HRESULT CResult::Init(void)
 	// リザルトのスコア生成
 	CResultScore::Create(D3DXVECTOR3(960.0f,525.0f,0.0f),200.0f,80.0f);
 
+	// 敵生成
+	//m_pResultEnemy = new CResultEnemy;
+	//m_pResultEnemy->Init();
+
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
 
@@ -63,7 +68,13 @@ HRESULT CResult::Init(void)
 //=================================
 void CResult::Uninit(void)
 {
-
+	// ポインタの破棄
+	if (m_pResultEnemy)
+	{
+		m_pResultEnemy->Uninit();
+		delete m_pResultEnemy;
+		m_pResultEnemy = nullptr;
+	}
 }
 //=================================
 // 更新処理
