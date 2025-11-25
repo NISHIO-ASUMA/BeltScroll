@@ -2,7 +2,10 @@
 //
 // リザルト用スコア処理 [ resultscore.cpp ]
 // Author: Asuma Nishio
-//
+// 
+// TODO : 演出つける,ボーナスと合成する
+// GameScore + BounsScore = AllScore
+// ナンバー配列が3つ必要
 //===========================================
 
 //**********************
@@ -12,9 +15,6 @@
 #include "number.h"
 #include <fstream>
 
-// 使用namespace
-using namespace NUMBERINFO;
-
 //=====================
 // コンストラクタ
 //=====================
@@ -22,9 +22,16 @@ CResultScore::CResultScore(int nPriority) : CObject(nPriority)
 {
 	// 値のクリア
 	m_pos = VECTOR3_NULL;
-	m_fHeight = 0.0f;
-	m_fWidth = 0.0f;
+	m_fHeight = NULL;
+	m_fWidth = NULL;
+	
 	m_nLoadScore = NULL;
+	m_nBounsScore = NULL;
+	m_nMassAllScore = NULL;
+
+	m_nAllScoreTime = NULL;
+	m_nBonusScoreTime = NULL;
+	m_nLoadScoreTime = NULL;
 
 	for (auto& number : m_pNumber)
 	{
@@ -64,7 +71,10 @@ CResultScore* CResultScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 HRESULT CResultScore::Init(void)
 {
 	// スコア読み込み
-	Load();
+	LoadAll();
+
+	// 最終スコア計算
+	MassLastScore(m_nLoadScore, m_nBounsScore);
 
 	// 横の分割幅を計算
 	float fTexPos = m_fWidth / RESULT_SCORE;
@@ -148,9 +158,18 @@ void CResultScore::Draw(void)
 	}
 }
 //=====================
-// 読み込み処理
+// 全スコア読み込み処理
 //=====================
-void CResultScore::Load(void)
+void CResultScore::LoadAll(void)
+{
+	// スコア関数呼び出し
+	CResultScore::LoadGameScore();
+	CResultScore::LoadBounsScore();
+}
+//=====================
+// ゲームスコア読み込み
+//=====================
+void CResultScore::LoadGameScore(void)
 {
 	// 開くファイルをセット
 	std::ifstream OpenFile("data/SCORE/GameScore.txt");
@@ -166,4 +185,47 @@ void CResultScore::Load(void)
 
 	// ファイルを閉じる
 	OpenFile.close();
+}
+//========================
+// ボーナススコア読み込み
+//========================
+void CResultScore::LoadBounsScore(void)
+{
+	// 開くファイルをセット
+	std::ifstream OpenFile("data/TrushScore.txt");
+	if (!OpenFile)
+	{
+		// 例外処理
+		MessageBox(GetActiveWindow(), "スコア読み込み失敗", "ファイルを開けません(TrushScore.txt)", MB_OK);
+		return;
+	}
+
+	// スコアを読み込む
+	OpenFile >> m_nBounsScore;
+
+	// ファイルを閉じる
+	OpenFile.close();
+}
+//=====================
+// 最終スコア計算関数
+//=====================
+void CResultScore::MassLastScore(const int nGameScore, const int nBounsScore)
+{
+	// 最終計算関数
+	m_nMassAllScore = nGameScore + nBounsScore;
+
+	// 外部ファイルに書き出す
+	std::ofstream OutFile("data/LastScore.txt");
+	if (!OutFile)
+	{
+		// 例外処理
+		MessageBox(GetActiveWindow(), "ファイルが開けません", "LastScore.txt", MB_OK);
+		return;
+	}
+
+	// 読み取ったデータをセット
+	OutFile << m_nMassAllScore << std::endl;
+
+	// ファイルを閉じる
+	OutFile.close();
 }
