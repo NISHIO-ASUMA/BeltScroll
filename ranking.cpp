@@ -41,13 +41,8 @@ HRESULT CRanking::Init(void)
 	// ランキングスコア生成
 	CRankingScore::Create(D3DXVECTOR3(850.0f, 180.0f, 0.0f), 250.0f, 40.0f);
 
-<<<<<<< HEAD
-	 //ランキングBGM再生
-	 CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);
-=======
 	// ランキングBGM再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);
->>>>>>> 54087a9929ffbb4fe53ac07ca0328c9f7b899fa2
 
 	// 初期化結果を返す
 	return S_OK;
