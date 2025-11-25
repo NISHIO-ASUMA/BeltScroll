@@ -26,6 +26,7 @@
 #include "combo.h"
 #include "trushbox.h"
 #include "score.h"
+#include "shredderPanel.h"
 
 //===============================
 // コンストラクタ

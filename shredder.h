@@ -21,6 +21,7 @@
 class CAABBCollider;
 class CModel;
 class CShredbinManager;
+class CShredderPanel;
 
 //***************************
 // シュレッダークラスを定義
@@ -41,6 +42,7 @@ public:
 
 	void InitModel(void);
 	void UpdateModel(void);
+	void UpdatePanel(void);
 
 	void SetPos(D3DXVECTOR3 pos) { m_pos = pos; };
 	void SetPosZ(float posZ);
@@ -48,6 +50,7 @@ public:
 	void State(void);
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 	void Shake(void);
+	void SetPanel(void);
 
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
@@ -74,5 +77,12 @@ private:
 	int m_nShake;
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
+	CShredderPanel* m_pPanel[9];
 	static constexpr int BIN_AMOUNT = 5;
+	static constexpr float PANEL_OFFSET_X = 65.0f;
+	static constexpr float PANEL_OFFSET_Y00 = 150.0f;
+	static constexpr float PANEL_OFFSET_Y01 = 50.0f;
+	static constexpr float PANEL_OFFSET_Y02 = -50.0f;
+	static constexpr float PANEL_OFFSET_Z00 = 100.0f;
+	static constexpr float PANEL_OFFSET_Z01 = 200.0f;
 };
