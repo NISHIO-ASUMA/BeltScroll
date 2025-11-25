@@ -42,7 +42,7 @@ HRESULT CRanking::Init(void)
 	CRankingScore::Create(D3DXVECTOR3(850.0f, 180.0f, 0.0f), 250.0f, 40.0f);
 
 	// ƒ‰ƒ“ƒLƒ“ƒOBGMÄ¶
-	// CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);
+	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RANKINGBGM);
 
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;

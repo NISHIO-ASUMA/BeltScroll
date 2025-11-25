@@ -165,6 +165,7 @@
     <ClCompile Include="confettiparticle.cpp" />
     <ClCompile Include="fan.cpp" />
     <ClCompile Include="resultenemy.cpp" />
+    <ClCompile Include="resultscoremanager.cpp" />
     <ClCompile Include="titleenemymanager.cpp" />
     <ClCompile Include="tutorialmanager.cpp" />
     <ClCompile Include="debugproc.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="confettiparticle.h" />
     <ClInclude Include="fan.h" />
     <ClInclude Include="resultenemy.h" />
+    <ClInclude Include="resultscoremanager.h" />
     <ClInclude Include="titleenemymanager.h" />
     <ClInclude Include="tutorialmanager.h" />
     <ClInclude Include="debugproc.h" />

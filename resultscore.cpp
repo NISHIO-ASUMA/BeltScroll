@@ -3,9 +3,6 @@
 // リザルト用スコア処理 [ resultscore.cpp ]
 // Author: Asuma Nishio
 // 
-// TODO : 演出つける,ボーナスと合成する
-// GameScore + BounsScore = AllScore
-// ナンバー配列が3つ必要
 //===========================================
 
 //**********************
@@ -14,6 +11,7 @@
 #include "resultscore.h"
 #include "number.h"
 #include <fstream>
+#include "easing.h"
 
 //=====================
 // コンストラクタ
@@ -29,9 +27,13 @@ CResultScore::CResultScore(int nPriority) : CObject(nPriority)
 	m_nBounsScore = NULL;
 	m_nMassAllScore = NULL;
 
-	m_nAllScoreTime = NULL;
-	m_nBonusScoreTime = NULL;
-	m_nLoadScoreTime = NULL;
+	m_nCurrentScore = NULL;	// 今の表示スコア
+	m_nStartScore = NULL;	// 開始時のスコア
+	m_nTargetScore = NULL;	// ゴールのスコア
+	m_nTimer = NULL;		// 経過フレーム
+	m_nDuration = NULL;		// 目的の時間
+
+	nType = NULL;
 
 	for (auto& number : m_pNumber)
 	{
@@ -48,7 +50,7 @@ CResultScore::~CResultScore()
 //=====================
 // 生成処理
 //=====================
-CResultScore* CResultScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
+CResultScore* CResultScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight,int nType)
 {
 	// インスタンス生成
 	CResultScore* presult = new CResultScore;
@@ -58,7 +60,8 @@ CResultScore* CResultScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 	presult->m_pos = pos;
 	presult->m_fHeight = fHeight;
 	presult->m_fWidth = fWidth;
-	
+	presult->nType = nType;
+
 	// 初期化失敗時
 	if (FAILED(presult->Init())) 	return nullptr;
 
@@ -70,12 +73,6 @@ CResultScore* CResultScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 //=====================
 HRESULT CResultScore::Init(void)
 {
-	// スコア読み込み
-	LoadAll();
-
-	// 最終スコア計算
-	MassLastScore(m_nLoadScore, m_nBounsScore);
-
 	// 横の分割幅を計算
 	float fTexPos = m_fWidth / RESULT_SCORE;
 
@@ -121,6 +118,7 @@ void CResultScore::Uninit(void)
 		}
 	}
 
+	// 自身の破棄
 	CObject::Release();
 }
 //=====================
@@ -128,8 +126,63 @@ void CResultScore::Uninit(void)
 //=====================
 void CResultScore::Update(void)
 {
+	// 種類に応じた更新
+	switch (nType)
+	{
+	case SCORE_GAME:
+		UpdateGameScore();
+		break;
+
+	case SCORE_BONUS:
+		UpdateBounsScore();
+		break;
+
+	case SCORE_ALL:
+		UpdateLastScore();
+		break;
+
+	default:
+		break;
+	}
+}
+//=====================
+// 描画処理
+//=====================
+void CResultScore::Draw(void)
+{
+	// ナンバーオブジェクト描画
+	for (int nCnt = 0; nCnt < RESULT_SCORE; nCnt++)
+	{
+		// ナンバー描画
+		m_pNumber[nCnt]->Draw();
+	}
+}
+//=====================
+// ゲームスコア更新
+//=====================
+void CResultScore::UpdateGameScore(void)
+{
+	// まだアニメ中
+	if (m_nTimer < m_nDuration)
+	{
+		// イージング適用s
+		float t = CEasing::SetEase(m_nTimer, m_nDuration);
+		float rate = CEasing::EaseOutCubic(t);
+
+		// 現在スコア = 開始 + (目標 - 開始) * イージング補間
+		m_nCurrentScore = m_nStartScore + (int)((m_nLoadScore - m_nStartScore) * rate);
+
+		// 加算
+		m_nTimer++;
+	}
+	else
+	{
+		// 現在スコアに設定
+		m_nCurrentScore = m_nLoadScore;
+	}
+
 	// 桁数更新
-	int nScore = m_nLoadScore;
+	int nScore = m_nCurrentScore;
 
 	// 八桁分
 	for (int nCntScore = 0; nCntScore < RESULT_SCORE; nCntScore++)
@@ -146,74 +199,93 @@ void CResultScore::Update(void)
 	}
 }
 //=====================
-// 描画処理
+// ボーナススコア更新
 //=====================
-void CResultScore::Draw(void)
+void CResultScore::UpdateBounsScore(void)
 {
-	// ナンバーオブジェクト描画
-	for (int nCnt = 0; nCnt < RESULT_SCORE; nCnt++)
+	// まだアニメ中
+	if (m_nTimer < m_nDuration)
 	{
-		// ナンバー描画
-		m_pNumber[nCnt]->Draw();
+		// イージング適用s
+		float t = CEasing::SetEase(m_nTimer, m_nDuration);
+		float rate = CEasing::EaseOutCubic(t);
+
+		// 現在スコア = 開始 + (目標 - 開始) * イージング補間
+		m_nCurrentScore = m_nStartScore + (int)((m_nBounsScore - m_nStartScore) * rate);
+
+		// 加算
+		m_nTimer++;
+	}
+	else
+	{
+		// 現在スコアに設定
+		m_nCurrentScore = m_nBounsScore;
+	}
+
+	// 桁数更新
+	int nScore = m_nCurrentScore;
+
+	// 八桁分
+	for (int nCntScore = 0; nCntScore < RESULT_SCORE; nCntScore++)
+	{
+		// 桁数ごとに分割する値を計算
+		int nDigit = nScore % NUMBERINFO::NUMBER_DIGIT_VALUE;
+		nScore /= NUMBERINFO::NUMBER_DIGIT_VALUE;
+
+		// 更新
+		m_pNumber[nCntScore]->Update();
+
+		// 桁更新
+		m_pNumber[nCntScore]->SetDigit(nDigit);
 	}
 }
 //=====================
-// 全スコア読み込み処理
+// 最終スコア更新
 //=====================
-void CResultScore::LoadAll(void)
+void CResultScore::UpdateLastScore(void)
 {
-	// スコア関数呼び出し
-	CResultScore::LoadGameScore();
-	CResultScore::LoadBounsScore();
-}
-//=====================
-// ゲームスコア読み込み
-//=====================
-void CResultScore::LoadGameScore(void)
-{
-	// 開くファイルをセット
-	std::ifstream OpenFile("data/SCORE/GameScore.txt");
-	if (!OpenFile)
+	// まだアニメ中
+	if (m_nTimer < m_nDuration)
 	{
-		// 例外処理
-		MessageBox(GetActiveWindow(), "ファイルが開けません", "リザルトスコア読み込み", MB_OK);
-		return;
+		// イージング適用s
+		float t = CEasing::SetEase(m_nTimer, m_nDuration);
+		float rate = CEasing::EaseOutCubic(t);
+
+		// 現在スコア = 開始 + (目標 - 開始) * イージング補間
+		m_nCurrentScore = m_nStartScore + (int)((m_nMassAllScore - m_nStartScore) * rate);
+
+		// 加算
+		m_nTimer++;
+	}
+	else
+	{
+		// 現在スコアに設定
+		m_nCurrentScore = m_nMassAllScore;
 	}
 
-	// 読み取ったデータをセット
-	OpenFile >> m_nLoadScore;
+	// 桁数更新
+	int nScore = m_nCurrentScore;
 
-	// ファイルを閉じる
-	OpenFile.close();
-}
-//========================
-// ボーナススコア読み込み
-//========================
-void CResultScore::LoadBounsScore(void)
-{
-	// 開くファイルをセット
-	std::ifstream OpenFile("data/TrushScore.txt");
-	if (!OpenFile)
+	// 八桁分
+	for (int nCntScore = 0; nCntScore < RESULT_SCORE; nCntScore++)
 	{
-		// 例外処理
-		MessageBox(GetActiveWindow(), "スコア読み込み失敗", "ファイルを開けません(TrushScore.txt)", MB_OK);
-		return;
+		// 桁数ごとに分割する値を計算
+		int nDigit = nScore % NUMBERINFO::NUMBER_DIGIT_VALUE;
+		nScore /= NUMBERINFO::NUMBER_DIGIT_VALUE;
+
+		// 更新
+		m_pNumber[nCntScore]->Update();
+
+		// 桁更新
+		m_pNumber[nCntScore]->SetDigit(nDigit);
 	}
-
-	// スコアを読み込む
-	OpenFile >> m_nBounsScore;
-
-	// ファイルを閉じる
-	OpenFile.close();
 }
-//=====================
-// 最終スコア計算関数
-//=====================
-void CResultScore::MassLastScore(const int nGameScore, const int nBounsScore)
-{
-	// 最終計算関数
-	m_nMassAllScore = nGameScore + nBounsScore;
 
+//=====================
+// 最終スコア書き出し
+//=====================
+void CResultScore::WriteScore(void)
+{
 	// 外部ファイルに書き出す
 	std::ofstream OutFile("data/LastScore.txt");
 	if (!OutFile)
