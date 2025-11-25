@@ -21,6 +21,7 @@
 #include "shredbinmanager.h"
 #include "combo.h"
 #include "score.h"
+#include "shredderPanel.h"
 
 //===============================
 // コンストラクタ
@@ -45,6 +46,10 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 
 	m_pAABB = nullptr;
 	m_pShredbinManager = nullptr;
+	for (int nCnt = 0; nCnt < 9; nCnt++)
+	{
+		m_pPanel[nCnt] = nullptr;
+	}
 }
 //===============================
 // デストラクタ
@@ -90,6 +95,10 @@ HRESULT CShredder::Init(void)
 	m_pShredbinManager->SetMove(D3DXVECTOR3(1.0f,0.0f,0.0f));
 	m_pShredbinManager->SetType(m_nType);
 	m_pShredbinManager->Init();
+	for (int nCnt = 0; nCnt < 9; nCnt++)
+	{
+		m_pPanel[nCnt] = CShredderPanel::Create(m_pos,m_nType);
+	}
 
 	return S_OK;
 }
@@ -140,6 +149,8 @@ void CShredder::Update(void)
 	}
 
 	UpdateModel();
+
+	UpdatePanel();
 
 	// 間違えたら揺れる
 	Shake();
@@ -201,12 +212,12 @@ void CShredder::InitModel(void)
 	case CShredderManager::TYPE_RED:
 		m_apModel[0] = CModel::Create(VECTOR3_NULL, 
 									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-									"data/MODEL/STAGEOBJ/shredder(RED)frame.x");
+									"data/MODEL/STAGEOBJ/shredderSumple.x");
 		break;
 	case CShredderManager::TYPE_BLUE:
 		m_apModel[0] = CModel::Create(VECTOR3_NULL,
 									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-									"data/MODEL/STAGEOBJ/shredder(BRUE)frame.x");
+									"data/MODEL/STAGEOBJ/shredderSumple.x");
 		break;
 	}
 
@@ -220,7 +231,7 @@ void CShredder::InitModel(void)
 }
 
 //===============================
-// パーツの動き更新y
+// パーツの動き更新
 //===============================
 void CShredder::UpdateModel(void)
 {
@@ -288,4 +299,45 @@ void CShredder::Shake(void)
 		m_pos = m_offsetPos;
 	}
 	m_nShake--;
+}
+
+//===============================
+// パネルの位置設定
+//===============================
+void CShredder::SetPanel(void)
+{
+	float fX = m_pos.x + PANEL_OFFSET_X;
+	m_pPanel[0]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z));
+	m_pPanel[1]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z - PANEL_OFFSET_Z00));
+	m_pPanel[2]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z + PANEL_OFFSET_Z00));
+	m_pPanel[3]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z - PANEL_OFFSET_Z01));
+	m_pPanel[4]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[5]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z - PANEL_OFFSET_Z01));
+	m_pPanel[6]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[7]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z - PANEL_OFFSET_Z01));
+	m_pPanel[8]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z + PANEL_OFFSET_Z01));
+}
+
+//===============================
+// パネルの更新
+//===============================
+void CShredder::UpdatePanel(void)
+{
+	SetPanel();
+	int swapCnt = CGame::GetGameManager()->GetShredderM()->GetSwapCnt();
+	
+	if (swapCnt > 400)
+	{// スワップしそうになったら点滅
+		for (int nCnt = 0; nCnt < 9; nCnt++)
+		{
+			m_pPanel[nCnt]->SetState(CShredderPanel::STATE_FLASH);
+		}
+	}
+	else
+	{// 通常状態
+		for (int nCnt = 0; nCnt < 9; nCnt++)
+		{
+			m_pPanel[nCnt]->SetState(CShredderPanel::STATE_NORMAL);
+		}
+	}
 }

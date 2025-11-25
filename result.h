@@ -13,6 +13,12 @@
 //**************************
 #include "scene.h"
 
+//**************************
+// 前方宣言
+//**************************
+class CResultEnemy;
+class CResultScoreManager;
+
 //*****************************
 // リザルトシーンクラスを定義
 //*****************************
@@ -30,6 +36,9 @@ public:
 	void Draw(void);
 
 private:
+
+	CResultEnemy* m_pResultEnemy; // リザルトの敵クラス
+	CResultScoreManager* m_pResultScoreManager; // スコア管理クラス
 };
 
 #endif

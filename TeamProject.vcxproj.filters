@@ -255,6 +255,15 @@
     <ClCompile Include="fan.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="shredderPanel.cpp">
+		<Filter>ソース ファイル</Filter>
+	</ClCompile>
+    <ClCompile Include="resultenemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="resultscoremanager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h">
@@ -494,6 +503,15 @@
     <ClInclude Include="fan.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="shredderPanel.h">
+		<Filter>ヘッダー ファイル</Filter>
+	</ClInclude>
+    <ClInclude Include="resultenemy.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="resultscoremanager.h">
+		<Filter>ヘッダー ファイル</Filter>
+	</ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TeamProject.rc">

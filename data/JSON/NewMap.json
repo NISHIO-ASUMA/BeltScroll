@@ -1,5 +1,5 @@
 {
-   "AllObject": 58,
+   "AllObject": 60,
    "SetObjects": [
       {
          "idx": 0,
@@ -1141,25 +1141,66 @@
          "Flags": true,
          "filepath": "data/MODEL/STAGEOBJ/fan.x"
       },
-      {
-         "idx": 57,
-         "pos": [
-            -484.2900085449219,
-            244.0,
-            -228.19000244140625
-         ],
-         "rot": [
-            0.0,
-            3.130000114440918,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": false,
-         "filepath": "data/MODEL/STAGEOBJ/fan.x"
-      }
+    {
+      "idx": 57,
+      "pos": [
+        -484.2900085449219,
+        244.0,
+        -228.19000244140625
+      ],
+      "rot": [
+        0.0,
+        3.130000114440918,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": false,
+      "filepath": "data/MODEL/STAGEOBJ/fan.x"
+    },
+    {
+      "idx": 58,
+      "pos": [
+        -850.52001953125,
+        -316.0,
+        -560.9199829101563
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "Flags": false,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 59,
+      "pos": [
+        6100.52001953125,
+        -322.0,
+        -560.9199829101563
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "Flags": false,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    }
+
    ]
 }

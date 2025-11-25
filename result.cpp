@@ -16,11 +16,13 @@
 #include "meshfield.h"
 #include "ui.h"
 #include "resultscore.h"
+#include "resultenemy.h"
+#include "resultscoremanager.h"
 
 //=================================
 // オーバーロードコンストラクタ
 //=================================
-CResult::CResult() : CScene(CScene::MODE_RESULT)
+CResult::CResult() : CScene(CScene::MODE_RESULT), m_pResultEnemy(nullptr), m_pResultScoreManager(nullptr)
 {
 
 }
@@ -44,13 +46,21 @@ HRESULT CResult::Init(void)
 	CWinPlayer::Create(VECTOR3_NULL);
 
 	// メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 3100.0f, 2000.0f, 1, 1);
 
 	// UI生成
 	CUi::Create(D3DXVECTOR3(260.0f, 525.0f, 0.0f), 0, 180.0f, 60.0f, "score_logo_result.png", false);
 
 	// リザルトのスコア生成
-	CResultScore::Create(D3DXVECTOR3(960.0f,525.0f,0.0f),200.0f,80.0f);
+	// CResultScore::Create(D3DXVECTOR3(960.0f,525.0f,0.0f),200.0f,80.0f);
+
+	// 敵生成
+	m_pResultEnemy = new CResultEnemy;
+	m_pResultEnemy->Init();
+
+	// 管理クラス生成
+	m_pResultScoreManager = new CResultScoreManager;
+	m_pResultScoreManager->Init();
 
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
@@ -63,20 +73,32 @@ HRESULT CResult::Init(void)
 //=================================
 void CResult::Uninit(void)
 {
+	// ポインタの破棄
+	if (m_pResultEnemy)
+	{
+		m_pResultEnemy->Uninit();
+		delete m_pResultEnemy;
+		m_pResultEnemy = nullptr;
+	}
 
+	// ポインタの破棄
+	if (m_pResultScoreManager)
+	{
+		m_pResultScoreManager->Uninit();
+		delete m_pResultScoreManager;
+		m_pResultScoreManager = nullptr;
+	}
 }
 //=================================
 // 更新処理
 //=================================
 void CResult::Update(void)
 {
-	// キー入力で遷移
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN))
+	// 管理クラスの更新処理
+	if (m_pResultScoreManager)
 	{
-		// ランキング
-		CManager::GetFade()->SetFade(std::make_unique<CRanking>());
+		m_pResultScoreManager->Update();
 
-		return;
 	}
 }
 //=================================

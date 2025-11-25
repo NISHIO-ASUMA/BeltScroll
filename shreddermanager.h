@@ -50,6 +50,7 @@ public:
 	CShredder* GetShredder(const int nIdx) { return m_pShredder[nIdx]; }
 	STATE GetState(void) { return m_state; }
 	D3DXVECTOR3 GetTrushBoxPos(void);
+	int GetSwapCnt(void) { return m_nSwapCnt; }
 
 private:
 	CShredder* m_pShredder[2];	// ポインタ
@@ -60,7 +61,7 @@ private:
 	STATE m_state;				// 状態
 	int m_trushBoxCnt;			// ごみステーションのカウント
 
-	static constexpr int SWAPCOUNT = 300;
+	static constexpr int SWAPCOUNT = 600;
 	static constexpr int LAST_TRASH_NUMBER = 2;
 	static constexpr float FIXED_Z00 = -250.0f;
 	static constexpr float FIXED_Z01 = 250.0f;

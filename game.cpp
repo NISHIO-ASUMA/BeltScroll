@@ -75,8 +75,6 @@ HRESULT CGame::Init(void)
 	// ’Êíisó‘Ô
 	m_nGametype = GAMESTATE_NORMAL;
 
-	CCombo::SetCurrentCombo(9);
-
 	// ‰Šú‰»Œ‹‰Ê‚ğ•Ô‚·
 	return S_OK;
 }

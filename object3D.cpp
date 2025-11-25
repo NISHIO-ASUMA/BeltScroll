@@ -48,7 +48,7 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos,const char * pFileName)
 
 	// オブジェクト設定
 	pObj3D->SetPos(pos);
-	pObj3D->SetTexture(pFileName);
+	//pObj3D->SetTexture(pFileName);
 
 	// 初期化処理失敗時
 	if (FAILED(pObj3D->Init()))
@@ -152,7 +152,7 @@ void CObject3D::Update(void)
 	pVtx[0].col = 
 	pVtx[1].col = 
 	pVtx[2].col = 
-	pVtx[3].col = COLOR_WHITE;
+	pVtx[3].col = m_col;
 
 	// テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
