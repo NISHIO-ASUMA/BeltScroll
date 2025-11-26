@@ -50,9 +50,9 @@ HRESULT CResultScoreManager::Init(void)
 	Load();
 
 	// スコアを生成する
-	m_pResultScore[info.GAME] = CResultScore::Create(D3DXVECTOR3(1120.0f, 260.0f, 0.0f), 270.0f, 50.0f, 0); // ゲームスコア
-	m_pResultScore[info.BONUS] = CResultScore::Create(D3DXVECTOR3(1120.0f, 415.0f, 0.0f), 270.0f, 50.0f, 1); // ボーナススコア
-	m_pResultScore[info.ALL] = CResultScore::Create(D3DXVECTOR3(1120.0f, 600.0f, 0.0f), 300.0f, 60.0f, 2); // 合計スコア
+	m_pResultScore[info.GAME] = CResultScore::Create(D3DXVECTOR3(1225.0f, 150.0f, 0.0f), 240.0f, 40.0f, 0); // ゲームスコア
+	m_pResultScore[info.BONUS] = CResultScore::Create(D3DXVECTOR3(1225.0f,380.0f, 0.0f), 240.0f, 40.0f, 1); // ボーナススコア
+	m_pResultScore[info.ALL] = CResultScore::Create(D3DXVECTOR3(1225.0f,  660.0f, 0.0f), 270.0f, 55.0f, 2); // 合計スコア
 
 	// ゲームスコアをセットする
 	m_pResultScore[info.GAME]->SetGameScore(m_nGameScore);

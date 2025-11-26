@@ -43,13 +43,18 @@ HRESULT CResult::Init(void)
 	pCamera->Init();
 
 	// 勝利プレイヤー生成
-	CWinPlayer::Create(VECTOR3_NULL);
+	CWinPlayer::Create(D3DXVECTOR3(80.0f,0.0f,-450.0f));
 
+	// プレイヤーの右側にゴミ箱設置
+	// 
+
+	// そこにパーティクル生成
+	
 	// メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 3100.0f, 2000.0f, 1, 1);
 
 	// UI生成
-	CUi::Create(D3DXVECTOR3(260.0f, 525.0f, 0.0f), 0, 180.0f, 60.0f, "score_logo_result.png", false);
+	CUi::Create(D3DXVECTOR3(1050.0f, 360.0f, 0.0f), 0, 360.0f, 720.0f, "backboard.png", false);
 
 	// リザルトのスコア生成
 	// CResultScore::Create(D3DXVECTOR3(960.0f,525.0f,0.0f),200.0f,80.0f);
