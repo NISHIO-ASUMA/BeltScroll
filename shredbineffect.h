@@ -19,6 +19,13 @@
 class CShredbinEffect : public CBillboard
 {
 public:
+	typedef enum
+	{
+		STATE_NORMAL = 0,
+		STATE_ENTRANCE,
+		STATE_EXIT,
+		STATE_MAX
+	}STATE;
 	// コンストラクタ・デストラクタ
 	CShredbinEffect(int nPriority = static_cast<int>(CObject::PRIORITY::EFFECT));
 	~CShredbinEffect();
@@ -50,6 +57,9 @@ private:
 	D3DXVECTOR3 m_move;					// 移動量
 	D3DXVECTOR3 m_shredMove;			// シュレッダーの移動速度
 	bool m_bBox;						// ボックス状態初期化用のフラグ
+	int m_nState;						// 状態
+	bool m_bExit;						// 出口
+	int m_nEntranceCnt;
 };
 
 #endif

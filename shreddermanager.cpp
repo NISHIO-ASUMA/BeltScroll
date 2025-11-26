@@ -18,7 +18,7 @@
 // 静的メンバ変数初期化
 //******************************
 const D3DXVECTOR3 CShredderManager::HOSE_ENTRANCE_OFFSET = D3DXVECTOR3(-70.0f,80.0f,0.0f);
-const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(0.0f, -100.0f, 100.0f);
+const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(90.0f, -80.0f, -40.0f);
 
 //===============================
 // コンストラクタ
