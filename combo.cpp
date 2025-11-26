@@ -47,7 +47,7 @@ CCombo::~CCombo()
 //*****************
 HRESULT CCombo::Init(void)
 {
-	m_nCurrent = 99;
+	m_nCurrent = 0;
 
 	return S_OK;
 }
