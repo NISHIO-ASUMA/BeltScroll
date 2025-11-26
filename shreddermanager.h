@@ -13,6 +13,7 @@
 //**************************
 class CShredder;
 class CShredbinManager;
+class CObjectX;
 
 //******************************
 // シュレッダー管理クラスを定義
@@ -45,15 +46,18 @@ public:
 	void Swap(void);
 	void State(void);
 	void TrushBox(void);
+	void UpdateHose(void);
 
 	// ゲッター
 	CShredder* GetShredder(const int nIdx) { return m_pShredder[nIdx]; }
 	STATE GetState(void) { return m_state; }
 	D3DXVECTOR3 GetTrushBoxPos(void);
+	D3DXVECTOR3 GetHosePos(bool bExit);
 	int GetSwapCnt(void) { return m_nSwapCnt; }
 
 private:
 	CShredder* m_pShredder[2];	// ポインタ
+	CObjectX* m_pHose;			// ポインタ
 	int m_nSwapCnt;				// 入れ替えるカウント
 	int m_nStateCnt;			// 状態管理のカウント
 	bool m_bRedFlont;			// 赤いほうが手前にあるか
@@ -70,6 +74,8 @@ private:
 	static constexpr float DUSTBOX_X01 = 100.0f;
 	static constexpr float DUSTBOX_X02 = 300.0f;
 
+	static const D3DXVECTOR3 HOSE_ENTRANCE_OFFSET;
+	static const D3DXVECTOR3 HOSE_EXIT_OFFSET;
 };
 
 #endif

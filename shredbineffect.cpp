@@ -261,7 +261,7 @@ void CShredbinEffect::BoxUpdate(void)
 
 	// À•W,ƒJƒ‰[Žæ“¾
 	D3DXVECTOR3 effectPos = GetPos();
-	D3DXVECTOR3 posDest = CGame::GetGameManager()->GetShredderM()->GetTrushBoxPos();
+	D3DXVECTOR3 posDest = CGame::GetGameManager()->GetShredderM()->GetHosePos(false);
 
 	D3DXVECTOR3 vec = (posDest - effectPos);
 
