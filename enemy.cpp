@@ -257,6 +257,7 @@ void CEnemy::Update(void)
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 		auto pShredder = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt);
 
+		if (pShredder->GetStop())return;
 		if (Collision(ShredderCol))
 		{
 			m_isSuck = true;
