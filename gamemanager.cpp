@@ -79,9 +79,6 @@ HRESULT CGameManager::Init(void)
 	m_pGoalManager = new CGoalManager;
 	m_pGoalManager->Init();
 
-	// ƒS[ƒ‹¶¬
-	m_pGoal = CGoal::Create(D3DXVECTOR3(5560.0f,90.0f,0.0f),"data/MODEL/STAGEOBJ/Goal.x");
-
 	// ƒTƒCƒŒƒ“¶¬
 	m_pSiren = CSiren::Create(D3DXVECTOR3(5510.0f, 15.0f, 20.0f));
 
