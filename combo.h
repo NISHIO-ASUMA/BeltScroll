@@ -45,9 +45,9 @@ private:
 	void Set(void);					// マルチテクスチャの設定
 	void SizeUpdate(void);
 
-	static constexpr int maxNumber = 2;
+	static constexpr int maxNumber = 3;
 	static constexpr int maxTime = 1400;	// 最大時間
-	static constexpr float offsetX = 35.0f;	// オフセット
+	static constexpr float offsetX = 70.0f;	// オフセット
 	static constexpr float maxHeight = 60.0f;	// 最大の縦の大きさ
 	static constexpr float maxWidth = 30.0f;	// 最大の横の大きさ
 	static constexpr float deltaHeight = 3.0f;	// 縦の大きさの変化量

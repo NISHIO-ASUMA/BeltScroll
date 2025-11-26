@@ -47,7 +47,7 @@ CCombo::~CCombo()
 //*****************
 HRESULT CCombo::Init(void)
 {
-	m_nCurrent = 0;
+	m_nCurrent = 99;
 
 	return S_OK;
 }
@@ -111,7 +111,8 @@ CCombo* CCombo::Create(D3DXVECTOR3 pos)
 		pCombo->m_pNumber[nCnt] = new CNumber;
 	}
 	m_pNumber[0]->Init(D3DXVECTOR3(pos.x + offsetX, pos.y, 0.0f), 0.0f, 0.0f);
-	m_pNumber[1]->Init(D3DXVECTOR3(pos.x - offsetX, pos.y, 0.0f), 0.0f, 0.0f);
+	m_pNumber[1]->Init(D3DXVECTOR3(pos.x, pos.y, 0.0f), 0.0f, 0.0f);
+	m_pNumber[2]->Init(D3DXVECTOR3(pos.x - offsetX, pos.y, 0.0f), 0.0f, 0.0f);
 	for (int nCnt = 0; nCnt < maxNumber; nCnt++)
 	{
 		m_pNumber[nCnt]->SetCol(COMBO_OFF);
@@ -128,7 +129,8 @@ CCombo* CCombo::Create(D3DXVECTOR3 pos)
 void CCombo::SetPos(D3DXVECTOR3 pos)
 {
 	m_pNumber[0]->SetPos(D3DXVECTOR3(pos.x + offsetX, pos.y, 0.0f));
-	m_pNumber[1]->SetPos(D3DXVECTOR3(pos.x - offsetX, pos.y, 0.0f));
+	m_pNumber[1]->SetPos(D3DXVECTOR3(pos.x, pos.y, 0.0f));
+	m_pNumber[2]->SetPos(D3DXVECTOR3(pos.x - offsetX, pos.y, 0.0f));
 }
 
 //*****************
