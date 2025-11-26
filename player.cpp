@@ -315,7 +315,7 @@ void CPlayer::Update(void)
 	}
 
 	// ブロワー強度切り替え
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_LEFT_B))
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_Q) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_LEFT_B) || pJoyPad->GetTriggerLT())
 	{
 		// 強度アップ
 		m_blower = Wrap(m_blower + 1, 0, static_cast<int>(BLOWER_MAXPOW));
@@ -323,7 +323,7 @@ void CPlayer::Update(void)
 		// サウンド再生
 		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_WIND);
 	}
-	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_RIGHT_B))
+	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_E) || pJoyPad->GetTrigger(CJoyPad::JOYKEY_RIGHT_B) || pJoyPad->GetTriggerRT())
 	{
 		// 強度ダウン
 		m_blower = Wrap(m_blower - 1, 0, static_cast<int>(BLOWER_MAXPOW));
