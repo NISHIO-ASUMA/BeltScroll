@@ -74,6 +74,12 @@ void CShredderManager::Update(void)
 //===============================
 void CShredderManager::Swap(void)
 {
+	if (m_pShredder[0]->GetStop() || m_pShredder[1]->GetStop())
+	{
+		m_nSwapCnt = 0;
+		return;
+	}
+
 	// 交換するタイミング
 	if (m_nSwapCnt > SWAPCOUNT)
 	{
@@ -127,6 +133,10 @@ void CShredderManager::State(void)
 
 	for (int nCnt = 0; nCnt < 2; nCnt++)
 	{
+		if (m_pShredder[nCnt]->GetStop())
+		{
+			move.x = 0.0f;
+		}
 		m_pShredder[nCnt]->SetMove(move);
 	}
 }

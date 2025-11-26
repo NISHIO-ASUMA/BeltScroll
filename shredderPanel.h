@@ -44,6 +44,7 @@ public:
 	// セッター
 	void SetPos(D3DXVECTOR3 pos);
 	void SetState(int nState) { m_nState = nState; }
+	void SetDie(void);
 
 	// ゲッター
 	D3DXVECTOR3 GetPos(void);
@@ -56,7 +57,10 @@ private:
 	int m_nType;				// 種類
 	int m_nFlachCnt;			// 点滅のカウント
 	int m_nState;
+	int m_nDieCnt;
+	bool m_bDie;
 	static constexpr float object3D_offset = 4.0f;
+	static constexpr int DIE_COUNT = 60;
 };
 
 #endif

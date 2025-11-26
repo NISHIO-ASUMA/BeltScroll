@@ -55,6 +55,7 @@ public:
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
 	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
+	bool GetStop(void) { return m_bStop; }
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -75,11 +76,19 @@ private:
 	int m_nShredbin;	// シュレッダービンに入ってるごみの量
 	float m_fCnt;		// 
 	int m_nShake;
+	int m_nPanelCnt;
+	int m_nMissCnt;
+	int m_nStopAnimCnt;
+	bool m_bStop;
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
 	CShredderPanel* m_pPanel[9];
+	
+	static constexpr int STOP_ANIMCNT = 200;
+	static constexpr int MISS_AMOUNT = 1;
 	static constexpr int BIN_AMOUNT = 5;
 	static constexpr float BIN_OFFSET_Y = 230.0f;
+	static constexpr int PANEL_AMOUNT = 9;
 	static constexpr float PANEL_OFFSET_X = 65.0f;
 	static constexpr float PANEL_OFFSET_Y00 = 150.0f;
 	static constexpr float PANEL_OFFSET_Y01 = 50.0f;
