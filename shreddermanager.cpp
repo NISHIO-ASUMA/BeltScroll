@@ -19,6 +19,8 @@
 //******************************
 const D3DXVECTOR3 CShredderManager::HOSE_ENTRANCE_OFFSET = D3DXVECTOR3(-70.0f,80.0f,0.0f);
 const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(90.0f, -80.0f, -40.0f);
+const D3DXVECTOR3 CShredderManager::DUST_OFFSET = D3DXVECTOR3(170.0f, 50.0f, -550.0f);
+
 
 //===============================
 // コンストラクタ
@@ -52,6 +54,12 @@ HRESULT CShredderManager::Init(void)
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_BLUE]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, 250.0f), TYPE_BLUE);
 	m_pHose = CObjectX::Create("data/MODEL/STAGEOBJ/shredderHose.x",D3DXVECTOR3(-320.0f, 250.0f, -500.0f));
+
+	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X00 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
+	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X01 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
+	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X02 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
+	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X03 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
+	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X04 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
 
 	// スコアをクリアする
 	CBonusScore::ClearScore();
@@ -155,7 +163,7 @@ void CShredderManager::State(void)
 //===============================
 void CShredderManager::TrushBox(void)
 {
-	 float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 };
+	float DUSTBOX_POSX[5] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 ,DUSTBOX_X03 ,DUSTBOX_X04 };
 
 	if (m_pShredder[0] == nullptr)
 	{
@@ -198,7 +206,7 @@ void CShredderManager::UpdateHose(void)
 //===============================
 D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
 {
-	float DUSTBOX_POSX[3] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 }; 
+	float DUSTBOX_POSX[5] = { DUSTBOX_X00,DUSTBOX_X01,DUSTBOX_X02 ,DUSTBOX_X03 ,DUSTBOX_X04 };
 	int nCnt = m_trushBoxCnt-1;
 	if (nCnt >= LAST_TRASH_NUMBER)
 	{// 2以上行かせない

@@ -66,16 +66,19 @@ private:
 	int m_trushBoxCnt;			// ごみステーションのカウント
 
 	static constexpr int SWAPCOUNT = 600;
-	static constexpr int LAST_TRASH_NUMBER = 2;
+	static constexpr int LAST_TRASH_NUMBER = 4;
 	static constexpr float FIXED_Z00 = -250.0f;
 	static constexpr float FIXED_Z01 = 250.0f;
 
 	static constexpr float DUSTBOX_X00 = 0.0f;
 	static constexpr float DUSTBOX_X01 = 100.0f;
 	static constexpr float DUSTBOX_X02 = 300.0f;
+	static constexpr float DUSTBOX_X03 = 500.0f;
+	static constexpr float DUSTBOX_X04 = 800.0f;
 
 	static const D3DXVECTOR3 HOSE_ENTRANCE_OFFSET;
 	static const D3DXVECTOR3 HOSE_EXIT_OFFSET;
+	static const D3DXVECTOR3 DUST_OFFSET;
 };
 
 #endif
