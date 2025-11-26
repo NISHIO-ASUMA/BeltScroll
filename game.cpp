@@ -191,6 +191,7 @@ void CGame::Update(void)
 		auto Player = m_pGameManager->GetPlayer();
 		if (Player == nullptr) return;
 
+		// ゲーム状態変更
 		//m_nGametype = GAMESTATE_END;
 		
 		// ゲームマネージャー更新
