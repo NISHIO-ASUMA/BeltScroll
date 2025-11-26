@@ -525,6 +525,7 @@ void CPlayer::EnemyBlow(void)
 	// 正規化
 	D3DXVec3Normalize(&vForward, &vForward);
 
+
 	// 敵オブジェクトの先頭取得
 	CObject* pObj = CObject::GetTop(static_cast<int>(CObject::PRIORITY::MODELOBJECT));
 
