@@ -79,6 +79,7 @@ private:
 	CShredbinManager* m_pShredbinManager;
 	CShredderPanel* m_pPanel[9];
 	static constexpr int BIN_AMOUNT = 5;
+	static constexpr float BIN_OFFSET_Y = 230.0f;
 	static constexpr float PANEL_OFFSET_X = 65.0f;
 	static constexpr float PANEL_OFFSET_Y00 = 150.0f;
 	static constexpr float PANEL_OFFSET_Y01 = 50.0f;
