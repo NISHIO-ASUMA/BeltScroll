@@ -34,6 +34,11 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_move = VECTOR3_NULL;
 	m_oldPos = VECTOR3_NULL;
 	m_offsetPos = VECTOR3_NULL;
+	m_nPanelCnt = 0;
+	m_nMissCnt = 0;
+	m_nShake = 0;
+	m_nStopAnimCnt = 0;
+	m_bStop = false;
 
 	m_nType = NULL;
 	m_nShredbin = NULL;
@@ -98,6 +103,7 @@ HRESULT CShredder::Init(void)
 	for (int nCnt = 0; nCnt < 9; nCnt++)
 	{
 		m_pPanel[nCnt] = CShredderPanel::Create(m_pos,m_nType);
+		m_nPanelCnt++;
 	}
 
 	return S_OK;
@@ -142,6 +148,12 @@ void CShredder::Update(void)
 	m_pAABB->SetPos(m_offsetPos);
 	m_pAABB->SetOldPos(m_oldPos);
 
+	if (m_nPanelCnt <= 0&&m_bStop==false)
+	{// シュレッダーが止まる条件
+		m_bStop = true;
+		m_nStopAnimCnt = STOP_ANIMCNT;
+	}
+
 	// モデルの更新
 	for (int nCnt = 0; nCnt < nNumParts; nCnt++)
 	{
@@ -158,6 +170,7 @@ void CShredder::Update(void)
 	m_pShredbinManager->Update();
 	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + BIN_OFFSET_Y, m_pos.z));
 
+	if (m_bStop)return;
 	// パーティクル生成
 	CSuckParticle::Create(D3DXVECTOR3(m_pos.x + 150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);
 }
@@ -237,14 +250,26 @@ void CShredder::UpdateModel(void)
 {
 	// 刃を回す処理
 	D3DXVECTOR3 rot = m_apModel[1]->GetRot();
-	rot.z += 0.5f;
-	m_apModel[1]->SetRot(rot);
-
 	D3DXVECTOR3 pos = m_apModel[1]->GetPos();
 
-	pos.y = -30.0f + sinf(m_fCnt) * 50.0f;
-	m_fCnt += 0.07f;
+	if (m_nStopAnimCnt > 0)
+	{
+		rot.z += 0.5f * (0.5f / (float)STOP_ANIMCNT * m_nStopAnimCnt);
+		pos.y = -30.0f + sinf(m_fCnt) * 50.0f;
+		m_fCnt += 0.07f * (0.07f / (float)STOP_ANIMCNT * m_nStopAnimCnt);
+		m_nStopAnimCnt--;
+	}
+	else if (!m_bStop)
+	{
+		pos.y = -30.0f + sinf(m_fCnt) * 50.0f;
+		rot.z += 0.5f;
+
+		m_fCnt += 0.07f;
+	}
+
+	m_apModel[1]->SetRot(rot);
 	m_apModel[1]->SetPos(pos);
+
 }
 
 //===============================
@@ -260,6 +285,8 @@ void CShredder::SetPosZ(float posZ)
 //===============================
 void CShredder::AddTrush(int nType)
 {
+	if (m_bStop)return;
+
 	m_nShredbin = m_pShredbinManager->GetNumAll();
 	// 種類一致時
 	if (m_nType == nType)
@@ -276,6 +303,7 @@ void CShredder::AddTrush(int nType)
 	else
 	{
 		m_nShake = 30;
+		m_nMissCnt++;
 		// コンボリセット
 		CCombo::Reset();
 	}
@@ -288,6 +316,8 @@ void CShredder::AddTrush(int nType)
 //===============================
 void CShredder::Shake(void)
 {
+	if (m_bStop)return;
+
 	if (m_nShake > 0)
 	{
 		m_pos.x = m_offsetPos.x + sinf((float)m_nShake) * 12.0f;
@@ -308,14 +338,14 @@ void CShredder::SetPanel(void)
 {
 	float fX = m_pos.x + PANEL_OFFSET_X;
 	m_pPanel[0]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z));
-	m_pPanel[1]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z - PANEL_OFFSET_Z00));
+	m_pPanel[1]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z - PANEL_OFFSET_Z01));
 	m_pPanel[2]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z + PANEL_OFFSET_Z00));
 	m_pPanel[3]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z - PANEL_OFFSET_Z01));
-	m_pPanel[4]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z + PANEL_OFFSET_Z01));
-	m_pPanel[5]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z - PANEL_OFFSET_Z01));
-	m_pPanel[6]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z + PANEL_OFFSET_Z01));
-	m_pPanel[7]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z - PANEL_OFFSET_Z01));
-	m_pPanel[8]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[4]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z - PANEL_OFFSET_Z01));
+	m_pPanel[5]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[6]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y02, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[7]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y01, m_pos.z + PANEL_OFFSET_Z01));
+	m_pPanel[8]->SetPos(D3DXVECTOR3(fX, m_pos.y + PANEL_OFFSET_Y00, m_pos.z - PANEL_OFFSET_Z00));
 }
 
 //===============================
@@ -326,6 +356,16 @@ void CShredder::UpdatePanel(void)
 	SetPanel();
 	int swapCnt = CGame::GetGameManager()->GetShredderM()->GetSwapCnt();
 	
+	if (m_nMissCnt > MISS_AMOUNT)
+	{
+		if (m_nPanelCnt <= 0)return;
+		m_nPanelCnt--;
+		m_pPanel[m_nPanelCnt]->SetDie();
+
+		m_nMissCnt = 0;
+	}
+
+
 	if (swapCnt > 400)
 	{// スワップしそうになったら点滅
 		for (int nCnt = 0; nCnt < 9; nCnt++)

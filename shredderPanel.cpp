@@ -22,6 +22,8 @@ CShredderPanel::CShredderPanel(int nPriority) : CObjectX(nPriority)
 	m_nFlachCnt = 0;
 	m_nType = 0;
 	m_nState = 0;
+	m_nDieCnt = 0;
+	m_bDie = false;
 }
 //================================
 // デストラクタ
@@ -90,6 +92,27 @@ void CShredderPanel::Update(void)
 	// 親クラスの更新
 	CObjectX::Update();
 
+
+	if (m_nDieCnt > 0)
+	{
+		// 通常状態
+		switch (m_nType)
+		{
+		case 0:
+			m_pPanel->SetCol(D3DXCOLOR(1.0f * (1.0f / (float)DIE_COUNT * m_nDieCnt), 0.0f, 0.0f, 1.0f));
+			break;
+		case 1:
+			m_pPanel->SetCol(D3DXCOLOR(0.0f, 0.0f, 1.0f * (1.0f / (float)DIE_COUNT * m_nDieCnt), 1.0f));
+			break;
+		}
+		m_nDieCnt--;
+	}
+
+	if (m_bDie)
+	{// 機能しない
+		return;
+	}
+
 	switch (m_nState)
 	{
 	case STATE_NORMAL:
@@ -157,6 +180,19 @@ void CShredderPanel::SetPos(D3DXVECTOR3 pos)
 	CObjectX::SetPos(pos);
 	pos.x -= object3D_offset;
 	m_pPanel->SetPos(pos);
+}
+
+//================================
+// 消える設定
+//================================
+void CShredderPanel::SetDie(void)
+{
+	if (m_bDie)
+	{// 機能しない
+		return;
+	}
+	m_bDie = true;
+	m_nDieCnt = DIE_COUNT;
 }
 
 //================================
