@@ -536,6 +536,7 @@ void CPlayer::EnemyBlow(void)
 			// キャスト
 			CEnemy* pEnemy = static_cast<CEnemy*>(pObj);
 
+			// ベクトルを引く
 			D3DXVECTOR3 vEnemyPos = pEnemy->GetPos();
 
 			// プレイヤーとの距離
@@ -914,11 +915,4 @@ CPlayer::PLAYERMOTION CPlayer::GetNowMotion() const
 	}
 
 	return PLAYERMOTION_NEUTRAL; // デフォルト
-}
-//===============================
-// ヒット処理
-//===============================
-void CPlayer::HitDamage(int nDamage)
-{
-
 }

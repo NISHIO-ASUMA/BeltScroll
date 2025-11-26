@@ -18,14 +18,17 @@
 #include "player.h"
 #include "score.h"
 #include "loseresult.h"
-#include "combo.h"
+#include "shreddermanager.h"
+#include "shredder.h"
+#include "siren.h"
+#include "goalline.h"
 
 //**************************
 // 定数空間
 //**************************
 namespace GAMEINFO
 {
-	constexpr int GAMECOUNT = 30; // リザルト遷移カウント
+	constexpr int GAMECOUNT = 60; // リザルト遷移カウント
 };
 
 //**************************
@@ -184,15 +187,32 @@ void CGame::Update(void)
 	}
 
 	// falseの時に更新
-	if (m_nGametype == GAMESTATE_NORMAL && m_pPausemanager->GetPause() == false)
-	{
-		
-		// プレイヤー取得
-		auto Player = m_pGameManager->GetPlayer();
-		if (Player == nullptr) return;
+	if (m_pPausemanager->GetPause() == false)
+	{		
+		// シュレッダー取得
+		auto shredder1 = m_pGameManager->GetShredderM()->GetShredder(0);
+		auto shredder2 = m_pGameManager->GetShredderM()->GetShredder(1);
 
-		// ゲーム状態変更
-		//m_nGametype = GAMESTATE_END;
+		// 両方停止したら
+		if (shredder1->GetStop() && shredder2->GetStop())
+		{
+			// 失敗リザルトに遷移
+			m_nGametype = GAMESTATE_LOSEEND;
+			return;
+		}
+
+		// ゴールライン取得
+		auto Line = m_pGameManager->GetLine();
+
+		// どっちか片方が生き残ってゴールに到達したら
+		if (Line->CheckIsGoalPos(shredder1->GetPos()) || Line->CheckIsGoalPos(shredder2->GetPos()))
+		{
+			// フラグ起動
+			m_pGameManager->GetSiren()->SetIsGoalFlag(true);
+
+			// 勝ちリザルト
+			m_nGametype = GAMESTATE_END;
+		}
 		
 		// ゲームマネージャー更新
 		m_pGameManager->Update();

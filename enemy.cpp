@@ -257,13 +257,14 @@ void CEnemy::Update(void)
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 		auto pShredder = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt);
 
-		if (Collision(ShredderCol))
+		// ’âŽ~‚µ‚Ä‚¢‚È‚¢•û‚¾‚Á‚½‚ç
+		if (Collision(ShredderCol) && !pShredder->GetStop())
 		{
 			m_isSuck = true;
 
 			// ‹z‚¢ž‚Ý•ûŒü‚ðƒVƒ…ƒŒƒbƒ_[‚ÉÝ’è
 			D3DXVECTOR3 shredderPos = pShredder->GetPos();
-			shredderPos.x += 50.0f;   // ­‚µ‰E‘¤
+			shredderPos.x += 50.0f;		// ­‚µ‰E‘¤
 
 			// ƒxƒNƒgƒ‹ŒvŽZ
 			m_vSuckDir = shredderPos - GetPos();
@@ -281,7 +282,7 @@ void CEnemy::Update(void)
 			// Šp“x“K—p
 			SetRot(rot);
 
-			// ‹z‚¢ž‚Ü‚ê‚é‰¹Ä¶
+			// ‹z‚¢ž‚Ü‚ê‚é‰¹‚ðÄ¶
 			CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_DEATHSE);
 
 			return;

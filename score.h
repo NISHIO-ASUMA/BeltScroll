@@ -53,5 +53,8 @@ private:
 	D3DXVECTOR3 m_pos;				// 座標
 	float m_fWidth;					// 横幅
 	float m_fHeight;				// 高さ
+	int m_nDrawCount;				// 描画カウント
+	bool m_isDraw;					// 描画フラグ
+	bool m_hasDrawed;		// もう表示したかどうか
 };
 

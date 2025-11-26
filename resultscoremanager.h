@@ -32,6 +32,8 @@ public:
 	void Update(void);
 	void Load(void);
 
+	CResultScore* GetIdx(const int nidx) { return m_pResultScore[nidx]; }
+
 private:
 
 	static constexpr int SCORELISTNUM = 3; // ”z—ñ‚ÌÅ‘å”

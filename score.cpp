@@ -12,6 +12,8 @@
 #include "number.h"
 #include "manager.h"
 #include <fstream>
+#include "game.h"
+#include "shreddermanager.h"
 
 //**********************************
 // 静的メンバ変数宣言
@@ -27,6 +29,9 @@ CScore::CScore(int nPriority) : CObject(nPriority)
 	m_fHeight = 0.0f;
 	m_fWidth = 0.0f;
 	m_pos = VECTOR3_NULL;
+	m_nDrawCount = NULL;
+	m_isDraw = false;
+	m_hasDrawed = false;
 
 	for (auto& number : m_pNumber)
 	{
@@ -87,7 +92,7 @@ HRESULT CScore::Init(void)
 		m_pNumber[nCnt]->SetPos(m_pos);
 
 		// テクスチャセット
-		m_pNumber[nCnt]->SetTexture("ResultScore.png");
+		m_pNumber[nCnt]->SetTexture("result_score.png");
 	}
 
 	// スコア初期化
@@ -123,6 +128,9 @@ void CScore::Uninit(void)
 //=================================
 void CScore::Update(void)
 {
+	// 座標移動
+	m_pos;
+
 	// スコア格納
 	int nScore = m_nScore;
 
@@ -136,19 +144,37 @@ void CScore::Update(void)
 		// 桁更新
 		m_pNumber[nCntScore]->SetDigit(nDigit);
 	}
+
+	// 現在のゴミステーションインデックスを取得
+	auto idx = CGame::GetGameManager()->GetShredderM()->GetTrushCount();
+
+	// 中間番号なら
+	if (idx == 3 && !m_hasDrawed)
+	{
+		m_isDraw = true;		// 描画開始
+		m_nDrawCount = 0;		// カウントリセット
+		m_hasDrawed = true;		// 再度表示しない
+	}
+
+	// 表示中ならカウント進める
+	if (m_isDraw)
+	{
+		m_nDrawCount++;
+
+		// 5秒経過したら非表示にする
+		if (m_nDrawCount >= 300)
+		{
+			m_isDraw = false;
+		}
+	}
 }
 //=================================
 // 描画処理
 //=================================
 void CScore::Draw(void)
-{
-	// 現在のゴミステーションインデックスを取得
-	// auto idx = Cgame::GetGameManager()->Get;
-
+{	
 	// 番号が表示番号なら描画をONにする
-	bool idActive = false;
-
-	if (idActive == true)
+	if (m_isDraw)
 	{
 		// 使っている桁数分の描画
 		for (int nCnt = 0; nCnt < SCORE_NUM; nCnt++)

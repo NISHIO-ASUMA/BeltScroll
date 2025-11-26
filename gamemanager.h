@@ -20,6 +20,7 @@ class CGoal;
 class CScore;
 class CGoalManager;
 class CSiren;
+class CGoalLine;
 
 //**************************
 // インクルードファイル
@@ -51,6 +52,7 @@ public:
 	CScore* GetScore(void) {return m_pScore;}
 	CGoalManager* GetGoalManager(void) { return m_pGoalManager; }
 	CSiren* GetSiren(void) { return m_pSiren; }
+	CGoalLine* GetLine(void) { return m_pLine; }
 
 private:
 	std::unique_ptr<CEnemyManager>m_pEnemyManager; // 敵管理
@@ -62,6 +64,7 @@ private:
 	CScore* m_pScore;				// ゲームのスコア
 	CGoalManager* m_pGoalManager;	// ゴールマネージャー
 	CSiren* m_pSiren;				// サイレンポインタ
+	CGoalLine* m_pLine;				// ゴールライン
 };
 
 #endif

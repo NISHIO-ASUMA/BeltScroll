@@ -45,8 +45,6 @@ HRESULT CResultBlock::Init(const char * pFileName)
 	// ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 	LoadJson(pFileName);
 
-	//data / JSON / ResultMap.json
-
 	return S_OK;
 }
 //=================================

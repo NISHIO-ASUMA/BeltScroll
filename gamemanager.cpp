@@ -29,6 +29,7 @@
 #include "shredderPanel.h"
 #include "goalmanager.h"
 #include "siren.h"
+#include "goalline.h"
 
 //===============================
 // コンストラクタ
@@ -43,6 +44,7 @@ CGameManager::CGameManager()
 	m_pGoal = nullptr;
 	m_pScore = nullptr;
 	m_pGoalManager = nullptr;
+	m_pLine = nullptr;
 }
 //===============================
 // デストラクタ
@@ -60,7 +62,7 @@ HRESULT CGameManager::Init(void)
 	CSound* pSound = CManager::GetSound();
 
 	//メッシュフィールド生成
-	CMeshField::Create(D3DXVECTOR3(2500.0f,0.0f,0.0f), 6000.0f, 1000.0f, 1, 1);
+	CMeshField::Create(D3DXVECTOR3(2500.0f,0.0f,0.0f), 8500.0f, 1000.0f, 1, 1);
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VECTOR3_NULL, VECTOR3_NULL, 10,"data/MOTION/Player/Player.txt");
@@ -73,16 +75,16 @@ HRESULT CGameManager::Init(void)
 	m_pBlockManager = new CBlockManager;
 	m_pBlockManager->Init();
 
+	// シュレッダーマネージャー生成
 	m_pShredderManaher = new CShredderManager;
 	m_pShredderManaher->Init();
 
+	// ゴールマネージャー生成
 	m_pGoalManager = new CGoalManager;
 	m_pGoalManager->Init();
 
 	// サイレン生成
 	m_pSiren = CSiren::Create(D3DXVECTOR3(5510.0f, 15.0f, 20.0f));
-
-	CTrushBox::Create(D3DXVECTOR3(100.0f, 100.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),"data/MODEL/STAGEOBJ/block000.x" );
 
 	// コンボスコア
 	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
@@ -91,7 +93,10 @@ HRESULT CGameManager::Init(void)
 	m_pScore = CScore::Create(D3DXVECTOR3(760.0f, 45.0f, 0.0f), 110.0f, 45.0f);
 	m_pScore->ClearScore();
 
-	// ゲームBGM
+	// ゴールライン生成
+	m_pLine = CGoalLine::Create(D3DXVECTOR3(4700.0f, 0.0f, 0.0f), 100.0f);
+
+	// ゲームBGM再生
 	pSound->PlaySound(CSound::SOUND_LABEL_GAMEBGM);
 
 	// 初期化結果を返す
@@ -118,6 +123,7 @@ void CGameManager::Uninit(void)
 	// 敵マネージャーの破棄
 	m_pEnemyManager.reset();
 
+	// シュレッダーマネージャーの破棄
 	if (m_pShredderManaher != nullptr)
 	{
 		// 終了処理
@@ -162,13 +168,6 @@ void CGameManager::Update(void)
 
 		return;
 	}
-
-	// 実験
-	if (CManager::GetInputKeyboard()->GetTrigger(DIK_M))
-	{
-		m_pSiren->SetIsGoalFlag(true);
-	}
-
 #endif
 
 	// nullチェック
@@ -197,6 +196,5 @@ void CGameManager::Update(void)
 //===============================
 void CGameManager::Draw(void)
 {
-	// 描画するものがあればここに追加
-	// Object継承の物は書くな
+
 }

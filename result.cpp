@@ -18,11 +18,18 @@
 #include "resultscore.h"
 #include "resultenemy.h"
 #include "resultscoremanager.h"
+#include "block.h"
+#include "resulttrush.h"
+
+//=================================
+// 静的メンバ変数
+//=================================
+CResultScoreManager* CResult::m_pResultScoreManager = nullptr; // スコア管理
 
 //=================================
 // オーバーロードコンストラクタ
 //=================================
-CResult::CResult() : CScene(CScene::MODE_RESULT), m_pResultEnemy(nullptr), m_pResultScoreManager(nullptr)
+CResult::CResult() : CScene(CScene::MODE_RESULT), m_pResultEnemy(nullptr)
 {
 
 }
@@ -45,31 +52,28 @@ HRESULT CResult::Init(void)
 	// 勝利プレイヤー生成
 	CWinPlayer::Create(D3DXVECTOR3(80.0f,0.0f,-450.0f));
 
-	// プレイヤーの右側にゴミ箱設置
-	// 
-
-	// そこにパーティクル生成
-	
 	// メッシュフィールド生成
 	CMeshField::Create(VECTOR3_NULL, 3100.0f, 2000.0f, 1, 1);
 
 	// UI生成
 	CUi::Create(D3DXVECTOR3(1050.0f, 360.0f, 0.0f), 0, 360.0f, 720.0f, "backboard.png", false);
 
-	// リザルトのスコア生成
-	// CResultScore::Create(D3DXVECTOR3(960.0f,525.0f,0.0f),200.0f,80.0f);
-
 	// 敵生成
 	m_pResultEnemy = new CResultEnemy;
 	m_pResultEnemy->Init("data/JSON/ResultEnemy.json");
 
-	// 管理クラス生成
+	// スコア管理クラス生成
 	m_pResultScoreManager = new CResultScoreManager;
 	m_pResultScoreManager->Init();
 
 	//// リザルトブロック生成
 	//m_pResultBlock = new CResultBlock;
 	//m_pResultBlock->Init("data/JSON/ResultMap.json");
+
+	// 演出用ゴミ箱生成
+	CResultTrush::Create(D3DXVECTOR3(-70.0f,0.0f,-440.0f),VECTOR3_NULL, D3DCOLOR_RGBA(255, 215, 0, 255));
+	CResultTrush::Create(D3DXVECTOR3(0.0f, 0.0f, -520.0f), VECTOR3_NULL, D3DCOLOR_RGBA(220, 20, 60, 255));
+	CResultTrush::Create(D3DXVECTOR3(-140.0f, 0.0f, -520.0f), VECTOR3_NULL, D3DCOLOR_RGBA(0, 191, 255,255));
 
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);

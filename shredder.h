@@ -51,6 +51,7 @@ public:
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 	void Shake(void);
 	void SetPanel(void);
+	void SetStop(const bool isStop) { m_bStop = isStop; }
 
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }

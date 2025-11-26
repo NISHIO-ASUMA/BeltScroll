@@ -50,8 +50,9 @@ public:
 	void UpdateGameScore(void);
 	void UpdateBounsScore(void);
 	void UpdateLastScore(void);
-	
 	void WriteScore(void);
+
+	int GetScoreUpTimer(void) {return m_nTimer; }
 
 	void SetGameScore(int nResultValue) 
 	{

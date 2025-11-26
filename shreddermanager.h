@@ -54,6 +54,7 @@ public:
 	D3DXVECTOR3 GetTrushBoxPos(void);
 	D3DXVECTOR3 GetHosePos(bool bExit);
 	int GetSwapCnt(void) { return m_nSwapCnt; }
+	int GetTrushCount(void) { return m_trushBoxCnt; }
 
 private:
 	CShredder* m_pShredder[2];	// ポインタ
@@ -62,19 +63,21 @@ private:
 	int m_nStateCnt;			// 状態管理のカウント
 	bool m_bRedFlont;			// 赤いほうが手前にあるか
 	bool m_isSaveScoreTrush;	// ボーナスを書き出したかどうか
+	bool m_isSound;				// 再生したかどうか
 	STATE m_state;				// 状態
 	int m_trushBoxCnt;			// ごみステーションのカウント
 
+	// 定数宣言
 	static constexpr int SWAPCOUNT = 600;
 	static constexpr int LAST_TRASH_NUMBER = 4;
 	static constexpr float FIXED_Z00 = -250.0f;
 	static constexpr float FIXED_Z01 = 250.0f;
 
-	static constexpr float DUSTBOX_X00 = 0.0f;
-	static constexpr float DUSTBOX_X01 = 100.0f;
-	static constexpr float DUSTBOX_X02 = 300.0f;
-	static constexpr float DUSTBOX_X03 = 500.0f;
-	static constexpr float DUSTBOX_X04 = 800.0f;
+	static constexpr float DUSTBOX_X00 = 300.0f;
+	static constexpr float DUSTBOX_X01 = 1300.0f;
+	static constexpr float DUSTBOX_X02 = 2500.0f;
+	static constexpr float DUSTBOX_X03 = 3250.0f;
+	static constexpr float DUSTBOX_X04 = 4000.0f;
 
 	static const D3DXVECTOR3 HOSE_ENTRANCE_OFFSET;
 	static const D3DXVECTOR3 HOSE_EXIT_OFFSET;

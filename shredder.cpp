@@ -22,6 +22,7 @@
 #include "combo.h"
 #include "score.h"
 #include "shredderPanel.h"
+#include "goalline.h"
 
 //===============================
 // コンストラクタ
@@ -140,6 +141,16 @@ void CShredder::Uninit(void)
 //===============================
 void CShredder::Update(void)
 {
+	// ゴールライン取得
+	auto GoalLine = CGame::GetGameManager()->GetLine();
+
+	// もし停止範囲に入っていたら
+	if (GoalLine->isGetGoalPos())
+	{
+		// 移動しない
+		return;
+	}
+
 	// シュレッダーの更新
 	m_oldPos = m_offsetPos;
 	m_offsetPos += m_move;

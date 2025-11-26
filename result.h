@@ -35,10 +35,12 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	static CResultScoreManager* GetScore(void) { return m_pResultScoreManager; }
+
 private:
 
 	CResultEnemy* m_pResultEnemy; // リザルトの敵クラス
-	CResultScoreManager* m_pResultScoreManager; // スコア管理クラス
+	static CResultScoreManager* m_pResultScoreManager; // スコア管理クラス
 };
 
 #endif

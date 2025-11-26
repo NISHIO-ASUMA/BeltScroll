@@ -164,7 +164,9 @@
     <ClCompile Include="confettieffect.cpp" />
     <ClCompile Include="confettiparticle.cpp" />
     <ClCompile Include="fan.cpp" />
+    <ClCompile Include="goalline.cpp" />
     <ClCompile Include="goalmanager.cpp" />
+    <ClCompile Include="resulttrush.cpp" />
     <ClCompile Include="shredderPanel.cpp" />
     <ClCompile Include="resultenemy.cpp" />
     <ClCompile Include="resultscoremanager.cpp" />
@@ -250,7 +252,9 @@
     <ClInclude Include="confettieffect.h" />
     <ClInclude Include="confettiparticle.h" />
     <ClInclude Include="fan.h" />
+    <ClInclude Include="goalline.h" />
     <ClInclude Include="goalmanager.h" />
+    <ClInclude Include="resulttrush.h" />
     <ClInclude Include="shredderPanel.h" />
     <ClInclude Include="resultenemy.h" />
     <ClInclude Include="resultscoremanager.h" />

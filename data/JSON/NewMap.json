@@ -1,1146 +1,1146 @@
 {
-   "AllObject": 60,
-   "SetObjects": [
-      {
-         "idx": 0,
-         "pos": [
-            40.0,
-            0.0,
-            532.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
-      },
-      {
-         "idx": 1,
-         "pos": [
-            564.4199829101563,
-            0.0,
-            556.1900024414063
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration6.x"
-      },
-      {
-         "idx": 2,
-         "pos": [
-            1179.3199462890625,
-            0.0,
-            552.7899780273438
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration5.x"
-      },
-      {
-         "idx": 3,
-         "pos": [
-            869.3699951171875,
-            0.0,
-            541.3900146484375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/DustBox.x"
-      },
-      {
-         "idx": 4,
-         "pos": [
-            1569.5899658203125,
-            0.0,
-            554.760009765625
-         ],
-         "rot": [
-            0.0,
-            0.029999999329447746,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration1.x"
-      },
-      {
-         "idx": 5,
-         "pos": [
-            2024.989990234375,
-            308.0,
-            541.75
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            0.800000011920929,
-            1.399999976158142,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration4.x"
-      },
-      {
-         "idx": 6,
-         "pos": [
-            1874.72998046875,
-            0.0,
-            546.8499755859375
-         ],
-         "rot": [
-            0.0,
-            0.5699999928474426,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/box1.x"
-      },
-      {
-         "idx": 7,
-         "pos": [
-            1936.3499755859375,
-            0.0,
-            563.47998046875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/box1.x"
-      },
-      {
-         "idx": 8,
-         "pos": [
-            1903.52001953125,
-            46.0,
-            556.5900268554688
-         ],
-         "rot": [
-            0.0,
-            1.1399999856948853,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/box1.x"
-      },
-      {
-         "idx": 9,
-         "pos": [
-            2099.949951171875,
-            20.0,
-            563.5599975585938
-         ],
-         "rot": [
-            0.0,
-            -0.6299999952316284,
-            0.15000000596046448
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/tekkotu.x"
-      },
-      {
-         "idx": 10,
-         "pos": [
-            2125.949951171875,
-            0.0,
-            535.5599975585938
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/tekkotu.x"
-      },
-      {
-         "idx": 11,
-         "pos": [
-            2413.409912109375,
-            0.0,
-            571.6300048828125
-         ],
-         "rot": [
-            1.559999942779541,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration3.x"
-      },
-      {
-         "idx": 12,
-         "pos": [
-            2546.56005859375,
-            122.0,
-            591.530029296875
-         ],
-         "rot": [
-            0.0,
-            1.5299999713897705,
-            -1.559999942779541
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration3.x"
-      },
-      {
-         "idx": 13,
-         "pos": [
-            2979.260009765625,
-            0.0,
-            559.8800048828125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration2.x"
-      },
-      {
-         "idx": 14,
-         "pos": [
-            3432.64990234375,
-            16.0,
-            624.8400268554688
-         ],
-         "rot": [
-            -0.029999999329447746,
-            2.0999999046325684,
-            0.5699999928474426
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/shredderblade.x"
-      },
-      {
-         "idx": 15,
-         "pos": [
-            3827.06005859375,
-            0.0,
-            553.3800048828125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration5.x"
-      },
-      {
-         "idx": 16,
-         "pos": [
-            4168.56982421875,
-            0.0,
-            537.1099853515625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
-      },
-      {
-         "idx": 17,
-         "pos": [
-            4374.080078125,
-            0.0,
-            542.6400146484375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
-      },
-      {
-         "idx": 18,
-         "pos": [
-            4810.0,
-            0.0,
-            556.510009765625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration6.x"
-      },
-      {
-         "idx": 19,
-         "pos": [
-            5238.25,
-            0.0,
-            552.97998046875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/decoration4.x"
-      },
-      {
-         "idx": 20,
-         "pos": [
-            4467.93017578125,
-            204.0,
-            621.219970703125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/haikei.x"
-      },
-      {
-         "idx": 21,
-         "pos": [
-            2399.469970703125,
-            206.0,
-            622.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/haikei.x"
-      },
-      {
-         "idx": 22,
-         "pos": [
-            1372.8399658203125,
-            0.0,
-            547.1699829101563
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gomistation.x"
-      },
-      {
-         "idx": 23,
-         "pos": [
-            3648.989990234375,
-            0.0,
-            551.739990234375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gomistation.x"
-      },
-      {
-         "idx": 24,
-         "pos": [
-            -348.1199951171875,
-            40.0,
-            -506.04998779296875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 25,
-         "pos": [
-            -51.150001525878906,
-            40.0,
-            -505.67999267578125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 26,
-         "pos": [
-            250.6999969482422,
-            40.0,
-            -505.2200012207031
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 27,
-         "pos": [
-            547.0499877929688,
-            38.0,
-            -502.8500061035156
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 28,
-         "pos": [
-            847.72998046875,
-            40.0,
-            -504.239990234375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 29,
-         "pos": [
-            1146.4300537109375,
-            40.0,
-            -503.9599914550781
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 30,
-         "pos": [
-            1445.5400390625,
-            38.0,
-            -500.94000244140625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 31,
-         "pos": [
-            1745.6600341796875,
-            38.0,
-            -501.6600036621094
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 32,
-         "pos": [
-            2044.699951171875,
-            38.0,
-            -500.9599914550781
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 33,
-         "pos": [
-            2346.64990234375,
-            38.0,
-            -502.9599914550781
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 34,
-         "pos": [
-            2645.9599609375,
-            38.0,
-            -500.79998779296875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 35,
-         "pos": [
-            2944.97998046875,
-            38.0,
-            -500.95001220703125
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 36,
-         "pos": [
-            3238.969970703125,
-            38.0,
-            -501.8500061035156
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 37,
-         "pos": [
-            3538.949951171875,
-            40.0,
-            -504.8500061035156
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 38,
-         "pos": [
-            3838.93994140625,
-            40.0,
-            -505.75
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 39,
-         "pos": [
-            4132.52978515625,
-            40.0,
-            -507.0299987792969
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 40,
-         "pos": [
-            4427.330078125,
-            40.0,
-            -507.2200012207031
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 41,
-         "pos": [
-            4725.93994140625,
-            40.0,
-            -507.54998779296875
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 42,
-         "pos": [
-            5024.5,
-            40.0,
-            -507.55999755859375
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 43,
-         "pos": [
-            5324.43994140625,
-            40.0,
-            -504.8599853515625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fence.x"
-      },
-      {
-         "idx": 44,
-         "pos": [
-            330.9100036621094,
-            204.0,
-            622.5
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/haikei.x"
-      },
-      {
-         "idx": 45,
-         "pos": [
-            750.969970703125,
-            134.0,
-            -505.0299987792969
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": false,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 46,
-         "pos": [
-            3284.820068359375,
-            132.0,
-            -508.010009765625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 47,
-         "pos": [
-            5810.0,
-            170.0,
-            -510.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 48,
-         "pos": [
-            6550.0,
-            170.0,
-            -510.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 49,
-         "pos": [
-            3285.0,
-            170.0,
-            487.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 50,
-         "pos": [
-            5810.0,
-            170.0,
-            487.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
-      },
-      {
-         "idx": 51,
-         "pos": [
-            503.05999755859375,
-            -316.0,
-            -552.760009765625
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gesui.x"
-      },
-      {
-         "idx": 52,
-         "pos": [
-            2416.0400390625,
-            -316.0,
-            -552.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gesui.x"
-      },
-      {
-         "idx": 53,
-         "pos": [
-            4421.9599609375,
-            -316.0,
-            -552.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gesui.x"
-      },
-      {
-         "idx": 54,
-         "pos": [
-            5500.25,
-            355.0,
-            20.0
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gateframe.x"
-      },
-      {
-         "idx": 55,
-         "pos": [
-            5104.52001953125,
-            -322.0,
-            -560.9199829101563
-         ],
-         "rot": [
-            0.0,
-            0.0,
-            0.0
-         ],
-         "scale": [
-            0.5,
-            1.0,
-            1.0
-         ],
-         "Flags": false,
-         "filepath": "data/MODEL/STAGEOBJ/gesui.x"
-      },
-      {
-         "idx": 56,
-         "pos": [
-            -489.3599853515625,
-            242.0,
-            270.1600036621094
-         ],
-         "rot": [
-            0.0,
-            3.130000114440918,
-            0.0
-         ],
-         "scale": [
-            1.0,
-            1.0,
-            1.0
-         ],
-         "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/fan.x"
-      },
+   "AllObject": 62,
+  "SetObjects": [
+    {
+      "idx": 0,
+      "pos": [
+        40.0,
+        0.0,
+        532.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
+    },
+    {
+      "idx": 1,
+      "pos": [
+        564.4199829101563,
+        0.0,
+        556.1900024414063
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration6.x"
+    },
+    {
+      "idx": 2,
+      "pos": [
+        1179.3199462890625,
+        0.0,
+        552.7899780273438
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration5.x"
+    },
+    {
+      "idx": 3,
+      "pos": [
+        869.3699951171875,
+        0.0,
+        541.3900146484375
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/DustBox.x"
+    },
+    {
+      "idx": 4,
+      "pos": [
+        1569.5899658203125,
+        0.0,
+        554.760009765625
+      ],
+      "rot": [
+        0.0,
+        0.029999999329447746,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration1.x"
+    },
+    {
+      "idx": 5,
+      "pos": [
+        2024.989990234375,
+        308.0,
+        541.75
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.800000011920929,
+        1.399999976158142,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration4.x"
+    },
+    {
+      "idx": 6,
+      "pos": [
+        1874.72998046875,
+        0.0,
+        546.8499755859375
+      ],
+      "rot": [
+        0.0,
+        0.5699999928474426,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/box1.x"
+    },
+    {
+      "idx": 7,
+      "pos": [
+        1936.3499755859375,
+        0.0,
+        563.47998046875
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/box1.x"
+    },
+    {
+      "idx": 8,
+      "pos": [
+        1903.52001953125,
+        46.0,
+        556.5900268554688
+      ],
+      "rot": [
+        0.0,
+        1.1399999856948853,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/box1.x"
+    },
+    {
+      "idx": 9,
+      "pos": [
+        2099.949951171875,
+        20.0,
+        563.5599975585938
+      ],
+      "rot": [
+        0.0,
+        -0.6299999952316284,
+        0.15000000596046448
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/tekkotu.x"
+    },
+    {
+      "idx": 10,
+      "pos": [
+        2125.949951171875,
+        0.0,
+        535.5599975585938
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/tekkotu.x"
+    },
+    {
+      "idx": 11,
+      "pos": [
+        2413.409912109375,
+        0.0,
+        571.6300048828125
+      ],
+      "rot": [
+        1.559999942779541,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration3.x"
+    },
+    {
+      "idx": 12,
+      "pos": [
+        2546.56005859375,
+        122.0,
+        591.530029296875
+      ],
+      "rot": [
+        0.0,
+        1.5299999713897705,
+        -1.559999942779541
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration3.x"
+    },
+    {
+      "idx": 13,
+      "pos": [
+        2979.260009765625,
+        0.0,
+        559.8800048828125
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration2.x"
+    },
+    {
+      "idx": 14,
+      "pos": [
+        3432.64990234375,
+        16.0,
+        624.8400268554688
+      ],
+      "rot": [
+        -0.029999999329447746,
+        2.0999999046325684,
+        0.5699999928474426
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/shredderblade.x"
+    },
+    {
+      "idx": 15,
+      "pos": [
+        3827.06005859375,
+        0.0,
+        553.3800048828125
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration5.x"
+    },
+    {
+      "idx": 16,
+      "pos": [
+        4168.56982421875,
+        0.0,
+        537.1099853515625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
+    },
+    {
+      "idx": 17,
+      "pos": [
+        4374.080078125,
+        0.0,
+        542.6400146484375
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration7.x"
+    },
+    {
+      "idx": 18,
+      "pos": [
+        4810.0,
+        0.0,
+        556.510009765625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration6.x"
+    },
+    {
+      "idx": 19,
+      "pos": [
+        5238.25,
+        0.0,
+        552.97998046875
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/decoration4.x"
+    },
+    {
+      "idx": 20,
+      "pos": [
+        4467.93017578125,
+        204.0,
+        621.219970703125
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/haikei.x"
+    },
+    {
+      "idx": 21,
+      "pos": [
+        2399.469970703125,
+        206.0,
+        622.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/haikei.x"
+    },
+    {
+      "idx": 22,
+      "pos": [
+        1372.8399658203125,
+        0.0,
+        547.1699829101563
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gomistation.x"
+    },
+    {
+      "idx": 23,
+      "pos": [
+        3648.989990234375,
+        0.0,
+        551.739990234375
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gomistation.x"
+    },
+    {
+      "idx": 24,
+      "pos": [
+        -348.1199951171875,
+        40.0,
+        -506.04998779296875
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 25,
+      "pos": [
+        -51.150001525878906,
+        40.0,
+        -505.67999267578125
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 26,
+      "pos": [
+        250.6999969482422,
+        40.0,
+        -505.2200012207031
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 27,
+      "pos": [
+        547.0499877929688,
+        38.0,
+        -502.8500061035156
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 28,
+      "pos": [
+        847.72998046875,
+        40.0,
+        -504.239990234375
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 29,
+      "pos": [
+        1146.4300537109375,
+        40.0,
+        -503.9599914550781
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 30,
+      "pos": [
+        1445.5400390625,
+        38.0,
+        -500.94000244140625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 31,
+      "pos": [
+        1745.6600341796875,
+        38.0,
+        -501.6600036621094
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 32,
+      "pos": [
+        2044.699951171875,
+        38.0,
+        -500.9599914550781
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 33,
+      "pos": [
+        2346.64990234375,
+        38.0,
+        -502.9599914550781
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 34,
+      "pos": [
+        2645.9599609375,
+        38.0,
+        -500.79998779296875
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 35,
+      "pos": [
+        2944.97998046875,
+        38.0,
+        -500.95001220703125
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 36,
+      "pos": [
+        3238.969970703125,
+        38.0,
+        -501.8500061035156
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 37,
+      "pos": [
+        3538.949951171875,
+        40.0,
+        -504.8500061035156
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 38,
+      "pos": [
+        3838.93994140625,
+        40.0,
+        -505.75
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 39,
+      "pos": [
+        4132.52978515625,
+        40.0,
+        -507.0299987792969
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 40,
+      "pos": [
+        4427.330078125,
+        40.0,
+        -507.2200012207031
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 41,
+      "pos": [
+        4725.93994140625,
+        40.0,
+        -507.54998779296875
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 42,
+      "pos": [
+        5024.5,
+        40.0,
+        -507.55999755859375
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 43,
+      "pos": [
+        5324.43994140625,
+        40.0,
+        -504.8599853515625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fence.x"
+    },
+    {
+      "idx": 44,
+      "pos": [
+        330.9100036621094,
+        204.0,
+        622.5
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/haikei.x"
+    },
+    {
+      "idx": 45,
+      "pos": [
+        750.969970703125,
+        134.0,
+        -505.0299987792969
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": false,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 46,
+      "pos": [
+        3284.820068359375,
+        132.0,
+        -508.010009765625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 47,
+      "pos": [
+        5810.0,
+        170.0,
+        -510.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 48,
+      "pos": [
+        6550.0,
+        170.0,
+        -510.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 49,
+      "pos": [
+        3285.0,
+        170.0,
+        495.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 50,
+      "pos": [
+        5810.0,
+        170.0,
+        495.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 51,
+      "pos": [
+        503.05999755859375,
+        -316.0,
+        -552.760009765625
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 52,
+      "pos": [
+        2416.0400390625,
+        -316.0,
+        -552.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 53,
+      "pos": [
+        4421.9599609375,
+        -316.0,
+        -552.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 54,
+      "pos": [
+        5500.25,
+        355.0,
+        20.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/gateframe.x"
+    },
+    {
+      "idx": 55,
+      "pos": [
+        5104.52001953125,
+        -322.0,
+        -560.9199829101563
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.5,
+        1.0,
+        1.0
+      ],
+      "Flags": false,
+      "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 56,
+      "pos": [
+        -489.3599853515625,
+        242.0,
+        270.1600036621094
+      ],
+      "rot": [
+        0.0,
+        3.130000114440918,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/fan.x"
+    },
     {
       "idx": 57,
       "pos": [
@@ -1200,7 +1200,47 @@
       ],
       "Flags": false,
       "filepath": "data/MODEL/STAGEOBJ/gesui.x"
+    },
+    {
+      "idx": 60,
+      "pos": [
+        750.0,
+        135.0,
+        490.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
+    },
+    {
+      "idx": 61,
+      "pos": [
+        3280.0,
+        135.0,
+        490.0
+      ],
+      "rot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Flags": true,
+      "filepath": "data/MODEL/STAGEOBJ/AlphaWall.x"
     }
 
-   ]
+  ]
 }
