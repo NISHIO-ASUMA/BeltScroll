@@ -1084,8 +1084,8 @@
       {
          "idx": 54,
          "pos": [
-            5485.25,
-            0.0,
+            5500.25,
+            355.0,
             30.0
          ],
          "rot": [
@@ -1099,7 +1099,7 @@
             1.0
          ],
          "Flags": true,
-         "filepath": "data/MODEL/STAGEOBJ/gate.x"
+         "filepath": "data/MODEL/STAGEOBJ/gateframe.x"
       },
       {
          "idx": 55,
