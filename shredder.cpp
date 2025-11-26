@@ -156,7 +156,7 @@ void CShredder::Update(void)
 	Shake();
 
 	m_pShredbinManager->Update();
-	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + 170.0f, m_pos.z));
+	m_pShredbinManager->SetPos(D3DXVECTOR3(m_pos.x, m_pos.y + BIN_OFFSET_Y, m_pos.z));
 
 	// パーティクル生成
 	CSuckParticle::Create(D3DXVECTOR3(m_pos.x + 150.0f, m_pos.y, m_pos.z), m_pos, D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.7f), 7, 30, 20, 20);

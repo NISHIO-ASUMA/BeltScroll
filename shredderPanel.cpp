@@ -125,7 +125,7 @@ void CShredderPanel::Draw(void)
 //================================
 void CShredderPanel::Flash(void)
 {
-	if (m_nFlachCnt < 30)
+	if (m_nFlachCnt < 20)
 	{
 		switch (m_nType)
 		{
@@ -138,7 +138,7 @@ void CShredderPanel::Flash(void)
 		}
 
 	}
-	else if(m_nFlachCnt<40)
+	else if(m_nFlachCnt<25)
 	{
 		m_pPanel->SetCol(COLOR_BLACK);
 	}
