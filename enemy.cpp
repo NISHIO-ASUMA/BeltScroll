@@ -190,6 +190,7 @@ void CEnemy::Update(void)
 		m_move *= friction;
 	}
 
+	// 0以下なら
 	if (D3DXVec3Length(&m_move) < 0.0f)
 	{
 		m_isBlow = false;
@@ -264,6 +265,7 @@ void CEnemy::Update(void)
 			D3DXVECTOR3 shredderPos = pShredder->GetPos();
 			shredderPos.x += 50.0f;   // 少し右側
 
+			// ベクトル計算
 			m_vSuckDir = shredderPos - GetPos();
 			D3DXVec3Normalize(&m_vSuckDir, &m_vSuckDir);
 

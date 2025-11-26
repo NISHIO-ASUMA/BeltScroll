@@ -35,7 +35,7 @@ public:
 	bool GetIsGoal(void) { return m_isGoal; }
 
 	// Ã“Iƒƒ“ƒoŠÖ”
-	static CGoal* Create(D3DXVECTOR3 pos);
+	static CGoal* Create(const D3DXVECTOR3 pos,const char * pModelName);
 
 private:
 

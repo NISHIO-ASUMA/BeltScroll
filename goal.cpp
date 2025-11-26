@@ -2,6 +2,9 @@
 //
 // ゴール地点処理 [ goal.cpp ]
 // Author: Asuma Nishio
+// 
+// TODO : ゴールの判定を考える
+// アニメーション,演出など
 //
 //===================================
 
@@ -27,7 +30,7 @@ CGoal::~CGoal()
 //====================================
 // 生成処理
 //====================================
-CGoal* CGoal::Create(D3DXVECTOR3 pos)
+CGoal* CGoal::Create(const D3DXVECTOR3 pos,const char * pModelName)
 {
 	// インスタンス生成
 	CGoal* pGoal = new CGoal;
@@ -36,7 +39,7 @@ CGoal* CGoal::Create(D3DXVECTOR3 pos)
 	// オブジェクト設定
 	pGoal->SetPos(pos);
 	pGoal->SetRot(VECTOR3_NULL);
-	pGoal->SetFilePass("data/MODEL/STAGEOBJ/Goal.x");
+	pGoal->SetFilePass(pModelName);
 
 	// 初期化失敗時
 	if (FAILED(pGoal->Init())) 	return nullptr;
@@ -77,8 +80,10 @@ void CGoal::Update(void)
 //====================================
 void CGoal::Draw(void)
 {
+#if 0
 	// 親クラスの描画
 	CObjectX::Draw();
+#endif
 }
 //====================================
 // チェック処理

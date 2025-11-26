@@ -416,6 +416,36 @@ bool CJoyPad::GetLeftStick(void)
 	return isLstick;
 }
 //====================================
+// L2トリガー処理
+//====================================
+bool CJoyPad::GetTriggerLT(void)
+{
+	return (m_joyKeyState.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD &&
+		m_OldKeyState.Gamepad.bLeftTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+}
+//====================================
+// R2トリガー処理		
+//====================================
+bool CJoyPad::GetTriggerRT(void)
+{
+	return (m_joyKeyState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD &&
+		m_OldKeyState.Gamepad.bRightTrigger <= XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+}
+//====================================
+// L2プレス処理		
+//====================================
+bool CJoyPad::GetPressLT(void)
+{
+	return (m_joyKeyState.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+}
+//====================================
+// R2プレス処理		
+//====================================
+bool CJoyPad::GetPressRT(void)
+{
+	return (m_joyKeyState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
+}
+//====================================
 // マウスのコンストラクタ
 //====================================
 CInputMouse::CInputMouse()
