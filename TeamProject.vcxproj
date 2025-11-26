@@ -168,6 +168,7 @@
     <ClCompile Include="shredderPanel.cpp" />
     <ClCompile Include="resultenemy.cpp" />
     <ClCompile Include="resultscoremanager.cpp" />
+    <ClCompile Include="siren.cpp" />
     <ClCompile Include="titleenemymanager.cpp" />
     <ClCompile Include="tutorialmanager.cpp" />
     <ClCompile Include="debugproc.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="shredderPanel.h" />
     <ClInclude Include="resultenemy.h" />
     <ClInclude Include="resultscoremanager.h" />
+    <ClInclude Include="siren.h" />
     <ClInclude Include="titleenemymanager.h" />
     <ClInclude Include="tutorialmanager.h" />
     <ClInclude Include="debugproc.h" />

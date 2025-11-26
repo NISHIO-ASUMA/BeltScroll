@@ -134,7 +134,7 @@ void CGame::Update(void)
 	case GAMESTATE_END:
 		m_nStateCount++;
 
-		if (m_nStateCount >= 60)
+		if (m_nStateCount >= GAMEINFO::GAMECOUNT)
 		{
 			// カウンターを初期化
 			m_nStateCount = 0;

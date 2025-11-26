@@ -21,12 +21,16 @@ class CGoal;
 class CGoalManager
 {
 public:
+
 	CGoalManager();
 	~CGoalManager();
 
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
+
+	// Žæ“¾
+	CGoal* GetGoal(const int nIdx) { return m_pGoal[nIdx]; }
 
 private:
 
