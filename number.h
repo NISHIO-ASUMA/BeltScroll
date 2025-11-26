@@ -39,6 +39,11 @@ public:
 	void SetSize(float fWidth, float fHeight);
 	void SetDigit(int nDigit);
 	void SetCol(D3DXCOLOR col);
+	void SetScale(float fW = 1.0f, float fH = 1.0f) 
+	{ 
+		m_fScaleW = fW,m_fScaleH = fH; 
+	}
+
 	void SetFlash(const int nStartFrame, const int nEndFrame, D3DXCOLOR col);
 
 	// ゲッター
@@ -54,6 +59,7 @@ private:
 	D3DXCOLOR m_col;				// 色情報
 	float m_fWidth, m_fHeight;		// 横幅,高さ
 	float m_TexU, m_TexU1,m_TexV;	// テクスチャ座標
+	float m_fScaleW, m_fScaleH = 1.0f;	// 拡大率
 	int n_nColorCount;
 	int m_nIdxTexture;				// テクスチャインデックス
 };

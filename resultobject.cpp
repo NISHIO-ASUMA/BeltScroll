@@ -37,13 +37,15 @@ CResultBlock::~CResultBlock()
 //=================================
 // 初期化処理
 //=================================
-HRESULT CResultBlock::Init(void)
+HRESULT CResultBlock::Init(const char * pFileName)
 {
 	// 値のクリア
 	m_resultblock.clear();
 
 	// ファイル読み込み
-	LoadJson();
+	LoadJson(pFileName);
+
+	//data / JSON / ResultMap.json
 
 	return S_OK;
 }
@@ -80,10 +82,10 @@ CBlock* CResultBlock::CreateBlock(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, 
 //=================================
 // JSON読み込み
 //=================================
-void CResultBlock::LoadJson(void)
+void CResultBlock::LoadJson(const char * pFileName)
 {
 	// 開くファイル
-	std::ifstream file("data/JSON/ResultMap.json");
+	std::ifstream file(pFileName);
 
 	// 開け無かった
 	if (!file.is_open())

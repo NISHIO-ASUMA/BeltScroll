@@ -165,7 +165,7 @@ void CResultScore::UpdateGameScore(void)
 	// まだアニメ中
 	if (m_nTimer < m_nDuration)
 	{
-		// イージング適用s
+		// イージング適用
 		float t = CEasing::SetEase(m_nTimer, m_nDuration);
 		float rate = CEasing::EaseOutCubic(t);
 

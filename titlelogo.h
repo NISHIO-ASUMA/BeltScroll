@@ -36,5 +36,7 @@ public:
 
 private:
 
+	int m_nEaseFrame = 0;
+	int m_nMaxEaseFrame = 120; // ƒoƒEƒ“ƒhüŠú
 };
 

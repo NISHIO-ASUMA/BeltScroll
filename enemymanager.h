@@ -49,6 +49,9 @@ public:
 	void Uninit(void);
 	void Update(void);
 
+	// 配列サイズ取得
+	int GetSize(void) { return m_pEnemys.size(); }
+
 	// 静的メンバ関数
 	static CEnemyManager* Create(void);
 	CEnemy* CreateEnemy(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const char* pModelName, int nType,int nColorType);

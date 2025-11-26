@@ -61,11 +61,15 @@ HRESULT CResult::Init(void)
 
 	// 敵生成
 	m_pResultEnemy = new CResultEnemy;
-	m_pResultEnemy->Init();
+	m_pResultEnemy->Init("data/JSON/ResultEnemy.json");
 
 	// 管理クラス生成
 	m_pResultScoreManager = new CResultScoreManager;
 	m_pResultScoreManager->Init();
+
+	//// リザルトブロック生成
+	//m_pResultBlock = new CResultBlock;
+	//m_pResultBlock->Init("data/JSON/ResultMap.json");
 
 	// サウンド再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTBGM);
@@ -103,7 +107,6 @@ void CResult::Update(void)
 	if (m_pResultScoreManager)
 	{
 		m_pResultScoreManager->Update();
-
 	}
 }
 //=================================

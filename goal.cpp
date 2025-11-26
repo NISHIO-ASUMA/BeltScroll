@@ -80,7 +80,7 @@ void CGoal::Update(void)
 //====================================
 void CGoal::Draw(void)
 {
-#if 0
+#if 1
 	// eƒNƒ‰ƒX‚Ì•`‰æ
 	CObjectX::Draw();
 #endif

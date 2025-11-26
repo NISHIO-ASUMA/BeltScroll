@@ -28,6 +28,7 @@
 #include "score.h"
 #include "shredderPanel.h"
 #include "goalmanager.h"
+#include "siren.h"
 
 //===============================
 // コンストラクタ
@@ -75,8 +76,11 @@ HRESULT CGameManager::Init(void)
 	m_pShredderManaher = new CShredderManager;
 	m_pShredderManaher->Init();
 
-	// ゴール生成
-	m_pGoal = CGoal::Create(D3DXVECTOR3(5500.0f,90.0f,0.0f),"data/MODEL/STAGEOBJ/Goal.x");
+	m_pGoalManager = new CGoalManager;
+	m_pGoalManager->Init();
+
+	// サイレン生成
+	m_pSiren = CSiren::Create(D3DXVECTOR3(5510.0f, 15.0f, 20.0f));
 
 	CTrushBox::Create(D3DXVECTOR3(100.0f, 100.0f, 100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f),"data/MODEL/STAGEOBJ/block000.x" );
 
@@ -84,7 +88,7 @@ HRESULT CGameManager::Init(void)
 	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
 
 	// スコア生成
-	m_pScore = CScore::Create(D3DXVECTOR3(1235.0f, 45.0f, 0.0f), 110.0f, 45.0f);
+	m_pScore = CScore::Create(D3DXVECTOR3(760.0f, 45.0f, 0.0f), 110.0f, 45.0f);
 	m_pScore->ClearScore();
 
 	// ゲームBGM
@@ -158,12 +162,27 @@ void CGameManager::Update(void)
 
 		return;
 	}
+
+	// 実験
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_M))
+	{
+		m_pSiren->SetIsGoalFlag(true);
+	}
+
 #endif
+
 	// nullチェック
 	if (m_pEnemyManager != nullptr)
 	{
 		// 敵管理の更新処理
 		m_pEnemyManager->Update();
+	}
+
+	// nullチェック
+	if (m_pGoalManager != nullptr)
+	{
+		// ゴール管理の更新処理
+		m_pGoalManager->Update();
 	}
 
 	// nullチェック

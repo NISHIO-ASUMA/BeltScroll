@@ -15,11 +15,13 @@
 #include "ranking.h"
 #include "loseplayer.h"
 #include "meshfield.h"
+#include "resultobject.h"
+#include "resultenemy.h"
 
 //==============================
 // コンストラクタ
 //==============================
-CLoseResult::CLoseResult() : CScene(CScene::MODE_LOSERESULT)
+CLoseResult::CLoseResult() : CScene(CScene::MODE_LOSERESULT), m_pResultBlock(nullptr), m_pResultEnemy(nullptr)
 {
 	// 値のクリア
 }
@@ -43,11 +45,19 @@ HRESULT CLoseResult::Init(void)
 	CMeshField::Create(VECTOR3_NULL, 3100.0f, 2000.0f, 1, 1);
 
 	// 負けリザルトプレイヤー生成
-	CLosePlayer::Create(VECTOR3_NULL);
+	CLosePlayer::Create(D3DXVECTOR3(0.0f,0.0f,-500.0f));
+
+	// 負けの敵配置
+	m_pResultEnemy = new CResultEnemy;
+	m_pResultEnemy->Init("data/JSON/LoseResultEnemy.json");
+
+	//// リザルトブロック生成
+	//m_pResultBlock = new CResultBlock;
+	//m_pResultBlock->Init("data/JSON/ResultMap.json");
 
 	//負けリザルトのBGM再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTLOSEBGM);
-		
+
 	return S_OK;
 }
 //==============================
@@ -55,7 +65,12 @@ HRESULT CLoseResult::Init(void)
 //==============================
 void CLoseResult::Uninit(void)
 {
-
+	if (m_pResultEnemy)
+	{
+		m_pResultEnemy->Uninit();
+		delete m_pResultEnemy;
+		m_pResultEnemy = nullptr;
+	}
 }
 //==============================
 // 更新処理

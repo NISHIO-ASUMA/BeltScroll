@@ -12,6 +12,13 @@
 #include "shredder.h"
 #include "shredbinmanager.h"
 #include "bonusscore.h"
+#include "objectX.h"
+
+//******************************
+// 静的メンバ変数初期化
+//******************************
+const D3DXVECTOR3 CShredderManager::HOSE_ENTRANCE_OFFSET = D3DXVECTOR3(-70.0f,80.0f,0.0f);
+const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(90.0f, -80.0f, -40.0f);
 
 //===============================
 // コンストラクタ
@@ -44,6 +51,7 @@ HRESULT CShredderManager::Init(void)
 
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_BLUE]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, 250.0f), TYPE_BLUE);
+	m_pHose = CObjectX::Create("data/MODEL/STAGEOBJ/shredderHose.x",D3DXVECTOR3(-320.0f, 250.0f, -500.0f));
 
 	// スコアをクリアする
 	CBonusScore::ClearScore();
@@ -116,12 +124,13 @@ void CShredderManager::State(void)
 	case STATE_MOVE:
 		// 座標移動
 		move.x = 0.3f;
+		UpdateHose();
 		break;
 	case STATE_DUSTBOX:
 		// 座標移動
 		move.x = 0.0f;
 		m_nStateCnt++;
-		if (m_nStateCnt >= 180)
+		if (m_nStateCnt >= 300)
 		{
 			m_state = STATE_MOVE;
 			m_nStateCnt = 0;
@@ -175,6 +184,15 @@ void CShredderManager::TrushBox(void)
 	}
 }
 
+void CShredderManager::UpdateHose(void)
+{
+	D3DXVECTOR3 pos=m_pHose->GetPos();
+
+	pos.x += 0.3f;
+
+	m_pHose->SetPos(pos);
+}
+
 //===============================
 // ごみステーションの配置
 //===============================
@@ -187,4 +205,21 @@ D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
 		nCnt = LAST_TRASH_NUMBER;
 	}
 	return D3DXVECTOR3(DUSTBOX_POSX[nCnt]+200.0f, 50.0f, -600.0f);
+}
+
+//===============================
+// ホースの位置情報
+//===============================
+D3DXVECTOR3 CShredderManager::GetHosePos(bool bExit)
+{
+	D3DXVECTOR3 pos = m_pHose->GetPos();
+	if (bExit == true)
+	{
+		pos += HOSE_EXIT_OFFSET;
+	}
+	else
+	{
+		pos += HOSE_ENTRANCE_OFFSET;
+	}
+	return pos;
 }

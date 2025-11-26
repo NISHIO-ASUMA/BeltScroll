@@ -30,8 +30,10 @@ CShredbinEffect::CShredbinEffect(int nPriority) : CBillboard(nPriority)
 	m_fRadius = NULL;
 	m_move = VECTOR3_NULL;
 	m_nType = 0;
+	m_nEntranceCnt = 0;
 	m_shredMove = VECTOR3_NULL;
 	m_bBox = false;
+	m_nState = STATE_NORMAL;
 }
 //===============================
 // デストラクタ
@@ -255,19 +257,40 @@ void CShredbinEffect::BoxUpdate(void)
 {
 	if (m_bBox == false && CGame::GetGameManager()->GetShredderM()->GetState() == CShredderManager::STATE_DUSTBOX)
 	{// ごみステーション状態の初期化の役割
-		m_move = D3DXVECTOR3(20.0f, 0.0f, 0.0f);
+		m_move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		m_bBox = true;
 	}
 
 	// 座標,カラー取得
 	D3DXVECTOR3 effectPos = GetPos();
-	D3DXVECTOR3 posDest = CGame::GetGameManager()->GetShredderM()->GetTrushBoxPos();
+	if (m_nEntranceCnt < 60)
+	{
+		D3DXVECTOR3 posDest = CGame::GetGameManager()->GetShredderM()->GetHosePos(false);
+		D3DXVECTOR3 vec = (posDest - effectPos);
 
-	D3DXVECTOR3 vec = (posDest - effectPos);
-
-	m_move.x = vec.x * 0.05f;
-	m_move.y = vec.y * 0.01f;
-	m_move.z = vec.z * 0.02f;
+		m_move.x = vec.x * 0.05f;
+		m_move.y = vec.y * 0.01f;
+		m_move.z = vec.z * 0.02f;
+	}
+	else
+	{
+		if (!m_bExit)
+		{
+			D3DXVECTOR3 pos = CGame::GetGameManager()->GetShredderM()->GetHosePos(true);
+			m_move.x = 0.0f;
+			m_move.y = -1.0f;
+			m_move.z = 0.0f;
+			effectPos.x = pos.x + ((float)(rand() % 30) - 15.0f);
+			effectPos.y = pos.y + ((float)(rand() % 60) - 30.0f);
+			effectPos.z = pos.z + ((float)(rand() % 30) - 15.0f);
+			m_bExit = true;
+		}
+		D3DXVECTOR3 DustPos= CGame::GetGameManager()->GetShredderM()->GetTrushBoxPos();
+		if (effectPos.y < DustPos.y)
+		{
+			m_move.y = 0.0f;
+		}
+	}
 
 	// 移動量の更新
 	effectPos += m_move;
@@ -275,10 +298,7 @@ void CShredbinEffect::BoxUpdate(void)
 	// 座標をセットする
 	SetPos(effectPos);
 
-	if (posDest == effectPos)
-	{
-		m_bBox = false;
-	}
+	m_nEntranceCnt++;
 }
 
 //=============================================

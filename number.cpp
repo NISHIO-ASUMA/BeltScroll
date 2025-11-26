@@ -158,6 +158,10 @@ void CNumber::SetSize(float fWidth, float fHeight)
 	m_fWidth = fWidth;
 	m_fHeight = fHeight;
 
+	// 
+	m_fWidth = m_fWidth * m_fScaleW;
+	m_fHeight = m_fHeight * m_fScaleH;
+
 	// 頂点情報のポインタ
 	VERTEX_2D* pVtx;
 

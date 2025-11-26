@@ -134,7 +134,7 @@ void CGame::Update(void)
 	case GAMESTATE_END:
 		m_nStateCount++;
 
-		if (m_nStateCount >= 60)
+		if (m_nStateCount >= GAMEINFO::GAMECOUNT)
 		{
 			// カウンターを初期化
 			m_nStateCount = 0;
@@ -186,24 +186,14 @@ void CGame::Update(void)
 	// falseの時に更新
 	if (m_nGametype == GAMESTATE_NORMAL && m_pPausemanager->GetPause() == false)
 	{
-		// ゴール取得
-		auto Goal = m_pGameManager->GetGoal();
-		if (Goal == nullptr) return;
-
+		
 		// プレイヤー取得
 		auto Player = m_pGameManager->GetPlayer();
 		if (Player == nullptr) return;
 
-		// 範囲内にいるか判定
-		if (Goal->CheckPos(Player->GetPos()))
-		{
-			// フラグをセット
-			Goal->SetIsGoal(true);
-
-			// タイプ変更
-			m_nGametype = GAMESTATE_END;
-		}
-
+		// ゲーム状態変更
+		//m_nGametype = GAMESTATE_END;
+		
 		// ゲームマネージャー更新
 		m_pGameManager->Update();
 	}
