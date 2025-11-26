@@ -36,13 +36,11 @@ CLoseResult::~CLoseResult()
 HRESULT CLoseResult::Init(void)
 {
 	// カメラ初期化
-	CManager::GetCamera()->Init();
-
-	// UI生成
-	CUi::Create(D3DXVECTOR3(640.0f, 205.0f, 0.0f), 0, 240.0f, 60.0f, "out.png", false);
+	CCamera* pCamera = CManager::GetCamera();
+	pCamera->Init();
 
 	// メッシュフィールド生成
-	CMeshField::Create(VECTOR3_NULL, 2000.0f, 2000.0f, 1, 1);
+	CMeshField::Create(VECTOR3_NULL, 3100.0f, 2000.0f, 1, 1);
 
 	// 負けリザルトプレイヤー生成
 	CLosePlayer::Create(VECTOR3_NULL);

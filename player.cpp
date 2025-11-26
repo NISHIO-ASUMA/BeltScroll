@@ -163,14 +163,7 @@ HRESULT CPlayer::Init(void)
 			m_apModel[nCnt]->SetIsPlayer(true);
 		}
 	}
-	
-	//// ステンシルシャドウ生成
-	//m_pShadowS = CShadowS::Create
-	//(
-	//	m_pos, 
-	//	m_rot
-	//);
-	
+		
 	// 影ポリゴン
 	m_pShadow = CShadow::Create(m_pos, m_rot);
 
