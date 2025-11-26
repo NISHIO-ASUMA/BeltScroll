@@ -35,6 +35,7 @@ CBlowerUi* CBlowerUi::Create(D3DXVECTOR3 pos, int nType)
 	CBlowerUi* pBlowUi = new CBlowerUi;
 	if (pBlowUi == nullptr) return nullptr;
 
+	// 初期化失敗時
 	if (FAILED(pBlowUi->Init())) return nullptr;
 
 	// オブジェクト設定
