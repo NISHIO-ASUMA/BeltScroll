@@ -28,6 +28,7 @@ public:
 		SOUND_LABEL_CLICKSE,		// 決定音
 		SOUND_LABEL_WIND,			// 風っぽい音
 		SOUND_LABEL_SELECTSE,		// 選択音
+		SOUND_LABEL_DEATHSE,		// 敵の吸い込まれる音
 		SOUND_LABEL_MAX
 	};
 
@@ -65,10 +66,11 @@ private:
 		{"data/BGM/Result.wav",-1},			 // リザルトBGM
 		{"data/BGM/result_lose.wav",-1},	 // 負けリザルトBGM
 		{"data/BGM/tutorialbgm.wav",-1},	 // チュートリアルBGM
-		{"data/BGM/ranking_bgm.wav",-1},		 // ランキングBGM
-		{"data/SE/ClickEnter.wav",0},			 // 決定音
-		{"data/SE/Change.wav",0},
-		{"data/SE/select.wav",0},
+		{"data/BGM/ranking_bgm.wav",-1},	 // ランキングBGM
+		{"data/SE/ClickEnter.wav",0},		 // 決定音
+		{"data/SE/Change.wav",0},			 // ブロワー変更音
+		{"data/SE/select.wav",0},			 // 選択音
+		{"data/SE/death_SE.wav",0},			 // 敵が吸い込まれる音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

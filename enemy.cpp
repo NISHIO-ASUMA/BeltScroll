@@ -257,7 +257,6 @@ void CEnemy::Update(void)
 		auto ShredderCol = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt)->GetCollider();
 		auto pShredder = CGame::GetGameManager()->GetShredderM()->GetShredder(nCnt);
 
-		if (pShredder->GetStop())return;
 		if (Collision(ShredderCol))
 		{
 			m_isSuck = true;
@@ -281,6 +280,9 @@ void CEnemy::Update(void)
 
 			// Šp“x“K—p
 			SetRot(rot);
+
+			// ‹z‚¢ž‚Ü‚ê‚é‰¹Ä¶
+			CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_DEATHSE);
 
 			return;
 		}
