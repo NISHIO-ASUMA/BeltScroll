@@ -219,23 +219,11 @@ bool CShredder::Collision(CAABBCollider* pOther, D3DXVECTOR3* pOutPos)
 //===============================
 void CShredder::InitModel(void)
 {
-	// ƒ^ƒCƒv‚²‚Æ‚Éˆá‚¤•”•ª
-	switch (m_nType)
-	{
-	case CShredderManager::TYPE_RED:
-		m_apModel[0] = CModel::Create(VECTOR3_NULL, 
-									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-									"data/MODEL/STAGEOBJ/shredderSumple.x");
-		break;
-	case CShredderManager::TYPE_BLUE:
-		m_apModel[0] = CModel::Create(VECTOR3_NULL,
-									D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-									"data/MODEL/STAGEOBJ/shredderSumple.x");
-		break;
-	}
+	m_apModel[0] = CModel::Create(VECTOR3_NULL,
+								D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
+								"data/MODEL/STAGEOBJ/shredderSumple.x");
 
 
-	// ‹¤’Ê•”•ª
 	m_apModel[1] = CModel::Create(VECTOR3_NULL,
 		D3DXVECTOR3(0.0f, D3DX_PI, 0.0f),
 		"data/MODEL/STAGEOBJ/shredderblade.x");

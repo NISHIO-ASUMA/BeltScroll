@@ -66,7 +66,7 @@ void CShredbinManager::Update(void)
 		}
 		else
 		{// ê¬êF
-			col = D3DXCOLOR(0.2f, 0.2f, 1.0f, 1.0f);
+			col = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
 		}
 
 		CShredbinEffect::Create(m_pos,m_move, D3DXVECTOR3(100.0f, 80.0f, 500.0f), col, 6,m_nType);
