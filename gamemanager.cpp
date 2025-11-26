@@ -173,11 +173,19 @@ void CGameManager::Update(void)
 	}
 
 #endif
+
 	// nullチェック
 	if (m_pEnemyManager != nullptr)
 	{
 		// 敵管理の更新処理
 		m_pEnemyManager->Update();
+	}
+
+	// nullチェック
+	if (m_pGoalManager != nullptr)
+	{
+		// ゴール管理の更新処理
+		m_pGoalManager->Update();
 	}
 
 	// nullチェック

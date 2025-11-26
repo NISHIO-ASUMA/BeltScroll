@@ -30,16 +30,15 @@ public:
 	CResultBlock();
 	~CResultBlock();
 
-	HRESULT Init(void);
+	HRESULT Init(const char * pFileName);
 	void Uninit(void);
 	void Update(void);
 	void PushBack(CBlock* pBlock) { m_resultblock.push_back(pBlock); }
+	void LoadJson(const char* pFileName);
 
 	CBlock* CreateBlock(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const D3DXVECTOR3 scale,const char* pModelName);
 
 private:
-
-	void LoadJson(void);
 
 	std::vector<CBlock*>m_resultblock;	// “®“I”z—ñ
 };

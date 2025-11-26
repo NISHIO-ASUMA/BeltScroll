@@ -15,6 +15,9 @@
 //**********************
 #include "scene.h"
 
+class CResultBlock;
+class CResultEnemy;
+
 //***************************
 // 負けリザルトシーンクラス
 //***************************
@@ -32,6 +35,9 @@ public:
 	void Draw(void);
 
 private:
+
+	CResultBlock* m_pResultBlock;
+	CResultEnemy* m_pResultEnemy;
 
 };
 

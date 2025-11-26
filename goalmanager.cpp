@@ -10,6 +10,8 @@
 //**********************
 #include "goalmanager.h"
 #include "goal.h"
+#include "game.h"
+#include "siren.h"
 
 //=========================================
 // コンストラクタ
@@ -49,14 +51,42 @@ void CGoalManager::Uninit(void)
 void CGoalManager::Update(void)
 {
 	// シュレッダー側から取得する
-	
+	auto isGoal = CGame::GetGameManager()->GetSiren()->GetisFlags();
+	if (isGoal == false) return;
+
 	// ゴールができるなら
-	// if ()
-	
-	// Z座標をずらす
-	D3DXVECTOR3 pos = m_pGoal[0]->GetPos();
-	D3DXVECTOR3 posfront = m_pGoal[1]->GetPos();
+	if (isGoal)
+	{
+		// Z座標をずらしてドアを開ける
+		D3DXVECTOR3 pos = m_pGoal[0]->GetPos();
+		D3DXVECTOR3 posfront = m_pGoal[1]->GetPos();
 
-	// 一定距離移動したら停止
+		// 一定距離移動したら
+		if (pos.z >= 420.0f)
+		{
+			// 座標を固定
+			pos.z = 420.0f;
 
+			// 座標セット
+			m_pGoal[0]->SetPos(pos);
+		}
+
+		// 一定距離移動したら
+		if (posfront.z <= -400.0f)
+		{
+			// 座標を固定
+			posfront.z = -400.0f;
+
+			// 座標セット
+			m_pGoal[1]->SetPos(posfront);
+		}
+
+		// 座標移動
+		pos.z += 2.0f;
+		posfront.z -= 2.0f;
+
+		// 座標セット
+		m_pGoal[0]->SetPos(pos);
+		m_pGoal[1]->SetPos(posfront);
+	}
 }

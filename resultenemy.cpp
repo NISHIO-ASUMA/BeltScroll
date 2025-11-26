@@ -23,13 +23,13 @@ using json = nlohmann::json;
 //===================================
 // 初期化処理
 //===================================
-HRESULT CResultEnemy::Init(void)
+HRESULT CResultEnemy::Init(const char* pFileName)
 {
 	// 配列クリア
 	m_pEnemy.clear();
 
 	// 読み込み関数
-	Load();
+	Load(pFileName);
 
 	return S_OK;
 }
@@ -44,10 +44,10 @@ void CResultEnemy::Uninit(void)
 //===================================
 // 読み込み処理
 //===================================
-void CResultEnemy::Load(void)
+void CResultEnemy::Load(const char * pFileName)
 {
 	// jsonファイルを開く
-	std::ifstream file("data/JSON/ResultEnemy.json");
+	std::ifstream file(pFileName);
 
 	// 開け無かった
 	if (!file.is_open())
