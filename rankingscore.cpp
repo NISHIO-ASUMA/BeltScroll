@@ -82,7 +82,7 @@ HRESULT CRankingScore::Init(void)
 			m_apNumbers[nRank][nDigit] = new CNumber;
 
 			// Y座標をずらす
-			float yOffset = m_pos.y + (m_fHeight + 55.0f) * nRank;
+			float yOffset = m_pos.y + (m_fHeight + 70.0f) * nRank;
 
 			// 初期化処理
 			m_apNumbers[nRank][nDigit]->Init
@@ -96,7 +96,7 @@ HRESULT CRankingScore::Init(void)
 			m_apNumbers[nRank][nDigit]->SetSize(fTexPos, m_fHeight);
 
 			// テクスチャ設定
-			m_apNumbers[nRank][nDigit]->SetTexture("score001.png");
+			m_apNumbers[nRank][nDigit]->SetTexture("number1.png");
 		}
 	}
 

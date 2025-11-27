@@ -40,6 +40,7 @@ public:
 
 	// セッター
 	void SetUseFall(bool isFlags,int nState) { m_isFlash = isFlags,m_nState = nState;}
+	void SetDraw(bool isDraw) { m_isDrawUi = isDraw; }
 
 	// 静的メンバ関数
 	static CUi* Create(D3DXVECTOR3 pos, int nFlashFrame,float fWidth, float fHeight,const char * Filename,bool isUse);
@@ -47,6 +48,7 @@ public:
 private:
 	int m_nFlashFrame;		// 点滅間隔
 	bool m_isFlash;			// 点滅するかどうか
+	bool m_isDrawUi;		// 描画するかどうか
 	int m_nState;
 };
 

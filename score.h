@@ -19,6 +19,7 @@
 // 前方宣言
 //******************************
 class CNumber;
+class CUi;
 
 //******************************
 // スコアクラスを定義
@@ -46,15 +47,20 @@ public:
 	}
 
 private:
+
 	static constexpr int SCORE_NUM = 8; // 表示桁数の定数
+	static constexpr int DRAWTIME = 240;	// 表示時間
 	static int m_nScore; // 格納スコア
 
 	CNumber* m_pNumber[SCORE_NUM];	// ナンバー配列
 	D3DXVECTOR3 m_pos;				// 座標
+	CUi* m_pUi;						// 表示するui
+
 	float m_fWidth;					// 横幅
 	float m_fHeight;				// 高さ
 	int m_nDrawCount;				// 描画カウント
 	bool m_isDraw;					// 描画フラグ
-	bool m_hasDrawed;		// もう表示したかどうか
+	bool m_hasDrawed;				// もう表示したかどうか
+	bool m_isSound;					// 再生済みかどうか
 };
 
