@@ -15,7 +15,8 @@
 #include "objectX.h"
 #include "manager.h"
 #include "game.h"
-#include "goalline.h"
+#include "goal.h"
+#include "gamemanager.h"
 
 //******************************
 // 静的メンバ変数宣言
@@ -40,6 +41,7 @@ CShredderManager::CShredderManager()
 	m_state = STATE_MOVE;
 	m_isSaveScoreTrush = false;
 	m_isSound = false;
+	m_bGoal = false;
 }
 //===============================
 // デストラクタ
@@ -205,29 +207,30 @@ void CShredderManager::TrushBox(void)
 	}
 
 	// 最後のゴミステーションに入ったら
-	if (m_trushBoxCnt >= LAST_TRASH_NUMBER && !m_isSaveScoreTrush)
+	if (m_trushBoxCnt >= LAST_TRASH_NUMBER+1 && !m_isSaveScoreTrush)
 	{
 		// フラグを有効化
 		m_isSaveScoreTrush = true;
 
 		// ボーナススコアを書き出す
 		CBonusScore::Save();
+
+		m_bGoal = true;
+		for (int nCnt = 0; nCnt < 2; nCnt++)
+		{
+			m_pShredder[nCnt]->SetStop(true);
+		}
 	}
 }
 
 void CShredderManager::UpdateHose(void)
 {
-	// ゴールライン取得
-	auto GoalLine = CGame::GetGameManager()->GetLine();
+	// ゴールしてたら止める
+	if (m_bGoal)return;
+	// どちらも停止したら止める
+	if (m_pShredder[TYPE_RED]->GetStop() && m_pShredder[TYPE_BLUE]->GetStop())return;
 
-	// もし停止範囲に入っていたら
-	if (GoalLine->isGetGoalPos())
-	{
-		// 移動しない
-		return;
-	}
-
-	D3DXVECTOR3 pos=m_pHose->GetPos();
+	D3DXVECTOR3 pos = m_pHose->GetPos();
 
 	pos.x += 0.3f;
 
@@ -243,9 +246,9 @@ D3DXVECTOR3 CShredderManager::GetTrushBoxPos(void)
 	int nCnt = m_trushBoxCnt-1;
 	if (nCnt >= LAST_TRASH_NUMBER)
 	{ 
-		
 		nCnt = LAST_TRASH_NUMBER;
 	}
+
 	return D3DXVECTOR3(DUSTBOX_POSX[nCnt]+200.0f, 50.0f, -600.0f);
 }
 

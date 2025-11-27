@@ -40,6 +40,7 @@ CShredder::CShredder(int nPriority) : CObject(nPriority)
 	m_nShake = 0;
 	m_nStopAnimCnt = 0;
 	m_bStop = false;
+	m_bStopAnimEnd = false;
 
 	m_nType = NULL;
 	m_nShredbin = NULL;
@@ -257,6 +258,10 @@ void CShredder::UpdateModel(void)
 		pos.y = -30.0f + sinf(m_fCnt) * 50.0f;
 		m_fCnt += 0.07f * (0.07f / (float)STOP_ANIMCNT * m_nStopAnimCnt);
 		m_nStopAnimCnt--;
+		if (m_nStopAnimCnt==0)
+		{
+			m_bStopAnimEnd = true;
+		}
 	}
 	else if (!m_bStop)
 	{
@@ -301,6 +306,9 @@ void CShredder::AddTrush(int nType)
 	}
 	else
 	{
+		// 間違えた時の音再生
+		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_DIFFSE);
+
 		m_nShake = 30;
 		m_nMissCnt++;
 		// コンボリセット
@@ -379,4 +387,16 @@ void CShredder::UpdatePanel(void)
 			m_pPanel[nCnt]->SetState(CShredderPanel::STATE_NORMAL);
 		}
 	}
+}
+
+//****************
+// 止める処理
+//****************
+void CShredder::SetStop(const bool isStop)
+{
+	if (isStop == true)
+	{
+		m_nStopAnimCnt = STOP_ANIMCNT;
+	}
+	m_bStop = isStop;
 }
