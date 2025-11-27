@@ -22,8 +22,8 @@
 // 静的メンバ変数宣言
 //******************************
 const D3DXVECTOR3 CShredderManager::HOSE_ENTRANCE_OFFSET = D3DXVECTOR3(-70.0f,80.0f,0.0f);
-const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(90.0f, -80.0f, -40.0f);
-const D3DXVECTOR3 CShredderManager::DUST_OFFSET = D3DXVECTOR3(170.0f, 30.0f, -550.0f);
+const D3DXVECTOR3 CShredderManager::HOSE_EXIT_OFFSET = D3DXVECTOR3(40.0f, -100.0f, -40.0f);
+const D3DXVECTOR3 CShredderManager::DUST_OFFSET = D3DXVECTOR3(70.0f, 20.0f, -550.0f);
 
 //===============================
 // コンストラクタ
@@ -34,6 +34,7 @@ CShredderManager::CShredderManager()
 	{
 		m_pShredder[nCnt] = nullptr;
 	}
+	m_pHose = nullptr;
 	m_nSwapCnt = 0;
 	m_bRedFlont = true;
 	m_trushBoxCnt = 0;
@@ -58,7 +59,7 @@ HRESULT CShredderManager::Init(void)
 	// シュレッダー生成
 	m_pShredder[TYPE_RED]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, -250.0f), TYPE_RED);
 	m_pShredder[TYPE_BLUE]=CShredder::Create(D3DXVECTOR3(-400.0f, 110.0f, 250.0f), TYPE_BLUE);
-	m_pHose = CObjectX::Create("data/MODEL/STAGEOBJ/shredderHose.x",D3DXVECTOR3(-320.0f, 250.0f, -500.0f));
+	m_pHose = CObjectX::Create("data/MODEL/STAGEOBJ/shredderHose.x",D3DXVECTOR3(-380.0f, 250.0f, -500.0f));
 
 	// ゴミ箱生成
 	CObjectX::Create("data/MODEL/STAGEOBJ/TrushBox.x", D3DXVECTOR3(DUSTBOX_X00 + DUST_OFFSET.x, DUST_OFFSET.y, DUST_OFFSET.z));
