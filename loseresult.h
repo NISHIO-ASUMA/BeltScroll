@@ -15,6 +15,9 @@
 //**********************
 #include "scene.h"
 
+//**********************
+// ‘O•ûéŒ¾
+//**********************
 class CResultBlock;
 class CResultEnemy;
 
@@ -38,6 +41,4 @@ private:
 
 	CResultBlock* m_pResultBlock;
 	CResultEnemy* m_pResultEnemy;
-
 };
-
