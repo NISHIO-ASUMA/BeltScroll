@@ -134,7 +134,7 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 
 #ifdef _DEBUG
 	// タイトルシーンをセット
-	m_pFade->SetFade(std::make_unique<CResult>());
+	m_pFade->SetFade(std::make_unique<CGame>());
 #else
 	// シーンセット
 	m_pFade->SetFade(std::make_unique<CTitle>());
