@@ -161,7 +161,7 @@ void CEnemy::Update(void)
 			CConfettiParticle::Create
 			(
 				D3DXVECTOR3(GetPos().x + 60.0f,GetPos().y,GetPos().z),
-				D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f),
+				D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f),
 				40, 150, 500, 40, -D3DX_PI * 0.5f
 			);
 

@@ -80,18 +80,20 @@ void CShredderManager::Uninit(void)
 //===============================
 void CShredderManager::Update(void)
 {
-	// 止まっているなら処理をさせない
-	if (m_pShredder[TYPE_RED]->GetStop() || m_pShredder[TYPE_BLUE]->GetStop())
-	{
-		return;
-	}
 
-	// 交換の処理
-	Swap();
 	// 状態による処理
 	State();
 	// ごみステーション用の処理
 	TrushBox();
+
+	//// 止まっているなら処理をさせない
+	//if (m_pShredder[TYPE_RED]->GetStop() || m_pShredder[TYPE_BLUE]->GetStop())
+	//{
+	//	return;
+	//}
+
+	// 交換の処理
+	Swap();
 }
 
 //===============================
