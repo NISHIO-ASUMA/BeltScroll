@@ -14,6 +14,8 @@
 #include "bonusscore.h"
 #include "objectX.h"
 #include "manager.h"
+#include "game.h"
+#include "goalline.h"
 
 //******************************
 // 静的メンバ変数宣言
@@ -85,12 +87,6 @@ void CShredderManager::Update(void)
 	State();
 	// ごみステーション用の処理
 	TrushBox();
-
-	//// 止まっているなら処理をさせない
-	//if (m_pShredder[TYPE_RED]->GetStop() || m_pShredder[TYPE_BLUE]->GetStop())
-	//{
-	//	return;
-	//}
 
 	// 交換の処理
 	Swap();
@@ -221,6 +217,16 @@ void CShredderManager::TrushBox(void)
 
 void CShredderManager::UpdateHose(void)
 {
+	// ゴールライン取得
+	auto GoalLine = CGame::GetGameManager()->GetLine();
+
+	// もし停止範囲に入っていたら
+	if (GoalLine->isGetGoalPos())
+	{
+		// 移動しない
+		return;
+	}
+
 	D3DXVECTOR3 pos=m_pHose->GetPos();
 
 	pos.x += 0.3f;
