@@ -14,6 +14,7 @@
 #include <fstream>
 #include "game.h"
 #include "shreddermanager.h"
+#include "ui.h"
 
 //**********************************
 // 静的メンバ変数宣言
@@ -37,6 +38,8 @@ CScore::CScore(int nPriority) : CObject(nPriority)
 	{
 		number = nullptr;
 	}
+
+	m_pUi = nullptr;
 }
 //=================================
 // デストラクタ
@@ -60,10 +63,7 @@ CScore* CScore::Create(D3DXVECTOR3 pos, float fWidth, float fHeight)
 	pScore->m_pos = pos;
 
 	// 初期化失敗時
-	if (FAILED(pScore->Init()))
-	{
-		return nullptr;
-	}
+	if (FAILED(pScore->Init())) return nullptr;
 
 	// インスタンスを課返す
 	return pScore;
@@ -98,6 +98,12 @@ HRESULT CScore::Init(void)
 	// スコア初期化
 	m_nScore = NULL;
 
+	// ui生成
+	m_pUi = CUi::Create(D3DXVECTOR3(650.0f, 550.0f, 0.0f), 30, 160.0f, 40.0f, "Drawscore.png", true);
+
+	// 最初はオフ
+	m_pUi->SetDraw(false);
+
 	return S_OK;
 }
 //=================================
@@ -128,9 +134,6 @@ void CScore::Uninit(void)
 //=================================
 void CScore::Update(void)
 {
-	// 座標移動
-	m_pos;
-
 	// スコア格納
 	int nScore = m_nScore;
 
@@ -154,6 +157,16 @@ void CScore::Update(void)
 		m_isDraw = true;		// 描画開始
 		m_nDrawCount = 0;		// カウントリセット
 		m_hasDrawed = true;		// 再度表示しない
+		m_pUi->SetDraw(true);
+		
+		// サウンド再生
+		if (!m_isSound)
+		{
+			CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_SCORESE);
+
+			// フラグ有効化
+			m_isSound = true;
+		}
 	}
 
 	// 表示中ならカウント進める
@@ -161,10 +174,13 @@ void CScore::Update(void)
 	{
 		m_nDrawCount++;
 
-		// 5秒経過したら非表示にする
-		if (m_nDrawCount >= 300)
+		// 4秒経過したら非表示にする
+		if (m_nDrawCount >= DRAWTIME)
 		{
 			m_isDraw = false;
+
+			// 描画オフ
+			m_pUi->SetDraw(false);
 		}
 	}
 }

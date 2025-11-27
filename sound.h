@@ -31,6 +31,7 @@ public:
 		SOUND_LABEL_DEATHSE,		// 敵の吸い込まれる音
 		SOUND_LABEL_BOUNSSE,		// ボーナス音
 		SOUND_LABEL_DIFFSE,			// 間違え音
+		SOUND_LABEL_SCORESE,		// スコア表示音
 		SOUND_LABEL_MAX
 	};
 
@@ -75,6 +76,7 @@ private:
 		{"data/SE/death_SE.wav",0},			 // 敵が吸い込まれる音
 		{"data/SE/Charge02.wav",0},			 // ボーナス加算音
 		{"data/SE/diff_SE.wav",0},			 // 間違えた時の音
+		{"data/SE/scoresound.wav",0},		// スコアサウンド
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス

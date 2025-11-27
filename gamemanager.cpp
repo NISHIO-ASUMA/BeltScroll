@@ -90,7 +90,7 @@ HRESULT CGameManager::Init(void)
 	CCombo::Create(D3DXVECTOR3(300.0f,50.0f,0.0f));
 
 	// スコア生成
-	m_pScore = CScore::Create(D3DXVECTOR3(760.0f, 45.0f, 0.0f), 110.0f, 45.0f);
+	m_pScore = CScore::Create(D3DXVECTOR3(760.0f, 650.0f, 0.0f), 130.0f, 50.0f);
 	m_pScore->ClearScore();
 
 	// ゴールライン生成

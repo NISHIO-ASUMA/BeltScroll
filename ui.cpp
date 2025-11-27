@@ -22,6 +22,7 @@ CUi::CUi(int nPriority) : CObject2D(nPriority)
 	m_isFlash = false;
 	m_nFlashFrame = NULL;
 	m_nState = STATE_NONE;
+	m_isDrawUi = true;
 }
 //===============================
 // デストラクタ
@@ -90,8 +91,7 @@ void CUi::Update(void)
 //===============================
 void CUi::Draw(void)
 {
-	// オブジェクトの描画
-	CObject2D::Draw();
+	if (m_isDrawUi) CObject2D::Draw();
 }
 //===============================
 // 生成処理
