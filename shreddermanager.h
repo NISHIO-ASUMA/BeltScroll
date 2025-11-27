@@ -55,6 +55,7 @@ public:
 	D3DXVECTOR3 GetHosePos(bool bExit);
 	int GetSwapCnt(void) { return m_nSwapCnt; }
 	int GetTrushCount(void) { return m_trushBoxCnt; }
+	bool GetIsGoal(void) { return m_bGoal; }
 
 private:
 	CShredder* m_pShredder[2];	// ポインタ
@@ -66,6 +67,7 @@ private:
 	bool m_isSound;				// 再生したかどうか
 	STATE m_state;				// 状態
 	int m_trushBoxCnt;			// ごみステーションのカウント
+	bool m_bGoal;		// ゴール
 
 	// 定数宣言
 	static constexpr int SWAPCOUNT = 600;

@@ -194,7 +194,8 @@ void CGame::Update(void)
 		auto shredder2 = m_pGameManager->GetShredderM()->GetShredder(1);
 
 		// —¼•û’âŽ~‚µ‚½‚ç
-		if (shredder1->GetStop() && shredder2->GetStop())
+		if (shredder1->GetStopAnimEnd() && !m_pGameManager->GetShredderM()->GetIsGoal()
+			&&shredder2->GetStopAnimEnd() && !m_pGameManager->GetShredderM()->GetIsGoal())
 		{
 			// Ž¸”sƒŠƒUƒ‹ƒg‚É‘JˆÚ
 			m_nGametype = GAMESTATE_LOSEEND;
@@ -205,7 +206,8 @@ void CGame::Update(void)
 		auto Line = m_pGameManager->GetLine();
 
 		// ‚Ç‚Á‚¿‚©•Ð•û‚ª¶‚«Žc‚Á‚ÄƒS[ƒ‹‚É“ž’B‚µ‚½‚ç
-		if (Line->CheckIsGoalPos(shredder1->GetPos()) || Line->CheckIsGoalPos(shredder2->GetPos()))
+		if (shredder1->GetStopAnimEnd() && m_pGameManager->GetShredderM()->GetIsGoal()
+			|| shredder2->GetStopAnimEnd() && m_pGameManager->GetShredderM()->GetIsGoal())
 		{
 			// ƒtƒ‰ƒO‹N“®
 			m_pGameManager->GetSiren()->SetIsGoalFlag(true);

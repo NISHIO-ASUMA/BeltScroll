@@ -51,12 +51,13 @@ public:
 	void SetMove(D3DXVECTOR3 move) { m_move = move; }
 	void Shake(void);
 	void SetPanel(void);
-	void SetStop(const bool isStop) { m_bStop = isStop; }
+	void SetStop(const bool isStop);
 
 	D3DXVECTOR3 GetPos(void) const { return m_pos; }
 	CAABBCollider* GetCollider(void) { return m_pAABB; }
 	CShredbinManager*GetShredbinManager(void){return m_pShredbinManager; }
 	bool GetStop(void) { return m_bStop; }
+	bool GetStopAnimEnd(void) { return m_bStopAnimEnd; }
 
 	// 静的メンバ関数
 	static CShredder* Create(D3DXVECTOR3 pos,int nType);
@@ -81,6 +82,7 @@ private:
 	int m_nMissCnt;
 	int m_nStopAnimCnt;
 	bool m_bStop;
+	bool m_bStopAnimEnd;
 	CAABBCollider* m_pAABB; // 矩形のコライダー
 	CShredbinManager* m_pShredbinManager;
 	CShredderPanel* m_pPanel[9];
