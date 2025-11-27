@@ -301,6 +301,9 @@ void CShredder::AddTrush(int nType)
 	}
 	else
 	{
+		// 間違えた時の音再生
+		CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_DIFFSE);
+
 		m_nShake = 30;
 		m_nMissCnt++;
 		// コンボリセット

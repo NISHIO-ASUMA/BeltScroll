@@ -30,6 +30,7 @@ public:
 		SOUND_LABEL_SELECTSE,		// 選択音
 		SOUND_LABEL_DEATHSE,		// 敵の吸い込まれる音
 		SOUND_LABEL_BOUNSSE,		// ボーナス音
+		SOUND_LABEL_DIFFSE,			// 間違え音
 		SOUND_LABEL_MAX
 	};
 
@@ -73,6 +74,7 @@ private:
 		{"data/SE/select.wav",0},			 // 選択音
 		{"data/SE/death_SE.wav",0},			 // 敵が吸い込まれる音
 		{"data/SE/Charge02.wav",0},			 // ボーナス加算音
+		{"data/SE/diff_SE.wav",0},			 // 間違えた時の音
 	};
 
 	IXAudio2* m_pXAudio2;									// XAudio2オブジェクトへのインターフェイス
