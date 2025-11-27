@@ -207,7 +207,7 @@ void CGame::Update(void)
 
 		// どっちか片方が生き残ってゴールに到達したら
 		if (shredder1->GetStopAnimEnd() && m_pGameManager->GetShredderM()->GetIsGoal()
-			|| shredder2->GetStopAnimEnd() && m_pGameManager->GetShredderM()->GetIsGoal())
+			&& shredder2->GetStopAnimEnd() && m_pGameManager->GetShredderM()->GetIsGoal())
 		{
 			// フラグ起動
 			m_pGameManager->GetSiren()->SetIsGoalFlag(true);

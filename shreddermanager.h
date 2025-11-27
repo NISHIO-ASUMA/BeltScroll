@@ -79,7 +79,7 @@ private:
 	static constexpr float DUSTBOX_X01 = 1300.0f;
 	static constexpr float DUSTBOX_X02 = 2500.0f;
 	static constexpr float DUSTBOX_X03 = 3250.0f;
-	static constexpr float DUSTBOX_X04 = 4600.0f;
+	static constexpr float DUSTBOX_X04 = 4650.0f;
 
 	static const D3DXVECTOR3 HOSE_ENTRANCE_OFFSET;
 	static const D3DXVECTOR3 HOSE_EXIT_OFFSET;
