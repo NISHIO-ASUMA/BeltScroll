@@ -167,6 +167,7 @@
     <ClCompile Include="goalline.cpp" />
     <ClCompile Include="goalmanager.cpp" />
     <ClCompile Include="resulttrush.cpp" />
+    <ClCompile Include="resultui.cpp" />
     <ClCompile Include="shredderPanel.cpp" />
     <ClCompile Include="resultenemy.cpp" />
     <ClCompile Include="resultscoremanager.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="goalline.h" />
     <ClInclude Include="goalmanager.h" />
     <ClInclude Include="resulttrush.h" />
+    <ClInclude Include="resultui.h" />
     <ClInclude Include="shredderPanel.h" />
     <ClInclude Include="resultenemy.h" />
     <ClInclude Include="resultscoremanager.h" />

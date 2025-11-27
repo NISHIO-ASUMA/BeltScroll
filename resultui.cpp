@@ -1,0 +1,101 @@
+//===================================
+//
+// リザルト演出ui処理 [ resultui.cpp ]
+// Author: Asuma Nishio
+//
+//===================================
+
+//******************************
+// インクルードファイル
+//******************************
+#include "resultui.h"
+#include "easing.h"
+
+//====================================
+// コンストラクタ
+//====================================
+CResultUi::CResultUi(int nPriority) : CObject2D(nPriority)
+{
+
+}
+//====================================
+// デストラクタ
+//====================================
+CResultUi::~CResultUi()
+{
+
+}
+//====================================
+// 生成処理
+//====================================
+CResultUi* CResultUi::Create(D3DXVECTOR3 pos, float fWidth, float fHeight,const char * pFileName)
+{
+	// インスタンス生成
+	CResultUi* pUi = new CResultUi;
+	if (pUi == nullptr) return nullptr;
+
+	// 初期化失敗時
+	if (FAILED(pUi->Init())) return nullptr;
+
+	// オブジェクト設定
+	pUi->SetPos(pos);
+	pUi->SetSize(fWidth, fHeight);
+	pUi->SetTexture(pFileName);
+	pUi->SetAnchor(CObject2D::ANCHORTYPE_CENTER);
+
+	// 生成されたポインタ
+	return pUi;
+}
+//====================================
+// 初期化処理
+//====================================
+HRESULT CResultUi::Init(void)
+{
+	// 親クラスの初期化
+	CObject2D::Init();
+
+	return S_OK;
+}
+//====================================
+// 終了処理
+//====================================
+void CResultUi::Uninit(void)
+{
+	// 親クラスの終了処理
+	CObject2D::Uninit();
+}
+//====================================
+// 更新処理
+//====================================
+void CResultUi::Update(void)
+{
+	// 座標取得
+	D3DXVECTOR3 pos = GetPos();
+
+	// 今の位置が規定値よりも右にいたら
+	if (pos.x > BASE_X)
+	{
+		// 左に移動
+		pos.x -= 10.0f;
+
+		// 通り過ぎた場合はBASE_Xに固定
+		if (pos.x < BASE_X)
+		{
+			pos.x = BASE_X;
+		}
+
+		// 座標セット
+		SetPos(pos);
+	}
+
+	// 親クラスの更新
+	CObject2D::Update();
+}
+//====================================
+// 描画処理
+//====================================
+void CResultUi::Draw(void)
+{
+	// 親クラスの描画
+	CObject2D::Draw();
+}

@@ -51,9 +51,9 @@ HRESULT CLoseResult::Init(void)
 	m_pResultEnemy = new CResultEnemy;
 	m_pResultEnemy->Init("data/JSON/LoseResultEnemy.json");
 
-	//// リザルトブロック生成
-	//m_pResultBlock = new CResultBlock;
-	//m_pResultBlock->Init("data/JSON/ResultMap.json");
+	// リザルトブロック生成
+	m_pResultBlock = new CResultBlock;
+	m_pResultBlock->Init("data/JSON/ResultMap.json");
 
 	//負けリザルトのBGM再生
 	CManager::GetSound()->PlaySound(CSound::SOUND_LABEL_RESULTLOSEBGM);
@@ -65,11 +65,20 @@ HRESULT CLoseResult::Init(void)
 //==============================
 void CLoseResult::Uninit(void)
 {
+	// ポインタの破棄
 	if (m_pResultEnemy)
 	{
 		m_pResultEnemy->Uninit();
 		delete m_pResultEnemy;
 		m_pResultEnemy = nullptr;
+	}
+
+	// ポインタの破棄
+	if (m_pResultBlock)
+	{
+		m_pResultBlock->Uninit();
+		delete m_pResultBlock;
+		m_pResultBlock = nullptr;
 	}
 }
 //==============================

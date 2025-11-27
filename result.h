@@ -18,6 +18,7 @@
 //**************************
 class CResultEnemy;
 class CResultScoreManager;
+class CResultBlock;
 
 //*****************************
 // リザルトシーンクラスを定義
@@ -41,6 +42,7 @@ private:
 
 	CResultEnemy* m_pResultEnemy; // リザルトの敵クラス
 	static CResultScoreManager* m_pResultScoreManager; // スコア管理クラス
+	CResultBlock* m_pResultBlock;
 };
 
 #endif
