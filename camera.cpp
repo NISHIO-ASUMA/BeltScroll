@@ -1,13 +1,13 @@
-//====================================
+//=========================================================
 //
 // カメラ処理 [ camera.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-//**********************
+//*********************************************************
 // インクルードファイル
-//**********************
+//*********************************************************
 #include "camera.h"
 #include "manager.h"
 #include "input.h"
@@ -18,9 +18,9 @@
 #include "gamemanager.h"
 #include "game.h"
 
-//**********************
+//*********************************************************
 // 定数宣言
-//**********************
+//*********************************************************
 namespace CAMERAINFO
 {
 	constexpr float MAX_VIEWUP = 3.0f;			// カメラの角度制限値
@@ -31,32 +31,30 @@ namespace CAMERAINFO
 	constexpr float DIGITVALUE = 1.5f;			// 割る値
 }
 
-//=================================
+//=========================================================
 // コンストラクタ
-//=================================
-CCamera::CCamera() : m_pCamera{}
+//=========================================================
+CCamera::CCamera() : m_pCamera{},
+m_Zoom(VECTOR3_NULL),
+m_bMove(false),
+m_bPlayerInit(false)
 {
-	// 値のクリア
-	m_Zoom = VECTOR3_NULL;
-	m_bMove = false;
-	m_bPlayerInit = false;
 }
-//=================================
+//=========================================================
 // デストラクタ
-//=================================
+//=========================================================
 CCamera::~CCamera()
 {
-	// 無し
 }
-//=================================
+//=========================================================
 // 初期化処理
-//=================================
+//=========================================================
 HRESULT CCamera::Init(void)
 {
 	// 初期値を設定する
 	m_pCamera.posV = D3DXVECTOR3(0.0f, 800.0f, -800.0f);		// カメラの位置
 	m_pCamera.posR = VECTOR3_NULL;								// カメラの見ている位置
-	m_pCamera.posRDest = VECTOR3_NULL;
+	m_pCamera.posRDest = VECTOR3_NULL;							// 目的座標
 	m_pCamera.vecU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);				// 上方向ベクトル
 	m_pCamera.rot = D3DXVECTOR3(D3DX_PI * 0.6f, 0.0f, 0.0f);	// 角度
 	m_bPlayerInit = false;
@@ -84,16 +82,16 @@ HRESULT CCamera::Init(void)
 	// 初期化結果を返す
 	return S_OK;
 }
-//=================================
+//=========================================================
 // 終了処理
-//=================================
+//=========================================================
 void CCamera::Uninit(void)
 {
 	// 無し
 }
-//=================================
+//=========================================================
 // 更新処理
-//=================================
+//=========================================================
 void CCamera::Update(void)
 {
 	// 入力情報を取得
@@ -139,9 +137,9 @@ void CCamera::Update(void)
 		m_pCamera.rot.y += CAMERAINFO::NorRot;
 	}
 }
-//=================================
+//=========================================================
 // カメラをセット
-//=================================
+//=========================================================
 void CCamera::SetCamera(void)
 {
 	// デバイスポインタを宣言
@@ -175,9 +173,9 @@ void CCamera::SetCamera(void)
 	// プロジェクションマトリックスの設定
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_pCamera.mtxprojection);
 }
-//======================================
+//=========================================================
 // マウス操作の視点移動
-//======================================
+//=========================================================
 void CCamera::MouseView(CInputMouse* pMouse, CInputKeyboard* pInput)
 {
 	// 左クリック
@@ -256,9 +254,9 @@ void CCamera::MouseView(CInputMouse* pMouse, CInputKeyboard* pInput)
 		m_pCamera.rot.x += -CAMERAINFO::NorRot;
 	}
 }
-//==============================
+//=========================================================
 // マウスホイール処理
-//==============================
+//=========================================================
 void CCamera::WheelMouse(int nDelta)
 {
 	// ローカル変数
@@ -287,15 +285,13 @@ void CCamera::WheelMouse(int nDelta)
 		m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	}
 }
-//==============================
+//=========================================================
 // 追従カメラ処理
-//==============================
+//=========================================================
 void CCamera::PlayerFllow(void)
 {
-#if 1
 	// 現在のモード取得
 	CScene::MODE nMode = CManager::GetScene();
-
 	if (nMode != CScene::MODE_GAME)
 	{
 		return;
@@ -324,13 +320,10 @@ void CCamera::PlayerFllow(void)
 	m_pCamera.posV.x = m_pCamera.posR.x - sinf(m_pCamera.rot.x) * sinf(m_pCamera.rot.y) * m_pCamera.fDistance;
 	m_pCamera.posV.y = m_pCamera.posR.y - cosf(m_pCamera.rot.x) * m_pCamera.fDistance;
 	m_pCamera.posV.z = m_pCamera.posR.z - sinf(m_pCamera.rot.x) * cosf(m_pCamera.rot.y) * m_pCamera.fDistance;
-
-#endif
 }
-
-//**********************************************************
+//=========================================================
 // プレイヤーが画面端に行ったときにカメラを動かすための判定
-//**********************************************************
+//=========================================================
 TRAKING CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 {
 
@@ -348,7 +341,6 @@ TRAKING CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	D3DXMatrixIdentity(&matWorld);
 	D3DXVec3Project(&pos, &playerPos, &viewport, &matProj, &matView, &matWorld);
 
-
 	// 画面の一定以上の割合右に行くと更新
 	if (pos.x > SCREEN_WIDTH * 0.75f)
 	{
@@ -362,22 +354,17 @@ TRAKING CCamera::PlayerCollisionScreen(D3DXVECTOR3 playerPos)
 	return TRAKING_NONE;
 
 }
-
-//**********************************************************
+//=========================================================
 // 追従カメラ処理
-//**********************************************************
+//=========================================================
 void CCamera::Traking(void)
 {
-#if 1
 	// 現在のモード取得
 	CScene::MODE nMode = CManager::GetScene();
-
 	if (nMode != CScene::MODE_GAME) return;
 
 	// プレイヤー取得
 	CPlayer* pPlayer = CGame::GetGameManager()->GetPlayer();
-
-	// nullptrチェック
 	if (pPlayer == nullptr) return;
 
 	bool bLeft = TRAKING_LEFT == PlayerCollisionScreen(pPlayer->GetPos()) && pPlayer->GetPos().x < pPlayer->GetOldPos().x;
@@ -403,7 +390,4 @@ void CCamera::Traking(void)
 	{
 		m_bMove = false;
 	}
-
-#endif
-
 }

@@ -1,58 +1,52 @@
-//=====================================
+//=========================================================
 //
 // モーション処理 [ motion.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-//**************************
-// インクルードファイル宣言
-//**************************
+//*********************************************************
+// インクルードファイル
+//*********************************************************
 #include "motion.h"
 #include "template.h"
 #include "debugproc.h"
 
-//==============================
+//=========================================================
 // コンストラクタ
-//==============================
-CMotion::CMotion()
+//=========================================================
+CMotion::CMotion() : m_aMotionInfo{},
+m_nCounterMotion(NULL),
+m_nKey(NULL),
+m_nNumKey(NULL),
+m_nNumMotion(NULL),
+m_motiontype(NULL),
+m_type(NULL),
+m_nNextKey(NULL),
+m_nNumModels(NULL),
+m_nAllFrameCount(NULL),
+m_nNumAllFrame(NULL),
+m_motiontypeBlend(NULL),
+m_nFrameBlend(NULL),
+m_nCounterBlend(NULL),
+m_nKeyBlend(NULL),
+m_nNextKeyBlend(NULL),
+m_isLoopMotion(false),
+m_isBlendMotion(false),
+m_isFinishMotion(false),
+m_isFirstMotion(false)
 {
-	// 配列クリア
-	m_aMotionInfo.clear();
-
-	// 値のクリア
-	m_nCounterMotion = NULL;
-	m_nKey = NULL;
-	m_nNumKey = NULL;
-	m_nNumMotion = NULL;
-	m_motiontype = NULL;
-	m_type = NULL;
-	m_nNextKey = NULL;
-	m_nNumModels = NULL;
-	m_nAllFrameCount = NULL;
-	m_nNumAllFrame = NULL;
-
-	m_motiontypeBlend = NULL;
-	m_nFrameBlend = NULL;
-	m_nCounterBlend = NULL;
-	m_nKeyBlend = NULL;
-	m_nNextKeyBlend = NULL;
-
-	m_isLoopMotion = false;
-	m_isBlendMotion = false;
-	m_isFinishMotion = false;
-	m_isFirstMotion = false;
 }
-//==============================
+//=========================================================
 // デストラクタ
-//==============================
+//=========================================================
 CMotion::~CMotion()
 {
-	// 無し
+	
 }
-//==============================
+//=========================================================
 // モーション読み込み関数
-//==============================
+//=========================================================
 CMotion* CMotion::Load(const char* pFilename,const int nMaxParts, CModel** pModel, int nDestMotions)
 {
 	// モーションクラスのインスタンス生成
@@ -139,9 +133,9 @@ CMotion* CMotion::Load(const char* pFilename,const int nMaxParts, CModel** pMode
 	// 生成されたポインタを返す
 	return pMotion;
 }
-//=================================
+//=========================================================
 // モーションセット
-//=================================
+//=========================================================
 void CMotion::SetMotion(int motiontype)
 {
 	// ここはmotiontypeに渡された番号を取得する
@@ -158,9 +152,9 @@ void CMotion::SetMotion(int motiontype)
 	m_nAllFrameCount = 0;
 	m_isFinishMotion = false;
 }
-//======================================
+//=========================================================
 // モーションセット情報
-//======================================
+//=========================================================
 void CMotion::SetMotion(int nMotionType, bool isBlend, int nBlendFrame,bool isBoss)
 {
 	// ここはmotiontypeに渡された番号を取得する
@@ -209,9 +203,9 @@ void CMotion::SetMotion(int nMotionType, bool isBlend, int nBlendFrame,bool isBo
 		m_isFinishMotion = false;
 	}
 }
-//==============================
+//=========================================================
 // モーション全体更新処理
-//==============================
+//=========================================================
 void CMotion::Update(CModel** ppModel, const int nMaxPart)
 {// モーションタイプの番号で該当のモーション更新するだけにする
 
@@ -353,9 +347,9 @@ void CMotion::Update(CModel** ppModel, const int nMaxPart)
 	// 全体フレーム計算
 	m_nNumAllFrame = nFrame;
 }
-//======================================
+//=========================================================
 // 現在のモーションの更新関数
-//======================================
+//=========================================================
 void CMotion::UpdateCurrentMotion(CModel** ppModel, int nModelCount)
 {
 	// モーションデータの取得変数を宣言
@@ -410,9 +404,9 @@ void CMotion::UpdateCurrentMotion(CModel** ppModel, int nModelCount)
 	ppModel[nModelCount]->SetRot(Rot);
 }
 
-//======================================
+//=================================================================
 // ブレンドモーションの更新関数
-//======================================
+//=================================================================
 void CMotion::UpdateBlend(CModel** ppModel, int nModelCount)
 {
 	// ブレンド係数を計算
@@ -456,9 +450,9 @@ void CMotion::UpdateBlend(CModel** ppModel, int nModelCount)
 	CurrentPos.y = nowKey.fPosY + DiffPos.y * fRateMotion;
 	CurrentPos.z = nowKey.fPosZ + DiffPos.z * fRateMotion;
 
-	//===============================
+	//==========================================================
 	// ブレンドモーションの補間計算
-	//===============================
+	//==========================================================
 	D3DXVECTOR3 DiffBlendRot = VECTOR3_NULL; // 角度
 	D3DXVECTOR3	BlendRot = VECTOR3_NULL;	 // ブレンド角度
 
@@ -485,9 +479,9 @@ void CMotion::UpdateBlend(CModel** ppModel, int nModelCount)
 	BlendPos.y = nowKeyBlend.fPosY + DiffBlendPos.y * fBlendFrame;
 	BlendPos.z = nowKeyBlend.fPosZ + DiffBlendPos.z * fBlendFrame;
 
-	//===============================
+	//==========================================================
 	// モデルの座標,角度に適用
-	//===============================
+	//==========================================================
 
 	// 最終角度,座標
 	D3DXVECTOR3 LastRot = VECTOR3_NULL;
@@ -508,16 +502,16 @@ void CMotion::UpdateBlend(CModel** ppModel, int nModelCount)
 	LastRot.y = NormalAngle(LastRot.y);
 	LastRot.z = NormalAngle(LastRot.z);
 
-	//===============================
+	//==========================================================
 	// モデルにセット
-	//===============================
+	//==========================================================
 	ppModel[nModelCount]->SetPos(LastPos);
 	ppModel[nModelCount]->SetRot(LastRot);
 }
 
-//======================================
+//=========================================================
 // デバッグフォント関数
-//======================================
+//=========================================================
 void CMotion::Debug(void)
 {
 	CDebugproc::Print("[現在フレームカウント] %d /  [ 最大モーションフレーム ] %d", m_nAllFrameCount, m_nNumAllFrame);
@@ -530,9 +524,9 @@ void CMotion::Debug(void)
 	CDebugproc::Draw(800, 360);
 }
 
-//======================================
+//=========================================================
 // モデル数読み込み
-//======================================
+//=========================================================
 int CMotion::SetModels(std::istringstream& iss,int nMaxParts)
 {
 	// 文字列設定
@@ -553,9 +547,9 @@ int CMotion::SetModels(std::istringstream& iss,int nMaxParts)
 	// モデル数を返す
 	return nModel;
 }
-//======================================
+//=========================================================
 // モデルファイル読み込み
-//======================================
+//=========================================================
 void CMotion::SetModelFile(std::istringstream& iss, CModel** pModel, int nCnt)
 {
 	// 読み込み用文字列
@@ -570,9 +564,9 @@ void CMotion::SetModelFile(std::istringstream& iss, CModel** pModel, int nCnt)
 	// モデルのポインタに格納
 	pModel[nCnt] = pNewModel;
 }
-//======================================
+//=========================================================
 // パーツごとの設定
-//======================================
+//=========================================================
 void CMotion::SetParts(std::ifstream& file, CModel** pModel)
 {
 	// 読み込み文字列
@@ -709,9 +703,9 @@ void CMotion::SetParts(std::ifstream& file, CModel** pModel)
 		}
 	}
 }
-//======================================
+//=========================================================
 // パーツごとのモーション設定
-//======================================
+//=========================================================
 void CMotion::SetPartsMotion(std::ifstream& file, CMotion* pMotion, int nCntMotion)
 {
 	// 読み込み用1行分のバッファ
@@ -781,9 +775,9 @@ void CMotion::SetPartsMotion(std::ifstream& file, CMotion* pMotion, int nCntMoti
 		}
 	}
 }
-//======================================
+//=========================================================
 // モーションキー全体の設定
-//======================================
+//=========================================================
 void CMotion::SetKey(std::ifstream& file, CMotion* pMotion, int nCntMotion, int nCntKey)
 {
 	// 行読み込み
@@ -847,9 +841,9 @@ void CMotion::SetKey(std::ifstream& file, CMotion* pMotion, int nCntMotion, int 
 		}
 	}
 }
-//======================================
+//=========================================================
 // キーごとの情報設定
-//======================================
+//=========================================================
 void CMotion::SetKeyDate(std::istringstream& ss, const std::string& param, CMotion* pMotion, int nCntMotion, int nCntKey, int& posKeyIndex, int& rotKeyIndex)
 {
 	// 読み込み用1行分のバッファ
@@ -890,9 +884,9 @@ void CMotion::SetKeyDate(std::istringstream& ss, const std::string& param, CMoti
 		rotKeyIndex++;
 	}
 }
-//======================================
+//=========================================================
 // モーションフレーム判定
-//======================================
+//=========================================================
 bool CMotion::CheckFrame(int nStartMotion, int nEndMotion, int nMotionType)
 {
 	// StartとEndの範囲内なら

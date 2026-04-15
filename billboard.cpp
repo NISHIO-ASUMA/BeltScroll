@@ -1,52 +1,49 @@
-//====================================
+//=========================================================
 //
 // ビルボード処理 [ billboard.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-//**********************
+//*********************************************************
 // インクルードファイル
-//**********************
+//*********************************************************
 #include "billboard.h"
 #include "manager.h"
 #include <string>
 
-//================================
+//==========================================================
 // コンストラクタ
-//================================
-CBillboard::CBillboard(int nPriority) : CObject(nPriority)
+//==========================================================
+CBillboard::CBillboard(int nPriority) : CObject(nPriority),
+m_col(COLOR_WHITE),
+m_pos(VECTOR3_NULL),
+m_rot(VECTOR3_NULL),
+m_nIdxTexture(-1),
+m_pVtxBuff(nullptr),
+m_mtxWorld{},
+m_fWidth(NULL),
+m_fHeight(NULL),
+m_FlashCount(NULL),
+m_nCountAnim(NULL),
+m_nPatterAnim(NULL),
+m_isTests(false)
 {
-	// 値のクリア
-	m_col = COLOR_WHITE;
-	m_pos = VECTOR3_NULL;
-	m_rot = VECTOR3_NULL;
-	m_nIdxTexture = -1;
-	m_pVtxBuff = nullptr;
-	m_mtxWorld = {};
-	m_fWidth = NULL;
-	m_fHeight = NULL;
-	m_isTests = false;
-	m_FlashCount = NULL;
-	m_nCountAnim = NULL;
-	m_nPatterAnim = NULL;
 }
-//================================
+//==========================================================
 // デストラクタ
-//================================
+//==========================================================
 CBillboard::~CBillboard()
 {
-	// 無し
+
 }
-//================================
+//==========================================================
 // 生成処理
-//================================
+//==========================================================
 CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot,float fWidth, float fHeight,const char * pTexName)
 {
 	// インスタンス生成
 	CBillboard* pBillboard = new CBillboard;
-
-	// nullptrだったら
 	if (pBillboard == nullptr) return nullptr;
 
 	// オブジェクトセット
@@ -57,17 +54,14 @@ CBillboard* CBillboard::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot,float fWidth, fl
 
 	// 初期化失敗時
 	if (FAILED(pBillboard->Init()))
-	{
-		// 失敗結果を返す
 		return nullptr;
-	}
 
 	// ビルボードのポインタを返す
 	return pBillboard;
 }
-//================================
+//==========================================================
 // 初期化処理
-//================================
+//==========================================================
 HRESULT CBillboard::Init(void)
 {
 	// デバイス取得
@@ -115,9 +109,9 @@ HRESULT CBillboard::Init(void)
 
 	return S_OK;
 }
-//================================
+//==========================================================
 // 終了処理
-//================================
+//==========================================================
 void CBillboard::Uninit(void)
 {
 	// 頂点バッファの破棄
@@ -125,17 +119,15 @@ void CBillboard::Uninit(void)
 	{
 		// 解放
 		m_pVtxBuff->Release();
-
-		// nullptr初期化
 		m_pVtxBuff = nullptr;
 	}
 
 	// オブジェクトの破棄
 	CObject::Release();
 }
-//================================
+//==========================================================
 // 更新処理
-//================================
+//==========================================================
 void CBillboard::Update(void)
 {
 	// 頂点情報のポインタ
@@ -165,9 +157,9 @@ void CBillboard::Update(void)
 	// アンロック
 	m_pVtxBuff->Unlock();
 }
-//================================
+//==========================================================
 // 描画処理
-//================================
+//==========================================================
 void CBillboard::Draw(void)
 {
 	// デバイス取得
@@ -251,9 +243,9 @@ void CBillboard::Draw(void)
 	// ライトを有効にする
 	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
-//================================
+//==========================================================
 // テクスチャセット
-//================================
+//==========================================================
 void CBillboard::SetTexture(const char * pTexName)
 {
 	// テクスチャポインタ取得
@@ -267,9 +259,9 @@ void CBillboard::SetTexture(const char * pTexName)
 	// 割り当て
 	m_nIdxTexture = pTexture->Register(TexName.c_str());
 }
-//================================
+//==========================================================
 // UV設定処理
-//================================
+//==========================================================
 void CBillboard::SetUV(float fTexU, float fTexU1, float fTexV)
 {
 	// 頂点情報のポインタ
@@ -287,9 +279,9 @@ void CBillboard::SetUV(float fTexU, float fTexU1, float fTexV)
 	//アンロック
 	m_pVtxBuff->Unlock();
 }
-//================================
+//==========================================================
 // アニメーション処理
-//================================
+//==========================================================
 void CBillboard::SetAnim(const int nMaxPattern,const int nMaxAnimCount,float fTexU, float fTexV)
 {
 	// アニメーションカウンターを加算
@@ -300,7 +292,7 @@ void CBillboard::SetAnim(const int nMaxPattern,const int nMaxAnimCount,float fTe
 	{
 		m_nCountAnim = NULL;		// カウンターを初期値に戻す
 
-		m_nPatterAnim++;		// パターンナンバーを更新
+		m_nPatterAnim++;			// パターンナンバーを更新
 
 		// テクスチャ座標更新
 		SetUV(m_nPatterAnim * fTexU, fTexU + m_nPatterAnim * fTexU, fTexV); // U,U1,V1座標
@@ -312,9 +304,9 @@ void CBillboard::SetAnim(const int nMaxPattern,const int nMaxAnimCount,float fTe
 		m_nPatterAnim = NULL;			// パターンナンバーを初期値に戻す
 	}
 }
-//================================
+//==========================================================
 // 点滅処理
-//================================
+//==========================================================
 void CBillboard::Flash(const int nMaxFlashTime, const int Digittime)
 {
 	// 頂点情報のポインタ
@@ -330,7 +322,7 @@ void CBillboard::Flash(const int nMaxFlashTime, const int Digittime)
 	D3DXCOLOR col = COLOR_WHITE;
 
 	// 点滅カウントと一致したとき
-	if (m_FlashCount == Digittime)		
+	if (m_FlashCount == Digittime)
 	{
 		// 頂点カラーの設定
 		col = 

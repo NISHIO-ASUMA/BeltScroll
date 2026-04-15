@@ -1,61 +1,58 @@
-//=====================================
+//=========================================================
 //
 // レンダリング処理 [ renderer.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-//****************************
-// インクルードファイル宣言
-//****************************
+//*********************************************************
+// インクルードファイル
+//*********************************************************
 #include "renderer.h"
 #include "object.h"
 #include "object2D.h"
 #include "manager.h"
 #include "input.h"
 
-//******************************************
+//*********************************************************
 // 静的メンバ変数宣言
-//******************************************
+//*********************************************************
 CDebugproc* CRenderer::m_pDebug = nullptr;	// デバッグプロセスへのポインタ
 
-//===============================
+//=========================================================
 // コンストラクタ
-//===============================
-CRenderer::CRenderer()
+//=========================================================
+CRenderer::CRenderer() : m_pD3D(nullptr),
+m_pD3DDevice(nullptr),
+m_pZBuffMT(nullptr),
+m_pRenderDef(nullptr),
+m_pZBuffDef(nullptr),
+m_isbuller(nullptr),
+m_pVtxMT(nullptr),
+m_nBullerTime(NULL),
+m_fps(NULL)
 {
 	// 値のクリア
-	m_pD3D = nullptr;
-	m_pD3DDevice = nullptr;
-	m_pZBuffMT = nullptr;
-	m_pRenderDef = nullptr;
-	m_pZBuffDef = nullptr;
-	m_isbuller = false;
-
 	for (int nCnt = 0; nCnt < NUM_FEEDBACKPOLYGON; nCnt++)
 	{
 		m_apRenderMT[nCnt] = nullptr;
 		m_apTextureMT[nCnt] = nullptr;
 	}
-
-	m_pVtxMT = nullptr;
-	m_nBullerTime = NULL;
-	m_fps = NULL;
 }
-//===============================
+//=========================================================
 // デストラクタ
-//===============================
+//=========================================================
 CRenderer::~CRenderer()
 {
 	// 無し
 }
-//===============================
+//=========================================================
 // レンダラー初期化処理
-//===============================
+//=========================================================
 HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 {
 	// ディスプレイモード
-	D3DDISPLAYMODE d3ddm;			
+	D3DDISPLAYMODE d3ddm;
 
 	// Direct3Dオブジェクトの生成
 	m_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
@@ -130,7 +127,6 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_CURRENT);
 
-#if 1
 	// マルチターゲット用変数
 	LPDIRECT3DSURFACE9 pRenderDef, pZBuffDef;
 
@@ -242,7 +238,6 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	//頂点バッファをアンロック
 	m_pVtxMT->Unlock();
 
-#endif
 	// デバッグフォント初期化
 	m_pDebug = new CDebugproc;
 	m_pDebug->Init();
@@ -252,9 +247,9 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 
 	return S_OK;
 }
-//===============================
+//=========================================================
 // レンダラー終了処理
-//===============================
+//=========================================================
 void CRenderer::Uninit(void)
 {
 	if (m_pDebug != nullptr)
@@ -314,9 +309,9 @@ void CRenderer::Uninit(void)
 		m_pD3D = nullptr;
 	}
 }
-//===============================
+//=========================================================
 // レンダラー更新処理
-//===============================
+//=========================================================
 void CRenderer::Update(void)
 {
 	// デバッグ情報の更新処理
@@ -353,9 +348,9 @@ void CRenderer::Update(void)
 
 #endif // _DEBUG
 }
-//===============================
+//=========================================================
 // レンダラー描画処理
-//===============================
+//=========================================================
 void CRenderer::Draw(void)
 {
 	// 画面クリア(バックバッファ&Zバッファ&ステンシルバッファのクリア)
@@ -459,9 +454,9 @@ void CRenderer::Draw(void)
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(nullptr, nullptr, nullptr, nullptr);
 }
-//===============================
+//=========================================================
 // レンダーターゲット変更関数
-//===============================
+//=========================================================
 void CRenderer::ChangeTarget(D3DXVECTOR3 posV, D3DXVECTOR3 posR, D3DXVECTOR3 vecU)
 {
 	// マトリックス変数
@@ -508,9 +503,9 @@ void CRenderer::ChangeTarget(D3DXVECTOR3 posV, D3DXVECTOR3 posR, D3DXVECTOR3 vec
 	m_pD3DDevice->SetTransform(D3DTS_PROJECTION, &mtxprojection);
 }
 
-//===============================
+//=========================================================
 // ブラーの設定
-//===============================
+//=========================================================
 void CRenderer::SetBuller(bool isBuller, const int nMaxbullerTime)
 {
 	// 値を設定
@@ -518,32 +513,32 @@ void CRenderer::SetBuller(bool isBuller, const int nMaxbullerTime)
 	m_nBullerTime = nMaxbullerTime;
 }
 
-//===============================
+//=========================================================
 // デバイス取得処理
-//===============================
+//=========================================================
 LPDIRECT3DDEVICE9 CRenderer::GetDevice(void)
 {
 	// デバイスを返す
 	return m_pD3DDevice;
 }
-//===============================
+//=========================================================
 // FPS表示
-//===============================
+//=========================================================
 void CRenderer::GetFps(int nFps)
 {
 	// 代入
 	m_fps = nFps;
 }
-//===============================
+//=========================================================
 // ワイヤーフレーム起動
-//===============================
+//=========================================================
 void CRenderer::OnWireFrame()
 {
 	m_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 }
-//===============================
+//=========================================================
 // ワイヤーフレーム終了
-//===============================
+//=========================================================
 void CRenderer::OffWireFrame()
 {
 	m_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);

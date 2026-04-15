@@ -1,43 +1,42 @@
-//=====================================
+//=========================================================
 //
 // 3Dオブジェクト処理 [ object3D.cpp ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-//**********************
+//*********************************************************
 // インクルードファイル
-//**********************
+//*********************************************************
 #include "object3D.h"
 #include "texture.h"
 #include "manager.h"
 #include <string>
 
-//===============================
+//=========================================================
 // コンストラクタ
-//===============================
-CObject3D::CObject3D(int nPriority) : CObject(nPriority)
+//=========================================================
+CObject3D::CObject3D(int nPriority) : CObject(nPriority),
+m_pVtxBuff(nullptr),
+m_mtxWorld{},
+m_rot(VECTOR3_NULL),
+m_pos(VECTOR3_NULL),
+m_col(COLOR_WHITE),
+m_nIdxTexture(-1),
+m_fWidth(NULL),
+m_fHeight(NULL)
 {
-	// 値のクリア
-	m_pVtxBuff = nullptr;
-	m_mtxWorld = {};
-	m_rot = VECTOR3_NULL;
-	m_pos = VECTOR3_NULL;
-	m_col = COLOR_WHITE;
-	m_nIdxTexture = -1;
-	m_fWidth = NULL;
-	m_fHeight = NULL;
 }
-//===============================
+//=========================================================
 // デストラクタ
-//===============================
+//=========================================================
 CObject3D::~CObject3D()
 {
 	// 無し
 }
-//===============================
+//=========================================================
 // 生成処理
-//===============================
+//=========================================================
 CObject3D* CObject3D::Create(D3DXVECTOR3 pos,const char * pFileName)
 {
 	// インスタンス生成
@@ -48,7 +47,6 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos,const char * pFileName)
 
 	// オブジェクト設定
 	pObj3D->SetPos(pos);
-	//pObj3D->SetTexture(pFileName);
 
 	// 初期化処理失敗時
 	if (FAILED(pObj3D->Init()))
@@ -60,9 +58,9 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos,const char * pFileName)
 	// 生成されたポインタを返す
 	return pObj3D;
 }
-//===============================
+//=========================================================
 // 初期化処理
-//===============================
+//=========================================================
 HRESULT CObject3D::Init(void)
 {
 	// デバイスポインタを宣言
@@ -110,9 +108,9 @@ HRESULT CObject3D::Init(void)
 
 	return S_OK;
 }
-//===============================
+//=========================================================
 // 終了処理
-//===============================
+//=========================================================
 void CObject3D::Uninit(void)
 {
 	// バッファ解放
@@ -125,9 +123,9 @@ void CObject3D::Uninit(void)
 	// 自身の破棄
 	CObject::Release();
 }
-//===============================
+//=========================================================
 // 更新処理
-//===============================
+//=========================================================
 void CObject3D::Update(void)
 {
 	// 頂点情報のポインタ
@@ -163,9 +161,9 @@ void CObject3D::Update(void)
 	// アンロック
 	m_pVtxBuff->Unlock();
 }
-//===============================
+//=========================================================
 // 描画処理
-//===============================
+//=========================================================
 void CObject3D::Draw(void)
 {
 	// デバイスポインタを宣言
@@ -206,9 +204,9 @@ void CObject3D::Draw(void)
 	// テクスチャNULLにする
 	pDevice->SetTexture(0, NULL);
 }
-//===============================
+//=========================================================
 // テクスチャ割り当て
-//===============================
+//=========================================================
 void CObject3D::SetTexture(const char * pTexName)
 {
 	// テクスチャポインタ取得
@@ -221,72 +219,4 @@ void CObject3D::SetTexture(const char * pTexName)
 
 	// 割り当て
 	m_nIdxTexture = pTexture->Register(TexPath.c_str());
-}
-//===============================
-// オブジェクトの高さ取得
-//===============================
-float CObject3D::GetHeight(D3DXVECTOR3 pos)
-{
-	// ベクトル計算用変数
-	float fHeight = 0.0f;
-
-	// 頂点情報のポインタ
-	VERTEX_3D* pVtx = nullptr;
-
-	// 頂点バッファをロックし,頂点情報へのポインタを取得
-	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
-
-	D3DXVECTOR3 Cross1, Cross2, Cross3;
-	D3DXVECTOR3 Pvec1, Pvec2, Pvec3;
-	D3DXVECTOR3 Vec1, Vec2,Vec3, nor;
-
-	// 始点ベクトル
-	Vec1 = pVtx[0].pos - pVtx[2].pos;
-	Pvec1 = pos - pVtx[2].pos;
-
-	Vec2 = pVtx[1].pos - pVtx[0].pos;
-	Pvec2 = pos - pVtx[0].pos;
-
-	Vec3 = pVtx[2].pos - pVtx[1].pos;
-	Pvec3 = pos - pVtx[1].pos;
-
-	// 外積計算
-	D3DXVec3Cross(&Cross1, &Vec1, &Pvec1);
-	D3DXVec3Cross(&Cross2, &Vec2, &Pvec2);
-	D3DXVec3Cross(&Cross3, &Vec3, &Pvec3);
-
-	// 正規化する
-	D3DXVec3Normalize(&Cross1, &Cross1);
-	D3DXVec3Normalize(&Cross2, &Cross2);
-	D3DXVec3Normalize(&Cross3, &Cross3);
-
-	D3DXVECTOR3 edge1, edge2;
-
-	// ベクトル引く
-	edge1 = pVtx[2].pos - pVtx[0].pos;
-	edge2 = pVtx[1].pos - pVtx[0].pos;
-
-	// 外積計算
-	D3DXVec3Cross(&nor, &edge2, &edge1);
-
-	// 求めたベクトルを正規化する
-	D3DXVec3Normalize(&nor, &nor);
-
-	// 正だったら
-	if (Cross1.y >= 0.0f && Cross2.y >= 0.0f && Cross3.y >= 0.0f)
-	{
-		// 乗っている時
-		if (nor.y != 0.0f)
-		{
-			// 高さ計算
-			fHeight = ((-nor.x * (pos.x - pVtx[0].pos.x)) - (nor.z * (pos.z - pVtx[0].pos.z))) / nor.y + pVtx[0].pos.y;
-		}
-	}
-
-	// アンロック
-	m_pVtxBuff->Unlock();
-
-	// 値を返す
-	return fHeight;
-
 }

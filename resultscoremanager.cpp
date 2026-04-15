@@ -5,31 +5,29 @@
 //
 //=======================================================
 
-//**********************
+//*******************************************************
 // インクルードガード
-//**********************
+//*******************************************************
 #include "resultscoremanager.h"
 #include "resultscore.h"
-#include <fstream>
-#include <string>
-#include <ostream>
 #include "manager.h"
 #include "ranking.h"
+#include <ostream>
+#include <fstream>
+#include <string>
 
 //=======================================================
 // コンストラクタ
 //=======================================================
-CResultScoreManager::CResultScoreManager()
+CResultScoreManager::CResultScoreManager() : m_nBonusScore(NULL),
+m_nGameScore(NULL),
+m_nLastScore(NULL)
 {
 	// 値のクリア
 	for (auto& number : m_pResultScore)
 	{
 		number = nullptr;
 	}
-
-	m_nBonusScore = NULL;
-	m_nGameScore = NULL;
-	m_nLastScore = NULL;
 }
 //=======================================================
 // デストラクタ
@@ -107,7 +105,7 @@ void CResultScoreManager::Load(void)
 
 	if (file.is_open())
 	{
-		file >> m_nGameScore;   // 数値1個を読み取り
+		file >> m_nGameScore;	// 数値1個を読み取り
 		file.close();
 	}
 	else

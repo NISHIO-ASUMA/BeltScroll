@@ -125,46 +125,6 @@ public:
 	void OnExit();
 };
 
-//*********************************
-// ダメージ状態時の管理
-//*********************************
-class CPlayerStateDamage : public CPlayerStateBase
-{
-public:
-
-	//**************************
-	// 状態列挙型
-	//**************************
-	enum DAMAGESTATE
-	{
-		DAMAGESTATE_NONE,
-		DAMAGESTATE_NORMAL,
-		DAMAGESTATE_DAMAGE,
-		DAMAGESTATE_INVINCIBLE,
-		DAMAGESTATE_MAX
-	};
-
-	// コンストラクタ・デストラクタ
-	CPlayerStateDamage(int nDamage);
-	~CPlayerStateDamage();
-
-	// ステートが始まるときに一度だけ呼ばれる関数
-	void OnStart();
-
-	// ステートが更新されるときに呼ばれる関数
-	void OnUpdate();
-
-	// ステートが終了する時に一度だけ呼ばれる関数
-	void OnExit();
-
-	// ゲッター
-	int GetState()const { return m_nStateCount; }
-
-private:
-	int m_nStateCount;		// 管理カウント
-	int m_nDamage;			// ダメージ数
-	int m_nCurrentstate;	// 現在状態
-};
 
 //*********************************
 // ジャンプ状態時の管理
@@ -188,6 +148,5 @@ public:
 private:
 
 };
-
 
 #endif

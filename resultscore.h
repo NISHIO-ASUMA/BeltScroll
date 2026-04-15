@@ -26,6 +26,7 @@ class CNumber;
 class CResultScore : public CObject
 {
 public:
+
 	//****************************
 	// Ží—Þ’è‹`
 	//****************************

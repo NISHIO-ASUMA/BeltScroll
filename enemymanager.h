@@ -34,7 +34,7 @@ public:
 	struct ENEMYDATA
 	{
 		D3DXVECTOR3 pos;	// 座標
-		D3DXVECTOR3 rot;	// 座標
+		D3DXVECTOR3 rot;	// 角度
 		std::string Modelname; // モデル名
 		int nType;			// 状態
 		int nColorType;		// 色の種類
@@ -59,16 +59,10 @@ public:
 
 private:
 
-	void LoadFile(void);				   // ファイル読み込み関数
-	void LoadSplit(const char* pFileName); // 分割読み込み
-	void LoadJson(void);
+	void LoadJson(void);				// jsonファイル読み込み
 
-	int m_nCount; // 出現カウント
+	int m_nCount;						// 出現カウント
 
 	std::vector<CEnemy*>m_pEnemys;		// 敵の動的配列
-
 	std::vector< ENEMYDATA>m_EnemyData; // 敵の構造体情報
-
-	std::vector<std::string> m_SubListFiles;	// 読み込むファイル群
-
 };

@@ -1,13 +1,13 @@
-//=========================================
+//=========================================================
 //
 // プレイヤー処理 [ player.cpp ]
 // Author: Asuma Nishio
 // 
-//=========================================
+//=========================================================
 
-//**********************
+//*********************************************************
 // インクルードファイル
-//**********************
+//*********************************************************
 #include "player.h"
 #include "manager.h"
 #include "texture.h"
@@ -22,7 +22,6 @@
 #include "sound.h"
 #include "enemy.h"
 #include "effect.h"
-#include "particlepiler.h"
 #include "collider.h"
 #include "collision.h"
 #include "blowerui.h"
@@ -37,89 +36,79 @@
 #include "goal.h"
 #include "shadow.h"
 
-//**********************
+//*********************************************************
 // プレイヤー情報
-//**********************
+//*********************************************************
 namespace PLAYERINFO
 {
-	constexpr float MOVE = 5.0f;		 // 1フレームの移動量
-	constexpr float JUMPVALUE = 19.0f;	 // ジャンプ量
-	constexpr float GRAVITY = 0.7f;		 // 重力値
-	constexpr float HITRADIUS = 25.0f;	 // 当たり判定の半径
-	constexpr int   KeyRepeatCount = 15; // キーのリピート最大カウント
-	constexpr float NorRot = D3DX_PI * 2.0f; // 正規化値
+	constexpr float MOVE = 5.0f;				// 1フレームの移動量
+	constexpr float JUMPVALUE = 19.0f;			// ジャンプ量
+	constexpr float GRAVITY = 0.7f;				// 重力値
+	constexpr float HITRADIUS = 25.0f;			// 当たり判定の半径
+	constexpr int   KeyRepeatCount = 15;		// キーのリピート最大カウント
+	constexpr float NorRot = D3DX_PI * 2.0f;	// 正規化値
 
 };
-//**********************
+//*********************************************************
 // ブロワー定数値
-//**********************
+//*********************************************************
 namespace BLOWERINFO
 {
-	constexpr float SMALLVALUE = 50.0f; // 初期値
-	constexpr float MEDIUMVALUE = 70.0f; // 中間
-	constexpr float MAXVALUE = 110.0f; // 最大値
+	constexpr float SMALLVALUE = 50.0f;		 // 初期値
+	constexpr float MEDIUMVALUE = 70.0f;	// 中間
+	constexpr float MAXVALUE = 110.0f;		// 最大値
 }
 
-//**********************
+//*********************************************************
 // 静的メンバ変数宣言
-//**********************
+//*********************************************************
 bool CPlayer::m_isDeath = false;  // 死亡フラグ
 
-//===============================
-// オーバーロードコンストラクタ
-//===============================
-CPlayer::CPlayer(int nPriority) : CObject(nPriority)
+//=========================================================
+// コンストラクタ
+//=========================================================
+CPlayer::CPlayer(int nPriority) : CObject(nPriority),
+m_Scal(INITSCALE),
+m_move(VECTOR3_NULL),
+m_posOld(VECTOR3_NULL),
+m_rotDest(VECTOR3_NULL),
+m_pFilename(nullptr),
+m_nNumAll(NULL),
+m_fAngle(NULL),
+m_State(NULL),
+m_fBlowerRange(NULL),
+m_pMotion(nullptr),
+m_pShadowS(nullptr),
+m_pStateMachine(nullptr),
+m_pSphereCollider(nullptr),
+m_pShadow(nullptr),
+m_isLanding(false),
+m_isJump(false),
+m_isAttack(false),
+m_isMoving(false),
+m_pBlowerUi(nullptr),
+m_blower(BLOWER_SMALLPOW)
 {
-	// 値のクリア
-	m_Scal = INITSCALE;
-	m_move = VECTOR3_NULL;
-	m_posOld = VECTOR3_NULL;
-	m_rotDest = VECTOR3_NULL;
-	m_pFilename = {};
-	m_nNumAll = NULL;
-	m_fAngle = NULL;
-	m_State = NULL;
-	m_fBlowerRange = NULL;
-
 	// モデルのポインタのクリア
 	for (int nCnt = 0; nCnt < MAX_MODEL; nCnt++)
 	{
 		m_apModel[nCnt] = nullptr;
 	}
-
-	// クラスポインタ
-	m_pMotion = nullptr;
-	m_pShadowS = nullptr;
-	m_pStateMachine = nullptr;
-	m_pSphereCollider = nullptr;
-	m_pShadow = nullptr;
-
-	// フラグメント
-	m_isLanding = false;
-	m_isJump = false;
-	m_isAttack = false;
-	m_isMoving = false;
-	m_pBlowerUi = nullptr;
-
-	// 初期状態
-	m_blower = BLOWER_SMALLPOW;
 }
-//===============================
+//=========================================================
 // デストラクタ
-//===============================
+//=========================================================
 CPlayer::~CPlayer()
 {
-	// 無し
+
 }
-//===============================
+//=========================================================
 // プレイヤー生成処理
-//===============================
+//=========================================================
 CPlayer* CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot,int nLife, const char* pFilename)
 {
 	// プレイヤーのインスタンス生成
 	CPlayer* pPlayer = new CPlayer;
-
-	// インスタンスがnullptrだったら
 	if (pPlayer == nullptr) return nullptr;
 
 	// オブジェクト設定
@@ -133,9 +122,9 @@ CPlayer* CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot,int nLife, const char*
 	// プレイヤーのポインタを返す
 	return pPlayer;
 }
-//===============================
+//=========================================================
 // プレイヤー初期化処理
-//===============================
+//=========================================================
 HRESULT CPlayer::Init(void)
 {
 	// オブジェクトの種類をセット
@@ -187,9 +176,9 @@ HRESULT CPlayer::Init(void)
 	// 結果を返す
 	return S_OK;
 }
-//===============================
+//=========================================================
 // プレイヤー終了処理
-//===============================
+//=========================================================
 void CPlayer::Uninit(void)
 {
 	// モデル数分の破棄
@@ -200,11 +189,7 @@ void CPlayer::Uninit(void)
 		{
 			// 終了処理
 			m_apModel[nCnt]->Uninit();
-
-			// ポインタの破棄
 			delete m_apModel[nCnt];
-
-			// nullptrにする
 			m_apModel[nCnt] = nullptr;
 		}
 	}
@@ -214,8 +199,6 @@ void CPlayer::Uninit(void)
 	{
 		// ポインタの破棄
 		delete m_pMotion;
-
-		// nullptrにする
 		m_pMotion = nullptr;
 	}
 
@@ -224,11 +207,7 @@ void CPlayer::Uninit(void)
 	{
 		// 終了処理
 		m_pStateMachine->OnExit();
-
-		// ポインタの破棄
 		delete m_pStateMachine;
-
-		// nullptrにする
 		m_pStateMachine = nullptr;
 	}
 
@@ -249,17 +228,13 @@ void CPlayer::Uninit(void)
 	// オブジェクト自身の破棄
 	CObject::Release();
 }
-//============================================================
+//======================================================================================
 // プレイヤー更新処理
-//============================================================
+//======================================================================================
 void CPlayer::Update(void)
 {
 	// 死んでるなら処理しない
 	if (m_isDeath) return;
-
-	//// ゴールに触れたら
-	//auto Goal = CGame::GetGameManager()->GetGoal();
-	//if (Goal->GetIsGoal()) return;
 
 	// 入力デバイスのポインタ取得
 	CInputKeyboard* pInputKeyboard = nullptr;
@@ -458,9 +433,9 @@ void CPlayer::Update(void)
 	// モーションの全体更新
 	m_pMotion->Update(m_apModel, MAX_MODEL); 
 }
-//===============================
+//=========================================================
 // プレイヤー描画処理
-//===============================
+//=========================================================
 void CPlayer::Draw(void)
 {
 	// デバイスポインタを宣言
@@ -493,6 +468,7 @@ void CPlayer::Draw(void)
 		m_apModel[nCnt]->Draw();
 	}
 
+#ifdef _DEBUG
 	// デバッグフォント
 	CDebugproc::Print("プレイヤーの座標 { %.2f,%.2f,%.2f }", m_pos.x, m_pos.y, m_pos.z);
 	CDebugproc::Draw(0, 120);
@@ -502,12 +478,13 @@ void CPlayer::Draw(void)
 
 	CDebugproc::Print("MAINプレイヤーのモーション { %d } ", GetNowMotion());
 	CDebugproc::Draw(0, 160);
+#endif // _DEBUG
 }
-//=======================================
+//=================================================================
 // 敵吹き飛ばし処理
-//=======================================
+//=================================================================
 void CPlayer::EnemyBlow(void)
-{// 敵の種類に応じて吹き飛ばせるものを分ける
+{
 
 	// 範囲パラメータ
 	const float fBlowRange = m_fBlowerRange;		// 有効距離
@@ -565,9 +542,9 @@ void CPlayer::EnemyBlow(void)
 		pObj = pObj->GetNext();
 	}
 }
-//===============================
+//=========================================================
 // スティック移動関数
-//================================
+//==========================================================
 void CPlayer::MovePad(CJoyPad* pPad)
 {
 	// パッド取得
@@ -630,16 +607,16 @@ void CPlayer::MovePad(CJoyPad* pPad)
 	// フラグを変更する
 	wasStick = isMoving;
 }
-//===============================
+//=========================================================
 // 当たり判定関数 ( 矩形 )
-//===============================
+//=========================================================
 bool CPlayer::CollisionBox(CAABBCollider* pOther,D3DXVECTOR3 * pOutPos)
 {
 	return CAABBAABBCollision::CollisionT(m_pAAABB,pOther, pOutPos);
 }
-//=========================================
+//===================================================================
 // モデルの特定部分パーツの取得関数
-//=========================================
+//===================================================================
 CModel* CPlayer::GetModelPartType(CModel::PARTTYPE modelpart)
 {
 	// プレイヤーが持っているモデルの数の中から探す
@@ -657,9 +634,9 @@ CModel* CPlayer::GetModelPartType(CModel::PARTTYPE modelpart)
 	return nullptr;
 }
 
-//=========================================
+//===================================================================
 // ステート変更
-//=========================================
+//===================================================================
 void CPlayer::ChangeState(CPlayerStateBase* pNewState,int id)
 {
 	// 自分自身を代入
@@ -668,18 +645,9 @@ void CPlayer::ChangeState(CPlayerStateBase* pNewState,int id)
 	// ステート変更
 	m_pStateMachine->ChangeState(pNewState);
 }
-
-//=========================================
-// 攻撃更新処理
-//=========================================
-void CPlayer::UpdateAction(CInputKeyboard* pInputKeyboard,D3DXMATRIX pMtx,const D3DXVECTOR3 DestMove, CJoyPad* pPad)
-{
-
-}
-
-//=========================================
+//===================================================================
 // 移動更新処理
-//=========================================
+//===================================================================
 void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 {
 	// パッドがあったら
@@ -825,16 +793,9 @@ void CPlayer::UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad)
 	// 現在の角度
 	m_rot.y += (m_rotDest.y - m_rot.y) * 0.25f;
 }
-//=========================================
-// ジャンプ更新処理
-//=========================================
-void CPlayer::UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad)
-{
-
-}
-//===============================
+//=========================================================
 // キー押下時の入力取得
-//===============================
+//=========================================================
 bool CPlayer::isMoveInputKey(CInputKeyboard* pKeyInput)
 {
 	// いずれかの移動キー入力
@@ -843,17 +804,17 @@ bool CPlayer::isMoveInputKey(CInputKeyboard* pKeyInput)
 		|| pKeyInput->GetPress(DIK_S)
 		|| pKeyInput->GetPress(DIK_W));
 }
-//===============================
+//=========================================================
 // キー押下時の入力取得
-//===============================
+//=========================================================
 bool CPlayer::isMovePadButton(CJoyPad* pPad)
 {
 	// いずれかの移動キー入力
 	return (pPad->GetPress(CJoyPad::JOYKEY_LEFT) || pPad->GetPress(CJoyPad::JOYKEY_RIGHT));
 }
-//===============================
+//=========================================================
 // ジャンプ制御関数
-//===============================
+//=========================================================
 void CPlayer::StartJump(void)
 {
 	// ジャンプキー入力 かつ ジャンプフラグがfalseの時
@@ -872,9 +833,9 @@ void CPlayer::StartJump(void)
 		AddMove();
 	}
 }
-//===============================
+//=========================================================
 // ブロワーの強度設定
-//===============================
+//=========================================================
 void CPlayer::SetBlower(int nType)
 {
 	// 種類に応じた強さ
@@ -902,9 +863,9 @@ void CPlayer::SetBlower(int nType)
 	// 切り替え
 	m_pBlowerUi->SetTexture(nType);
 }
-//===============================
+//=========================================================
 // 現在のモーション種類取得
-//===============================
+//=========================================================
 CPlayer::PLAYERMOTION CPlayer::GetNowMotion() const
 {
 	// nullじゃなかったら
