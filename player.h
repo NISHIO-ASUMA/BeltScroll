@@ -1,23 +1,25 @@
-//====================================
+//=========================================================
 //
 // プレイヤー処理 [ player.h ]
 // Author: Asuma Nishio
 //
-//=====================================
+//=========================================================
 
-#ifndef _PLAYER_H_ // このマクロ定義がされてなかったら
-#define _PLAYER_H_ // 2重インクルード防止のマクロ定義
+//*********************************************************
+// インクルードガード
+//*********************************************************
+#pragma once
 
-//**********************
+//*********************************************************
 // インクルードファイル
-//**********************
+//*********************************************************
 #include "object.h"
 #include "model.h"
 #include "motion.h"
 
-//**********************
+//*********************************************************
 // 前方宣言
-//**********************
+//*********************************************************
 class CInputKeyboard;
 class CJoyPad;
 class CCamera;
@@ -29,9 +31,9 @@ class CAABBCollider;
 class CSphereCollider;
 class CBlowerUi;
 
-//*************************
+//*********************************************************
 // プレイヤークラスを定義
-//*************************
+//*********************************************************
 class CPlayer : public CObject
 {
 public:
@@ -70,12 +72,9 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void ChangeState(CPlayerStateBase* pNewState,int Id); // ステート変更
-	void UpdateAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad); // 通常攻撃更新関数
-	void UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad);					  // 移動更新関数
-	void UpdateJumpAction(CInputKeyboard* pInputKeyboard, D3DXMATRIX pMtx, const D3DXVECTOR3 DestMove, CJoyPad* pPad);
+	void ChangeState(CPlayerStateBase* pNewState,int Id); 
+	void UpdateMove(CInputKeyboard* pInputKeyboard, CJoyPad* pPad);	
 	void StartJump(void);
-	void HitDamage(int nDamage);
 	void EnemyBlow(void);
 	void MovePad(CJoyPad* pPad);
 	bool CollisionBox(CAABBCollider* pOther, D3DXVECTOR3* pOutPos);
@@ -156,5 +155,3 @@ private:
 
 	static bool m_isDeath; // 静的
 };
-
-#endif

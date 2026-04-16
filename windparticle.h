@@ -36,7 +36,7 @@ public:
 	HRESULT Init(void);
 	void Uninit(void);
 	void Update(void);
-	void Draw(void);
+	void Draw(void) {}
 
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static CWindParticle* Create(const D3DXVECTOR3 pos,const int nMax,const int nLife,const int nLength,const int nRadius, const D3DXCOLOR col);
